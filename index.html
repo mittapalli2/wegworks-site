@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WegWorks - Strategic Consulting Excellence</title>
+    <meta name="description" content="WegWorks delivers strategic consulting solutions for business transformation, operations excellence, and digital innovation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background-color: #ffffff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: white;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: #1f2937;
+        }
+
+        .nav-links a:hover {
+            color: #10b981;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .navbar.scrolled .mobile-menu-btn {
+            color: #1f2937;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 16px 0;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: #1f2937;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            background-color: #f3f4f6;
+            color: #10b981;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            padding-top: 64px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            color: #1f2937;
+        }
+
+        .hero-text .accent {
+            color: #10b981;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 32px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #10b981;
+            border: 2px solid #10b981;
+        }
+
+        .btn-outline:hover {
+            background-color: #ecfdf5;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, transparent 100%);
+            border-radius: 12px;
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 16px;
+        }
+
+        .section-title p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            color: #1f2937;
+        }
+
+        .about-text p {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 32px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #10b981;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Services Section */
+        .services {
+            background-color: #f9fafb;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: #1f2937;
+        }
+
+        .service-card p {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .service-features li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .testimonial-card {
+            background: #f9fafb;
+            padding: 32px;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.125rem;
+            color: #1f2937;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .testimonial-role {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f9fafb;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            color: #1f2937;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: 'Crimson Text', serif;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            color: #1f2937;
+        }
+
+        .contact-item {
+            margin-bottom: 24px;
+        }
+
+        .contact-item h4 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .contact-item p {
+            color: #6b7280;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 48px 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: #d1d5db;
+            margin-bottom: 24px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-links a {
+            color: #d1d5db;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #10b981;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 16px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .footer-section ul li a:hover {
+            color: #10b981;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            margin-top: 32px;
+            padding-top: 32px;
+            text-align: center;
+            color: #d1d5db;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-menu.active {
+                display: block;
+            }
+
+            .hero-content,
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .nav-content {
+                padding: 0 16px;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 10px 24px;
+                font-size: 14px;
+            }
+
+            .service-card,
+            .contact-form {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <img src="https://storage.lovable.dev/fbbe3a4b-6dcf-4d9a-a456-7e6b30b7b8db.png" alt="WegWorks Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a onclick="scrollToSection('home')">Home</a></li>
+                <li><a onclick="scrollToSection('about')">About</a></li>
+                <li><a onclick="scrollToSection('services')">Services</a></li>
+                <li><a onclick="scrollToSection('testimonials')">Testimonials</a></li>
+                <li><a onclick="scrollToSection('contact')">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+        <div class="mobile-menu" id="mobile-menu">
+            <a onclick="scrollToSection('home')">Home</a>
+            <a onclick="scrollToSection('about')">About</a>
+            <a onclick="scrollToSection('services')">Services</a>
+            <a onclick="scrollToSection('testimonials')">Testimonials</a>
+            <a onclick="scrollToSection('contact')">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Transform Your Business with <span class="accent">Strategic Excellence</span></h1>
+                    <p>WegWorks delivers innovative consulting solutions that drive growth, optimize operations, and unlock your organization's full potential in today's competitive landscape.</p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary" onclick="scrollToSection('contact')">Schedule a Consultation</a>
+                        <a href="#about" class="btn btn-outline" onclick="scrollToSection('about')">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Professional business consultation">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="about-content fade-in">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80" alt="WegWorks team collaboration">
+                </div>
+                <div class="about-text">
+                    <h2>About WegWorks</h2>
+                    <p>Founded on the principle that every business has untapped potential, WegWorks has been at the forefront of strategic consulting for over a decade. Our team of seasoned professionals brings together diverse expertise in strategy, operations, and digital transformation.</p>
+                    <p>We believe in collaborative partnerships that drive sustainable growth. Our proven methodologies and innovative approaches have helped organizations across industries achieve remarkable transformations and exceed their goals.</p>
+                    <div class="stats">
+                        <div class="stat">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Successful Projects</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Client Satisfaction</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Our Services</h2>
+                <p>We offer comprehensive consulting services designed to address your unique challenges and accelerate your path to success.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <h3>Strategic Planning</h3>
+                    <p>Develop comprehensive strategies that align with your vision and drive sustainable growth through market analysis and competitive positioning.</p>
+                    <ul class="service-features">
+                        <li>Market Analysis</li>
+                        <li>Competitive Intelligence</li>
+                        <li>Strategic Roadmapping</li>
+                        <li>Performance Metrics</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" onclick="scrollToSection('contact')">Learn More</a>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>Operations Excellence</h3>
+                    <p>Optimize your operational processes to increase efficiency, reduce costs, and improve quality across all business functions.</p>
+                    <ul class="service-features">
+                        <li>Process Optimization</li>
+                        <li>Quality Management</li>
+                        <li>Cost Reduction</li>
+                        <li>Performance Improvement</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" onclick="scrollToSection('contact')">Learn More</a>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>Digital Transformation</h3>
+                    <p>Navigate the digital landscape with confidence through technology integration, automation, and digital strategy implementation.</p>
+                    <ul class="service-features">
+                        <li>Technology Integration</li>
+                        <li>Process Automation</li>
+                        <li>Digital Strategy</li>
+                        <li>Change Management</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" onclick="scrollToSection('contact')">Learn More</a>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>Organizational Development</h3>
+                    <p>Build high-performing teams and organizational capabilities that support your business objectives and culture.</p>
+                    <ul class="service-features">
+                        <li>Leadership Development</li>
+                        <li>Team Building</li>
+                        <li>Culture Transformation</li>
+                        <li>Talent Management</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" onclick="scrollToSection('contact')">Learn More</a>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>Financial Advisory</h3>
+                    <p>Enhance financial performance through strategic financial planning, risk management, and investment optimization.</p>
+                    <ul class="service-features">
+                        <li>Financial Planning</li>
+                        <li>Risk Assessment</li>
+                        <li>Investment Strategy</li>
+                        <li>Performance Analytics</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" onclick="scrollToSection('contact')">Learn More</a>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>Change Management</h3>
+                    <p>Successfully navigate organizational changes with structured approaches that ensure smooth transitions and stakeholder buy-in.</p>
+                    <ul class="service-features">
+                        <li>Change Strategy</li>
+                        <li>Stakeholder Engagement</li>
+                        <li>Communication Planning</li>
+                        <li>Training & Support</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" onclick="scrollToSection('contact')">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section testimonials">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>What Our Clients Say</h2>
+                <p>Don't just take our word for it. Here's what our valued clients have to say about their experience working with WegWorks.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">"WegWorks transformed our operations completely. Their strategic insights and hands-on approach helped us increase efficiency by 40% while reducing costs significantly."</div>
+                    <div class="testimonial-author">Sarah Johnson</div>
+                    <div class="testimonial-role">CEO, TechForward Solutions</div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">"The digital transformation journey with WegWorks was seamless. They guided us through every step and delivered results that exceeded our expectations."</div>
+                    <div class="testimonial-author">Michael Chen</div>
+                    <div class="testimonial-role">CTO, Innovation Labs</div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">"Outstanding strategic planning and execution. WegWorks helped us identify new market opportunities and develop a roadmap that led to 60% revenue growth."</div>
+                    <div class="testimonial-author">Emily Rodriguez</div>
+                    <div class="testimonial-role">COO, GrowthCorp</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Get In Touch</h2>
+                <p>Ready to transform your business? Let's start a conversation about how WegWorks can help you achieve your goals.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-form fade-in">
+                    <form onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your project or how we can help..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info fade-in">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <h4>Email</h4>
+                        <p>hello@wegworks.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Phone</h4>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Office</h4>
+                        <p>123 Business Avenue<br>Suite 100<br>New York, NY 10001</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Business Hours</h4>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 2:00 PM<br>Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>WegWorks</h3>
+                    <p>Transforming businesses through strategic excellence, innovative solutions, and collaborative partnerships. Your success is our mission.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter">𝕏</a>
+                        <a href="#" aria-label="LinkedIn">in</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a onclick="scrollToSection('home')">Home</a></li>
+                        <li><a onclick="scrollToSection('about')">About Us</a></li>
+                        <li><a onclick="scrollToSection('services')">Services</a></li>
+                        <li><a onclick="scrollToSection('testimonials')">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li>Strategic Planning</li>
+                        <li>Operations Excellence</li>
+                        <li>Digital Transformation</li>
+                        <li>Organizational Development</li>
+                        <li>Financial Advisory</li>
+                        <li>Change Management</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 WegWorks Consulting. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.remove('active');
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach((element) => observer.observe(element));
+        });
+
+        // Form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+            
+            // Here you would typically send the data to your server
+            alert(`Thank you ${name}! We've received your message and will get back to you soon.`);
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
