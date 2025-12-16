@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Segment CDP Implementation & Consulting | WegWorks</title>
+<meta name="description" content="Expert Segment CDP implementation by WegWorks. Unified customer profiles, real-time data activation, and first-party data strategy. Transform your customer data infrastructure."/>
+<meta name="keywords" content="Segment CDP, Segment implementation, customer data platform, CDP consulting, Twilio Segment, real-time data activation, first-party data, WegWorks, MarTech consulting"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/services/segment-cdp/"/>
+<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.wegworks.com/services/segment-cdp/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="Segment CDP Implementation & Consulting | WegWorks"/>
+<meta property="og:description" content="Expert Segment CDP implementation. Unified customer profiles, real-time data activation, and first-party data strategy."/>
+<meta property="og:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/about.png"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:title" content="Segment CDP Implementation & Consulting | WegWorks"/>
+<meta name="twitter:description" content="Expert Segment CDP implementation. Unified customer profiles and real-time data activation."/>
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Segment CDP Implementation",
+  "name": "Segment CDP Implementation & Consulting",
+  "description": "Expert Segment CDP implementation services including unified customer profiles, real-time data activation, connections setup, and first-party data strategy for enterprise brands.",
+  "provider": {
+    "@type": "Organization",
+    "name": "WegWorks",
+    "url": "https://www.wegworks.com"
+  },
+  "areaServed": "Worldwide"
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.wegworks.com/#services"},
+    {"@type": "ListItem", "position": 3, "name": "Segment CDP", "item": "https://www.wegworks.com/services/segment-cdp/"}
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-tertiary: #1a1a24;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #10b981;
+  --accent-secondary: #34d399;
+  --accent-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(16, 185, 129, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand img { height: 40px; width: auto; object-fit: contain; }
+.brand-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text-primary); }
+
+.nav-cta {
+  padding: 12px 28px;
+  background: var(--accent-gradient);
+  color: var(--bg-primary);
+  font-weight: 600;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.nav-cta:hover { transform: translateY(-2px); box-shadow: var(--glow-primary); }
+
+.hero { padding: 160px 0 100px; position: relative; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 24px; line-height: 1.15; }
+.gradient-text { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-description { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin-bottom: 40px; line-height: 1.7; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  font-weight: 600;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-primary { background: var(--accent-gradient); color: var(--bg-primary); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: var(--glow-primary); }
+
+.section { padding: 100px 0; }
+.section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
+.section-subtitle { font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 60px; line-height: 1.7; }
+
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 60px; }
+.service-card {
+  padding: 40px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  transition: all 0.4s ease;
+}
+.service-card:hover { border-color: var(--accent-primary); transform: translateY(-8px); box-shadow: var(--glow-primary); }
+.service-icon { width: 64px; height: 64px; background: var(--accent-gradient); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 1.75rem; }
+.service-card h3 { font-size: 1.375rem; margin-bottom: 16px; }
+.service-card p { color: var(--text-secondary); line-height: 1.7; }
+
+.features-list { margin-top: 40px; }
+.feature-item { display: flex; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--glass-border); }
+.feature-icon { width: 48px; height: 48px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent-primary); }
+.feature-content h3 { font-size: 1.125rem; margin-bottom: 8px; }
+.feature-content p { color: var(--text-secondary); line-height: 1.6; }
+
+.related-services { padding: 80px 0; background: var(--bg-secondary); }
+.related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 40px; }
+.related-card { padding: 32px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; text-decoration: none; color: var(--text-primary); transition: all 0.3s; }
+.related-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); }
+.related-card h4 { margin-bottom: 8px; }
+.related-card p { color: var(--text-secondary); font-size: 0.9rem; }
+
+.cta-section { padding: 100px 0; text-align: center; }
+.cta-box { padding: 80px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 32px; max-width: 800px; margin: 0 auto; }
+.cta-box h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 20px; }
+.cta-box p { color: var(--text-secondary); margin-bottom: 40px; font-size: 1.125rem; }
+
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: var(--text-muted); }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .hero { padding: 120px 0 60px; }
+  .cta-box { padding: 40px 24px; }
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-wrapper">
+      <a class="brand" href="../../index.html">
+        <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/>
+        <span class="brand-text">WegWorks</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../../index.html#services">Services</a></li>
+        <li><a href="../../index.html#about">About</a></li>
+        <li><a href="../../index.html#clients">Clients</a></li>
+        <li><a href="../../index.html#contact">Contact</a></li>
+      </ul>
+      <a class="nav-cta" href="../../index.html#contact">Get Started</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="hero-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+        <line x1="12" y1="22.08" x2="12" y2="12"/>
+      </svg>
+      Customer Data Platform
+    </span>
+    <h1>
+      <span class="gradient-text">Segment CDP</span><br/>
+      Implementation & Strategy
+    </h1>
+    <p class="hero-description">
+      Build a unified view of your customers with Segment CDP. We help brands implement 
+      real-time customer data infrastructure that powers personalized experiences across 
+      every touchpoint while maintaining data privacy and governance.
+    </p>
+    <a class="btn btn-primary" href="../../index.html#contact">
+      Start Your CDP Journey
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Our Segment CDP Services</h2>
+    <p class="section-subtitle">
+      End-to-end CDP implementation that transforms how you collect, unify, and activate customer data.
+    </p>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🔗</div>
+        <h3>Connections Setup</h3>
+        <p>Configure Sources and Destinations to collect data from every touchpoint and sync to your marketing, analytics, and data warehouse tools.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">👤</div>
+        <h3>Identity Resolution</h3>
+        <p>Implement Personas for unified customer profiles, stitching together anonymous and known users across devices and channels.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">🎯</div>
+        <h3>Audience Building</h3>
+        <p>Create dynamic audiences based on behavioral, transactional, and computed traits for precise targeting and personalization.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Real-Time Activation</h3>
+        <p>Enable real-time data syncing to advertising platforms, email tools, and personalization engines for instant action.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">🔒</div>
+        <h3>Privacy & Governance</h3>
+        <p>Implement consent management, data controls, and GDPR/CCPA compliance features to protect customer data.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Tracking Plan Design</h3>
+        <p>Create comprehensive tracking plans and data schemas that ensure consistent, high-quality data collection across teams.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: var(--bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Why Segment CDP with WegWorks?</h2>
+    
+    <div class="features-list">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <div class="feature-content">
+          <h3>First-Party Data Experts</h3>
+          <p>With the deprecation of third-party cookies, first-party data strategy is critical. We help you build a sustainable data foundation that respects privacy while enabling personalization.</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="feature-content">
+          <h3>300+ Integration Experience</h3>
+          <p>We've configured hundreds of Segment integrations across analytics, advertising, CRM, email, data warehouses, and custom destinations.</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <div class="feature-content">
+          <h3>Developer-Friendly Approach</h3>
+          <p>We work seamlessly with your engineering team, providing clear documentation, code reviews, and implementation support for web, mobile, and server-side tracking.</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="feature-content">
+          <h3>Full MarTech Stack Integration</h3>
+          <p>Segment is most powerful when connected to your entire stack. We ensure seamless integration with your analytics, CRM, advertising, and data warehouse tools.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="related-services">
+  <div class="container">
+    <h2 class="section-title">Related Services</h2>
+    <p class="section-subtitle">Explore complementary services to maximize your CDP investment.</p>
+    
+    <div class="related-grid">
+      <a class="related-card" href="../adobe-analytics/index.html">
+        <h4>Adobe Analytics</h4>
+        <p>Advanced analytics implementation with Segment integration for unified data.</p>
+      </a>
+      <a class="related-card" href="../salesforce/index.html">
+        <h4>Salesforce</h4>
+        <p>CRM integration for complete customer journey visibility.</p>
+      </a>
+      <a class="related-card" href="../marketing-automation/index.html">
+        <h4>Marketing Automation</h4>
+        <p>Activate CDP audiences in your email and journey tools.</p>
+      </a>
+      <a class="related-card" href="../adobe-experience-cloud/index.html">
+        <h4>Adobe Experience Cloud</h4>
+        <p>Enterprise-grade personalization powered by unified customer data.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Ready to Unify Your Customer Data?</h2>
+      <p>Let's discuss how Segment CDP can transform your marketing with unified, real-time customer data.</p>
+      <a class="btn btn-primary" href="../../index.html#contact">
+        Schedule a Consultation
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 <a href="../../index.html">WegWorks</a>. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
+
