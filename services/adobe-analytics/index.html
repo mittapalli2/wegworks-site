@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Adobe Analytics Consulting & Implementation | WegWorks</title>
+<meta name="description" content="Expert Adobe Analytics consulting services by WegWorks. Implementation, custom reporting, data layer setup, Analysis Workspace training, and optimization for enterprise brands."/>
+<meta name="keywords" content="Adobe Analytics consulting, Adobe Analytics implementation, Analysis Workspace, Adobe Analytics training, data layer setup, WegWorks, MarTech consulting, digital analytics"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/services/adobe-analytics/"/>
+<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.wegworks.com/services/adobe-analytics/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="Adobe Analytics Consulting & Implementation | WegWorks"/>
+<meta property="og:description" content="Expert Adobe Analytics consulting services. Implementation, custom reporting, data layer setup, and Analysis Workspace training."/>
+<meta property="og:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/about.png"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:title" content="Adobe Analytics Consulting & Implementation | WegWorks"/>
+<meta name="twitter:description" content="Expert Adobe Analytics consulting services. Implementation, custom reporting, and Analysis Workspace training."/>
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Adobe Analytics Consulting",
+  "name": "Adobe Analytics Implementation & Consulting",
+  "description": "Expert Adobe Analytics consulting services including implementation, custom reporting, data layer setup, Analysis Workspace training, and optimization for enterprise brands.",
+  "provider": {
+    "@type": "Organization",
+    "name": "WegWorks",
+    "url": "https://www.wegworks.com"
+  },
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Adobe Analytics Services",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Adobe Analytics Implementation"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Data Layer Architecture"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Custom Reporting & Dashboards"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Analysis Workspace Training"}}
+    ]
+  }
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.wegworks.com/#services"},
+    {"@type": "ListItem", "position": 3, "name": "Adobe Analytics", "item": "https://www.wegworks.com/services/adobe-analytics/"}
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-tertiary: #1a1a24;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #10b981;
+  --accent-secondary: #34d399;
+  --accent-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(16, 185, 129, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.3;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--text-primary);
+}
+
+.nav-cta {
+  padding: 12px 28px;
+  background: var(--accent-gradient);
+  color: var(--bg-primary);
+  font-weight: 600;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-primary);
+}
+
+/* Hero */
+.hero {
+  padding: 160px 0 100px;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 24px;
+  line-height: 1.15;
+}
+
+.gradient-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  font-weight: 600;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background: var(--accent-gradient);
+  color: var(--bg-primary);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--glow-primary);
+}
+
+/* Content Sections */
+.section {
+  padding: 100px 0;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 20px;
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin-bottom: 60px;
+  line-height: 1.7;
+}
+
+/* Services Grid */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  margin-top: 60px;
+}
+
+.service-card {
+  padding: 40px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  transition: all 0.4s ease;
+}
+
+.service-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-8px);
+  box-shadow: var(--glow-primary);
+}
+
+.service-icon {
+  width: 64px;
+  height: 64px;
+  background: var(--accent-gradient);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  font-size: 1.75rem;
+}
+
+.service-card h3 {
+  font-size: 1.375rem;
+  margin-bottom: 16px;
+}
+
+.service-card p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Features List */
+.features-list {
+  margin-top: 40px;
+}
+
+.feature-item {
+  display: flex;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--accent-primary);
+}
+
+.feature-content h3 {
+  font-size: 1.125rem;
+  margin-bottom: 8px;
+}
+
+.feature-content p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Related Services */
+.related-services {
+  padding: 80px 0;
+  background: var(--bg-secondary);
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.related-card {
+  padding: 32px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.3s;
+}
+
+.related-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-4px);
+}
+
+.related-card h4 {
+  margin-bottom: 8px;
+}
+
+.related-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* CTA Section */
+.cta-section {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.cta-box {
+  padding: 80px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 32px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-box h2 {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  margin-bottom: 20px;
+}
+
+.cta-box p {
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  font-size: 1.125rem;
+}
+
+/* Footer */
+.footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--glass-border);
+  text-align: center;
+}
+
+.footer p {
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links, .nav-cta {
+    display: none;
+  }
+  
+  .hero {
+    padding: 120px 0 60px;
+  }
+  
+  .cta-box {
+    padding: 40px 24px;
+  }
+}
+</style>
+</head>
+
+<body>
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-wrapper">
+      <a class="brand" href="/">
+        <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/>
+        <span class="brand-text">WegWorks</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#clients">Clients</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+      <a class="nav-cta" href="/#contact">Get Started</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      </svg>
+      Adobe Experience Cloud Partner
+    </span>
+    <h1>
+      <span class="gradient-text">Adobe Analytics</span><br/>
+      Consulting & Implementation
+    </h1>
+    <p class="hero-description">
+      Unlock the full potential of Adobe Analytics with expert implementation, custom reporting, 
+      and strategic guidance. We help enterprise brands transform raw data into actionable insights 
+      that drive marketing performance and business growth.
+    </p>
+    <a class="btn btn-primary" href="/#contact">
+      Start Your Analytics Journey
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Our Adobe Analytics Services</h2>
+    <p class="section-subtitle">
+      Comprehensive analytics solutions tailored to your business needs, from initial setup to advanced optimization.
+    </p>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Implementation & Setup</h3>
+        <p>Full Adobe Analytics implementation including tag management, data layer architecture, and custom variable configuration for accurate data collection.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">🏗️</div>
+        <h3>Data Layer Architecture</h3>
+        <p>Design and implement robust data layers that capture every customer interaction, ensuring clean and consistent data across all touchpoints.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">📈</div>
+        <h3>Custom Reporting</h3>
+        <p>Build powerful Analysis Workspace dashboards and custom reports that surface the insights your teams need to make data-driven decisions.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">🎓</div>
+        <h3>Training & Enablement</h3>
+        <p>Hands-on Analysis Workspace training and certification prep for your team, ensuring self-sufficiency and analytics maturity.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3>Audit & Optimization</h3>
+        <p>Comprehensive analytics audits to identify data quality issues, implementation gaps, and optimization opportunities.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">🔗</div>
+        <h3>Integration Services</h3>
+        <p>Connect Adobe Analytics with Target, Campaign, Audience Manager, and third-party tools for unified marketing intelligence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section" style="background: var(--bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Why Choose WegWorks for Adobe Analytics?</h2>
+    
+    <div class="features-list">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <div class="feature-content">
+          <h3>Adobe Certified Experts</h3>
+          <p>Our team holds Adobe Analytics certifications and has implemented solutions for Fortune 500 companies across retail, finance, healthcare, and technology sectors.</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="feature-content">
+          <h3>Faster Time to Value</h3>
+          <p>Our proven implementation methodology gets you from kickoff to actionable insights in weeks, not months. We prioritize quick wins while building for scale.</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="feature-content">
+          <h3>Knowledge Transfer Focus</h3>
+          <p>We don't just implement and leave. Our engagement model includes comprehensive training and documentation so your team can maintain and evolve the solution.</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <div class="feature-content">
+          <h3>Full Adobe Experience Cloud Integration</h3>
+          <p>As Adobe Experience Cloud specialists, we ensure your Analytics investment connects seamlessly with Target, Campaign, AEM, and the entire Adobe ecosystem.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Related Services -->
+<section class="related-services">
+  <div class="container">
+    <h2 class="section-title">Related Services</h2>
+    <p class="section-subtitle">Explore our other Adobe Experience Cloud and MarTech services.</p>
+    
+    <div class="related-grid">
+      <a class="related-card" href="/services/adobe-experience-cloud/">
+        <h4>Adobe Experience Cloud</h4>
+        <p>Full-suite implementation and strategy across all Adobe marketing products.</p>
+      </a>
+      <a class="related-card" href="/services/segment-cdp/">
+        <h4>Segment CDP</h4>
+        <p>Customer data platform implementation for unified customer profiles.</p>
+      </a>
+      <a class="related-card" href="/services/marketing-automation/">
+        <h4>Marketing Automation</h4>
+        <p>Journey orchestration with Adobe Campaign, Marketo, and HubSpot.</p>
+      </a>
+      <a class="related-card" href="/services/salesforce/">
+        <h4>Salesforce</h4>
+        <p>CRM and Marketing Cloud implementation with analytics integration.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Ready to Transform Your Analytics?</h2>
+      <p>Let's discuss how WegWorks can help you unlock the full potential of Adobe Analytics.</p>
+      <a class="btn btn-primary" href="/#contact">
+        Schedule a Consultation
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
+
