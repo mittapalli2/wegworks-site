@@ -1482,6 +1482,26 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 140px;
 }
 
+/* Captcha */
+.captcha-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.captcha-group #captcha-question {
+  background: var(--glass-bg);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--accent-primary);
+  border: 1px solid var(--glass-border);
+}
+
+.captcha-group input {
+  max-width: 150px;
+}
+
 /* Form Success Message */
 .form-success {
   text-align: center;
@@ -2522,6 +2542,10 @@ h1, h2, h3, h4, h5, h6 {
         <div class="form-group">
           <label for="message">How Can We Help?</label>
           <textarea id="message" name="message" required placeholder="Tell us about your MarTech challenges..."></textarea>
+        </div>
+        <div class="form-group captcha-group">
+          <label for="captcha">Quick Check: <span id="captcha-question"></span></label>
+          <input type="number" id="captcha" name="captcha" required placeholder="Your answer" autocomplete="off"/>
         </div>
         <button class="btn btn-primary" type="submit" style="width: 100%;">Send Message →</button>
       </form>
