@@ -76,8 +76,19 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .brand img { height: 40px; width: auto; object-fit: contain; }
 .brand-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links > li { position: relative; }
 .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
 .nav-links a:hover { color: var(--text-primary); }
+
+/* Dropdown */
+.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+.nav-dropdown > a::after { content: ''; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid currentColor; transition: transform 0.3s; }
+.nav-dropdown:hover > a::after { transform: rotate(180deg); }
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+.dropdown-menu a:hover { color: var(--accent-primary); background: var(--glass-bg); }
+
 .nav-cta { padding: 12px 28px; background: var(--accent-gradient); color: var(--bg-primary); font-weight: 600; border-radius: 100px; text-decoration: none; transition: all 0.3s; }
 .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--glow-primary); }
 
@@ -152,7 +163,16 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
         <span class="brand-text">WegWorks</span>
       </a>
       <ul class="nav-links">
-        <li><a href="/services/">Services</a></li>
+        <li class="nav-dropdown">
+          <a href="/services/">Services</a>
+          <div class="dropdown-menu">
+            <a href="/services/adobe-analytics/">Adobe Analytics</a>
+            <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+            <a href="/services/segment-cdp/">Segment CDP</a>
+            <a href="/services/salesforce/">Salesforce</a>
+            <a href="/services/marketing-automation/">Marketing Automation</a>
+          </div>
+        </li>
         <li><a href="/blog/">Blog</a></li>
         <li><a href="/#about">About</a></li>
         <li><a href="/#contact">Contact</a></li>
