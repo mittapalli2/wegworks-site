@@ -135,6 +135,61 @@
       background-clip: text;
     }
 
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-gray);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--text-white); }
+
+    .nav-dropdown { position: relative; }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: -16px;
+      min-width: 220px;
+      padding: 12px 0;
+      background: rgba(13, 13, 18, 0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(196, 245, 65, 0.15);
+      border-radius: 12px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      margin-top: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      z-index: 100;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      color: var(--text-gray);
+      font-size: 0.9rem;
+    }
+
+    .dropdown-menu a:hover {
+      color: var(--accent-lime);
+      background: rgba(196, 245, 65, 0.05);
+    }
+
     .nav-cta {
       padding: 14px 32px;
       background: var(--accent-lime);
@@ -1075,6 +1130,129 @@
       transform: translateY(0);
     }
   </style>
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "WegWorks Small Business Web Solutions",
+    "alternateName": "Free Website Hosting for Small Businesses",
+    "description": "Zero-cost professional website hosting for small businesses including gyms, restaurants, salons, coffee shops, photographers, and local service providers. No monthly fees, ever. Get a free subdomain or use your own custom domain.",
+    "url": "https://www.wegworks.com/small-business/",
+    "provider": {
+      "@type": "Organization",
+      "name": "WegWorks",
+      "url": "https://www.wegworks.com"
+    },
+    "serviceType": "Website Hosting",
+    "areaServed": "Worldwide",
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Small Business Owners",
+      "geographicArea": "Worldwide"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free forever website hosting with no monthly fees",
+      "availability": "https://schema.org/InStock"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Small Business Web Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Free Subdomain Hosting",
+            "description": "Get your business online with yourbusiness.wegworks.com - completely free"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Custom Domain Support",
+            "description": "Use your own domain name (domain registration $10-15/year from registrars like Namecheap, Google Domains)"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Mobile-Responsive Design",
+            "description": "Professional websites that look great on all devices"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Small Business Solutions", "item": "https://www.wegworks.com/small-business/"}
+    ]
+  }
+  </script>
+
+  <!-- FAQPage Schema for AI Agents -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is WegWorks website hosting really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! WegWorks provides completely free website hosting for small businesses. There are no hidden fees, no monthly charges, and no catches. Your site stays hosted for free forever."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What types of businesses can get free hosting from WegWorks?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "WegWorks offers free hosting for all small businesses including: gyms and fitness studios, restaurants and cafes, hair salons and barbershops, coffee shops, photographers, home service providers (plumbers, electricians, landscapers), retail shops, and any local service business."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use my own domain name with WegWorks free hosting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! You have three options: 1) Use a free subdomain like yourbusiness.wegworks.com, 2) Register your own domain ($10-15/year from Namecheap, Google Domains, or Cloudflare) and point it to your site, or 3) Connect an existing domain you already own."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get started with WegWorks free hosting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Simply fill out the contact form on wegworks.com/small-business with your business name, type of business, and contact information. Our team will reach out within 24-48 hours to get your professional website set up."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's included in the free website package?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The free package includes: professional mobile-responsive design, SSL security (https), fast loading speeds, SEO-friendly structure, contact form integration, and ongoing hosting with no monthly fees. We create custom designs that match your business branding."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div class="bg-grid"></div>
@@ -1089,6 +1267,21 @@
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/>
           <span class="brand-text">WegWorks</span>
         </a>
+        <ul class="nav-links">
+          <li class="nav-dropdown">
+            <a href="/services/">Services</a>
+            <div class="dropdown-menu">
+              <a href="/services/adobe-analytics/">Adobe Analytics</a>
+              <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+              <a href="/services/segment-cdp/">Segment CDP</a>
+              <a href="/services/salesforce/">Salesforce</a>
+              <a href="/services/marketing-automation/">Marketing Automation</a>
+              <a href="/small-business/" style="border-top: 1px solid rgba(196, 245, 65, 0.1); margin-top: 8px; padding-top: 16px;">Small Business Solutions</a>
+            </div>
+          </li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/#about">About</a></li>
+        </ul>
         <a class="nav-cta" href="#contact">Get Started Free →</a>
       </nav>
     </div>

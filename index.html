@@ -2010,12 +2010,13 @@ h1, h2, h3, h4, h5, h6 {
 <!-- JSON-LD -->
 <!-- Organization Schema -->
 <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "WegWorks",
-  "alternateName": ["Weg Works", "WegWorks MarTech", "WegWorks Consulting"],
-    "url": "https://www.wegworks.com",
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "WegWorks",
+  "legalName": "WegWorks LLC",
+  "alternateName": ["Weg Works", "WegWorks MarTech", "WegWorks Consulting", "WegWorks Digital"],
+  "url": "https://www.wegworks.com",
   "logo": {
     "@type": "ImageObject",
     "url": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/logo.png",
@@ -2023,20 +2024,109 @@ h1, h2, h3, h4, h5, h6 {
     "height": 512
   },
   "image": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/about.png",
-  "description": "WegWorks is a MarTech consultancy specializing in Adobe Experience Cloud, Salesforce, Segment CDP, marketing automation, analytics, and attribution. We help brands build intelligent marketing ecosystems.",
+  "description": "WegWorks is a premier MarTech consultancy helping enterprise brands and growing businesses implement Adobe Experience Cloud, Salesforce, Segment CDP, Google Analytics 4, and marketing automation platforms. We specialize in customer data platforms, analytics implementation, personalization, and building unified marketing technology ecosystems that drive measurable ROI.",
+  "slogan": "MarTech Strategy & Digital Marketing Excellence",
   "foundingDate": "2020",
-    "sameAs": [
-      "https://x.com/Wegworks_",
-      "https://www.linkedin.com/company/weg-works/about"
+  "knowsAbout": [
+    "Adobe Analytics",
+    "Adobe Experience Platform",
+    "Adobe Target",
+    "Adobe Experience Manager (AEM)",
+    "Adobe Real-Time CDP",
+    "Segment CDP",
+    "Twilio Segment",
+    "Customer Data Platforms",
+    "Salesforce Marketing Cloud",
+    "Salesforce Sales Cloud",
+    "Salesforce Data Cloud",
+    "Google Analytics 4",
+    "GA4 Migration",
+    "Marketing Automation",
+    "Marketo",
+    "HubSpot",
+    "Braze",
+    "Klaviyo",
+    "Data Layer Implementation",
+    "Tag Management",
+    "Adobe Launch",
+    "Google Tag Manager",
+    "Marketing Attribution",
+    "A/B Testing",
+    "Personalization",
+    "MarTech Strategy",
+    "Digital Analytics",
+    "First-Party Data Strategy"
   ],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "customer service",
-    "email": "hello@wegworks.com",
-    "availableLanguage": "English"
-  },
-  "areaServed": "Worldwide",
-  "serviceType": ["MarTech Consulting", "CDP Implementation", "Marketing Automation", "Analytics & Attribution", "Adobe Experience Cloud", "Salesforce Implementation"]
+  "sameAs": [
+    "https://x.com/Wegworks_",
+    "https://www.linkedin.com/company/weg-works/about",
+    "https://github.com/mittapalli2/wegworks-site"
+  ],
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "email": "hello@wegworks.com",
+      "availableLanguage": ["English"],
+      "areaServed": "Worldwide"
+    },
+    {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "hello@wegworks.com",
+      "availableLanguage": ["English"]
+    }
+  ],
+  "areaServed": [
+    {
+      "@type": "Country",
+      "name": "United States"
+    },
+    {
+      "@type": "Country",
+      "name": "United Kingdom"
+    },
+    {
+      "@type": "Country",
+      "name": "Canada"
+    },
+    {
+      "@type": "Country",
+      "name": "Australia"
+    },
+    "Worldwide"
+  ],
+  "serviceType": [
+    "MarTech Consulting",
+    "CDP Implementation",
+    "Marketing Automation",
+    "Analytics Implementation",
+    "Adobe Experience Cloud Implementation",
+    "Salesforce Implementation",
+    "GA4 Migration",
+    "Data Strategy Consulting",
+    "Website Development for Small Business"
+  ],
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Enterprise MarTech Consulting",
+        "description": "Full-scale marketing technology implementation for enterprise brands including Adobe Experience Cloud, Salesforce, and Segment CDP."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Small Business Web Solutions",
+        "description": "Zero-cost professional website hosting for small businesses including gyms, restaurants, salons, and local service providers.",
+        "url": "https://www.wegworks.com/small-business/"
+      }
+    }
+  ],
+  "keywords": "MarTech consulting, Adobe Analytics consultant, Segment CDP implementation, Salesforce partner, marketing automation agency, GA4 migration, customer data platform, WegWorks, Weg Works, digital analytics, Adobe Experience Cloud"
 }
 </script>
 
@@ -2141,6 +2231,34 @@ h1, h2, h3, h4, h5, h6 {
 }
 </script>
 
+<!-- Speakable Schema - Helps voice assistants describe WegWorks -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "WegWorks - MarTech Consulting & Digital Marketing Excellence",
+  "url": "https://www.wegworks.com/",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".hero-content", ".about-text", ".stats-grid"]
+  },
+  "about": {
+    "@type": "Organization",
+    "name": "WegWorks",
+    "description": "WegWorks is a MarTech consultancy specializing in Adobe Experience Cloud, Salesforce, Segment CDP, and marketing automation. They help enterprise brands build intelligent marketing ecosystems and offer free website hosting for small businesses."
+  },
+  "mentions": [
+    {"@type": "Thing", "name": "Adobe Analytics"},
+    {"@type": "Thing", "name": "Adobe Experience Platform"},
+    {"@type": "Thing", "name": "Segment CDP"},
+    {"@type": "Thing", "name": "Salesforce"},
+    {"@type": "Thing", "name": "Google Analytics 4"},
+    {"@type": "Thing", "name": "Marketing Automation"},
+    {"@type": "Thing", "name": "Customer Data Platform"}
+  ]
+}
+</script>
+
 <!-- SiteNavigationElement Schema for crawlers -->
 <script type="application/ld+json">
 {
@@ -2154,7 +2272,82 @@ h1, h2, h3, h4, h5, h6 {
     {"@type": "WebPage", "name": "Segment CDP", "url": "https://www.wegworks.com/services/segment-cdp/"},
     {"@type": "WebPage", "name": "Salesforce", "url": "https://www.wegworks.com/services/salesforce/"},
     {"@type": "WebPage", "name": "Marketing Automation", "url": "https://www.wegworks.com/services/marketing-automation/"},
-    {"@type": "WebPage", "name": "Adobe Experience Cloud", "url": "https://www.wegworks.com/services/adobe-experience-cloud/"}
+    {"@type": "WebPage", "name": "Adobe Experience Cloud", "url": "https://www.wegworks.com/services/adobe-experience-cloud/"},
+    {"@type": "WebPage", "name": "Small Business Solutions", "url": "https://www.wegworks.com/small-business/"}
+  ]
+}
+</script>
+
+<!-- FAQPage Schema - Helps AI agents answer questions about WegWorks -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is WegWorks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WegWorks is a MarTech (Marketing Technology) consultancy that helps businesses implement and optimize digital marketing platforms. We specialize in Adobe Experience Cloud, Salesforce, Segment CDP, Google Analytics 4, and marketing automation tools like Marketo, HubSpot, Braze, and Klaviyo. We serve both enterprise clients and small businesses with zero-cost website hosting solutions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is WegWorks the same as WageWorks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, WegWorks and WageWorks are completely different companies. WegWorks (wegworks.com) is a MarTech consultancy specializing in marketing technology implementation. WageWorks was a benefits administration company (now part of HealthEquity). Despite the similar names, they are unrelated businesses in different industries."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What services does WegWorks provide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WegWorks provides: 1) Customer Data Platform (CDP) implementation with Segment and Adobe Real-Time CDP, 2) Adobe Experience Cloud services including Analytics, Target, AEM, and Campaign, 3) Salesforce implementation for Sales Cloud, Marketing Cloud, and Data Cloud, 4) Marketing automation setup with Marketo, HubSpot, Braze, and Klaviyo, 5) Google Analytics 4 migration and implementation, 6) Free website hosting for small businesses like gyms, restaurants, and salons."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does WegWorks offer free website hosting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! WegWorks offers zero-cost professional website hosting for small businesses. This includes gyms, restaurants, salons, coffee shops, photographers, and local service providers. You can get a free subdomain (yourbusiness.wegworks.com) or use your own custom domain. There are no monthly hosting fees ever."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What industries does WegWorks work with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WegWorks serves a wide range of industries including retail, e-commerce, financial services, healthcare, travel, hospitality, media, entertainment, technology, SaaS, and small local businesses. Our enterprise clients typically need help with complex MarTech implementations, while small businesses benefit from our free hosting program."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I contact WegWorks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can contact WegWorks by emailing hello@wegworks.com or by filling out the contact form on our website at wegworks.com. We respond to all inquiries within 24-48 business hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is WegWorks located?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WegWorks provides services worldwide with a distributed team. We work with clients across the United States, United Kingdom, Canada, Australia, and globally. Our remote-first approach allows us to serve clients in any timezone."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes WegWorks different from other MarTech consultancies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WegWorks combines deep technical expertise with strategic thinking. We're platform-agnostic, meaning we recommend the best tools for your needs rather than pushing specific vendors. Our team has hands-on experience implementing Adobe, Salesforce, Segment, and Google platforms at scale. We also uniquely offer free hosting for small businesses, making professional web presence accessible to everyone."
+      }
+    }
   ]
 }
 </script>
@@ -2187,6 +2380,7 @@ h1, h2, h3, h4, h5, h6 {
             <a href="/services/adobe-analytics/">Analytics & Attribution</a>
             <a href="/services/salesforce/">Salesforce & Integration</a>
             <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+            <a href="/small-business/" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 8px; padding-top: 16px;">Small Business Solutions</a>
           </div>
         </li>
         <li><a href="/blog/">Blog</a></li>

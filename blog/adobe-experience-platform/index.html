@@ -134,6 +134,12 @@
         .nav a:hover {
             color: var(--accent-primary);
         }
+
+        .nav-dropdown { position: relative; }
+        .dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.98); backdrop-filter: blur(20px); border: 1px solid var(--border-color); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 8px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+        .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu a { display: block; padding: 10px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+        .dropdown-menu a:hover { color: var(--accent-primary); background: rgba(16, 185, 129, 0.05); }
         
         .hero {
             background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
@@ -312,7 +318,17 @@
             <a href="/" class="logo">Weg<span>Works</span></a>
             <nav class="nav">
                 <a href="/">Home</a>
-                <a href="/services/">Services</a>
+                <span class="nav-dropdown">
+                    <a href="/services/">Services</a>
+                    <div class="dropdown-menu">
+                        <a href="/services/adobe-analytics/">Adobe Analytics</a>
+                        <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+                        <a href="/services/segment-cdp/">Segment CDP</a>
+                        <a href="/services/salesforce/">Salesforce</a>
+                        <a href="/services/marketing-automation/">Marketing Automation</a>
+                        <a href="/small-business/" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 8px; padding-top: 16px;">Small Business Solutions</a>
+                    </div>
+                </span>
                 <a href="/blog/">Blog</a>
             </nav>
         </div>
