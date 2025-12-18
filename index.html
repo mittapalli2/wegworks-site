@@ -1659,7 +1659,7 @@ h1, h2, h3, h4, h5, h6 {
 
 <!-- BreadcrumbList Schema -->
 <script type="application/ld+json">
-  {
+{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
@@ -1668,28 +1668,28 @@ h1, h2, h3, h4, h5, h6 {
       "position": 1,
       "name": "Home",
       "item": "https://www.wegworks.com/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Services",
-      "item": "https://www.wegworks.com/#services"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "About",
-      "item": "https://www.wegworks.com/#about"
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "name": "Contact",
-      "item": "https://www.wegworks.com/#contact"
     }
-    ]
-  }
-  </script>
+  ]
+}
+</script>
+
+<!-- SiteNavigationElement Schema for crawlers -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SiteNavigationElement",
+  "name": "Main Navigation",
+  "hasPart": [
+    {"@type": "WebPage", "name": "Services", "url": "https://www.wegworks.com/services/"},
+    {"@type": "WebPage", "name": "Blog", "url": "https://www.wegworks.com/blog/"},
+    {"@type": "WebPage", "name": "Adobe Analytics", "url": "https://www.wegworks.com/services/adobe-analytics/"},
+    {"@type": "WebPage", "name": "Segment CDP", "url": "https://www.wegworks.com/services/segment-cdp/"},
+    {"@type": "WebPage", "name": "Salesforce", "url": "https://www.wegworks.com/services/salesforce/"},
+    {"@type": "WebPage", "name": "Marketing Automation", "url": "https://www.wegworks.com/services/marketing-automation/"},
+    {"@type": "WebPage", "name": "Adobe Experience Cloud", "url": "https://www.wegworks.com/services/adobe-experience-cloud/"}
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -1714,17 +1714,17 @@ h1, h2, h3, h4, h5, h6 {
       </a>
       <ul class="nav-links">
         <li class="nav-dropdown">
-          <a href="#services">Services <span class="dropdown-arrow">▾</span></a>
+          <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
           <div class="dropdown-menu">
-            <a href="services/segment-cdp/index.html">Customer Data Platform</a>
-            <a href="services/marketing-automation/index.html">Marketing Automation</a>
-            <a href="services/adobe-analytics/index.html">Analytics & Attribution</a>
-            <a href="services/salesforce/index.html">Salesforce & Integration</a>
-            <a href="services/adobe-experience-cloud/index.html">Adobe Experience Cloud</a>
+            <a href="/services/segment-cdp/">Customer Data Platform</a>
+            <a href="/services/marketing-automation/">Marketing Automation</a>
+            <a href="/services/adobe-analytics/">Analytics & Attribution</a>
+            <a href="/services/salesforce/">Salesforce & Integration</a>
+            <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
           </div>
         </li>
+        <li><a href="/blog/">Blog</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#testimonials">Results</a></li>
         <li><a href="#contact">Contact</a></li>
 </ul>
       <a class="nav-cta" href="#contact">Let's Talk</a>
@@ -1735,14 +1735,14 @@ h1, h2, h3, h4, h5, h6 {
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#services">All Services</a>
-  <a href="services/segment-cdp/index.html" class="mobile-submenu">→ Customer Data Platform</a>
-  <a href="services/marketing-automation/index.html" class="mobile-submenu">→ Marketing Automation</a>
-  <a href="services/adobe-analytics/index.html" class="mobile-submenu">→ Analytics & Attribution</a>
-  <a href="services/salesforce/index.html" class="mobile-submenu">→ Salesforce & Integration</a>
-  <a href="services/adobe-experience-cloud/index.html" class="mobile-submenu">→ Adobe Experience Cloud</a>
+  <a href="/services/">All Services</a>
+  <a href="/services/segment-cdp/" class="mobile-submenu">→ Customer Data Platform</a>
+  <a href="/services/marketing-automation/" class="mobile-submenu">→ Marketing Automation</a>
+  <a href="/services/adobe-analytics/" class="mobile-submenu">→ Analytics & Attribution</a>
+  <a href="/services/salesforce/" class="mobile-submenu">→ Salesforce & Integration</a>
+  <a href="/services/adobe-experience-cloud/" class="mobile-submenu">→ Adobe Experience Cloud</a>
+  <a href="/blog/">Blog</a>
   <a href="#about">About</a>
-  <a href="#testimonials">Results</a>
   <a href="#contact">Contact</a>
 </div>
 
@@ -1865,7 +1865,7 @@ h1, h2, h3, h4, h5, h6 {
             <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/>
           </svg>
         </div>
-        <h3><a href="services/segment-cdp/index.html" style="color: inherit; text-decoration: none;">Customer Data Platform</a></h3>
+        <h3><a href="/services/segment-cdp/" style="color: inherit; text-decoration: none;">Customer Data Platform</a></h3>
         <p>Unify your customer data across all touchpoints for personalized, real-time marketing at scale.</p>
 <ul class="service-features">
           <li>CDP Selection & Implementation</li>
@@ -1873,7 +1873,7 @@ h1, h2, h3, h4, h5, h6 {
           <li>Audience Segmentation</li>
           <li>Real-time Activation</li>
 </ul>
-        <a href="services/segment-cdp/index.html" class="service-link">Learn More →</a>
+        <a href="/services/segment-cdp/" class="service-link">Learn More →</a>
 </article>
       
       <article class="service-card reveal">
@@ -1890,7 +1890,7 @@ h1, h2, h3, h4, h5, h6 {
             <circle cx="12" cy="12" r="4"/>
           </svg>
         </div>
-        <h3><a href="services/marketing-automation/index.html" style="color: inherit; text-decoration: none;">Marketing Automation</a></h3>
+        <h3><a href="/services/marketing-automation/" style="color: inherit; text-decoration: none;">Marketing Automation</a></h3>
         <p>Design and implement automated journeys that nurture leads and accelerate conversions.</p>
 <ul class="service-features">
           <li>Platform Implementation</li>
@@ -1898,7 +1898,7 @@ h1, h2, h3, h4, h5, h6 {
           <li>Lead Scoring Models</li>
           <li>Email & SMS Campaigns</li>
 </ul>
-        <a href="services/marketing-automation/index.html" class="service-link">Learn More →</a>
+        <a href="/services/marketing-automation/" class="service-link">Learn More →</a>
 </article>
       
       <article class="service-card reveal">
@@ -1909,7 +1909,7 @@ h1, h2, h3, h4, h5, h6 {
             <circle cx="18" cy="9" r="2"/>
           </svg>
         </div>
-        <h3><a href="services/adobe-analytics/index.html" style="color: inherit; text-decoration: none;">Analytics & Attribution</a></h3>
+        <h3><a href="/services/adobe-analytics/" style="color: inherit; text-decoration: none;">Analytics & Attribution</a></h3>
         <p>Understand what's working with comprehensive measurement and multi-touch attribution.</p>
 <ul class="service-features">
           <li>Marketing Mix Modeling</li>
@@ -1917,7 +1917,7 @@ h1, h2, h3, h4, h5, h6 {
           <li>Dashboard Development</li>
           <li>Performance Optimization</li>
 </ul>
-        <a href="services/adobe-analytics/index.html" class="service-link">Learn More →</a>
+        <a href="/services/adobe-analytics/" class="service-link">Learn More →</a>
 </article>
       
       <article class="service-card reveal">
@@ -1948,7 +1948,7 @@ h1, h2, h3, h4, h5, h6 {
             <path d="M16 9l-3 3 3 3"/>
           </svg>
         </div>
-        <h3><a href="services/salesforce/index.html" style="color: inherit; text-decoration: none;">Integration & Architecture</a></h3>
+        <h3><a href="/services/salesforce/" style="color: inherit; text-decoration: none;">Integration & Architecture</a></h3>
         <p>Connect your MarTech stack with seamless integrations and data pipelines.</p>
 <ul class="service-features">
           <li>API Development</li>
@@ -1956,7 +1956,7 @@ h1, h2, h3, h4, h5, h6 {
           <li>System Integration</li>
           <li>Tech Stack Audit</li>
 </ul>
-        <a href="services/salesforce/index.html" class="service-link">Learn More →</a>
+        <a href="/services/salesforce/" class="service-link">Learn More →</a>
 </article>
       
       <article class="service-card reveal">
@@ -1969,7 +1969,7 @@ h1, h2, h3, h4, h5, h6 {
             <circle cx="3" cy="21" r="1"/>
           </svg>
         </div>
-        <h3><a href="services/adobe-experience-cloud/index.html" style="color: inherit; text-decoration: none;">Growth Strategy</a></h3>
+        <h3><a href="/services/adobe-experience-cloud/" style="color: inherit; text-decoration: none;">Growth Strategy</a></h3>
         <p>Full-funnel digital marketing strategy aligned with your business objectives.</p>
 <ul class="service-features">
           <li>Go-to-Market Strategy</li>
@@ -1977,7 +1977,7 @@ h1, h2, h3, h4, h5, h6 {
           <li>Content Strategy</li>
           <li>SEO & Organic Growth</li>
 </ul>
-        <a href="services/adobe-experience-cloud/index.html" class="service-link">Learn More →</a>
+        <a href="/services/adobe-experience-cloud/" class="service-link">Learn More →</a>
 </article>
 </div>
 </div>
@@ -2236,29 +2236,29 @@ h1, h2, h3, h4, h5, h6 {
       <div class="footer-col">
         <h4>Services</h4>
         <ul>
-          <li><a href="services/segment-cdp/index.html">CDP Implementation</a></li>
-          <li><a href="services/marketing-automation/index.html">Marketing Automation</a></li>
-          <li><a href="services/adobe-analytics/index.html">Analytics & Attribution</a></li>
-          <li><a href="services/adobe-experience-cloud/index.html">Adobe Experience Cloud</a></li>
-          <li><a href="services/salesforce/index.html">Salesforce</a></li>
+          <li><a href="/services/segment-cdp/">CDP Implementation</a></li>
+          <li><a href="/services/marketing-automation/">Marketing Automation</a></li>
+          <li><a href="/services/adobe-analytics/">Analytics & Attribution</a></li>
+          <li><a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a></li>
+          <li><a href="/services/salesforce/">Salesforce</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
           <li><a href="#about">About</a></li>
-          <li><a href="#testimonials">Results</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
-<div class="footer-col">
+      <div class="footer-col">
         <h4>Resources</h4>
         <ul>
-          <li><a href="#">MarTech Glossary</a></li>
-          <li><a href="#">Case Studies</a></li>
-          <li><a href="#">Blog</a></li>
-</ul>
-</div>
+          <li><a href="/blog/adobe-analytics/">Adobe Analytics Guides</a></li>
+          <li><a href="/blog/segment-cdp/">CDP Resources</a></li>
+          <li><a href="/blog/salesforce/">Salesforce Insights</a></li>
+        </ul>
+      </div>
 </div>
 <div class="footer-bottom">
 <p>© <span id="year"></span> WegWorks LLC. All rights reserved.</p>

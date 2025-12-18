@@ -86,6 +86,46 @@
         "@type": "Answer",
         "text": "Yes, WegWorks takes a MarTech-first approach to Salesforce implementation. We integrate Salesforce with your CDP (Segment, Adobe), analytics platforms, marketing automation tools, data warehouses, and ERP systems using MuleSoft, APIs, and native integrations."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between Sales Cloud and Marketing Cloud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sales Cloud is Salesforce's CRM for sales teams—managing leads, opportunities, accounts, and pipeline. Marketing Cloud is for marketers—handling email campaigns, journey orchestration, social media, and advertising. WegWorks implements both and ensures they work together for complete customer visibility."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Salesforce Data Cloud (CDP) and when should we use it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Salesforce Data Cloud unifies customer data from all sources into real-time profiles for segmentation and activation. It's ideal when you need to combine Salesforce data with external sources for unified customer views. WegWorks implements Data Cloud and connects it to Marketing Cloud, Service Cloud, and external platforms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a Salesforce implementation typically take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sales Cloud implementations typically take 6-12 weeks. Marketing Cloud implementations range from 8-16 weeks based on channel complexity. Data Cloud implementations take 4-8 weeks. WegWorks uses agile methodology with phased rollouts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you customize Salesforce with custom objects and Apex code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, WegWorks provides custom Salesforce development including custom objects and fields, Apex triggers and classes, Lightning Web Components, Flow automation, and AppExchange integrations. We follow Salesforce best practices for maintainable, scalable customizations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Einstein Analytics and how do you use it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Einstein Analytics (now Tableau CRM) provides AI-powered analytics within Salesforce. WegWorks builds custom analytics apps, creates predictive models for lead scoring, and designs executive dashboards that surface actionable intelligence for sales and marketing teams."
+      }
     }
   ]
 }
@@ -177,9 +217,9 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
         <span class="brand-text">WegWorks</span>
       </a>
       <ul class="nav-links">
-        <li><a href="/#services">Services</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/blog/">Blog</a></li>
         <li><a href="/#about">About</a></li>
-        <li><a href="/#clients">Clients</a></li>
         <li><a href="/#contact">Contact</a></li>
       </ul>
       <a class="nav-cta" href="/#contact">Get Started</a>
@@ -367,6 +407,56 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
         </button>
         <div class="faq-answer">
           <p>Yes, WegWorks takes a MarTech-first approach to Salesforce implementation. We integrate Salesforce with your CDP (Segment, Adobe), analytics platforms, marketing automation tools, data warehouses, and ERP systems using MuleSoft, APIs, and native integrations.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What's the difference between Sales Cloud and Marketing Cloud?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Sales Cloud is Salesforce's CRM for sales teams—managing leads, opportunities, accounts, and pipeline. Marketing Cloud is for marketers—handling email campaigns, journey orchestration, social media, and advertising. WegWorks implements both and ensures they work together, syncing marketing engagement data with sales records for complete customer visibility.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What is Salesforce Data Cloud (CDP) and when should we use it?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Salesforce Data Cloud (formerly Salesforce CDP) unifies customer data from all sources into real-time profiles for segmentation and activation. It's ideal when you need to combine Salesforce data with external sources (web analytics, mobile apps, data warehouses) for unified customer views. WegWorks implements Data Cloud and connects it to Marketing Cloud, Service Cloud, and external platforms.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          How long does a Salesforce implementation typically take?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Sales Cloud implementations typically take 6-12 weeks depending on customization needs. Marketing Cloud implementations range from 8-16 weeks based on channel complexity. Data Cloud implementations take 4-8 weeks. WegWorks uses agile methodology with phased rollouts—delivering core functionality quickly while building toward full implementation.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Can you customize Salesforce with custom objects and Apex code?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, WegWorks provides custom Salesforce development including custom objects, fields, and relationships; Apex triggers and classes for business logic; Lightning Web Components for custom UI; Flow automation for complex processes; and AppExchange integrations. We follow Salesforce best practices to ensure maintainable, scalable customizations.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What is Einstein Analytics and how do you use it?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Einstein Analytics (now Tableau CRM) provides AI-powered analytics and dashboards within Salesforce. WegWorks builds custom analytics apps that combine Salesforce data with external sources, creates predictive models for lead scoring and opportunity insights, and designs executive dashboards that surface actionable intelligence for sales and marketing teams.</p>
         </div>
       </div>
     </div>
