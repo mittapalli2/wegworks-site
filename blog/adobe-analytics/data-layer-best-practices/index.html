@@ -168,6 +168,11 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .btn-primary { background: var(--accent-gradient); color: var(--bg-primary); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--glow-primary); }
 
+.keywords-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--glass-border); }
+.keywords-section h4 { font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+.keyword-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.keyword-tags span { padding: 6px 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.8rem; color: var(--text-secondary); }
+
 .footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
 .footer p { color: var(--text-muted); }
 .footer a { color: var(--accent-primary); text-decoration: none; }
@@ -411,9 +416,31 @@ window.dispatchEvent(new CustomEvent('digitalData:updated'));</code>
         development team) will thank you.
       </p>
 
+      <!-- Keywords Section -->
+      <div class="keywords-section">
+        <h4>Related Topics</h4>
+        <div class="keyword-tags">
+          <span>data layer</span>
+          <span>Adobe Analytics</span>
+          <span>data layer best practices</span>
+          <span>Adobe Launch</span>
+          <span>Experience Platform Tags</span>
+          <span>analytics implementation</span>
+          <span>digital data layer</span>
+          <span>tag management</span>
+          <span>JavaScript data layer</span>
+          <span>eCommerce tracking</span>
+          <span>WegWorks Analytics</span>
+          <span>Weg Works</span>
+          <span>Adobe consulting</span>
+          <span>data layer architecture</span>
+          <span>web analytics</span>
+        </div>
+      </div>
+
       <div class="cta-box">
         <h3>Need Help with Your Adobe Analytics Implementation?</h3>
-        <p>Our certified experts can design your data layer architecture and implement Adobe Analytics the right way.</p>
+        <p>Our certified experts at WegWorks (Weg Works) can design your data layer architecture and implement Adobe Analytics the right way.</p>
         <a class="btn btn-primary" href="/services/adobe-analytics/">
           View Our Services
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>

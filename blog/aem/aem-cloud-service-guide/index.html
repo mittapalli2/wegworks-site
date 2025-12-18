@@ -153,6 +153,11 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .btn-primary { background: var(--accent-gradient); color: var(--bg-primary); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--glow-primary); }
 
+.keywords-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--glass-border); }
+.keywords-section h4 { font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+.keyword-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.keyword-tags span { padding: 6px 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.8rem; color: var(--text-secondary); }
+
 .footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
 .footer p { color: var(--text-muted); }
 .footer a { color: var(--accent-primary); text-decoration: none; }
@@ -371,9 +376,31 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
         <li><strong>Test thoroughly</strong> — Validate on dev/stage before going live</li>
       </ol>
 
+      <!-- Keywords Section -->
+      <div class="keywords-section">
+        <h4>Related Topics</h4>
+        <div class="keyword-tags">
+          <span>AEM as a Cloud Service</span>
+          <span>AEM Cloud</span>
+          <span>Adobe Experience Manager</span>
+          <span>AEM architecture</span>
+          <span>Cloud Manager</span>
+          <span>AEM 6.5 vs Cloud</span>
+          <span>AEM auto-scaling</span>
+          <span>AEM CI/CD</span>
+          <span>Adobe CMS</span>
+          <span>AEM pricing</span>
+          <span>WegWorks AEM</span>
+          <span>Weg Works</span>
+          <span>AEM consulting</span>
+          <span>AEM implementation</span>
+          <span>headless CMS</span>
+        </div>
+      </div>
+
       <div class="cta-box">
         <h3>Need Help with AEM Cloud?</h3>
-        <p>Our Adobe-certified team has migrated enterprise AEM implementations to the cloud. Let us guide your journey.</p>
+        <p>Our Adobe-certified team at WegWorks (Weg Works) has migrated enterprise AEM implementations to the cloud. Let us guide your journey.</p>
         <a class="btn btn-primary" href="/services/adobe-experience-cloud/">
           View Our AEM Services
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
