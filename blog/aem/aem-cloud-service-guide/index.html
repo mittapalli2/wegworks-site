@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>What is AEM as a Cloud Service? A Complete Guide | WegWorks</title>
+<meta name="description" content="Everything you need to know about AEM as a Cloud Service: architecture, benefits, auto-scaling, CI/CD pipeline, pricing model, and how it compares to AEM 6.5 on-premise."/>
+<meta name="keywords" content="AEM as a Cloud Service, AEM Cloud, Adobe Experience Manager Cloud, AEM architecture, AEM pricing, AEM vs on-premise, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/aem/aem-cloud-service-guide/"/>
+<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/aem/aem-cloud-service-guide/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="What is AEM as a Cloud Service? A Complete Guide"/>
+<meta property="og:description" content="Everything you need to know about AEM Cloud: architecture, benefits, and how it compares to AEM 6.5."/>
+<meta property="og:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/about.png"/>
+<meta property="article:published_time" content="2025-12-17"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+
+<!-- Schema.org Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What is AEM as a Cloud Service? A Complete Guide",
+  "description": "Everything you need to know about AEM as a Cloud Service: architecture, benefits, auto-scaling, CI/CD pipeline, pricing model, and comparison to AEM 6.5.",
+  "image": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/about.png",
+  "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png"}},
+  "datePublished": "2025-12-17",
+  "dateModified": "2025-12-17"
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "AEM", "item": "https://www.wegworks.com/blog/aem/"},
+    {"@type": "ListItem", "position": 4, "name": "AEM Cloud Service Guide", "item": "https://www.wegworks.com/blog/aem/aem-cloud-service-guide/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is AEM as a Cloud Service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AEM as a Cloud Service is Adobe's cloud-native version of Adobe Experience Manager. It runs on Adobe's managed cloud infrastructure with automatic scaling, continuous updates, and a modern CI/CD deployment pipeline."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is AEM Cloud different from AEM 6.5?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AEM Cloud is cloud-native with automatic scaling and updates, while AEM 6.5 is on-premise or AMS-hosted with manual updates. AEM Cloud uses immutable deployments via Cloud Manager, offers better performance through CDN integration, and follows a consumption-based pricing model."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-tertiary: #1a1a24;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #10b981;
+  --accent-secondary: #34d399;
+  --accent-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(16, 185, 129, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand img { height: 40px; width: auto; }
+.brand-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text-primary); }
+.nav-cta { padding: 12px 28px; background: var(--accent-gradient); color: var(--bg-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+
+.article-header { padding: 160px 0 60px; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 24px; text-decoration: none; transition: all 0.3s; }
+.back-link:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+.article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: var(--text-muted); }
+.article-category { color: var(--accent-primary); font-weight: 600; text-decoration: none; }
+.article-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
+.article-intro { font-size: 1.25rem; color: var(--text-secondary); line-height: 1.7; }
+
+.article-content { padding: 60px 0 100px; }
+.article-content h2 { font-size: 1.75rem; margin: 48px 0 20px; color: var(--text-primary); }
+.article-content h3 { font-size: 1.375rem; margin: 36px 0 16px; color: var(--text-primary); }
+.article-content p { margin-bottom: 20px; color: var(--text-secondary); line-height: 1.8; }
+.article-content ul, .article-content ol { margin: 20px 0 20px 24px; color: var(--text-secondary); }
+.article-content li { margin-bottom: 12px; line-height: 1.7; }
+.article-content strong { color: var(--text-primary); }
+.article-content a { color: var(--accent-primary); text-decoration: none; }
+.article-content a:hover { text-decoration: underline; }
+
+.comparison-table { width: 100%; border-collapse: collapse; margin: 32px 0; }
+.comparison-table th, .comparison-table td { padding: 16px; text-align: left; border-bottom: 1px solid var(--glass-border); }
+.comparison-table th { color: var(--text-primary); font-weight: 600; background: var(--bg-tertiary); }
+.comparison-table td { color: var(--text-secondary); }
+
+.callout { padding: 24px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; margin: 32px 0; }
+.callout-title { font-weight: 700; color: var(--accent-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.callout p { margin: 0; color: var(--text-secondary); }
+
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 32px 0; }
+.feature-card { padding: 24px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; }
+.feature-card h4 { color: var(--accent-primary); margin-bottom: 8px; font-size: 1rem; }
+.feature-card p { margin: 0; font-size: 0.9rem; }
+
+.cta-box { padding: 48px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; text-align: center; margin-top: 60px; }
+.cta-box h3 { font-size: 1.5rem; margin-bottom: 16px; }
+.cta-box p { color: var(--text-secondary); margin-bottom: 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-weight: 600; border-radius: 12px; text-decoration: none; transition: all 0.3s; }
+.btn-primary { background: var(--accent-gradient); color: var(--bg-primary); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--glow-primary); }
+
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: var(--text-muted); }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .article-header { padding: 120px 0 40px; }
+  .cta-box { padding: 32px 24px; }
+  .comparison-table { font-size: 0.875rem; }
+  .comparison-table th, .comparison-table td { padding: 12px 8px; }
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <nav class="nav-wrapper">
+    <a class="brand" href="/"><img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/><span class="brand-text">WegWorks</span></a>
+    <ul class="nav-links">
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="/#contact">Get Started</a>
+  </nav>
+</header>
+
+<article>
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="/blog/aem/">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        AEM
+      </a>
+      <div class="article-meta">
+        <a class="article-category" href="/blog/aem/">AEM</a>
+        <span>December 17, 2025</span>
+        <span>10 min read</span>
+      </div>
+      <h1>What is AEM as a Cloud Service? A Complete Guide</h1>
+      <p class="article-intro">
+        AEM as a Cloud Service is Adobe's cloud-native content management solution. Here's everything 
+        you need to know about its architecture, benefits, and how it compares to traditional AEM.
+      </p>
+    </div>
+  </header>
+
+  <div class="article-content">
+    <div class="container">
+      
+      <h2>What is AEM as a Cloud Service?</h2>
+      <p>
+        <strong>AEM as a Cloud Service (AEMaaCS)</strong> is Adobe's cloud-native version of Adobe Experience 
+        Manager. Unlike traditional on-premise AEM or Adobe Managed Services (AMS), AEM Cloud runs entirely 
+        on Adobe's managed infrastructure with automatic scaling, continuous updates, and modern DevOps practices.
+      </p>
+      <p>
+        Think of it as AEM reimagined for the cloud era—same powerful content management capabilities, 
+        but with the operational benefits of a true SaaS platform.
+      </p>
+
+      <h2>Key Features of AEM Cloud</h2>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h4>Always Up to Date</h4>
+          <p>Adobe pushes updates automatically. No more quarterly upgrade projects—you're always on the latest version.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Auto-Scaling</h4>
+          <p>Resources scale automatically based on traffic. Handle traffic spikes without manual intervention.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Built-in CDN</h4>
+          <p>Fastly CDN is integrated out of the box for global content delivery and edge caching.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Cloud Manager CI/CD</h4>
+          <p>Deployment pipeline with quality gates, automated testing, and blue-green deployments.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Immutable Infrastructure</h4>
+          <p>No SSH access or runtime changes. All customizations go through the deployment pipeline.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Environment Isolation</h4>
+          <p>Dev, stage, and production environments with isolated resources and rapid provisioning.</p>
+        </div>
+      </div>
+
+      <h2>AEM Cloud Architecture</h2>
+      <p>
+        AEM Cloud uses a microservices-based architecture that separates author, publish, and dispatcher tiers:
+      </p>
+      <ul>
+        <li><strong>Author Service</strong> — Where content creators work. Scaled separately from publish.</li>
+        <li><strong>Publish Service</strong> — Serves content to end users. Auto-scales based on traffic.</li>
+        <li><strong>Dispatcher/CDN</strong> — Fastly CDN at the edge with Apache dispatcher for caching.</li>
+        <li><strong>Asset Compute</strong> — Serverless microservices for asset processing (thumbnails, renditions).</li>
+        <li><strong>Content Repository</strong> — Cloud-native version of Oak with segment tar storage.</li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2v1"/><path d="M12 8a4 4 0 0 0-4 4c0 1.5.8 2.8 2 3.4V17h4v-1.6c1.2-.6 2-1.9 2-3.4a4 4 0 0 0-4-4Z"/></svg>
+          Key Concept: Immutability
+        </div>
+        <p>
+          In AEM Cloud, the infrastructure is immutable. You can't SSH into servers or make runtime changes. 
+          All code and configuration must go through Cloud Manager. This ensures consistency and reproducibility.
+        </p>
+      </div>
+
+      <h2>AEM Cloud vs AEM 6.5: Key Differences</h2>
+      
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>AEM as a Cloud Service</th>
+            <th>AEM 6.5 (On-Prem/AMS)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Updates</strong></td>
+            <td>Automatic, continuous</td>
+            <td>Manual, quarterly service packs</td>
+          </tr>
+          <tr>
+            <td><strong>Scaling</strong></td>
+            <td>Automatic</td>
+            <td>Manual infrastructure changes</td>
+          </tr>
+          <tr>
+            <td><strong>Deployment</strong></td>
+            <td>Cloud Manager CI/CD</td>
+            <td>Package Manager or custom</td>
+          </tr>
+          <tr>
+            <td><strong>CDN</strong></td>
+            <td>Built-in (Fastly)</td>
+            <td>Separate configuration</td>
+          </tr>
+          <tr>
+            <td><strong>Server Access</strong></td>
+            <td>No SSH access</td>
+            <td>Full server access</td>
+          </tr>
+          <tr>
+            <td><strong>Pricing</strong></td>
+            <td>Consumption-based</td>
+            <td>License + hosting</td>
+          </tr>
+          <tr>
+            <td><strong>Customization</strong></td>
+            <td>Through OSGi & Sling</td>
+            <td>Full JCR/OSGi access</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Cloud Manager: The Deployment Engine</h2>
+      <p>
+        Cloud Manager is the control center for AEM Cloud deployments. It provides:
+      </p>
+      <ul>
+        <li><strong>Git Repository</strong> — Source control for your AEM project (or connect your own repo)</li>
+        <li><strong>Build Pipeline</strong> — Maven-based builds with quality gates</li>
+        <li><strong>Code Quality</strong> — Automated scans for security, performance, and best practices</li>
+        <li><strong>Environment Management</strong> — Provision and manage dev/stage/prod environments</li>
+        <li><strong>Monitoring</strong> — Logs, metrics, and alerts for all environments</li>
+      </ul>
+      <p>
+        Deployments follow a blue-green pattern. Cloud Manager deploys to a new set of instances, 
+        runs health checks, and switches traffic only when healthy.
+      </p>
+
+      <h2>What Changes for Developers?</h2>
+      <p>
+        If you're coming from AEM 6.5, expect these changes:
+      </p>
+      <ol>
+        <li><strong>No mutable content in code</strong> — Content paths like /content, /etc, /var can't be deployed via code packages</li>
+        <li><strong>Sling Feature Model</strong> — OSGi configurations use the new Sling Feature Model format</li>
+        <li><strong>Repository structure package</strong> — Required to define JCR structure without content</li>
+        <li><strong>Dispatcher as code</strong> — Dispatcher configs are part of your Git repo and validated at build time</li>
+        <li><strong>No custom run modes</strong> — Only author, publish, and the standard environments</li>
+        <li><strong>Environment variables</strong> — Secrets and config via Cloud Manager environment variables</li>
+      </ol>
+
+      <h2>Who Should Use AEM Cloud?</h2>
+      <p>AEM as a Cloud Service is ideal for:</p>
+      <ul>
+        <li>Organizations that want to reduce infrastructure management overhead</li>
+        <li>Teams that value continuous updates and always being on the latest version</li>
+        <li>Websites with variable traffic that benefit from auto-scaling</li>
+        <li>Companies adopting modern DevOps practices</li>
+        <li>New AEM implementations (no legacy migration concerns)</li>
+      </ul>
+      <p>Consider staying on AEM 6.5/AMS if you:</p>
+      <ul>
+        <li>Have heavy customizations that depend on mutable infrastructure</li>
+        <li>Require on-premise hosting for compliance reasons</li>
+        <li>Have integrations that need server-level access</li>
+      </ul>
+
+      <h2>Getting Started with AEM Cloud</h2>
+      <ol>
+        <li><strong>Assess your current state</strong> — Use the Best Practices Analyzer to evaluate your existing AEM implementation</li>
+        <li><strong>Plan your migration</strong> — Identify code changes needed for cloud compatibility</li>
+        <li><strong>Set up Cloud Manager</strong> — Configure your program, environments, and pipelines</li>
+        <li><strong>Refactor code</strong> — Update OSGi configs, remove mutable content, modernize dispatcher</li>
+        <li><strong>Migrate content</strong> — Use the Content Transfer Tool for large content migrations</li>
+        <li><strong>Test thoroughly</strong> — Validate on dev/stage before going live</li>
+      </ol>
+
+      <div class="cta-box">
+        <h3>Need Help with AEM Cloud?</h3>
+        <p>Our Adobe-certified team has migrated enterprise AEM implementations to the cloud. Let us guide your journey.</p>
+        <a class="btn btn-primary" href="/services/adobe-experience-cloud/">
+          View Our AEM Services
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container-wide">
+    <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
+

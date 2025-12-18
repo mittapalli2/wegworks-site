@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Email Deliverability Best Practices: A Complete Guide | WegWorks</title>
+<meta name="description" content="Master email deliverability with this comprehensive guide. Learn about sender reputation, authentication (SPF, DKIM, DMARC), list hygiene, and how to stay out of spam folders."/>
+<meta name="keywords" content="email deliverability, email marketing, SPF DKIM DMARC, sender reputation, email authentication, inbox placement, spam filters, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/marketing-automation/email-deliverability-guide/"/>
+<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/marketing-automation/email-deliverability-guide/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="Email Deliverability Best Practices: A Complete Guide"/>
+<meta property="og:description" content="Master email deliverability with sender reputation, authentication, and list hygiene best practices."/>
+<meta property="og:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/about.png"/>
+<meta property="article:published_time" content="2025-12-17"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+
+<!-- Schema.org Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Email Deliverability Best Practices: A Complete Guide",
+  "description": "Master email deliverability with this comprehensive guide. Learn about sender reputation, authentication, list hygiene, and how to stay out of spam folders.",
+  "image": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/about.png",
+  "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png"}},
+  "datePublished": "2025-12-17",
+  "dateModified": "2025-12-17"
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "Marketing Automation", "item": "https://www.wegworks.com/blog/marketing-automation/"},
+    {"@type": "ListItem", "position": 4, "name": "Email Deliverability Guide", "item": "https://www.wegworks.com/blog/marketing-automation/email-deliverability-guide/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is email deliverability?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Email deliverability is the ability of your emails to reach subscribers' inboxes rather than landing in spam folders or being blocked entirely. It depends on sender reputation, authentication, content quality, and list hygiene."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a good email deliverability rate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A good email deliverability rate is 95% or higher. This means at least 95% of your sent emails reach the inbox (not spam). Industry leaders often achieve 98-99% deliverability rates."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-tertiary: #1a1a24;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #10b981;
+  --accent-secondary: #34d399;
+  --accent-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(16, 185, 129, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand img { height: 40px; width: auto; }
+.brand-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text-primary); }
+.nav-cta { padding: 12px 28px; background: var(--accent-gradient); color: var(--bg-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+
+.article-header { padding: 160px 0 60px; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 24px; text-decoration: none; transition: all 0.3s; }
+.back-link:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+.article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: var(--text-muted); }
+.article-category { color: var(--accent-primary); font-weight: 600; text-decoration: none; }
+.article-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
+.article-intro { font-size: 1.25rem; color: var(--text-secondary); line-height: 1.7; }
+
+.article-content { padding: 60px 0 100px; }
+.article-content h2 { font-size: 1.75rem; margin: 48px 0 20px; color: var(--text-primary); }
+.article-content h3 { font-size: 1.375rem; margin: 36px 0 16px; color: var(--text-primary); }
+.article-content p { margin-bottom: 20px; color: var(--text-secondary); line-height: 1.8; }
+.article-content ul, .article-content ol { margin: 20px 0 20px 24px; color: var(--text-secondary); }
+.article-content li { margin-bottom: 12px; line-height: 1.7; }
+.article-content strong { color: var(--text-primary); }
+.article-content a { color: var(--accent-primary); text-decoration: none; }
+.article-content a:hover { text-decoration: underline; }
+
+.callout { padding: 24px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; margin: 32px 0; }
+.callout-title { font-weight: 700; color: var(--accent-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.callout p { margin: 0; color: var(--text-secondary); }
+
+.warning { padding: 24px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; margin: 32px 0; }
+.warning-title { font-weight: 700; color: #ef4444; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.warning p { margin: 0; color: var(--text-secondary); }
+
+.checklist { list-style: none; margin: 24px 0; padding: 0; }
+.checklist li { padding: 12px 0 12px 32px; position: relative; border-bottom: 1px solid var(--glass-border); }
+.checklist li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-primary); font-weight: bold; }
+
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
+.metric-card { padding: 20px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; text-align: center; }
+.metric-value { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.metric-label { font-size: 0.875rem; color: var(--text-muted); margin-top: 4px; }
+
+.cta-box { padding: 48px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; text-align: center; margin-top: 60px; }
+.cta-box h3 { font-size: 1.5rem; margin-bottom: 16px; }
+.cta-box p { color: var(--text-secondary); margin-bottom: 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-weight: 600; border-radius: 12px; text-decoration: none; transition: all 0.3s; }
+.btn-primary { background: var(--accent-gradient); color: var(--bg-primary); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--glow-primary); }
+
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: var(--text-muted); }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .article-header { padding: 120px 0 40px; }
+  .cta-box { padding: 32px 24px; }
+  .metric-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <nav class="nav-wrapper">
+    <a class="brand" href="/"><img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/><span class="brand-text">WegWorks</span></a>
+    <ul class="nav-links">
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="/#contact">Get Started</a>
+  </nav>
+</header>
+
+<article>
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="/blog/marketing-automation/">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Marketing Automation
+      </a>
+      <div class="article-meta">
+        <a class="article-category" href="/blog/marketing-automation/">Marketing Automation</a>
+        <span>December 17, 2025</span>
+        <span>11 min read</span>
+      </div>
+      <h1>Email Deliverability Best Practices: A Complete Guide</h1>
+      <p class="article-intro">
+        You can craft the perfect email, but it's worthless if it lands in spam. Here's everything 
+        you need to know about email deliverability—from authentication to list hygiene.
+      </p>
+    </div>
+  </header>
+
+  <div class="article-content">
+    <div class="container">
+      
+      <h2>What is Email Deliverability?</h2>
+      <p>
+        <strong>Email deliverability</strong> measures your ability to reach subscribers' inboxes. 
+        It's not the same as delivery rate (whether an email was accepted by the server)—deliverability 
+        specifically measures inbox placement versus spam folder.
+      </p>
+      
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="metric-value">95%+</div>
+          <div class="metric-label">Target Deliverability</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">&lt;0.1%</div>
+          <div class="metric-label">Spam Complaint Rate</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">&lt;2%</div>
+          <div class="metric-label">Bounce Rate</div>
+        </div>
+      </div>
+
+      <h2>The Three Pillars of Deliverability</h2>
+      
+      <h3>1. Authentication (Technical Foundation)</h3>
+      <p>
+        Email authentication proves you are who you say you are. Without it, mailbox providers 
+        can't distinguish your legitimate emails from phishing attempts using your domain.
+      </p>
+      
+      <p><strong>SPF (Sender Policy Framework)</strong></p>
+      <p>
+        SPF tells receiving servers which IP addresses are authorized to send email on behalf of 
+        your domain. Add a TXT record to your DNS that lists your email service providers.
+      </p>
+
+      <p><strong>DKIM (DomainKeys Identified Mail)</strong></p>
+      <p>
+        DKIM adds a digital signature to your emails. The receiving server verifies this signature 
+        against a public key in your DNS, proving the message wasn't altered in transit.
+      </p>
+
+      <p><strong>DMARC (Domain-based Message Authentication)</strong></p>
+      <p>
+        DMARC tells receiving servers what to do when SPF or DKIM fail. It also enables reporting, 
+        so you can see who's sending email using your domain.
+      </p>
+
+      <div class="callout">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2v1"/><path d="M12 8a4 4 0 0 0-4 4c0 1.5.8 2.8 2 3.4V17h4v-1.6c1.2-.6 2-1.9 2-3.4a4 4 0 0 0-4-4Z"/></svg>
+          Google & Yahoo 2024 Requirements
+        </div>
+        <p>
+          As of February 2024, Google and Yahoo require bulk senders (5,000+ emails/day) to have 
+          SPF, DKIM, and DMARC configured. Without them, your emails may be blocked entirely.
+        </p>
+      </div>
+
+      <h3>2. Reputation (Trust Score)</h3>
+      <p>
+        Your <strong>sender reputation</strong> is like a credit score for email. Mailbox providers 
+        track your sending patterns and user engagement to decide if you're trustworthy.
+      </p>
+      <p>Reputation is built on:</p>
+      <ul>
+        <li><strong>IP Reputation</strong> — The sending IP address's history</li>
+        <li><strong>Domain Reputation</strong> — Your domain's sending history</li>
+        <li><strong>Content Reputation</strong> — Patterns in your email content</li>
+        <li><strong>Engagement Signals</strong> — Opens, clicks, replies, complaints</li>
+      </ul>
+
+      <h3>3. Content (What You Send)</h3>
+      <p>
+        Even with perfect authentication and reputation, bad content triggers spam filters:
+      </p>
+      <ul>
+        <li>Excessive use of spam trigger words ("FREE!", "Act now!", "Limited time!")</li>
+        <li>ALL CAPS in subject lines or body</li>
+        <li>Too many images with little text</li>
+        <li>Broken HTML or rendering issues</li>
+        <li>Missing unsubscribe link</li>
+        <li>Misleading subject lines</li>
+      </ul>
+
+      <h2>List Hygiene: Your Most Important Practice</h2>
+      <p>
+        The quality of your email list directly impacts deliverability. Sending to invalid or 
+        unengaged addresses signals to mailbox providers that you're not a legitimate sender.
+      </p>
+
+      <ul class="checklist">
+        <li>Remove hard bounces immediately (invalid addresses)</li>
+        <li>Suppress soft bounces after 3-5 consecutive failures</li>
+        <li>Implement double opt-in for new subscribers</li>
+        <li>Remove subscribers who haven't engaged in 6-12 months</li>
+        <li>Never purchase email lists (this will destroy your reputation)</li>
+        <li>Use email validation services before importing lists</li>
+        <li>Honor unsubscribe requests within 24 hours</li>
+      </ul>
+
+      <div class="warning">
+        <div class="warning-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Never Buy Email Lists
+        </div>
+        <p>
+          Purchased lists contain spam traps, invalid addresses, and people who never consented. 
+          One send to a bad list can tank your reputation for months.
+        </p>
+      </div>
+
+      <h2>Warming Up a New IP or Domain</h2>
+      <p>
+        New IP addresses and domains have no reputation. Sending high volume immediately looks 
+        suspicious. Instead, gradually increase volume over 4-6 weeks.
+      </p>
+      <p>A typical warmup schedule:</p>
+      <ul>
+        <li><strong>Week 1:</strong> 50-100 emails/day to most engaged subscribers</li>
+        <li><strong>Week 2:</strong> 500-1,000 emails/day</li>
+        <li><strong>Week 3:</strong> 5,000-10,000 emails/day</li>
+        <li><strong>Week 4:</strong> 25,000-50,000 emails/day</li>
+        <li><strong>Week 5+:</strong> Gradually reach full volume</li>
+      </ul>
+
+      <h2>Monitoring Your Deliverability</h2>
+      <p>Track these metrics to catch problems early:</p>
+      <ul>
+        <li><strong>Inbox Placement Rate</strong> — Percentage reaching inbox (use tools like GlockApps or 250ok)</li>
+        <li><strong>Bounce Rate</strong> — Should be under 2%</li>
+        <li><strong>Spam Complaint Rate</strong> — Should be under 0.1%</li>
+        <li><strong>Unsubscribe Rate</strong> — High rates signal content problems</li>
+        <li><strong>DMARC Reports</strong> — Shows authentication failures and potential abuse</li>
+      </ul>
+
+      <h2>Platform-Specific Considerations</h2>
+      
+      <h3>Gmail</h3>
+      <p>
+        Gmail's algorithms heavily weight user engagement. If recipients don't open or click your 
+        emails, you'll gradually move to the Promotions tab or spam. Focus on subject line 
+        optimization and send-time personalization.
+      </p>
+
+      <h3>Microsoft (Outlook, Hotmail)</h3>
+      <p>
+        Microsoft is stricter about authentication and reputation. Use their SNDS (Smart Network 
+        Data Services) to monitor your reputation with their network.
+      </p>
+
+      <h3>Yahoo/AOL</h3>
+      <p>
+        Yahoo aggressively filters based on engagement signals. Maintain clean lists and segment 
+        by engagement level to protect your reputation.
+      </p>
+
+      <h2>Quick Wins to Improve Deliverability</h2>
+      <ol>
+        <li>Set up SPF, DKIM, and DMARC if you haven't already</li>
+        <li>Remove subscribers who haven't opened in 6+ months</li>
+        <li>Add a clear unsubscribe link to every email</li>
+        <li>Use a consistent "From" name and address</li>
+        <li>Test emails across providers before sending</li>
+        <li>Segment your list by engagement level</li>
+        <li>Send consistently—don't go from 0 to 100,000 overnight</li>
+      </ol>
+
+      <div class="cta-box">
+        <h3>Need Help with Email Deliverability?</h3>
+        <p>Our team can audit your email infrastructure, fix authentication issues, and implement best practices for your ESP.</p>
+        <a class="btn btn-primary" href="/services/marketing-automation/">
+          View Our Services
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container-wide">
+    <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
+
