@@ -49,7 +49,7 @@
   <!-- Blog -->
   <url>
     <loc>https://www.wegworks.com/blog/</loc>
-    <lastmod>2025-12-17</lastmod>
+    <lastmod>2025-12-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -82,6 +82,24 @@
   <url>
     <loc>https://www.wegworks.com/blog/aem/</loc>
     <lastmod>2025-12-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.wegworks.com/blog/adobe-target/</loc>
+    <lastmod>2025-12-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.wegworks.com/blog/adobe-experience-platform/</loc>
+    <lastmod>2025-12-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.wegworks.com/blog/google-analytics-4/</loc>
+    <lastmod>2025-12-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -146,6 +164,48 @@
   <url>
     <loc>https://www.wegworks.com/blog/aem/aem-headless-content-fragments/</loc>
     <lastmod>2025-12-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Adobe Target Articles -->
+  <url>
+    <loc>https://www.wegworks.com/blog/adobe-target/personalization-guide/</loc>
+    <lastmod>2025-12-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wegworks.com/blog/adobe-target/ab-testing-best-practices/</loc>
+    <lastmod>2025-12-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Adobe Experience Platform Articles -->
+  <url>
+    <loc>https://www.wegworks.com/blog/adobe-experience-platform/what-is-aep/</loc>
+    <lastmod>2025-12-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wegworks.com/blog/adobe-experience-platform/real-time-cdp-guide/</loc>
+    <lastmod>2025-12-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Google Analytics 4 Articles -->
+  <url>
+    <loc>https://www.wegworks.com/blog/google-analytics-4/ga4-migration-guide/</loc>
+    <lastmod>2025-12-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wegworks.com/blog/google-analytics-4/ga4-implementation-guide/</loc>
+    <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
