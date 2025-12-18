@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zero-Cost Websites for Small Businesses | WegWorks</title>
+  <meta name="description" content="Professional websites for gyms, restaurants, salons, and local service providers. Zero hosting costs. Get online without breaking the bank."/>
+  <meta name="keywords" content="free website hosting, small business website, gym website, restaurant website, local business website, affordable web design, WegWorks"/>
+  <link rel="canonical" href="https://www.wegworks.com/small-business/"/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/svg+xml" href="/images/ww.svg"/>
+  
+  <style>
+    :root {
+      --bg-dark: #050508;
+      --bg-card: #0d0d12;
+      --text-white: #ffffff;
+      --text-gray: #8b8b9e;
+      --accent-lime: #c4f541;
+      --accent-cyan: #41f5e8;
+      --accent-purple: #a855f7;
+      --accent-pink: #f541c4;
+      --accent-orange: #f59e0b;
+      --gradient-hero: linear-gradient(135deg, #c4f541 0%, #41f5e8 50%, #a855f7 100%);
+      --gradient-card: linear-gradient(145deg, rgba(196, 245, 65, 0.1) 0%, rgba(65, 245, 232, 0.05) 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(196, 245, 65, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(196, 245, 65, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(196, 245, 65, 0.15) 0%, transparent 70%);
+      top: -150px;
+      left: -150px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
+      top: 40%;
+      right: -100px;
+      animation-delay: -7s;
+    }
+
+    .orb-3 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(65, 245, 232, 0.1) 0%, transparent 70%);
+      bottom: 10%;
+      left: 20%;
+      animation-delay: -14s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(20px, 30px) scale(1.02); }
+    }
+
+    .container { max-width: 1300px; margin: 0 auto; padding: 0 32px; }
+
+    /* Header */
+    header {
+      padding: 20px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(5, 5, 8, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(196, 245, 65, 0.1);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand img { height: 42px; width: auto; }
+
+    .brand-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-cta {
+      padding: 14px 32px;
+      background: var(--accent-lime);
+      color: var(--bg-dark);
+      font-weight: 700;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(196, 245, 65, 0.4);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: rgba(196, 245, 65, 0.1);
+      border: 1px solid rgba(196, 245, 65, 0.3);
+      border-radius: 100px;
+      font-size: 0.95rem;
+      color: var(--accent-lime);
+      margin-bottom: 32px;
+      font-weight: 600;
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(196, 245, 65, 0.2); }
+      50% { box-shadow: 0 0 40px rgba(196, 245, 65, 0.4); }
+    }
+
+    .hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 28px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 .line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero h1 .line span {
+      display: inline-block;
+      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: translateY(100%);
+    }
+
+    .hero h1 .line:nth-child(2) span { animation-delay: 0.1s; }
+    .hero h1 .line:nth-child(3) span { animation-delay: 0.2s; }
+
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .gradient-text {
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% 200%;
+      animation: gradient-shift 4s ease infinite;
+    }
+
+    @keyframes gradient-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .hero-subtitle {
+      font-size: 1.4rem;
+      color: var(--text-gray);
+      max-width: 600px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+      animation: fadeIn 1s ease 0.5s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      animation: fadeIn 1s ease 0.7s forwards;
+      opacity: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 40px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--accent-lime);
+      color: var(--bg-dark);
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+    }
+
+    .btn-primary:hover::before {
+      transform: translateX(100%);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(196, 245, 65, 0.5);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.2);
+      color: var(--text-white);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(65, 245, 232, 0.2);
+    }
+
+    /* Stats */
+    .stats-row {
+      display: flex;
+      gap: 60px;
+      margin-top: 80px;
+      animation: fadeIn 1s ease 0.9s forwards;
+      opacity: 0;
+    }
+
+    .stat-item {
+      text-align: left;
+    }
+
+    .stat-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 8px;
+    }
+
+    /* Sections */
+    section {
+      position: relative;
+      z-index: 10;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent-lime);
+      margin-bottom: 20px;
+    }
+
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      width: 30px;
+      height: 2px;
+      background: var(--accent-lime);
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-gray);
+      max-width: 600px;
+      margin: 20px auto 0;
+    }
+
+    /* Business Cards */
+    .who-section {
+      padding: 150px 0;
+    }
+
+    .business-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .business-card {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      cursor: pointer;
+    }
+
+    .business-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .business-card:hover img {
+      transform: scale(1.15);
+    }
+
+    .business-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5, 5, 8, 0.95) 0%, rgba(5, 5, 8, 0.4) 50%, transparent 100%);
+      z-index: 1;
+      transition: all 0.4s;
+    }
+
+    .business-card:hover::before {
+      background: linear-gradient(to top, rgba(196, 245, 65, 0.9) 0%, rgba(5, 5, 8, 0.6) 60%, transparent 100%);
+    }
+
+    .business-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px;
+      z-index: 2;
+      transform: translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .business-card:hover .business-card-content {
+      transform: translateY(0);
+    }
+
+    .business-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      transition: color 0.3s;
+    }
+
+    .business-card:hover h3 {
+      color: var(--bg-dark);
+    }
+
+    .business-card p {
+      font-size: 0.95rem;
+      color: var(--text-gray);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s 0.1s;
+    }
+
+    .business-card:hover p {
+      opacity: 1;
+      transform: translateY(0);
+      color: var(--bg-dark);
+    }
+
+    .card-arrow {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      background: var(--accent-lime);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      opacity: 0;
+      transform: scale(0.5) rotate(-45deg);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .business-card:hover .card-arrow {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    .card-arrow svg {
+      width: 24px;
+      height: 24px;
+      color: var(--bg-dark);
+    }
+
+    /* How Section */
+    .how-section {
+      padding: 150px 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(196, 245, 65, 0.03) 50%, transparent 100%);
+    }
+
+    .steps-container {
+      display: flex;
+      gap: 32px;
+      margin-top: 80px;
+    }
+
+    .step-card {
+      flex: 1;
+      padding: 48px 36px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-hero);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .step-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .step-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(196, 245, 65, 0.2);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    }
+
+    .step-number {
+      font-family: 'Outfit', sans-serif;
+      font-size: 5rem;
+      font-weight: 900;
+      background: linear-gradient(180deg, rgba(196, 245, 65, 0.2) 0%, transparent 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .step-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .step-card p {
+      color: var(--text-gray);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* Features */
+    .features-section {
+      padding: 150px 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      padding: 36px 28px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      text-align: center;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(196, 245, 65, 0.3);
+    }
+
+    .feature-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 24px;
+      background: var(--gradient-card);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      transition: transform 0.4s;
+    }
+
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .feature-card h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      color: var(--text-gray);
+      font-size: 0.9rem;
+    }
+
+    /* Domain Section */
+    .domain-section {
+      padding: 150px 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(65, 245, 232, 0.03) 50%, transparent 100%);
+    }
+
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 48px;
+    }
+
+    .domain-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+      transition: all 0.4s;
+    }
+
+    .domain-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(196, 245, 65, 0.3);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    }
+
+    .domain-card.custom {
+      border-color: rgba(196, 245, 65, 0.3);
+      background: linear-gradient(180deg, rgba(196, 245, 65, 0.05) 0%, var(--bg-card) 100%);
+    }
+
+    .domain-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 16px;
+      background: var(--bg-dark);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--text-gray);
+    }
+
+    .domain-badge.popular {
+      background: var(--accent-lime);
+      color: var(--bg-dark);
+      border: none;
+    }
+
+    .domain-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .domain-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .domain-example {
+      background: var(--bg-dark);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 1rem;
+    }
+
+    .domain-prefix {
+      color: var(--accent-lime);
+      font-weight: 600;
+    }
+
+    .domain-suffix {
+      color: var(--text-gray);
+    }
+
+    .domain-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+
+    .domain-features li {
+      padding: 10px 0;
+      color: var(--text-gray);
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .domain-features li:last-child {
+      border-bottom: none;
+    }
+
+    .domain-price {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+
+    .domain-price .price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .domain-price .period {
+      color: var(--text-gray);
+      font-size: 1rem;
+    }
+
+    .domain-note {
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      font-weight: 500;
+    }
+
+    .domain-info {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .info-card {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 28px 32px;
+    }
+
+    .info-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .info-card h4 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: var(--accent-lime);
+    }
+
+    .info-card p {
+      color: var(--text-gray);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .info-card strong {
+      color: var(--text-white);
+    }
+
+    @media (max-width: 1024px) {
+      .domain-grid { grid-template-columns: 1fr; max-width: 450px; margin-left: auto; margin-right: auto; }
+    }
+
+    /* CTA & Contact Form */
+    .cta-section {
+      padding: 150px 0;
+      position: relative;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1000px;
+      height: 1000px;
+      background: radial-gradient(circle, rgba(196, 245, 65, 0.12) 0%, transparent 60%);
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .cta-header {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-header p {
+      font-size: 1.2rem;
+      color: var(--text-gray);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .contact-form-wrapper {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-form {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 48px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text-white);
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 16px 20px;
+      background: var(--bg-dark);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      color: var(--text-white);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent-lime);
+      box-shadow: 0 0 20px rgba(196, 245, 65, 0.15);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-gray);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238b8b9e' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+
+    .form-group select option {
+      background: var(--bg-dark);
+      color: var(--text-white);
+    }
+
+    .captcha-row {
+      align-items: flex-end;
+    }
+
+    .captcha-group {
+      margin-bottom: 0;
+    }
+
+    .captcha-group label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .captcha-group #captcha-question {
+      background: rgba(196, 245, 65, 0.1);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      color: var(--accent-lime);
+      border: 1px solid rgba(196, 245, 65, 0.3);
+    }
+
+    .captcha-group input {
+      max-width: 120px;
+    }
+
+    .btn-submit {
+      height: fit-content;
+      white-space: nowrap;
+    }
+
+    /* Success Message */
+    .form-success {
+      text-align: center;
+      padding: 60px 48px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+    }
+
+    .success-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .success-circle {
+      stroke: var(--accent-lime);
+      stroke-width: 2;
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      animation: strokeCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+
+    .success-check {
+      stroke: var(--accent-lime);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: strokeCheck 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+    }
+
+    @keyframes strokeCircle {
+      100% { stroke-dashoffset: 0; }
+    }
+
+    @keyframes strokeCheck {
+      100% { stroke-dashoffset: 0; }
+    }
+
+    .form-success h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .form-success p {
+      color: var(--text-gray);
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.2);
+      color: var(--text-white);
+      padding: 14px 28px;
+      font-size: 1rem;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-lime);
+      color: var(--accent-lime);
+    }
+
+    @media (max-width: 768px) {
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form { padding: 32px 24px; }
+      .captcha-row { gap: 16px; }
+      .btn-submit { width: 100%; justify-content: center; }
+    }
+
+    /* Footer */
+    footer {
+      padding: 48px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--text-gray);
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: var(--accent-lime);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--accent-cyan);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .business-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-container { flex-wrap: wrap; }
+      .step-card { flex: 1 1 45%; }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.8rem; }
+      .stats-row { flex-direction: column; gap: 32px; }
+      .business-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .step-card { flex: 1 1 100%; }
+      .nav-cta { display: none; }
+    }
+
+    /* Scroll Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="floating-orb orb-3"></div>
+
+  <header>
+    <div class="container">
+      <nav class="nav-wrapper">
+        <a class="brand" href="/">
+          <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/>
+          <span class="brand-text">WegWorks</span>
+        </a>
+        <a class="nav-cta" href="#contact">Get Started Free →</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-badge">✨ $0/month hosting forever</span>
+          <h1>
+            <span class="line"><span>Get Your Business</span></span>
+            <span class="line"><span>Online</span></span>
+            <span class="line"><span class="gradient-text">Without the Bills</span></span>
+          </h1>
+          <p class="hero-subtitle">
+            Professional websites for local businesses. Modern design. Zero hosting costs. 
+            We help gyms, restaurants, salons & service providers get online without breaking the bank.
+          </p>
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-primary">Get Your Free Quote →</a>
+            <a href="#how" class="btn btn-secondary">See How It Works</a>
+          </div>
+          
+          <div class="stats-row">
+            <div class="stat-item">
+              <div class="stat-value">$0</div>
+              <div class="stat-label">Monthly Hosting</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">48h</div>
+              <div class="stat-label">Turnaround Time</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">100%</div>
+              <div class="stat-label">Mobile Ready</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who We Help -->
+    <section class="who-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Who We Help</span>
+          <h2 class="section-title">Perfect for <span class="gradient-text">Local Businesses</span></h2>
+          <p class="section-subtitle">Whether you're just starting out or ready to upgrade, we build websites that convert visitors into customers.</p>
+        </div>
+        
+        <div class="business-grid">
+          <div class="business-card reveal">
+            <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/sb/pizza.jpg" alt="Restaurant Website" loading="lazy"/>
+            <div class="card-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+              </svg>
+            </div>
+            <div class="business-card-content">
+              <h3>Restaurants</h3>
+              <p>Menus, reservations, and online orders that drive hungry customers to your door.</p>
+            </div>
+          </div>
+          
+          <div class="business-card reveal">
+            <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/sb/coffee-shop.jpg" alt="Cafe Website" loading="lazy"/>
+            <div class="card-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+              </svg>
+            </div>
+            <div class="business-card-content">
+              <h3>Cafés & Coffee</h3>
+              <p>Showcase your vibe, menu, and specialty drinks to attract coffee lovers.</p>
+            </div>
+          </div>
+          
+          <div class="business-card reveal">
+            <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/sb/saloon.jpg" alt="Salon Website" loading="lazy"/>
+            <div class="card-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+              </svg>
+            </div>
+            <div class="business-card-content">
+              <h3>Salons & Spas</h3>
+              <p>Services, pricing, and easy appointment booking for your clients.</p>
+            </div>
+          </div>
+          
+          <div class="business-card reveal">
+            <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/sb/home-services.webp" alt="Home Services Website" loading="lazy"/>
+            <div class="card-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+              </svg>
+            </div>
+            <div class="business-card-content">
+              <h3>Home Services</h3>
+              <p>Plumbers, electricians, cleaners — showcase your work and get leads.</p>
+            </div>
+          </div>
+          
+          <div class="business-card reveal">
+            <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/sb/photograper.jpeg" alt="Photography Portfolio" loading="lazy"/>
+            <div class="card-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+              </svg>
+            </div>
+            <div class="business-card-content">
+              <h3>Photographers</h3>
+              <p>Beautiful portfolios that showcase your work and attract clients.</p>
+            </div>
+          </div>
+          
+          <div class="business-card reveal">
+            <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/sb/retail.webp" alt="Retail Store Website" loading="lazy"/>
+            <div class="card-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+              </svg>
+            </div>
+            <div class="business-card-content">
+              <h3>Retail & Shops</h3>
+              <p>Highlight products and drive foot traffic to your location.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-section" id="how">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Simple Process</span>
+          <h2 class="section-title">From Idea to <span class="gradient-text">Live Website</span></h2>
+          <p class="section-subtitle">We handle everything. You just tell us what you need.</p>
+        </div>
+        
+        <div class="steps-container">
+          <div class="step-card reveal">
+            <div class="step-number">01</div>
+            <h3>Share Your Vision</h3>
+            <p>Tell us about your business, brand colors, and what you need. We'll take it from there.</p>
+          </div>
+          <div class="step-card reveal">
+            <div class="step-number">02</div>
+            <h3>We Design & Build</h3>
+            <p>Our team creates a stunning, mobile-friendly website tailored to your business.</p>
+          </div>
+          <div class="step-card reveal">
+            <div class="step-number">03</div>
+            <h3>Review & Refine</h3>
+            <p>You review the design. We make changes until you love it. No limits.</p>
+          </div>
+          <div class="step-card reveal">
+            <div class="step-number">04</div>
+            <h3>Go Live!</h3>
+            <p>Your website launches and starts bringing in customers 24/7.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Everything Included</span>
+          <h2 class="section-title">What You <span class="gradient-text">Get</span></h2>
+          <p class="section-subtitle">Professional features without the enterprise price tag.</p>
+        </div>
+        
+        <div class="features-grid">
+          <div class="feature-card reveal">
+            <div class="feature-icon">🎨</div>
+            <h4>Custom Design</h4>
+            <p>Unique design that matches your brand</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">📱</div>
+            <h4>Mobile Ready</h4>
+            <p>Perfect on all devices</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">⚡</div>
+            <h4>Lightning Fast</h4>
+            <p>Loads in under 2 seconds</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">🔒</div>
+            <h4>Free SSL</h4>
+            <p>Secure HTTPS included</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">🔍</div>
+            <h4>SEO Ready</h4>
+            <p>Built to rank on Google</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">📧</div>
+            <h4>Contact Forms</h4>
+            <p>Leads straight to your inbox</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">🗺️</div>
+            <h4>Google Maps</h4>
+            <p>Help customers find you</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">📊</div>
+            <h4>Analytics</h4>
+            <p>Track your visitors</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Domain Options -->
+    <section class="domain-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Your Web Address</span>
+          <h2 class="section-title">Pick Your <span class="gradient-text">Domain</span></h2>
+          <p class="section-subtitle">Choose how customers find you online. Free or custom — you decide.</p>
+        </div>
+        
+        <div class="domain-grid">
+          <div class="domain-card free reveal">
+            <div class="domain-badge">FREE</div>
+            <div class="domain-icon">🎁</div>
+            <h3>Free Subdomain</h3>
+            <div class="domain-example">
+              <span class="domain-prefix">yourbusiness</span><span class="domain-suffix">.wegworks.site</span>
+            </div>
+            <ul class="domain-features">
+              <li>✓ Completely free forever</li>
+              <li>✓ Instant setup</li>
+              <li>✓ Free SSL included</li>
+              <li>✓ Professional look</li>
+              <li>✓ Great for starting out</li>
+            </ul>
+            <div class="domain-price">
+              <span class="price">$0</span>
+              <span class="period">/forever</span>
+            </div>
+          </div>
+          
+          <div class="domain-card custom reveal">
+            <div class="domain-badge popular">RECOMMENDED</div>
+            <div class="domain-icon">🌐</div>
+            <h3>Your Own Domain</h3>
+            <div class="domain-example">
+              <span class="domain-prefix">www</span><span class="domain-suffix">.yourbusiness.com</span>
+            </div>
+            <ul class="domain-features">
+              <li>✓ Professional brand identity</li>
+              <li>✓ Better for SEO & Google</li>
+              <li>✓ Custom email available</li>
+              <li>✓ Easy to remember</li>
+              <li>✓ You own it forever</li>
+            </ul>
+            <div class="domain-price">
+              <span class="price">$10-15</span>
+              <span class="period">/year</span>
+            </div>
+            <p class="domain-note">We help you register & set it up!</p>
+          </div>
+          
+          <div class="domain-card transfer reveal">
+            <div class="domain-badge">HAVE ONE?</div>
+            <div class="domain-icon">🔗</div>
+            <h3>Use Existing Domain</h3>
+            <div class="domain-example">
+              <span class="domain-prefix">www</span><span class="domain-suffix">.yourdomain.com</span>
+            </div>
+            <ul class="domain-features">
+              <li>✓ Keep your current domain</li>
+              <li>✓ We handle the DNS setup</li>
+              <li>✓ No downtime during switch</li>
+              <li>✓ Free SSL activation</li>
+              <li>✓ Full support included</li>
+            </ul>
+            <div class="domain-price">
+              <span class="price">$0</span>
+              <span class="period">setup fee</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="domain-info reveal">
+          <div class="info-card">
+            <span class="info-icon">💡</span>
+            <div>
+              <h4>Where to Buy a Domain?</h4>
+              <p>We recommend <strong>Namecheap</strong>, <strong>Google Domains</strong>, or <strong>Cloudflare</strong> — all around $10-15/year for .com domains. We'll guide you through the entire process!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA & Contact Form -->
+    <section class="cta-section" id="contact">
+      <div class="container">
+        <div class="cta-header reveal">
+          <h2>Ready to Get <span class="gradient-text">Online</span>?</h2>
+          <p>Tell us about your business and we'll send you a free quote within 24 hours.</p>
+        </div>
+        
+        <div class="contact-form-wrapper reveal">
+          <form class="contact-form" id="sb-contact-form" onsubmit="handleFormSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your Name *</label>
+                <input type="text" id="name" name="name" required placeholder="John Smith"/>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required placeholder="john@yourbusiness.com"/>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="business">Business Name</label>
+                <input type="text" id="business" name="company" placeholder="Your Business Name"/>
+              </div>
+              <div class="form-group">
+                <label for="business-type">Business Type</label>
+                <select id="business-type" name="business-type">
+                  <option value="">Select your business type</option>
+                  <option value="Restaurant/Cafe">Restaurant / Café</option>
+                  <option value="Salon/Spa">Salon / Spa</option>
+                  <option value="Gym/Fitness">Gym / Fitness Studio</option>
+                  <option value="Home Services">Home Services</option>
+                  <option value="Photography">Photography / Creative</option>
+                  <option value="Retail">Retail / Shop</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell us about your project *</label>
+              <textarea id="message" name="message" required placeholder="What kind of website do you need? Any specific features or pages?"></textarea>
+            </div>
+            <div class="form-row captcha-row">
+              <div class="form-group captcha-group">
+                <label for="captcha">🤖 Prove you're human: <span id="captcha-question"></span></label>
+                <input type="number" id="captcha" name="captcha" required placeholder="Answer" autocomplete="off"/>
+              </div>
+              <button type="submit" class="btn btn-primary btn-submit">Send Message →</button>
+            </div>
+          </form>
+          
+          <div id="form-success" class="form-success" style="display: none;">
+            <div class="success-icon">
+              <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+                <circle class="success-circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="success-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+              </svg>
+            </div>
+            <h3>Thank You! 🎉</h3>
+            <p>Your message has been sent successfully.<br/>We'll get back to you within 24 hours with a free quote.</p>
+            <button class="btn btn-secondary" onclick="resetForm()">Send Another Message</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 <a href="/">WegWorks</a> — Helping local businesses thrive online.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal animation
+    const reveals = document.querySelectorAll('.reveal');
+    
+    function revealOnScroll() {
+      reveals.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const revealPoint = 150;
+        
+        if (elementTop < windowHeight - revealPoint) {
+          el.classList.add('active');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    // Math CAPTCHA
+    let captchaAnswer = 0;
+    
+    function generateCaptcha() {
+      const num1 = Math.floor(Math.random() * 10) + 1;
+      const num2 = Math.floor(Math.random() * 10) + 1;
+      const operators = ['+', '-', '×'];
+      const operator = operators[Math.floor(Math.random() * 3)];
+      
+      let question = '';
+      switch(operator) {
+        case '+':
+          captchaAnswer = num1 + num2;
+          question = `${num1} + ${num2} = ?`;
+          break;
+        case '-':
+          const larger = Math.max(num1, num2);
+          const smaller = Math.min(num1, num2);
+          captchaAnswer = larger - smaller;
+          question = `${larger} - ${smaller} = ?`;
+          break;
+        case '×':
+          captchaAnswer = num1 * num2;
+          question = `${num1} × ${num2} = ?`;
+          break;
+      }
+      
+      document.getElementById('captcha-question').textContent = question;
+    }
+    
+    // Generate captcha on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', generateCaptcha);
+    } else {
+      generateCaptcha();
+    }
+    
+    async function handleFormSubmit(event) {
+      event.preventDefault();
+      
+      const form = event.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const formWrapper = document.querySelector('.contact-form-wrapper');
+      const successDiv = document.getElementById('form-success');
+      const originalBtnText = submitBtn.textContent;
+      const userAnswer = parseInt(form.querySelector('#captcha').value);
+      
+      // Validate CAPTCHA
+      if (userAnswer !== captchaAnswer) {
+        alert('Incorrect answer. Please try the math question again.');
+        generateCaptcha();
+        form.querySelector('#captcha').value = '';
+        form.querySelector('#captcha').focus();
+        return;
+      }
+      
+      // Disable button and show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      
+      // Collect form data
+      const businessType = form.querySelector('#business-type');
+      const formData = {
+        name: form.querySelector('#name').value,
+        email: form.querySelector('#email').value,
+        company: form.querySelector('#business').value || 'Not provided',
+        message: `[Small Business Page]\nBusiness Type: ${businessType ? businessType.value : 'Not selected'}\n\n${form.querySelector('#message').value}`
+      };
+      
+      try {
+        await fetch('https://script.google.com/macros/s/AKfycbwlulkLyPgt9g63HCyo6-2zEKCMfnpDt0oPLMzZ-fjHTz_l4dW2tA_vvLh5a9CTXxjG/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+        
+        // Hide form and show success message
+        form.style.display = 'none';
+        successDiv.style.display = 'block';
+        
+      } catch (error) {
+        console.error('Form submission error:', error);
+        alert('Something went wrong. Please try again or email us at hello@wegworks.com');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
+    }
+    
+    function resetForm() {
+      const form = document.getElementById('sb-contact-form');
+      const successDiv = document.getElementById('form-success');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      
+      form.reset();
+      form.style.display = 'block';
+      successDiv.style.display = 'none';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message →';
+      generateCaptcha();
+    }
+  </script>
+</body>
+</html>
