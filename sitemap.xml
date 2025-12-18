@@ -88,13 +88,31 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.wegworks.com/blog/adobe-analytics/analysis-workspace-tips/</loc>
+    <lastmod>2025-12-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.wegworks.com/blog/segment-cdp/what-is-a-cdp/</loc>
     <lastmod>2025-12-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.wegworks.com/blog/segment-cdp/tracking-plan-guide/</loc>
+    <lastmod>2025-12-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.wegworks.com/blog/salesforce/sales-cloud-vs-marketing-cloud/</loc>
+    <lastmod>2025-12-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wegworks.com/blog/marketing-automation/email-deliverability-guide/</loc>
     <lastmod>2025-12-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

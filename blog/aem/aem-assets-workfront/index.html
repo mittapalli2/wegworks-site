@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AEM Assets + Workfront: Streamlining Creative Operations | WegWorks</title>
+<meta name="description" content="How to integrate AEM Assets with Adobe Workfront for seamless DAM workflows. Connect creative project management with digital asset management."/>
+<meta name="keywords" content="AEM Assets, Adobe Workfront, Workfront integration, DAM workflow, creative operations, AEM Workfront connector, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/aem/aem-assets-workfront/"/>
+<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/aem/aem-assets-workfront/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="AEM Assets + Workfront: Streamlining Creative Operations"/>
+<meta property="og:description" content="How to integrate AEM Assets with Adobe Workfront for seamless DAM workflows."/>
+<meta property="article:published_time" content="2025-12-17"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+
+<!-- Schema.org Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AEM Assets + Workfront: Streamlining Creative Operations",
+  "description": "How to integrate AEM Assets with Adobe Workfront for seamless DAM workflows and creative project management.",
+  "image": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/about.png",
+  "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png"}},
+  "datePublished": "2025-12-17",
+  "dateModified": "2025-12-17"
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "AEM", "item": "https://www.wegworks.com/blog/aem/"},
+    {"@type": "ListItem", "position": 4, "name": "AEM Assets + Workfront", "item": "https://www.wegworks.com/blog/aem/aem-assets-workfront/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the AEM Assets Workfront integration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The AEM Assets Workfront integration is Adobe's native connector that links Workfront project management with AEM Assets DAM. It enables automatic asset syncing, metadata mapping, folder linking, and streamlined creative workflows between the two platforms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Workfront require AEM as a Cloud Service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, the Workfront integration works with both AEM as a Cloud Service and AEM 6.5 with the enhanced connector. However, AEM Cloud provides better native integration with automatic updates and improved performance."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-tertiary: #1a1a24;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #10b981;
+  --accent-secondary: #34d399;
+  --accent-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(16, 185, 129, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+h1, h2, h3 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand img { height: 40px; width: auto; }
+.brand-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.nav-cta { padding: 12px 28px; background: var(--accent-gradient); color: var(--bg-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+
+.article-header { padding: 160px 0 60px; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 24px; text-decoration: none; }
+.article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: var(--text-muted); }
+.article-category { color: var(--accent-primary); font-weight: 600; text-decoration: none; }
+.article-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
+.article-intro { font-size: 1.25rem; color: var(--text-secondary); line-height: 1.7; }
+
+.article-content { padding: 60px 0 100px; }
+.article-content h2 { font-size: 1.75rem; margin: 48px 0 20px; }
+.article-content h3 { font-size: 1.375rem; margin: 36px 0 16px; }
+.article-content p { margin-bottom: 20px; color: var(--text-secondary); line-height: 1.8; }
+.article-content ul, .article-content ol { margin: 20px 0 20px 24px; color: var(--text-secondary); }
+.article-content li { margin-bottom: 12px; line-height: 1.7; }
+.article-content strong { color: var(--text-primary); }
+.article-content a { color: var(--accent-primary); text-decoration: none; }
+
+.benefit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
+.benefit-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 28px; }
+.benefit-icon { width: 48px; height: 48px; background: var(--accent-gradient); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.benefit-icon svg { width: 24px; height: 24px; color: var(--bg-primary); }
+.benefit-card h4 { color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem; }
+.benefit-card p { margin: 0; font-size: 0.95rem; }
+
+.workflow-steps { margin: 32px 0; }
+.workflow-step { display: flex; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--glass-border); }
+.workflow-step:last-child { border-bottom: none; }
+.step-number { width: 36px; height: 36px; background: var(--accent-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--bg-primary); flex-shrink: 0; }
+.step-content h4 { color: var(--text-primary); margin-bottom: 8px; }
+.step-content p { margin: 0; }
+
+.callout { padding: 24px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; margin: 32px 0; }
+.callout-title { font-weight: 700; color: var(--accent-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.callout p { margin: 0; color: var(--text-secondary); }
+
+.cta-box { padding: 48px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; text-align: center; margin-top: 60px; }
+.cta-box h3 { font-size: 1.5rem; margin-bottom: 16px; }
+.cta-box p { color: var(--text-secondary); margin-bottom: 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-weight: 600; border-radius: 12px; text-decoration: none; }
+.btn-primary { background: var(--accent-gradient); color: var(--bg-primary); }
+
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: var(--text-muted); }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .article-header { padding: 120px 0 40px; }
+  .workflow-step { flex-direction: column; gap: 12px; }
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <nav class="nav-wrapper">
+    <a class="brand" href="/"><img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/><span class="brand-text">WegWorks</span></a>
+    <ul class="nav-links">
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="/#contact">Get Started</a>
+  </nav>
+</header>
+
+<article>
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="/blog/aem/">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        AEM
+      </a>
+      <div class="article-meta">
+        <a class="article-category" href="/blog/aem/">AEM</a>
+        <span>December 17, 2025</span>
+        <span>9 min read</span>
+      </div>
+      <h1>AEM Assets + Workfront: Streamlining Creative Operations</h1>
+      <p class="article-intro">
+        Connect your creative workflow to your digital asset management. Learn how the AEM Assets and 
+        Workfront integration creates a seamless pipeline from project brief to published asset.
+      </p>
+    </div>
+  </header>
+
+  <div class="article-content">
+    <div class="container">
+
+      <h2>The Creative Operations Challenge</h2>
+      <p>
+        Marketing teams face a common challenge: creative work happens in one system (Workfront) while 
+        final assets live in another (AEM Assets DAM). The result? Manual uploads, lost metadata, 
+        version confusion, and time wasted on administrative tasks instead of creative work.
+      </p>
+      <p>
+        The <strong>AEM Assets Workfront integration</strong> solves this by creating a bi-directional 
+        connection between project management and digital asset management.
+      </p>
+
+      <h2>Why Integrate AEM Assets and Workfront?</h2>
+
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h4>Save Time</h4>
+          <p>Eliminate manual asset uploads. Approved assets flow automatically to the DAM with full metadata.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg>
+          </div>
+          <h4>Maintain Context</h4>
+          <p>Link assets back to their originating projects. Know who created it, when, and for what campaign.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h4>Version Control</h4>
+          <p>Every revision in Workfront can sync to AEM. No more "final_v3_FINAL_revised.psd" confusion.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <h4>Rich Metadata</h4>
+          <p>Map Workfront fields to AEM metadata schemas. Campaign, brand, usage rights—all transferred automatically.</p>
+        </div>
+      </div>
+
+      <h2>How the Integration Works</h2>
+      <p>
+        The AEM Assets Workfront connector creates a bridge between the two systems:
+      </p>
+
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Link Project Folders</h4>
+            <p>Connect a Workfront project to an AEM Assets folder. All assets from the project will sync to this location.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Creative Work in Workfront</h4>
+            <p>Designers work on tasks, upload proofs, and iterate through reviews—all within Workfront's familiar interface.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Automatic Sync to AEM</h4>
+            <p>When assets are marked complete (or based on your rules), they automatically sync to AEM Assets with mapped metadata.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Use Assets Across Channels</h4>
+            <p>Assets in AEM are ready for use in AEM Sites, email templates, social media, and any connected system.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2>Key Integration Features</h2>
+
+      <h3>Folder Linking</h3>
+      <p>
+        The core capability is linking Workfront projects to AEM folders. You can:
+      </p>
+      <ul>
+        <li>Link existing AEM folders or create new ones from Workfront</li>
+        <li>Link multiple folders per project (e.g., /final, /source-files, /working)</li>
+        <li>Control who can create/link folders based on Workfront permissions</li>
+      </ul>
+
+      <h3>Metadata Mapping</h3>
+      <p>
+        Map Workfront custom fields to AEM metadata schemas:
+      </p>
+      <ul>
+        <li><strong>Project fields</strong> — Campaign name, brand, business unit</li>
+        <li><strong>Document fields</strong> — Asset type, usage rights, expiration date</li>
+        <li><strong>Task fields</strong> — Deliverable type, channel, market</li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2v1"/><path d="M12 8a4 4 0 0 0-4 4c0 1.5.8 2.8 2 3.4V17h4v-1.6c1.2-.6 2-1.9 2-3.4a4 4 0 0 0-4-4Z"/></svg>
+          Pro Tip
+        </div>
+        <p>
+          Plan your metadata mapping carefully before implementation. Align Workfront custom forms 
+          with AEM metadata schemas to ensure clean data transfer without manual cleanup.
+        </p>
+      </div>
+
+      <h3>Event Subscriptions</h3>
+      <p>
+        Configure what triggers sync operations:
+      </p>
+      <ul>
+        <li><strong>Document upload</strong> — Sync when files are uploaded to Workfront</li>
+        <li><strong>Status change</strong> — Sync only when documents reach "Approved" status</li>
+        <li><strong>Project completion</strong> — Batch sync all deliverables when project closes</li>
+      </ul>
+
+      <h3>Bi-Directional Linking</h3>
+      <p>
+        The integration isn't one-way. From AEM, you can:
+      </p>
+      <ul>
+        <li>View linked Workfront project details</li>
+        <li>See which task/deliverable an asset came from</li>
+        <li>Navigate back to Workfront for context</li>
+      </ul>
+
+      <h2>Implementation Considerations</h2>
+
+      <h3>Prerequisites</h3>
+      <ul>
+        <li><strong>AEM Assets</strong> — AEM as a Cloud Service or AEM 6.5 with enhanced connector</li>
+        <li><strong>Workfront</strong> — Enterprise or Business tier with API access</li>
+        <li><strong>Adobe IMS</strong> — Both systems integrated with Adobe Identity Management</li>
+      </ul>
+
+      <h3>Folder Structure Strategy</h3>
+      <p>
+        Before integrating, plan your AEM folder structure:
+      </p>
+      <ul>
+        <li><strong>By project</strong> — /content/dam/projects/[project-name]/</li>
+        <li><strong>By brand/campaign</strong> — /content/dam/[brand]/[campaign]/[year]/</li>
+        <li><strong>By asset type</strong> — /content/dam/images/, /content/dam/videos/</li>
+      </ul>
+      <p>
+        The right structure depends on how assets will be reused. Campaign-based structures work 
+        for one-off assets; type-based structures suit reusable brand assets.
+      </p>
+
+      <h3>Permission Alignment</h3>
+      <p>
+        Ensure permissions are consistent across systems:
+      </p>
+      <ul>
+        <li>Workfront users who can create folders need appropriate AEM group membership</li>
+        <li>AEM folder permissions should reflect Workfront project access</li>
+        <li>Consider read-only AEM access for Workfront users who just need to reference assets</li>
+      </ul>
+
+      <h2>Common Use Cases</h2>
+
+      <h3>Campaign Asset Production</h3>
+      <p>
+        A marketing campaign involves multiple deliverables: hero images, email banners, social ads. 
+        Each is a task in Workfront. As designers complete and get approval, assets automatically 
+        populate the campaign's AEM folder, ready for the web team to build the landing page.
+      </p>
+
+      <h3>Brand Portal Updates</h3>
+      <p>
+        Brand teams use Workfront to manage logo refreshes, style guide updates, and template creation. 
+        Approved assets sync to AEM Assets, which powers the brand portal via AEM Asset Link or 
+        Brand Portal, ensuring stakeholders always access current brand materials.
+      </p>
+
+      <h3>Product Photography</h3>
+      <p>
+        E-commerce teams coordinate photo shoots through Workfront. Photographers upload images, 
+        creative directors approve, and product shots sync to AEM with SKU metadata—ready for 
+        automatic placement in product detail pages.
+      </p>
+
+      <h2>Getting Started</h2>
+      <ol>
+        <li><strong>Audit current workflows</strong> — Document how assets move from creation to DAM today</li>
+        <li><strong>Define metadata requirements</strong> — What fields need to transfer?</li>
+        <li><strong>Plan folder structure</strong> — How should assets be organized in AEM?</li>
+        <li><strong>Configure the connector</strong> — Install, authenticate, and set up mappings</li>
+        <li><strong>Pilot with one team</strong> — Test with a real project before broad rollout</li>
+        <li><strong>Train users</strong> — Show creatives the new workflow</li>
+      </ol>
+
+      <div class="cta-box">
+        <h3>Ready to Connect AEM + Workfront?</h3>
+        <p>Our team has implemented the AEM-Workfront integration for enterprise creative teams. Let us streamline your creative operations.</p>
+        <a class="btn btn-primary" href="/services/adobe-experience-cloud/">
+          View Our AEM Services
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container-wide">
+    <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
+
