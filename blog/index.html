@@ -62,6 +62,34 @@
 }
 </script>
 
+<!-- ItemList for Articles -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "WegWorks MarTech Blog Articles",
+  "numberOfItems": 16,
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "url": "https://www.wegworks.com/blog/adobe-analytics/data-layer-best-practices/", "name": "Data Layer Best Practices for Adobe Analytics Implementation"},
+    {"@type": "ListItem", "position": 2, "url": "https://www.wegworks.com/blog/segment-cdp/what-is-a-cdp/", "name": "What is a Customer Data Platform? A Complete Guide"},
+    {"@type": "ListItem", "position": 3, "url": "https://www.wegworks.com/blog/salesforce/sales-cloud-vs-marketing-cloud/", "name": "Sales Cloud vs Marketing Cloud: Understanding the Difference"},
+    {"@type": "ListItem", "position": 4, "url": "https://www.wegworks.com/blog/adobe-analytics/analysis-workspace-tips/", "name": "10 Analysis Workspace Tips Every Analyst Should Know"},
+    {"@type": "ListItem", "position": 5, "url": "https://www.wegworks.com/blog/segment-cdp/tracking-plan-guide/", "name": "How to Create an Effective Tracking Plan for Segment"},
+    {"@type": "ListItem", "position": 6, "url": "https://www.wegworks.com/blog/marketing-automation/email-deliverability-guide/", "name": "Email Deliverability Best Practices: A Complete Guide"},
+    {"@type": "ListItem", "position": 7, "url": "https://www.wegworks.com/blog/aem/aem-cloud-service-guide/", "name": "What is AEM as a Cloud Service? A Complete Guide"},
+    {"@type": "ListItem", "position": 8, "url": "https://www.wegworks.com/blog/aem/aem-headless-content-fragments/", "name": "AEM Headless: Content Fragments & GraphQL API Guide"},
+    {"@type": "ListItem", "position": 9, "url": "https://www.wegworks.com/blog/aem/aem-cloud-migration/", "name": "AEM Cloud Migration: Planning Your Move from AEM 6.5"},
+    {"@type": "ListItem", "position": 10, "url": "https://www.wegworks.com/blog/aem/aem-assets-workfront/", "name": "AEM Assets + Workfront: Streamlining Creative Operations"},
+    {"@type": "ListItem", "position": 11, "url": "https://www.wegworks.com/blog/adobe-target/personalization-guide/", "name": "Adobe Target Personalization Guide"},
+    {"@type": "ListItem", "position": 12, "url": "https://www.wegworks.com/blog/adobe-target/ab-testing-best-practices/", "name": "A/B Testing Best Practices with Adobe Target"},
+    {"@type": "ListItem", "position": 13, "url": "https://www.wegworks.com/blog/adobe-experience-platform/what-is-aep/", "name": "What is Adobe Experience Platform (AEP)?"},
+    {"@type": "ListItem", "position": 14, "url": "https://www.wegworks.com/blog/adobe-experience-platform/real-time-cdp-guide/", "name": "Real-Time CDP Implementation Guide"},
+    {"@type": "ListItem", "position": 15, "url": "https://www.wegworks.com/blog/google-analytics-4/ga4-migration-guide/", "name": "Complete GA4 Migration Guide"},
+    {"@type": "ListItem", "position": 16, "url": "https://www.wegworks.com/blog/google-analytics-4/ga4-implementation-guide/", "name": "GA4 Implementation Best Practices"}
+  ]
+}
+</script>
+
 <style>
 :root {
   --bg-primary: #0a0a0f;
@@ -399,7 +427,7 @@ h1, h2, h3, h4, h5, h6 {
     <p class="section-subtitle">Deep-dive into your technology of choice.</p>
     
     <div class="categories-grid">
-      <a class="category-card" href="/blog/adobe-analytics/">
+      <a class="category-card" href="/blog/adobe-analytics/" title="Browse Adobe Analytics Articles">
         <div class="category-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-3 3"/>
@@ -408,7 +436,7 @@ h1, h2, h3, h4, h5, h6 {
         <h3>Adobe Analytics</h3>
         <p>Implementation, Analysis Workspace, data layers</p>
       </a>
-      <a class="category-card" href="/blog/segment-cdp/">
+      <a class="category-card" href="/blog/segment-cdp/" title="Browse Segment CDP Articles">
         <div class="category-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="5" r="3"/><path d="M12 8v8"/><circle cx="6" cy="19" r="3"/><circle cx="18" cy="19" r="3"/><path d="M6 16v-4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/>
@@ -417,7 +445,7 @@ h1, h2, h3, h4, h5, h6 {
         <h3>Segment CDP</h3>
         <p>Customer data, identity, integrations</p>
       </a>
-      <a class="category-card" href="/blog/salesforce/">
+      <a class="category-card" href="/blog/salesforce/" title="Browse Salesforce Articles">
         <div class="category-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/>
@@ -426,7 +454,7 @@ h1, h2, h3, h4, h5, h6 {
         <h3>Salesforce</h3>
         <p>CRM, Marketing Cloud, Data Cloud</p>
       </a>
-      <a class="category-card" href="/blog/marketing-automation/">
+      <a class="category-card" href="/blog/marketing-automation/" title="Browse Marketing Automation Articles">
         <div class="category-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/>
@@ -435,7 +463,7 @@ h1, h2, h3, h4, h5, h6 {
         <h3>Marketing Automation</h3>
         <p>Journeys, email, lead scoring</p>
       </a>
-      <a class="category-card" href="/blog/aem/">
+      <a class="category-card" href="/blog/aem/" title="Browse AEM Articles">
         <div class="category-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
@@ -444,7 +472,7 @@ h1, h2, h3, h4, h5, h6 {
         <h3>AEM</h3>
         <p>AEM Cloud, headless CMS, content fragments</p>
       </a>
-      <a class="category-card" href="/blog/adobe-target/">
+      <a class="category-card" href="/blog/adobe-target/" title="Browse Adobe Target Articles">
         <div class="category-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
@@ -453,7 +481,7 @@ h1, h2, h3, h4, h5, h6 {
         <h3>Adobe Target</h3>
         <p>Personalization, A/B testing, optimization</p>
       </a>
-      <a class="category-card" href="/blog/adobe-experience-platform/">
+      <a class="category-card" href="/blog/adobe-experience-platform/" title="Browse Adobe Experience Platform Articles">
         <div class="category-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
@@ -462,7 +490,7 @@ h1, h2, h3, h4, h5, h6 {
         <h3>Adobe Experience Platform</h3>
         <p>AEP, Real-Time CDP, unified profiles</p>
       </a>
-      <a class="category-card" href="/blog/google-analytics-4/">
+      <a class="category-card" href="/blog/google-analytics-4/" title="Browse Google Analytics 4 Articles">
         <div class="category-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/>
@@ -493,7 +521,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
     <div class="articles-grid" id="articles-grid">
-      <a class="article-card" href="/blog/adobe-analytics/data-layer-best-practices/" data-date="2025-03-12" data-title="Data Layer Best Practices">
+      <a class="article-card" href="/blog/adobe-analytics/data-layer-best-practices/" data-date="2025-03-12" data-title="Data Layer Best Practices" title="Read: Data Layer Best Practices for Adobe Analytics Implementation">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/datalayer.png" alt="Data Layer Best Practices for Adobe Analytics" loading="lazy"/>
         </div>
@@ -511,7 +539,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/segment-cdp/what-is-a-cdp/" data-date="2025-04-08" data-title="What is a Customer Data Platform">
+      <a class="article-card" href="/blog/segment-cdp/what-is-a-cdp/" data-date="2025-04-08" data-title="What is a Customer Data Platform" title="Read: What is a Customer Data Platform? A Complete Guide">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/cdp.png" alt="What is a Customer Data Platform CDP" loading="lazy"/>
         </div>
@@ -529,7 +557,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/salesforce/sales-cloud-vs-marketing-cloud/" data-date="2025-05-22" data-title="Sales Cloud vs Marketing Cloud">
+      <a class="article-card" href="/blog/salesforce/sales-cloud-vs-marketing-cloud/" data-date="2025-05-22" data-title="Sales Cloud vs Marketing Cloud" title="Read: Sales Cloud vs Marketing Cloud - Understanding the Difference">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/sfvssm.jpg" alt="Salesforce Sales Cloud vs Marketing Cloud Connect" loading="lazy"/>
         </div>
@@ -547,7 +575,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/adobe-analytics/analysis-workspace-tips/" data-date="2025-06-15" data-title="10 Analysis Workspace Tips">
+      <a class="article-card" href="/blog/adobe-analytics/analysis-workspace-tips/" data-date="2025-06-15" data-title="10 Analysis Workspace Tips" title="Read: 10 Analysis Workspace Tips Every Analyst Should Know">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/aa-dashboard.png" alt="Adobe Analytics Analysis Workspace Dashboard" loading="lazy"/>
         </div>
@@ -565,7 +593,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/segment-cdp/tracking-plan-guide/" data-date="2025-08-03" data-title="How to Create an Effective Tracking Plan">
+      <a class="article-card" href="/blog/segment-cdp/tracking-plan-guide/" data-date="2025-08-03" data-title="How to Create an Effective Tracking Plan" title="Read: How to Create an Effective Tracking Plan for Segment">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/segments.webp" alt="Segment Tracking Plan Guide" loading="lazy"/>
         </div>
@@ -583,7 +611,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/marketing-automation/email-deliverability-guide/" data-date="2025-09-18" data-title="Email Deliverability Best Practices">
+      <a class="article-card" href="/blog/marketing-automation/email-deliverability-guide/" data-date="2025-09-18" data-title="Email Deliverability Best Practices" title="Read: Email Deliverability Best Practices - A Complete Guide">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/email-delivery.png" alt="Email Deliverability Best Practices" loading="lazy"/>
         </div>
@@ -601,7 +629,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/aem/aem-cloud-service-guide/" data-date="2025-10-29" data-title="What is AEM as a Cloud Service">
+      <a class="article-card" href="/blog/aem/aem-cloud-service-guide/" data-date="2025-10-29" data-title="What is AEM as a Cloud Service" title="Read: What is AEM as a Cloud Service? A Complete Guide">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/aem-cloud.png" alt="AEM as a Cloud Service Guide" loading="lazy"/>
         </div>
@@ -619,7 +647,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/aem/aem-headless-content-fragments/" data-date="2025-12-10" data-title="AEM Headless Content Fragments">
+      <a class="article-card" href="/blog/aem/aem-headless-content-fragments/" data-date="2025-12-10" data-title="AEM Headless Content Fragments" title="Read: AEM Headless - Content Fragments and GraphQL API Guide">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/graph-aem.png" alt="AEM Headless Content Fragments GraphQL" loading="lazy"/>
         </div>
@@ -637,7 +665,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/aem/aem-cloud-migration/" data-date="2025-11-05" data-title="AEM Cloud Migration">
+      <a class="article-card" href="/blog/aem/aem-cloud-migration/" data-date="2025-11-05" data-title="AEM Cloud Migration" title="Read: AEM Cloud Migration - Planning Your Move from AEM 6.5">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/cloudmigration.gif" alt="AEM Cloud Migration Guide" loading="lazy"/>
         </div>
@@ -655,7 +683,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/aem/aem-assets-workfront/" data-date="2025-07-21" data-title="AEM Assets Workfront">
+      <a class="article-card" href="/blog/aem/aem-assets-workfront/" data-date="2025-07-21" data-title="AEM Assets Workfront" title="Read: AEM Assets + Workfront - Streamlining Creative Operations">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/wf-aem.png" alt="AEM Assets Workfront Integration" loading="lazy"/>
         </div>
@@ -673,7 +701,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/adobe-target/personalization-guide/" data-date="2025-01-15" data-title="Adobe Target Personalization Guide">
+      <a class="article-card" href="/blog/adobe-target/personalization-guide/" data-date="2025-01-15" data-title="Adobe Target Personalization Guide" title="Read: Adobe Target Personalization Guide">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/target-p13n.png" alt="Adobe Target Personalization Guide" loading="lazy"/>
         </div>
@@ -691,7 +719,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/adobe-target/ab-testing-best-practices/" data-date="2025-02-08" data-title="AB Testing Best Practices">
+      <a class="article-card" href="/blog/adobe-target/ab-testing-best-practices/" data-date="2025-02-08" data-title="AB Testing Best Practices" title="Read: A/B Testing Best Practices with Adobe Target">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/a-b-testing.jpg" alt="A/B Testing Best Practices with Adobe Target" loading="lazy"/>
         </div>
@@ -709,7 +737,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/adobe-experience-platform/what-is-aep/" data-date="2025-02-20" data-title="What is Adobe Experience Platform">
+      <a class="article-card" href="/blog/adobe-experience-platform/what-is-aep/" data-date="2025-02-20" data-title="What is Adobe Experience Platform" title="Read: What is Adobe Experience Platform (AEP)?">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/aep.png" alt="What is Adobe Experience Platform AEP" loading="lazy"/>
         </div>
@@ -727,7 +755,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/adobe-experience-platform/real-time-cdp-guide/" data-date="2025-03-05" data-title="Real-Time CDP Implementation Guide">
+      <a class="article-card" href="/blog/adobe-experience-platform/real-time-cdp-guide/" data-date="2025-03-05" data-title="Real-Time CDP Implementation Guide" title="Read: Real-Time CDP Implementation Guide">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/realtime-cdp.png" alt="Real-Time CDP Implementation Guide" loading="lazy"/>
         </div>
@@ -745,7 +773,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/google-analytics-4/ga4-migration-guide/" data-date="2025-03-18" data-title="Complete GA4 Migration Guide">
+      <a class="article-card" href="/blog/google-analytics-4/ga4-migration-guide/" data-date="2025-03-18" data-title="Complete GA4 Migration Guide" title="Read: Complete GA4 Migration Guide">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/ga-a.jpg" alt="GA4 Migration Guide" loading="lazy"/>
         </div>
@@ -763,7 +791,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/google-analytics-4/ga4-implementation-guide/" data-date="2025-04-02" data-title="GA4 Implementation Best Practices">
+      <a class="article-card" href="/blog/google-analytics-4/ga4-implementation-guide/" data-date="2025-04-02" data-title="GA4 Implementation Best Practices" title="Read: GA4 Implementation Best Practices">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/ga-a.jpg" alt="GA4 Implementation Best Practices" loading="lazy"/>
         </div>
