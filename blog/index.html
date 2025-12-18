@@ -468,7 +468,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/segment-cdp/what-is-a-cdp/">
+      <a class="article-card" href="/blog/segment-cdp/what-is-a-cdp/" data-date="2025-04-08" data-title="What is a Customer Data Platform">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/cdp.png" alt="What is a Customer Data Platform CDP" loading="lazy"/>
         </div>
@@ -486,7 +486,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/salesforce/sales-cloud-vs-marketing-cloud/">
+      <a class="article-card" href="/blog/salesforce/sales-cloud-vs-marketing-cloud/" data-date="2025-05-22" data-title="Sales Cloud vs Marketing Cloud">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/sfvssm.jpg" alt="Salesforce Sales Cloud vs Marketing Cloud Connect" loading="lazy"/>
         </div>
@@ -504,7 +504,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/adobe-analytics/analysis-workspace-tips/">
+      <a class="article-card" href="/blog/adobe-analytics/analysis-workspace-tips/" data-date="2025-06-15" data-title="10 Analysis Workspace Tips">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/aa-dashboard.png" alt="Adobe Analytics Analysis Workspace Dashboard" loading="lazy"/>
         </div>
@@ -522,7 +522,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/segment-cdp/tracking-plan-guide/">
+      <a class="article-card" href="/blog/segment-cdp/tracking-plan-guide/" data-date="2025-08-03" data-title="How to Create an Effective Tracking Plan">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/segments.webp" alt="Segment Tracking Plan Guide" loading="lazy"/>
         </div>
@@ -540,7 +540,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/marketing-automation/email-deliverability-guide/">
+      <a class="article-card" href="/blog/marketing-automation/email-deliverability-guide/" data-date="2025-09-18" data-title="Email Deliverability Best Practices">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/email-delivery.png" alt="Email Deliverability Best Practices" loading="lazy"/>
         </div>
@@ -558,7 +558,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/aem/aem-cloud-service-guide/">
+      <a class="article-card" href="/blog/aem/aem-cloud-service-guide/" data-date="2025-10-29" data-title="What is AEM as a Cloud Service">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/aemcloud.png" alt="AEM as a Cloud Service Guide" loading="lazy"/>
         </div>
@@ -576,7 +576,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/aem/aem-headless-content-fragments/">
+      <a class="article-card" href="/blog/aem/aem-headless-content-fragments/" data-date="2025-12-10" data-title="AEM Headless Content Fragments">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/Headless.jpg" alt="AEM Headless Content Fragments GraphQL" loading="lazy"/>
         </div>
@@ -594,7 +594,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/aem/aem-cloud-migration/">
+      <a class="article-card" href="/blog/aem/aem-cloud-migration/" data-date="2025-11-05" data-title="AEM Cloud Migration">
         <div class="article-image">
           <div class="icon-box">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -616,7 +616,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </a>
       
-      <a class="article-card" href="/blog/aem/aem-assets-workfront/">
+      <a class="article-card" href="/blog/aem/aem-assets-workfront/" data-date="2025-07-21" data-title="AEM Assets Workfront">
         <div class="article-image">
           <div class="icon-box">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -661,6 +661,30 @@ h1, h2, h3, h4, h5, h6 {
     <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+function sortArticles(sortBy) {
+  const grid = document.getElementById('articles-grid');
+  const articles = Array.from(grid.querySelectorAll('.article-card'));
+  
+  articles.sort((a, b) => {
+    if (sortBy === 'newest') {
+      return new Date(b.dataset.date) - new Date(a.dataset.date);
+    } else if (sortBy === 'oldest') {
+      return new Date(a.dataset.date) - new Date(b.dataset.date);
+    } else if (sortBy === 'title') {
+      return a.dataset.title.localeCompare(b.dataset.title);
+    }
+    return 0;
+  });
+  
+  // Re-append sorted articles
+  articles.forEach(article => grid.appendChild(article));
+}
+
+// Sort by newest on page load
+document.addEventListener('DOMContentLoaded', () => sortArticles('newest'));
+</script>
 
 </body>
 </html>
