@@ -2664,6 +2664,40 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
 // Form
+    // Math CAPTCHA
+    let captchaAnswer = 0;
+    
+    function generateCaptcha() {
+      const num1 = Math.floor(Math.random() * 10) + 1;
+      const num2 = Math.floor(Math.random() * 10) + 1;
+      const operators = ['+', '-', '×'];
+      const operator = operators[Math.floor(Math.random() * 3)];
+      
+      let question = '';
+      switch(operator) {
+        case '+':
+          captchaAnswer = num1 + num2;
+          question = `${num1} + ${num2} = ?`;
+          break;
+        case '-':
+          // Ensure positive result
+          const larger = Math.max(num1, num2);
+          const smaller = Math.min(num1, num2);
+          captchaAnswer = larger - smaller;
+          question = `${larger} - ${smaller} = ?`;
+          break;
+        case '×':
+          captchaAnswer = num1 * num2;
+          question = `${num1} × ${num2} = ?`;
+          break;
+      }
+      
+      document.getElementById('captcha-question').textContent = question;
+    }
+    
+    // Generate captcha on page load
+    document.addEventListener('DOMContentLoaded', generateCaptcha);
+    
     async function handleFormSubmit(event) {
       event.preventDefault();
       
@@ -2671,6 +2705,16 @@ document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
       const submitBtn = form.querySelector('button[type="submit"]');
       const successDiv = document.getElementById('form-success');
       const originalBtnText = submitBtn.textContent;
+      const userAnswer = parseInt(form.querySelector('#captcha').value);
+      
+      // Validate CAPTCHA
+      if (userAnswer !== captchaAnswer) {
+        alert('Incorrect answer. Please try the math question again.');
+        generateCaptcha();
+        form.querySelector('#captcha').value = '';
+        form.querySelector('#captcha').focus();
+        return;
+      }
       
       // Disable button and show loading state
       submitBtn.disabled = true;
@@ -2716,6 +2760,7 @@ document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
       successDiv.style.display = 'none';
       submitBtn.disabled = false;
       submitBtn.textContent = 'Send Message →';
+      generateCaptcha(); // New question
     }
     
     window.handleFormSubmit = handleFormSubmit;
