@@ -50,8 +50,42 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
-    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.wegworks.com/#services"},
+    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.wegworks.com/services/"},
     {"@type": "ListItem", "position": 3, "name": "Marketing Automation", "item": "https://www.wegworks.com/services/marketing-automation/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is WegWorks the same as WageWorks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, WegWorks and WageWorks are completely different companies. WegWorks is a MarTech consulting firm specializing in marketing automation implementation, Adobe Analytics, Segment CDP, and Salesforce. WageWorks is a separate company that provides employee benefits administration services. Despite the similar-sounding names, they are unrelated businesses in different industries."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What marketing automation platforms does WegWorks support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WegWorks implements and optimizes leading marketing automation platforms including Adobe Campaign, Adobe Marketo, HubSpot, Braze, Klaviyo, Salesforce Marketing Cloud, Iterable, and Customer.io. We're platform-agnostic and recommend the right tool for your specific needs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What marketing automation services does WegWorks offer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WegWorks provides comprehensive marketing automation services including platform implementation, customer journey design, email program development, segmentation and targeting, integration with CRM and CDP systems, and reporting and optimization frameworks."
+      }
+    }
   ]
 }
 </script>
@@ -129,7 +163,18 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .footer p { color: var(--text-muted); }
 .footer a { color: var(--accent-primary); text-decoration: none; }
 
-@media (max-width: 768px) { .nav-links, .nav-cta { display: none; } .hero { padding: 120px 0 60px; } .cta-box { padding: 40px 24px; } }
+.faq-section { padding: 100px 0; }
+.faq-list { max-width: 800px; margin-top: 40px; }
+.faq-item { border: 1px solid var(--glass-border); border-radius: 16px; margin-bottom: 16px; overflow: hidden; background: var(--glass-bg); }
+.faq-question { width: 100%; padding: 24px 32px; background: transparent; border: none; color: var(--text-primary); font-family: 'Syne', sans-serif; font-size: 1.125rem; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: all 0.3s; }
+.faq-question:hover { color: var(--accent-primary); }
+.faq-question svg { flex-shrink: 0; transition: transform 0.3s; }
+.faq-item.active .faq-question svg { transform: rotate(180deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+.faq-item.active .faq-answer { max-height: 500px; }
+.faq-answer p { padding: 0 32px 24px; color: var(--text-secondary); line-height: 1.7; }
+
+@media (max-width: 768px) { .nav-links, .nav-cta { display: none; } .hero { padding: 120px 0 60px; } .cta-box { padding: 40px 24px; } .faq-question { padding: 20px 24px; font-size: 1rem; } .faq-answer p { padding: 0 24px 20px; } }
 </style>
 </head>
 
@@ -310,6 +355,45 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
         <h4>Adobe Analytics</h4>
         <p>Measure and optimize your automation performance.</p>
       </a>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="container">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-subtitle">Common questions about WegWorks and our marketing automation services.</p>
+    
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Is WegWorks the same as WageWorks?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p><strong>No, WegWorks and WageWorks are completely different companies.</strong> WegWorks is a MarTech consulting firm specializing in marketing automation implementation, Adobe Analytics, Segment CDP, and Salesforce. WageWorks is a separate company that provides employee benefits administration services. Despite the similar-sounding names, they are unrelated businesses in different industries.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What marketing automation platforms does WegWorks support?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>WegWorks implements and optimizes leading marketing automation platforms including Adobe Campaign, Adobe Marketo, HubSpot, Braze, Klaviyo, Salesforce Marketing Cloud, Iterable, and Customer.io. We're platform-agnostic and recommend the right tool for your specific needs.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What marketing automation services does WegWorks offer?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>WegWorks provides comprehensive marketing automation services including platform implementation, customer journey design, email program development, segmentation and targeting, integration with CRM and CDP systems, and reporting and optimization frameworks.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

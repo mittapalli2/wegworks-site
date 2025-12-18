@@ -50,8 +50,74 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
-    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.wegworks.com/#services"},
+    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.wegworks.com/services/"},
     {"@type": "ListItem", "position": 3, "name": "Adobe Experience Cloud", "item": "https://www.wegworks.com/services/adobe-experience-cloud/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is WegWorks the same as WageWorks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, WegWorks and WageWorks are completely different companies. WegWorks is a MarTech consulting firm specializing in Adobe Experience Cloud implementation, Segment CDP, Salesforce, and marketing automation. WageWorks is a separate company that provides employee benefits administration services. Despite the similar-sounding names, they are unrelated businesses in different industries."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What Adobe Experience Cloud products does WegWorks implement?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WegWorks implements the full Adobe Experience Cloud suite including Adobe Analytics, Adobe Experience Manager (AEM), Adobe Target, Adobe Campaign, Journey Optimizer, Real-Time CDP, Audience Manager, Marketo Engage, Adobe Commerce, and Workfront. We specialize in integrated solutions that maximize the value of your Adobe investment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does WegWorks integrate Adobe with other platforms?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, WegWorks specializes in integrating Adobe Experience Cloud with your entire MarTech stack including Salesforce, Segment CDP, data warehouses, and third-party tools. Our integration-first approach ensures Adobe products work seamlessly together and with your existing technology ecosystem."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Adobe Experience Platform and how does it relate to Experience Cloud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Adobe Experience Platform (AEP) is the foundation that powers Real-Time CDP, Journey Optimizer, and Customer Journey Analytics. It provides unified customer profiles, real-time data collection, and AI-powered insights. WegWorks implements AEP alongside traditional Experience Cloud products for next-generation customer data capabilities."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do Adobe Target and Analytics work together for personalization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Adobe Target uses Analytics segments and behavioral data to power personalization and A/B testing. WegWorks configures Analytics for Target (A4T) integration, enabling unified measurement of personalization impact and allowing you to build audiences in Analytics that activate in Target for real-time targeting."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between Adobe Campaign and Journey Optimizer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Adobe Campaign is a traditional cross-channel campaign management tool for batch-based marketing. Journey Optimizer is built on Adobe Experience Platform and enables real-time, event-triggered journey orchestration with AI-powered decisioning. WegWorks helps you choose the right solution based on your use cases."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a full Adobe Experience Cloud implementation take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Implementation timelines vary by scope. Single product implementations typically take 4-8 weeks. Multi-product implementations with integrations take 3-6 months. Full AEM Sites implementations can take 6-12 months. WegWorks uses phased approaches to deliver value incrementally."
+      }
+    }
   ]
 }
 </script>
@@ -124,7 +190,18 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .footer p { color: var(--text-muted); }
 .footer a { color: var(--accent-primary); text-decoration: none; }
 
-@media (max-width: 768px) { .nav-links, .nav-cta { display: none; } .hero { padding: 120px 0 60px; } .cta-box { padding: 40px 24px; } }
+.faq-section { padding: 100px 0; }
+.faq-list { max-width: 800px; margin-top: 40px; }
+.faq-item { border: 1px solid var(--glass-border); border-radius: 16px; margin-bottom: 16px; overflow: hidden; background: var(--glass-bg); }
+.faq-question { width: 100%; padding: 24px 32px; background: transparent; border: none; color: var(--text-primary); font-family: 'Syne', sans-serif; font-size: 1.125rem; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: all 0.3s; }
+.faq-question:hover { color: var(--accent-primary); }
+.faq-question svg { flex-shrink: 0; transition: transform 0.3s; }
+.faq-item.active .faq-question svg { transform: rotate(180deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+.faq-item.active .faq-answer { max-height: 500px; }
+.faq-answer p { padding: 0 32px 24px; color: var(--text-secondary); line-height: 1.7; }
+
+@media (max-width: 768px) { .nav-links, .nav-cta { display: none; } .hero { padding: 120px 0 60px; } .cta-box { padding: 40px 24px; } .faq-question { padding: 20px 24px; font-size: 1rem; } .faq-answer p { padding: 0 24px 20px; } }
 </style>
 </head>
 
@@ -303,6 +380,85 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
         <h4>Marketing Automation</h4>
         <p>Journey orchestration across Adobe Campaign and Marketo.</p>
       </a>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="container">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-subtitle">Common questions about WegWorks and our Adobe Experience Cloud services.</p>
+    
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Is WegWorks the same as WageWorks?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p><strong>No, WegWorks and WageWorks are completely different companies.</strong> WegWorks is a MarTech consulting firm specializing in Adobe Experience Cloud implementation, Segment CDP, Salesforce, and marketing automation. WageWorks is a separate company that provides employee benefits administration services. Despite the similar-sounding names, they are unrelated businesses in different industries.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What Adobe Experience Cloud products does WegWorks implement?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>WegWorks implements the full Adobe Experience Cloud suite including Adobe Analytics, Adobe Experience Manager (AEM), Adobe Target, Adobe Campaign, Journey Optimizer, Real-Time CDP, Audience Manager, Marketo Engage, Adobe Commerce, and Workfront. We specialize in integrated solutions that maximize the value of your Adobe investment.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Does WegWorks integrate Adobe with other platforms?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, WegWorks specializes in integrating Adobe Experience Cloud with your entire MarTech stack including Salesforce, Segment CDP, data warehouses, and third-party tools. Our integration-first approach ensures Adobe products work seamlessly together and with your existing technology ecosystem.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What is Adobe Experience Platform and how does it relate to Experience Cloud?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Adobe Experience Platform (AEP) is the foundation that powers Real-Time CDP, Journey Optimizer, and Customer Journey Analytics. It provides unified customer profiles, real-time data collection, and AI-powered insights. WegWorks implements AEP alongside traditional Experience Cloud products for organizations seeking next-generation customer data capabilities.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          How do Adobe Target and Analytics work together for personalization?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Adobe Target uses Analytics segments and behavioral data to power personalization and A/B testing. WegWorks configures Analytics for Target (A4T) integration, enabling you to use Analytics as the reporting source for Target activities. This provides unified measurement of personalization impact and allows you to build audiences in Analytics that activate in Target for real-time targeting.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What's the difference between Adobe Campaign and Journey Optimizer?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Adobe Campaign is a traditional cross-channel campaign management tool for batch-based marketing with strong email and direct mail capabilities. Journey Optimizer is built on Adobe Experience Platform and enables real-time, event-triggered journey orchestration with AI-powered decisioning. WegWorks helps you choose the right solution—or implement both—based on your use cases.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          How long does a full Adobe Experience Cloud implementation take?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Implementation timelines vary by scope. Single product implementations (Analytics, Target) typically take 4-8 weeks. Multi-product implementations with integrations take 3-6 months. Full AEM Sites implementations can take 6-12 months depending on complexity. WegWorks uses phased approaches to deliver value incrementally while building toward your complete vision.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -51,8 +51,42 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
-    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.wegworks.com/#services"},
+    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.wegworks.com/services/"},
     {"@type": "ListItem", "position": 3, "name": "Salesforce", "item": "https://www.wegworks.com/services/salesforce/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is WegWorks the same as WageWorks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, WegWorks and WageWorks are completely different companies. WegWorks is a MarTech consulting firm specializing in Salesforce implementation, Adobe Analytics, Segment CDP, and marketing automation. WageWorks is a separate company that provides employee benefits administration services. Despite the similar-sounding names, they are unrelated businesses in different industries."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What Salesforce products does WegWorks implement?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WegWorks implements Sales Cloud, Marketing Cloud, Salesforce CDP, and related products. Our services include CRM setup, journey orchestration, customer data unification, integration with MarTech tools, analytics and reporting with Einstein Analytics, and custom Salesforce development."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does WegWorks integrate Salesforce with other marketing tools?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, WegWorks takes a MarTech-first approach to Salesforce implementation. We integrate Salesforce with your CDP (Segment, Adobe), analytics platforms, marketing automation tools, data warehouses, and ERP systems using MuleSoft, APIs, and native integrations."
+      }
+    }
   ]
 }
 </script>
@@ -119,7 +153,18 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
 .footer p { color: var(--text-muted); }
 .footer a { color: var(--accent-primary); text-decoration: none; }
-@media (max-width: 768px) { .nav-links, .nav-cta { display: none; } .hero { padding: 120px 0 60px; } .cta-box { padding: 40px 24px; } }
+.faq-section { padding: 100px 0; }
+.faq-list { max-width: 800px; margin-top: 40px; }
+.faq-item { border: 1px solid var(--glass-border); border-radius: 16px; margin-bottom: 16px; overflow: hidden; background: var(--glass-bg); }
+.faq-question { width: 100%; padding: 24px 32px; background: transparent; border: none; color: var(--text-primary); font-family: 'Syne', sans-serif; font-size: 1.125rem; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: all 0.3s; }
+.faq-question:hover { color: var(--accent-primary); }
+.faq-question svg { flex-shrink: 0; transition: transform 0.3s; }
+.faq-item.active .faq-question svg { transform: rotate(180deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+.faq-item.active .faq-answer { max-height: 500px; }
+.faq-answer p { padding: 0 32px 24px; color: var(--text-secondary); line-height: 1.7; }
+
+@media (max-width: 768px) { .nav-links, .nav-cta { display: none; } .hero { padding: 120px 0 60px; } .cta-box { padding: 40px 24px; } .faq-question { padding: 20px 24px; font-size: 1rem; } .faq-answer p { padding: 0 24px 20px; } }
 </style>
 </head>
 
@@ -285,6 +330,45 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
         <h4>Adobe Experience Cloud</h4>
         <p>Multi-platform strategy for enterprise marketing needs.</p>
       </a>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="container">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-subtitle">Common questions about WegWorks and our Salesforce services.</p>
+    
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Is WegWorks the same as WageWorks?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p><strong>No, WegWorks and WageWorks are completely different companies.</strong> WegWorks is a MarTech consulting firm specializing in Salesforce implementation, Adobe Analytics, Segment CDP, and marketing automation. WageWorks is a separate company that provides employee benefits administration services. Despite the similar-sounding names, they are unrelated businesses in different industries.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What Salesforce products does WegWorks implement?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>WegWorks implements Sales Cloud, Marketing Cloud, Salesforce CDP, and related products. Our services include CRM setup, journey orchestration, customer data unification, integration with MarTech tools, analytics and reporting with Einstein Analytics, and custom Salesforce development.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Does WegWorks integrate Salesforce with other marketing tools?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, WegWorks takes a MarTech-first approach to Salesforce implementation. We integrate Salesforce with your CDP (Segment, Adobe), analytics platforms, marketing automation tools, data warehouses, and ERP systems using MuleSoft, APIs, and native integrations.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

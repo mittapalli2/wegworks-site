@@ -53,8 +53,82 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
-    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.wegworks.com/#services"},
+    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.wegworks.com/services/"},
     {"@type": "ListItem", "position": 3, "name": "Segment CDP", "item": "https://www.wegworks.com/services/segment-cdp/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is WegWorks the same as WageWorks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, WegWorks and WageWorks are completely different companies. WegWorks is a MarTech consulting firm specializing in Segment CDP implementation, Adobe Analytics, Salesforce, and marketing automation. WageWorks is a separate company that provides employee benefits administration services. Despite the similar-sounding names, they are unrelated businesses in different industries."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What Segment CDP services does WegWorks provide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WegWorks provides comprehensive Segment CDP services including connections setup (Sources and Destinations), identity resolution with Personas, audience building, real-time data activation, privacy and governance implementation, and tracking plan design. We help brands build unified customer data infrastructure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a Segment CDP implementation take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Segment CDP implementation timelines vary based on complexity. Basic implementations with core sources and destinations typically take 4-6 weeks. Enterprise implementations with Personas, multiple data sources, complex audience rules, and extensive integrations may take 8-12 weeks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does WegWorks integrate Segment with other tools?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, WegWorks has configured 300+ Segment integrations across analytics platforms (Adobe, Google), advertising tools, CRM systems (Salesforce), email platforms, data warehouses (Snowflake, BigQuery), and custom destinations. Integration expertise is a core part of our CDP services."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a tracking plan and why do I need one?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A tracking plan is a documented specification of all the events, properties, and user traits you'll collect through Segment. It ensures consistent data collection across web, mobile, and server-side implementations. WegWorks creates comprehensive tracking plans using Segment Protocols for real-time data validation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Segment Personas and how does identity resolution work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Segment Personas creates unified customer profiles by stitching together anonymous and known user identities across devices and channels. WegWorks configures identity resolution rules that merge user events based on email, user ID, anonymous ID, and custom identifiers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do Segment Sources and Destinations work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sources collect data into Segment (website, mobile app, server, cloud apps), while Destinations send data out to your tools (analytics, advertising, email, CRM, warehouse). WegWorks configures your entire data pipeline and maps data correctly to each Destination's requirements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Segment help with privacy compliance like GDPR and CCPA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, Segment provides built-in privacy features including consent management, user deletion APIs, and data controls. WegWorks implements Privacy Portal for handling data subject requests and configures consent-based destination filtering for GDPR, CCPA, and other regulations."
+      }
+    }
   ]
 }
 </script>
@@ -202,10 +276,23 @@ h1, h2, h3, h4, h5, h6 {
 .footer p { color: var(--text-muted); }
 .footer a { color: var(--accent-primary); text-decoration: none; }
 
+.faq-section { padding: 100px 0; }
+.faq-list { max-width: 800px; margin-top: 40px; }
+.faq-item { border: 1px solid var(--glass-border); border-radius: 16px; margin-bottom: 16px; overflow: hidden; background: var(--glass-bg); }
+.faq-question { width: 100%; padding: 24px 32px; background: transparent; border: none; color: var(--text-primary); font-family: 'Syne', sans-serif; font-size: 1.125rem; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: all 0.3s; }
+.faq-question:hover { color: var(--accent-primary); }
+.faq-question svg { flex-shrink: 0; transition: transform 0.3s; }
+.faq-item.active .faq-question svg { transform: rotate(180deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+.faq-item.active .faq-answer { max-height: 500px; }
+.faq-answer p { padding: 0 32px 24px; color: var(--text-secondary); line-height: 1.7; }
+
 @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
   .hero { padding: 120px 0 60px; }
   .cta-box { padding: 40px 24px; }
+  .faq-question { padding: 20px 24px; font-size: 1rem; }
+  .faq-answer p { padding: 0 24px 20px; }
 }
 </style>
 </head>
@@ -385,6 +472,105 @@ h1, h2, h3, h4, h5, h6 {
         <h4>Adobe Experience Cloud</h4>
         <p>Enterprise-grade personalization powered by unified customer data.</p>
       </a>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="container">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-subtitle">Common questions about WegWorks and our Segment CDP services.</p>
+    
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Is WegWorks the same as WageWorks?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p><strong>No, WegWorks and WageWorks are completely different companies.</strong> WegWorks is a MarTech consulting firm specializing in Segment CDP implementation, Adobe Analytics, Salesforce, and marketing automation. WageWorks is a separate company that provides employee benefits administration services. Despite the similar-sounding names, they are unrelated businesses in different industries.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What Segment CDP services does WegWorks provide?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>WegWorks provides comprehensive Segment CDP services including connections setup (Sources and Destinations), identity resolution with Personas, audience building, real-time data activation, privacy and governance implementation, and tracking plan design. We help brands build unified customer data infrastructure.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          How long does a Segment CDP implementation take?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Segment CDP implementation timelines vary based on complexity. Basic implementations with core sources and destinations typically take 4-6 weeks. Enterprise implementations with Personas, multiple data sources, complex audience rules, and extensive integrations may take 8-12 weeks.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Does WegWorks integrate Segment with other tools?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, WegWorks has configured 300+ Segment integrations across analytics platforms (Adobe, Google), advertising tools, CRM systems (Salesforce), email platforms, data warehouses (Snowflake, BigQuery), and custom destinations. Integration expertise is a core part of our CDP services.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What is a tracking plan and why do I need one?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>A tracking plan is a documented specification of all the events, properties, and user traits you'll collect through Segment. It ensures consistent data collection across web, mobile, and server-side implementations. WegWorks creates comprehensive tracking plans using Segment Protocols, which validates data quality and alerts you to implementation errors in real-time.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What is Segment Personas and how does identity resolution work?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Segment Personas (now part of Twilio Engage) creates unified customer profiles by stitching together anonymous and known user identities across devices and channels. WegWorks configures identity resolution rules that merge user events based on email, user ID, anonymous ID, and custom identifiers—giving you a complete view of each customer's journey.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          How do Segment Sources and Destinations work?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Sources collect data into Segment (website, mobile app, server, cloud apps), while Destinations send data out to your tools (analytics, advertising, email, CRM, warehouse). WegWorks configures your entire data pipeline—selecting the right Sources for your touchpoints and mapping data correctly to each Destination's requirements.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Can Segment help with privacy compliance like GDPR and CCPA?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, Segment provides built-in privacy features including consent management, user deletion APIs, and data controls. WegWorks implements Privacy Portal for handling data subject requests, configures consent-based destination filtering, and sets up data governance rules that ensure compliance with GDPR, CCPA, and other privacy regulations.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Should we use Segment's cloud-mode or device-mode destinations?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Cloud-mode sends data server-side through Segment (better performance, single SDK), while device-mode loads the destination's SDK directly (needed for certain features). WegWorks evaluates each destination's requirements and recommends the optimal mode—often using cloud-mode for most tools while enabling device-mode only when specific features require it.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

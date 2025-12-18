@@ -63,8 +63,82 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
-    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.wegworks.com/#services"},
+    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.wegworks.com/services/"},
     {"@type": "ListItem", "position": 3, "name": "Adobe Analytics", "item": "https://www.wegworks.com/services/adobe-analytics/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is WegWorks the same as WageWorks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, WegWorks and WageWorks are completely different companies. WegWorks is a MarTech consulting firm specializing in marketing technology implementation including Adobe Analytics, Segment CDP, Salesforce, and marketing automation. WageWorks is a separate company that provides employee benefits administration services. Despite the similar-sounding names, they are unrelated businesses in different industries."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What Adobe Analytics services does WegWorks provide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WegWorks provides comprehensive Adobe Analytics services including implementation and setup, data layer architecture design, custom reporting and Analysis Workspace dashboards, training and enablement, analytics audits and optimization, and integration with other Adobe Experience Cloud products and third-party tools."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does an Adobe Analytics implementation take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Implementation timelines vary based on complexity, but WegWorks typically delivers initial implementations in 4-8 weeks. Our proven methodology prioritizes quick wins while building a scalable foundation. Enterprise implementations with complex data layer requirements may take 8-12 weeks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does WegWorks offer Adobe Analytics training?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, WegWorks provides hands-on Adobe Analytics and Analysis Workspace training tailored to your team's skill level. Our training programs include certification preparation, custom curriculum development, and ongoing enablement to ensure your team can independently manage and evolve your analytics implementation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a data layer and why is it important for Adobe Analytics?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A data layer is a JavaScript object that stores and organizes data on your website for analytics and marketing tools. It acts as a single source of truth for customer interactions, page information, and transaction data. WegWorks designs robust data layer architectures that ensure consistent, accurate data collection across all touchpoints."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you use Adobe Launch (Tags) for implementation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, WegWorks implements Adobe Analytics using Adobe Experience Platform Tags (formerly Adobe Launch) as the tag management system. We configure rules, data elements, and extensions to capture all required data points. We also work with other tag managers like Google Tag Manager when needed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you integrate Adobe Analytics with our existing tools?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. WegWorks specializes in integrating Adobe Analytics with the broader Adobe Experience Cloud (Target, Campaign, AEM, Audience Manager) as well as third-party tools like Salesforce, Segment CDP, data warehouses (Snowflake, BigQuery), and BI platforms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Analysis Workspace and how do you use it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Analysis Workspace is Adobe Analytics' powerful drag-and-drop interface for building custom reports, dashboards, and visualizations. WegWorks builds tailored Workspace projects including executive dashboards, marketing performance reports, conversion funnels, cohort analysis, and attribution models."
+      }
+    }
   ]
 }
 </script>
@@ -423,6 +497,71 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
 }
 
+/* FAQ Section */
+.faq-section {
+  padding: 100px 0;
+}
+
+.faq-list {
+  max-width: 800px;
+  margin-top: 40px;
+}
+
+.faq-item {
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  background: var(--glass-bg);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 24px 32px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: 'Syne', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.3s;
+}
+
+.faq-question:hover {
+  color: var(--accent-primary);
+}
+
+.faq-question svg {
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.faq-item.active .faq-question svg {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 500px;
+}
+
+.faq-answer p {
+  padding: 0 32px 24px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .nav-links, .nav-cta {
@@ -435,6 +574,15 @@ h1, h2, h3, h4, h5, h6 {
   
   .cta-box {
     padding: 40px 24px;
+  }
+  
+  .faq-question {
+    padding: 20px 24px;
+    font-size: 1rem;
+  }
+  
+  .faq-answer p {
+    padding: 0 24px 20px;
   }
 }
 </style>
@@ -620,6 +768,112 @@ h1, h2, h3, h4, h5, h6 {
         <h4>Salesforce</h4>
         <p>CRM and Marketing Cloud implementation with analytics integration.</p>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-subtitle">Common questions about WegWorks and our Adobe Analytics services.</p>
+    
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Is WegWorks the same as WageWorks?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p><strong>No, WegWorks and WageWorks are completely different companies.</strong> WegWorks is a MarTech consulting firm specializing in marketing technology implementation including Adobe Analytics, Segment CDP, Salesforce, and marketing automation. WageWorks is a separate company that provides employee benefits administration services. Despite the similar-sounding names, they are unrelated businesses in different industries.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What Adobe Analytics services does WegWorks provide?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>WegWorks provides comprehensive Adobe Analytics services including implementation and setup, data layer architecture design, custom reporting and Analysis Workspace dashboards, training and enablement, analytics audits and optimization, and integration with other Adobe Experience Cloud products and third-party tools.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          How long does an Adobe Analytics implementation take?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Implementation timelines vary based on complexity, but WegWorks typically delivers initial implementations in 4-8 weeks. Our proven methodology prioritizes quick wins while building a scalable foundation. Enterprise implementations with complex data layer requirements may take 8-12 weeks.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Does WegWorks offer Adobe Analytics training?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, WegWorks provides hands-on Adobe Analytics and Analysis Workspace training tailored to your team's skill level. Our training programs include certification preparation, custom curriculum development, and ongoing enablement to ensure your team can independently manage and evolve your analytics implementation.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What is a data layer and why is it important for Adobe Analytics?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>A data layer is a JavaScript object that stores and organizes data on your website for analytics and marketing tools. It acts as a single source of truth for customer interactions, page information, and transaction data. WegWorks designs robust data layer architectures that ensure consistent, accurate data collection across all touchpoints—making your Adobe Analytics implementation more reliable and easier to maintain.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Do you use Adobe Launch (Tags) for implementation?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, WegWorks implements Adobe Analytics using Adobe Experience Platform Tags (formerly Adobe Launch) as the tag management system. We configure rules, data elements, and extensions to capture all required data points. We also work with other tag managers like Google Tag Manager when needed for hybrid implementations.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          Can you integrate Adobe Analytics with our existing tools?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Absolutely. WegWorks specializes in integrating Adobe Analytics with the broader Adobe Experience Cloud (Target, Campaign, AEM, Audience Manager) as well as third-party tools like Salesforce, Segment CDP, data warehouses (Snowflake, BigQuery), and BI platforms. We ensure your analytics data flows seamlessly across your entire MarTech stack.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          What is Analysis Workspace and how do you use it?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Analysis Workspace is Adobe Analytics' powerful drag-and-drop interface for building custom reports, dashboards, and visualizations. WegWorks builds tailored Workspace projects for your teams including executive dashboards, marketing performance reports, conversion funnels, cohort analysis, and attribution models—all designed to surface actionable insights for your specific business needs.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
