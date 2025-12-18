@@ -110,6 +110,12 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .footer p { color: var(--text-muted); }
 .footer a { color: var(--accent-primary); text-decoration: none; }
 
+.breadcrumb { padding: 0 0 24px; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+.breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+.breadcrumb a:hover { color: var(--accent-primary); }
+.breadcrumb span { color: var(--text-muted); }
+.breadcrumb .current { color: var(--text-secondary); }
+
 @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
   .hero { padding: 120px 0 60px; }
@@ -140,10 +146,13 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 
 <section class="hero">
   <div class="container">
-    <a class="hero-badge" href="/blog/">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Back to Blog
-    </a>
+    <nav class="breadcrumb">
+      <a href="/">Home</a>
+      <span>›</span>
+      <a href="/blog/">Blog</a>
+      <span>›</span>
+      <span class="current">Segment CDP</span>
+    </nav>
     <h1><span class="gradient-text">Segment CDP</span> Insights</h1>
     <p class="hero-description">
       Customer data platform guides, identity resolution strategies, tracking plan best practices, 

@@ -136,7 +136,18 @@
   --glow-primary: 0 0 40px rgba(16, 185, 129, 0.3);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+
+/* Animated Background */
+.bg-mesh { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse 80% 50% at 20% -20%, rgba(16, 185, 129, 0.15), transparent), radial-gradient(ellipse 60% 40% at 80% 100%, rgba(52, 211, 153, 0.1), transparent), var(--bg-primary); }
+.edge-glow { position: fixed; pointer-events: none; z-index: 0; }
+.edge-glow-top { top: 0; left: 0; right: 0; height: 300px; background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(16, 185, 129, 0.08), transparent); }
+.edge-glow-left { top: 0; left: 0; bottom: 0; width: 200px; background: radial-gradient(ellipse 100% 50% at 0% 50%, rgba(16, 185, 129, 0.06), transparent); }
+.edge-glow-right { top: 0; right: 0; bottom: 0; width: 200px; background: radial-gradient(ellipse 100% 50% at 100% 50%, rgba(16, 185, 129, 0.06), transparent); }
+.corner-glow { position: fixed; width: 400px; height: 400px; pointer-events: none; z-index: 0; opacity: 0.5; }
+.corner-glow-tl { top: -100px; left: -100px; background: radial-gradient(circle, rgba(16, 185, 129, 0.15), transparent 60%); }
+.corner-glow-br { bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(52, 211, 153, 0.1), transparent 60%); }
+
 h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.2; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
@@ -206,6 +217,14 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 </head>
 
 <body>
+<!-- Glow Effects -->
+<div class="bg-mesh"></div>
+<div class="edge-glow edge-glow-top"></div>
+<div class="edge-glow edge-glow-left"></div>
+<div class="edge-glow edge-glow-right"></div>
+<div class="corner-glow corner-glow-tl"></div>
+<div class="corner-glow corner-glow-br"></div>
+
 <header class="site-header">
   <div class="container">
     <nav class="nav-wrapper">
