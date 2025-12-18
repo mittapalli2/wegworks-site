@@ -79,6 +79,12 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.wegworks.com/blog/aem/</loc>
+    <lastmod>2025-12-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
   
   <!-- Blog Articles -->
   <url>
@@ -113,6 +119,32 @@
   </url>
   <url>
     <loc>https://www.wegworks.com/blog/marketing-automation/email-deliverability-guide/</loc>
+    <lastmod>2025-12-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- AEM Articles -->
+  <url>
+    <loc>https://www.wegworks.com/blog/aem/aem-cloud-service-guide/</loc>
+    <lastmod>2025-12-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wegworks.com/blog/aem/aem-cloud-migration/</loc>
+    <lastmod>2025-12-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wegworks.com/blog/aem/aem-assets-workfront/</loc>
+    <lastmod>2025-12-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wegworks.com/blog/aem/aem-headless-content-fragments/</loc>
     <lastmod>2025-12-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
