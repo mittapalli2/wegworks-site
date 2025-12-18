@@ -1482,6 +1482,96 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 140px;
 }
 
+/* Form Success Message */
+.form-success {
+  text-align: center;
+  padding: 60px 40px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+}
+
+.success-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.success-circle {
+  stroke: var(--accent-primary);
+  stroke-width: 2;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: strokeCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.success-check {
+  stroke: var(--accent-primary);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: strokeCheck 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+}
+
+@keyframes strokeCircle {
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes strokeCheck {
+  100% { stroke-dashoffset: 0; }
+}
+
+.form-success h3 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form-success p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.btn-secondary {
+  padding: 14px 28px;
+  background: transparent;
+  border: 2px solid var(--accent-primary);
+  color: var(--accent-primary);
+  font-weight: 600;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
 .contact-info h3 {
   font-size: 2.5rem;
   margin-bottom: 24px;
@@ -2435,6 +2525,19 @@ h1, h2, h3, h4, h5, h6 {
         </div>
         <button class="btn btn-primary" type="submit" style="width: 100%;">Send Message →</button>
       </form>
+      
+      <!-- Success Message -->
+      <div id="form-success" class="form-success" style="display: none;">
+        <div class="success-icon">
+          <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+            <circle class="success-circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="success-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+          </svg>
+        </div>
+        <h3>Thank You!</h3>
+        <p>Your message has been sent successfully.<br/>We'll be in touch within 24 hours.</p>
+        <button class="btn btn-secondary" onclick="resetForm()">Send Another Message</button>
+      </div>
 </div>
 </div>
 </section>
@@ -2537,13 +2640,62 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
 // Form
-    function handleFormSubmit(event) {
+    async function handleFormSubmit(event) {
       event.preventDefault();
-      const fd = new FormData(event.target);
-  alert(`Thanks ${fd.get("name")}! We'll be in touch soon.`);
-      event.target.reset();
+      
+      const form = event.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const successDiv = document.getElementById('form-success');
+      const originalBtnText = submitBtn.textContent;
+      
+      // Disable button and show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      
+      // Collect form data
+      const formData = {
+        name: form.querySelector('#name').value,
+        email: form.querySelector('#email').value,
+        company: form.querySelector('#company').value || 'Not provided',
+        message: form.querySelector('#message').value
+      };
+      
+      try {
+        await fetch('https://script.google.com/macros/s/AKfycbwlulkLyPgt9g63HCyo6-2zEKCMfnpDt0oPLMzZ-fjHTz_l4dW2tA_vvLh5a9CTXxjG/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+        
+        // Hide form and show success message
+        form.style.display = 'none';
+        successDiv.style.display = 'block';
+        
+      } catch (error) {
+        console.error('Form submission error:', error);
+        alert('Something went wrong. Please try again or email us directly at hello@wegworks.com');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
     }
+    
+    function resetForm() {
+      const form = document.querySelector('.contact-form');
+      const successDiv = document.getElementById('form-success');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      
+      form.reset();
+      form.style.display = 'block';
+      successDiv.style.display = 'none';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message →';
+    }
+    
     window.handleFormSubmit = handleFormSubmit;
+    window.resetForm = resetForm;
   </script>
 </body>
 </html>
