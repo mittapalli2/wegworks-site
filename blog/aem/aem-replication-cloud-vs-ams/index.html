@@ -159,6 +159,10 @@ h1, h2, h3 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3
 .architecture-box { background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 16px; padding: 32px; margin: 32px 0; }
 .architecture-box h4 { color: var(--accent-primary); margin-bottom: 24px; font-size: 1.1rem; text-align: center; }
 
+/* Diagram Image */
+.diagram-image { margin: 32px 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--glass-border); }
+.diagram-image img { width: 100%; height: auto; display: block; }
+
 /* Flow Diagram - Horizontal Layout */
 .flow-diagram { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 20px 0; flex-wrap: wrap; }
 .flow-step { 
@@ -347,59 +351,8 @@ pre code { background: none; padding: 0; font-size: 0.85rem; color: var(--text-s
 
       <h3>How Traditional Replication Works</h3>
 
-      <div class="architecture-box">
-        <h4>AEM AMS/6.5 Replication Flow</h4>
-        <div class="flow-diagram">
-          <div class="flow-step">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#f0c14b" stroke-width="1.5">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-              </svg>
-            </div>
-            <div class="label">Author</div>
-          </div>
-          <div class="flow-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-          <div class="flow-step highlight">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                <line x1="12" y1="22.08" x2="12" y2="12"/>
-              </svg>
-            </div>
-            <div class="label">Replication Agent</div>
-          </div>
-          <div class="flow-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-          <div class="flow-step">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="2" y1="12" x2="22" y2="12"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
-            </div>
-            <div class="label">Dispatcher</div>
-          </div>
-          <div class="flow-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-          <div class="flow-step">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#8b949e" stroke-width="1.5">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
-            </div>
-            <div class="label">Publish</div>
-          </div>
-        </div>
+      <div class="diagram-image">
+        <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/replication-aem-ams.png" alt="AEM AMS/6.5 Replication Flow - Author to Replication Agent to Publish to Dispatcher" loading="lazy"/>
       </div>
 
       <p>When you activate a page in AEM AMS:</p>
@@ -457,57 +410,8 @@ Agent Enabled: true</code></pre>
         backed by Adobe's pipeline infrastructure.
       </p>
 
-      <div class="architecture-box">
-        <h4>AEM Cloud Service Content Distribution Flow</h4>
-        <div class="flow-diagram">
-          <div class="flow-step">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#f0c14b" stroke-width="1.5">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-              </svg>
-            </div>
-            <div class="label">Author</div>
-          </div>
-          <div class="flow-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-          <div class="flow-step highlight">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <line x1="8" y1="8" x2="16" y2="8"/>
-                <line x1="8" y1="12" x2="16" y2="12"/>
-                <line x1="8" y1="16" x2="12" y2="16"/>
-              </svg>
-            </div>
-            <div class="label">Distribution Queue</div>
-          </div>
-          <div class="flow-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-          <div class="flow-step highlight">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
-              </svg>
-            </div>
-            <div class="label">Adobe I/O Pipeline</div>
-          </div>
-          <div class="flow-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-          <div class="flow-step">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#8b949e" stroke-width="1.5">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                <line x1="8" y1="21" x2="16" y2="21"/>
-                <line x1="12" y1="17" x2="12" y2="21"/>
-              </svg>
-            </div>
-            <div class="label">Publish Pods</div>
-          </div>
-        </div>
+      <div class="diagram-image">
+        <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/replication-aem-cloud.png" alt="AEM Cloud Service Content Distribution Flow - Author to Distribution Queue to Adobe I/O Pipeline to Publish Pods to CDN" loading="lazy"/>
       </div>
 
       <h3>The Distribution Process Step-by-Step</h3>
