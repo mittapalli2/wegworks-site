@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9VH11ZH9Y4');
+</script>
+<title>AEM Replication: Why Cloud Service Doesn't Have Replication Agents | WegWorks</title>
+<meta name="description" content="Understanding why AEM Cloud Service removed traditional replication agents and how Sling Content Distribution handles author-to-publish content sync differently than AEM AMS."/>
+<meta name="keywords" content="AEM replication, AEM Cloud Service, Sling Content Distribution, AEM AMS, replication agents, content distribution, AEM publish, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/aem/aem-replication-cloud-vs-ams/"/>
+<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/aem/aem-replication-cloud-vs-ams/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="AEM Replication: Why Cloud Service Doesn't Have Replication Agents"/>
+<meta property="og:description" content="Understanding how content distribution works in AEM Cloud vs traditional replication in AMS."/>
+<meta property="og:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/replication-publish-aem.png"/>
+<meta property="article:published_time" content="2025-05-15"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/replication-publish-aem.png"/>
+
+<!-- Schema.org Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AEM Replication: Why Cloud Service Doesn't Have Replication Agents",
+  "description": "Understanding why AEM Cloud Service removed traditional replication agents and how Sling Content Distribution handles author-to-publish content sync.",
+  "image": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/replication-publish-aem.png",
+  "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png"}},
+  "datePublished": "2025-05-15",
+  "dateModified": "2025-05-15"
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "AEM", "item": "https://www.wegworks.com/blog/aem/"},
+    {"@type": "ListItem", "position": 4, "name": "AEM Replication Cloud vs AMS", "item": "https://www.wegworks.com/blog/aem/aem-replication-cloud-vs-ams/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why doesn't AEM Cloud Service have replication agents?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AEM Cloud Service replaced traditional replication agents with Sling Content Distribution, a more scalable and cloud-native approach. This eliminates manual agent configuration, provides automatic scaling, and ensures better reliability through a queue-based distribution system managed by Adobe."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does content get published in AEM Cloud Service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In AEM Cloud Service, content distribution uses Sling Content Distribution with Apache Jackrabbit Oak. When you publish content, it's serialized and placed in a distribution queue (backed by Adobe I/O pipelines), then consumed by publish instances. This is fully managed by Adobe with no manual configuration required."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-tertiary: #1a1a24;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #10b981;
+  --accent-secondary: #34d399;
+  --accent-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(16, 185, 129, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+h1, h2, h3 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand img { height: 40px; width: auto; }
+.brand-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links > li { position: relative; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text-primary); }
+.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+.dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
+.nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+.dropdown-menu a:hover { background: rgba(16, 185, 129, 0.1); color: var(--accent-primary); }
+.nav-cta { padding: 12px 28px; background: var(--accent-gradient); color: var(--bg-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+
+.article-header { padding: 160px 0 40px; }
+.article-hero-image { margin: 0 auto 60px; max-width: 900px; padding: 0 24px; }
+.article-hero-image img { width: 100%; height: auto; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
+.back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 24px; text-decoration: none; }
+.article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: var(--text-muted); }
+.article-category { color: var(--accent-primary); font-weight: 600; text-decoration: none; }
+.article-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
+.article-intro { font-size: 1.25rem; color: var(--text-secondary); line-height: 1.7; }
+
+.article-content { padding: 60px 0 100px; }
+.article-content h2 { font-size: 1.75rem; margin: 48px 0 20px; }
+.article-content h3 { font-size: 1.375rem; margin: 36px 0 16px; }
+.article-content p { margin-bottom: 20px; color: var(--text-secondary); line-height: 1.8; }
+.article-content ul, .article-content ol { margin: 20px 0 20px 24px; color: var(--text-secondary); }
+.article-content li { margin-bottom: 12px; line-height: 1.7; }
+.article-content strong { color: var(--text-primary); }
+.article-content a { color: var(--accent-primary); text-decoration: none; }
+
+.comparison-table { width: 100%; border-collapse: collapse; margin: 32px 0; background: var(--glass-bg); border-radius: 12px; overflow: hidden; }
+.comparison-table th, .comparison-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--glass-border); }
+.comparison-table th { background: var(--bg-tertiary); color: var(--text-primary); font-weight: 600; font-size: 0.9rem; }
+.comparison-table td { color: var(--text-secondary); font-size: 0.95rem; }
+.comparison-table tr:last-child td { border-bottom: none; }
+.comparison-table .feature { color: var(--text-primary); font-weight: 500; }
+
+.architecture-box { background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 16px; padding: 32px; margin: 32px 0; }
+.architecture-box h4 { color: var(--accent-primary); margin-bottom: 24px; font-size: 1.1rem; text-align: center; }
+
+/* Flow Diagram - Horizontal Layout */
+.flow-diagram { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 20px 0; flex-wrap: wrap; }
+.flow-step { 
+  background: #0d1117; 
+  border: 1px solid #21262d; 
+  border-radius: 12px; 
+  padding: 20px 28px; 
+  text-align: center; 
+  min-width: 130px;
+  transition: all 0.3s;
+}
+.flow-step:hover { border-color: #30363d; transform: translateY(-2px); }
+.flow-step .icon { 
+  width: 48px; 
+  height: 48px; 
+  margin: 0 auto 12px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  font-size: 28px;
+}
+.flow-step .icon svg { width: 32px; height: 32px; }
+.flow-step .label { font-size: 0.85rem; color: #8b949e; font-weight: 500; }
+.flow-step.highlight { 
+  border-color: var(--accent-primary); 
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+}
+.flow-step.highlight .label { color: var(--accent-secondary); }
+.flow-arrow { 
+  color: var(--accent-primary); 
+  font-size: 20px; 
+  display: flex;
+  align-items: center;
+}
+.flow-arrow svg { width: 24px; height: 24px; stroke: var(--accent-primary); }
+
+/* Two-row diagram layout */
+.flow-diagram-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.flow-diagram-grid .flow-step { min-width: unset; }
+.flow-diagram-grid .flow-step.bottom-center {
+  grid-column: 2 / 4;
+  grid-row: 2;
+}
+.flow-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
+}
+.flow-connector svg { width: 20px; height: 20px; stroke: var(--accent-primary); }
+
+.callout { padding: 24px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; margin: 32px 0; }
+.callout-title { font-weight: 700; color: var(--accent-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.callout p { margin: 0; color: var(--text-secondary); }
+
+.callout-warning { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); }
+.callout-warning .callout-title { color: #fbbf24; }
+
+.callout-info { background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3); }
+.callout-info .callout-title { color: #60a5fa; }
+
+code { background: var(--bg-tertiary); padding: 3px 8px; border-radius: 4px; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.85em; color: var(--accent-secondary); }
+pre { background: var(--bg-tertiary); padding: 20px; border-radius: 12px; overflow-x: auto; margin: 24px 0; border: 1px solid var(--glass-border); }
+pre code { background: none; padding: 0; font-size: 0.85rem; color: var(--text-secondary); }
+
+.cta-box { padding: 48px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; text-align: center; margin-top: 60px; }
+.cta-box h3 { font-size: 1.5rem; margin-bottom: 16px; }
+.cta-box p { color: var(--text-secondary); margin-bottom: 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-weight: 600; border-radius: 12px; text-decoration: none; }
+.btn-primary { background: var(--accent-gradient); color: var(--bg-primary); }
+
+.keywords-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--glass-border); }
+.keywords-section h4 { font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+.keyword-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.keyword-tags span { padding: 6px 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.8rem; color: var(--text-secondary); }
+
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: var(--text-muted); }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .article-header { padding: 120px 0 40px; }
+  .flow-diagram { flex-direction: column; }
+  .flow-arrow { transform: rotate(90deg); }
+  .comparison-table { font-size: 0.85rem; }
+  .comparison-table th, .comparison-table td { padding: 12px; }
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <nav class="nav-wrapper">
+    <a class="brand" href="/"><img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/><span class="brand-text">WegWorks</span></a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/services/adobe-analytics/">Adobe Analytics</a>
+          <a href="/services/segment-cdp/">Segment CDP</a>
+          <a href="/services/salesforce/">Salesforce</a>
+          <a href="/services/marketing-automation/">Marketing Automation</a>
+          <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+          <a href="/small-business/" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 8px; padding-top: 16px;">Small Business Solutions</a>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+          <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+          <a href="/blog/adobe-target/">Adobe Target</a>
+          <a href="/blog/aem/">AEM</a>
+          <a href="/blog/google-analytics-4/">Google Analytics 4</a>
+          <a href="/blog/marketing-automation/">Marketing Automation</a>
+          <a href="/blog/salesforce/">Salesforce</a>
+          <a href="/blog/segment-cdp/">Segment CDP</a>
+        </div>
+      </li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="/#contact">Get Started</a>
+  </nav>
+</header>
+
+<article>
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="/blog/aem/">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        AEM
+      </a>
+      <div class="article-meta">
+        <a class="article-category" href="/blog/aem/">AEM</a>
+        <span>May 15, 2025</span>
+        <span>12 min read</span>
+      </div>
+      <h1>AEM Replication: Why Cloud Service Doesn't Have Replication Agents</h1>
+      <p class="article-intro">
+        If you've migrated from AEM Managed Services (AMS) or on-premise AEM to Cloud Service, you've 
+        probably noticed something missing: replication agents. Here's why Adobe removed them and how 
+        content distribution actually works in the cloud.
+      </p>
+    </div>
+  </header>
+
+  <div class="article-hero-image">
+    <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/replication-publish-aem.png" alt="AEM Replication - Cloud vs AMS Architecture" loading="eager" onerror="this.style.display='none'"/>
+  </div>
+
+  <div class="article-content">
+    <div class="container">
+
+      <h2>The Traditional AEM Replication Model (AMS/On-Premise)</h2>
+      
+      <p>
+        In AEM 6.5 and AEM Managed Services, replication is the mechanism for moving content from 
+        Author to Publish instances. It's based on <strong>replication agents</strong>—configurable 
+        transport mechanisms that push content packages from one instance to another.
+      </p>
+
+      <h3>How Traditional Replication Works</h3>
+
+      <div class="architecture-box">
+        <h4>AEM AMS/6.5 Replication Flow</h4>
+        <div class="flow-diagram">
+          <div class="flow-step">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#f0c14b" stroke-width="1.5">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+            </div>
+            <div class="label">Author</div>
+          </div>
+          <div class="flow-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+          <div class="flow-step highlight">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                <line x1="12" y1="22.08" x2="12" y2="12"/>
+              </svg>
+            </div>
+            <div class="label">Replication Agent</div>
+          </div>
+          <div class="flow-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+          <div class="flow-step">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div class="label">Dispatcher</div>
+          </div>
+          <div class="flow-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+          <div class="flow-step">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#8b949e" stroke-width="1.5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <div class="label">Publish</div>
+          </div>
+        </div>
+      </div>
+
+      <p>When you activate a page in AEM AMS:</p>
+      <ol>
+        <li>The replication agent serializes the content into a package</li>
+        <li>The agent opens an HTTP connection to the publish instance</li>
+        <li>The package is transmitted and deserialized on publish</li>
+        <li>Optionally, dispatcher cache is flushed via a flush agent</li>
+      </ol>
+
+      <h3>Configuring Replication Agents in AMS</h3>
+      
+      <p>In AEM 6.5/AMS, you configure agents at <code>/etc/replication/agents.author</code>:</p>
+
+<pre><code>// Typical replication agent configuration
+Name: Publish Agent
+Transport URI: https://publish.example.com/bin/receive?sling:authRequestLogin=1
+Transport User: replication-user
+Transport Password: ********
+Serialization Type: Default
+Retry Delay: 60000
+Log Level: Info
+Agent Enabled: true</code></pre>
+
+      <div class="callout callout-warning">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Problems with Traditional Replication
+        </div>
+        <p>
+          Traditional replication has issues at scale: blocked queues, agent failures, manual restarts, 
+          credential management, and no automatic scaling. Every new publish instance requires new agent configuration.
+        </p>
+      </div>
+
+      <h2>Why AEM Cloud Service Removed Replication Agents</h2>
+
+      <p>
+        AEM as a Cloud Service is built on a fundamentally different architecture. Adobe removed 
+        replication agents for several reasons:
+      </p>
+
+      <ul>
+        <li><strong>Auto-scaling:</strong> Cloud publish instances scale automatically. Manual agent configuration for each instance is impossible.</li>
+        <li><strong>Immutable infrastructure:</strong> You can't modify <code>/etc</code> or system configurations in Cloud Service.</li>
+        <li><strong>Reliability:</strong> Queue-based distribution is more resilient than point-to-point HTTP.</li>
+        <li><strong>Security:</strong> No need to manage replication user credentials across instances.</li>
+        <li><strong>Simplicity:</strong> Authors shouldn't care about infrastructure—just click "Publish."</li>
+      </ul>
+
+      <h2>How Content Distribution Works in AEM Cloud</h2>
+
+      <p>
+        AEM Cloud Service replaces replication agents with <strong>Sling Content Distribution</strong>, 
+        backed by Adobe's pipeline infrastructure.
+      </p>
+
+      <div class="architecture-box">
+        <h4>AEM Cloud Service Content Distribution Flow</h4>
+        <div class="flow-diagram">
+          <div class="flow-step">
+            <div class="icon">✍️</div>
+            <div class="label">Author</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step highlight">
+            <div class="icon">📋</div>
+            <div class="label">Distribution Queue</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step highlight">
+            <div class="icon">☁️</div>
+            <div class="label">Adobe I/O Pipeline</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="icon">📄📄📄</div>
+            <div class="label">Publish Pods</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>The Distribution Process Step-by-Step</h3>
+
+      <ol>
+        <li>
+          <strong>Author triggers publish:</strong> User clicks "Quick Publish" or "Manage Publication" 
+          in the AEM UI.
+        </li>
+        <li>
+          <strong>Content serialization:</strong> Sling Content Distribution serializes the content 
+          tree into distribution packages using Apache Jackrabbit Oak.
+        </li>
+        <li>
+          <strong>Queue submission:</strong> Packages are placed in a distribution queue (not an HTTP 
+          call to a specific publish instance).
+        </li>
+        <li>
+          <strong>Adobe pipeline processing:</strong> Adobe's infrastructure manages the queue, 
+          ensuring reliable delivery.
+        </li>
+        <li>
+          <strong>Publish consumption:</strong> All publish pods subscribe to the queue and pull 
+          content packages automatically.
+        </li>
+        <li>
+          <strong>CDN invalidation:</strong> Adobe's CDN layer (Fastly) is automatically invalidated 
+          when content is published.
+        </li>
+      </ol>
+
+      <div class="callout">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          Key Insight
+        </div>
+        <p>
+          In Cloud Service, publish instances <strong>pull</strong> content from a queue rather than 
+          author <strong>pushing</strong> to each instance. This inversion enables auto-scaling and 
+          fault tolerance.
+        </p>
+      </div>
+
+      <h2>Comparison: AMS vs Cloud Replication</h2>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>AEM AMS / 6.5</th>
+            <th>AEM Cloud Service</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature">Mechanism</td>
+            <td>Replication Agents</td>
+            <td>Sling Content Distribution</td>
+          </tr>
+          <tr>
+            <td class="feature">Configuration</td>
+            <td>Manual per-agent setup</td>
+            <td>Zero configuration (managed by Adobe)</td>
+          </tr>
+          <tr>
+            <td class="feature">Transport</td>
+            <td>HTTP POST to each publish</td>
+            <td>Queue-based distribution pipeline</td>
+          </tr>
+          <tr>
+            <td class="feature">Scaling</td>
+            <td>Add agent per publish instance</td>
+            <td>Automatic—all pods subscribe to queue</td>
+          </tr>
+          <tr>
+            <td class="feature">Credentials</td>
+            <td>Replication user/password</td>
+            <td>No credentials (Adobe-managed auth)</td>
+          </tr>
+          <tr>
+            <td class="feature">Queue visibility</td>
+            <td>/etc/replication/agents.author</td>
+            <td>Distribution UI in Tools menu</td>
+          </tr>
+          <tr>
+            <td class="feature">Custom agents</td>
+            <td>Yes (custom transport handlers)</td>
+            <td>No (use Content Distribution SDK)</td>
+          </tr>
+          <tr>
+            <td class="feature">Reverse replication</td>
+            <td>Supported via reverse agents</td>
+            <td>Not supported (use APIs/workflows)</td>
+          </tr>
+          <tr>
+            <td class="feature">Dispatcher flush</td>
+            <td>Separate flush agents</td>
+            <td>Automatic via CDN invalidation</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Working with Content Distribution in Cloud</h2>
+
+      <h3>Viewing the Distribution Queue</h3>
+      
+      <p>
+        In AEM Cloud, you can monitor distribution status at:<br>
+        <code>Tools → Deployment → Distribution</code>
+      </p>
+
+      <p>The Distribution UI shows:</p>
+      <ul>
+        <li>Queue status and pending items</li>
+        <li>Distribution history</li>
+        <li>Failed packages and retry options</li>
+        <li>Agent status (Golden Publish reference)</li>
+      </ul>
+
+      <h3>Programmatic Publishing</h3>
+      
+      <p>
+        To trigger distribution programmatically in Cloud Service, use the Sling Content Distribution API:
+      </p>
+
+<pre><code>import org.apache.sling.distribution.DistributionRequest;
+import org.apache.sling.distribution.DistributionRequestType;
+import org.apache.sling.distribution.DistributionResponse;
+import org.apache.sling.distribution.Distributor;
+import org.apache.sling.distribution.SimpleDistributionRequest;
+
+@Reference
+private Distributor distributor;
+
+public void publishContent(String path) {
+    DistributionRequest request = new SimpleDistributionRequest(
+        DistributionRequestType.ADD,  // ADD = publish, DELETE = unpublish
+        path
+    );
+    
+    DistributionResponse response = distributor.distribute(
+        "publish",  // agent name
+        resourceResolver,
+        request
+    );
+    
+    if (response.isSuccessful()) {
+        log.info("Content distributed: {}", path);
+    } else {
+        log.error("Distribution failed: {}", response.getMessage());
+    }
+}</code></pre>
+
+      <h3>Handling Distribution Events</h3>
+
+<pre><code>import org.apache.sling.distribution.event.DistributionEventTopics;
+import org.osgi.service.event.Event;
+import org.osgi.service.event.EventHandler;
+
+@Component(
+    service = EventHandler.class,
+    property = {
+        "event.topics=" + DistributionEventTopics.AGENT_PACKAGE_DISTRIBUTED
+    }
+)
+public class DistributionEventListener implements EventHandler {
+    
+    @Override
+    public void handleEvent(Event event) {
+        String[] paths = (String[]) event.getProperty("distribution.paths");
+        String type = (String) event.getProperty("distribution.type");
+        
+        log.info("Content distributed: {} - {}", type, Arrays.toString(paths));
+    }
+}</code></pre>
+
+      <h2>Common Migration Challenges</h2>
+
+      <h3>1. Custom Replication Agents</h3>
+      <p>
+        If you had custom replication agents in AMS (e.g., pushing to external systems), you'll need 
+        to refactor. Options in Cloud Service:
+      </p>
+      <ul>
+        <li>Use <strong>Adobe I/O Events</strong> to trigger external workflows on publish</li>
+        <li>Implement <strong>Sling Jobs</strong> that run on publish and push to external systems</li>
+        <li>Use <strong>Content Distribution SDK</strong> for custom distribution handlers</li>
+      </ul>
+
+      <h3>2. Reverse Replication</h3>
+      <p>
+        Reverse replication (publish-to-author) isn't supported in Cloud Service. Alternatives:
+      </p>
+      <ul>
+        <li>Use <strong>AEM Forms</strong> for user-generated content that needs to reach author</li>
+        <li>Implement custom <strong>APIs on publish</strong> that write to external storage (S3, database)</li>
+        <li>Use <strong>Adobe I/O Runtime</strong> as an intermediary</li>
+      </ul>
+
+      <h3>3. Dispatcher Flush Agents</h3>
+      <p>
+        No need for flush agents—AEM Cloud's CDN (Fastly) handles cache invalidation automatically 
+        when content is published. You can still configure TTLs and cache rules in dispatcher configs.
+      </p>
+
+      <div class="callout callout-info">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          Golden Publish
+        </div>
+        <p>
+          In AEM Cloud, there's a concept of "Golden Publish"—a reference publish instance that 
+          receives content first and validates it before distribution to all other pods. This ensures 
+          consistency across the publish tier.
+        </p>
+      </div>
+
+      <h2>Best Practices for Cloud Content Distribution</h2>
+
+      <ol>
+        <li>
+          <strong>Don't fight the model:</strong> Embrace queue-based distribution rather than trying 
+          to replicate agent behavior.
+        </li>
+        <li>
+          <strong>Use Manage Publication:</strong> For bulk publishing, use "Manage Publication" which 
+          batches items efficiently.
+        </li>
+        <li>
+          <strong>Monitor the queue:</strong> Check Distribution UI regularly, especially after large 
+          content updates.
+        </li>
+        <li>
+          <strong>Handle failures gracefully:</strong> Distribution can fail—build retry logic and 
+          alerting into your workflows.
+        </li>
+        <li>
+          <strong>Understand timing:</strong> Distribution isn't instant. Factor in queue processing 
+          time for time-sensitive content.
+        </li>
+      </ol>
+
+      <h2>Conclusion</h2>
+
+      <p>
+        The shift from replication agents to Sling Content Distribution is one of the most significant 
+        architectural changes in AEM Cloud Service. While it requires a mindset shift for developers 
+        familiar with AMS, the benefits—automatic scaling, zero configuration, and improved 
+        reliability—make it a worthwhile trade-off.
+      </p>
+
+      <p>
+        For teams migrating to Cloud Service, understanding this difference early prevents surprises 
+        and helps you design solutions that work <em>with</em> the cloud architecture rather than against it.
+      </p>
+
+      <!-- Keywords Section -->
+      <div class="keywords-section">
+        <h4>Related Topics</h4>
+        <div class="keyword-tags">
+          <span>AEM Replication</span>
+          <span>AEM Cloud Service</span>
+          <span>Sling Content Distribution</span>
+          <span>AEM Managed Services</span>
+          <span>Replication Agents</span>
+          <span>Content Distribution</span>
+          <span>AEM Publish</span>
+          <span>AEM Author</span>
+          <span>Adobe Experience Manager</span>
+          <span>Cloud Migration</span>
+          <span>WegWorks</span>
+          <span>Weg Works</span>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h3>Need Help with AEM Cloud Migration?</h3>
+        <p>Our team at WegWorks (Weg Works) has migrated numerous AEM implementations from AMS to Cloud Service. We understand the architectural differences and can help you navigate the transition smoothly.</p>
+        <a class="btn btn-primary" href="/#contact">
+          Get Expert Help
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container-wide">
+    <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
+
