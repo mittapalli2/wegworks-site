@@ -152,6 +152,12 @@
   
   <!-- AEM Articles -->
   <url>
+    <loc>https://www.wegworks.com/blog/aem/aem-replication-cloud-vs-ams/</loc>
+    <lastmod>2025-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.wegworks.com/blog/aem/aem-vs-payload-cms/</loc>
     <lastmod>2025-03-15</lastmod>
     <changefreq>monthly</changefreq>
