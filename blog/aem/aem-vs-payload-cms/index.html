@@ -94,14 +94,14 @@ a:hover { color: var(--accent-secondary); }
 .brand-text span { font-size: 0.7rem; color: #ffffff; letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
 .nav-links { display: flex; gap: 40px; list-style: none; }
 .nav-links > li { position: relative; }
-.nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 600; transition: color 0.3s; }
+.nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
 .nav-links a:hover { color: var(--text-primary); }
 .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
 .dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
 .nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
 .dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
 .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-.dropdown-menu a { display: block; padding: 10px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+.dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
 .dropdown-menu a:hover { background: rgba(16, 185, 129, 0.1); color: var(--accent-primary); }
 .nav-cta { padding: 12px 28px; background: var(--accent-gradient); color: var(--bg-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
 
@@ -120,8 +120,8 @@ a:hover { color: var(--accent-secondary); }
 .article-content { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
 .article-content h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700; margin: 48px 0 24px; color: var(--text-primary); }
 .article-content h3 { font-size: 1.3rem; font-weight: 600; margin: 32px 0 16px; color: var(--text-primary); }
-.article-content p { color: var(--text-secondary); margin-bottom: 20px; font-size: 1.05rem; }
-.article-content ul, .article-content ol { color: var(--text-secondary); margin: 0 0 24px 24px; }
+.article-content p { color: #ffffff; margin-bottom: 20px; font-size: 1.05rem; }
+.article-content ul, .article-content ol { color: #ffffff; margin: 0 0 24px 24px; }
 .article-content li { margin-bottom: 12px; }
 .article-content code { font-family: 'JetBrains Mono', monospace; background: rgba(16, 185, 129, 0.1); color: var(--accent-primary); padding: 2px 8px; border-radius: 4px; font-size: 0.9em; }
 .article-content strong { color: var(--text-primary); }
@@ -141,7 +141,7 @@ a:hover { color: var(--accent-secondary); }
 .comparison-table th:first-child { width: 30%; }
 .comparison-table th.aem { color: var(--aem-color); }
 .comparison-table th.payload { color: var(--payload-color); }
-.comparison-table td { color: var(--text-secondary); font-size: 0.95rem; }
+.comparison-table td { color: #ffffff; font-size: 0.95rem; }
 .comparison-table tr:last-child td { border-bottom: none; }
 .comparison-table .feature { font-weight: 600; color: var(--text-primary); }
 
@@ -154,7 +154,7 @@ a:hover { color: var(--accent-secondary); }
 .platform-card.aem h4 { color: var(--aem-color); }
 .platform-card.payload h4 { color: var(--payload-color); }
 .platform-card ul { list-style: none; margin: 0; padding: 0; }
-.platform-card li { padding: 8px 0; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 10px; }
+.platform-card li { padding: 8px 0; color: #ffffff; display: flex; align-items: flex-start; gap: 10px; }
 .platform-card li::before { content: "✓"; color: var(--accent-primary); font-weight: bold; }
 
 /* Use Case Cards */
@@ -173,11 +173,11 @@ a:hover { color: var(--accent-secondary); }
 .keywords-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--glass-border); }
 .keywords-section h3 { font-size: 1rem; color: #ffffff; margin-bottom: 16px; }
 .keywords-list { display: flex; flex-wrap: wrap; gap: 10px; }
-.keyword-tag { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; color: var(--text-secondary); }
+.keyword-tag { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; color: #ffffff; }
 
 /* Footer */
 footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--glass-border); color: #ffffff; font-size: 0.9rem; }
-footer a { color: var(--text-secondary); margin: 0 10px; }
+footer a { color: #ffffff; margin: 0 10px; }
 
 @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
@@ -251,7 +251,7 @@ pre, code, .code-block { overflow-x: auto; max-width: 100%; } table { display: b
         <a href="/">Home</a> › <a href="/blog/">Blog</a> › <a href="/blog/aem/">AEM</a> › AEM vs Payload CMS
       </nav>
       <h1><span class="aem">AEM</span> vs <span class="payload">Payload CMS</span>: An Honest Comparison</h1>
-      <p style="color: var(--text-secondary); font-size: 1.1rem; margin-top: 16px;">From our implementation experience at WegWorks</p>
+      <p style="color: #ffffff; font-size: 1.1rem; margin-top: 16px;">From our implementation experience at WegWorks</p>
       <div class="article-meta" style="margin-top: 20px;">
         <span>📅 March 15, 2025</span>
         <span>⏱️ 12 min read</span>
