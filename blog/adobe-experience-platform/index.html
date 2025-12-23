@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
     <script>
@@ -11,48 +11,31 @@
       gtag('js', new Date());
       gtag('config', 'G-9VH11ZH9Y4');
     </script>
-    <title>Adobe Experience Platform Insights | WegWorks Blog</title>
-    <meta name="description" content="Expert guides on Adobe Experience Platform (AEP), Real-Time CDP, data collection, and customer profile management. Learn implementation best practices from WegWorks.">
-    <meta name="keywords" content="Adobe Experience Platform, AEP, Real-Time CDP, customer data platform, unified profiles, WegWorks, Weg Works, data collection">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.wegworks.com/blog/adobe-experience-platform/">
-    <link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+<title>Adobe Experience Platform Blog | WegWorks - AEP & Real-Time CDP Guides</title>
+<meta name="description" content="Adobe Experience Platform insights from WegWorks. AEP implementation guides, Real-Time CDP tutorials, unified profiles, and data collection best practices."/>
+<meta name="keywords" content="Adobe Experience Platform, AEP blog, Real-Time CDP, customer data platform, unified profiles, XDM schema, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/adobe-experience-platform/"/>
+<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Adobe Experience Platform Insights | WegWorks Blog">
-    <meta property="og:description" content="Expert guides on Adobe Experience Platform (AEP), Real-Time CDP, and unified customer profiles.">
-    <meta property="og:url" content="https://www.wegworks.com/blog/adobe-experience-platform/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="WegWorks">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Adobe Experience Platform Insights | WegWorks Blog">
-    <meta name="twitter:description" content="Expert guides on Adobe Experience Platform and Real-Time CDP.">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        "name": "Adobe Experience Platform Insights",
-        "description": "Expert guides on Adobe Experience Platform (AEP), Real-Time CDP, and customer profile management.",
-        "url": "https://www.wegworks.com/blog/adobe-experience-platform/",
-        "isPartOf": {
-            "@type": "Blog",
-            "name": "WegWorks Blog",
-            "url": "https://www.wegworks.com/blog/"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "WegWorks",
-            "url": "https://www.wegworks.com/"
-        }
-    }
-    </script>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/adobe-experience-platform/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="Adobe Experience Platform Blog | WegWorks"/>
+<meta property="og:description" content="AEP implementation guides, Real-Time CDP tutorials, and unified customer profile best practices."/>
+<meta property="og:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/about.png"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+
+<!-- BreadcrumbList -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -66,32 +49,23 @@
     </script>
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         :root {
             --bg-primary: #0a0a0f;
             --bg-secondary: #12121a;
             --bg-tertiary: #1a1a24;
             --text-primary: #ffffff;
-            --text-secondary: #a0a0b0;
-            --text-muted: #606070;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
             --accent-primary: #10b981;
             --accent-secondary: #34d399;
-            --border-color: #2a2a3a;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+  --accent-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(16, 185, 129, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
         
         /* Animated Background */
         .bg-mesh { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse 80% 50% at 20% -20%, rgba(16, 185, 129, 0.15), transparent), radial-gradient(ellipse 60% 40% at 80% 100%, rgba(52, 211, 153, 0.1), transparent), var(--bg-primary); }
@@ -102,230 +76,85 @@
         .corner-glow { position: fixed; width: 400px; height: 400px; pointer-events: none; z-index: 0; opacity: 0.5; }
         .corner-glow-tl { top: -100px; left: -100px; background: radial-gradient(circle, rgba(16, 185, 129, 0.15), transparent 60%); }
         .corner-glow-br { bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(52, 211, 153, 0.1), transparent 60%); }
-        
-        .header {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
-        .brand img { height: 60px; width: auto; object-fit: contain; }
-        .brand-text {
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 700;
-            font-size: 1.6rem;
-            color: #ffffff;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            display: flex;
-            flex-direction: column;
-            line-height: 1;
-        }
-        .brand-text span {
-            font-size: 0.55rem;
-            color: var(--text-muted);
-            letter-spacing: 0.2em;
-            font-weight: 500;
-            margin-top: 2px;
-        }
-        
-        .nav {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav a:hover {
-            color: var(--accent-primary);
-        }
+h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.2; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-        .nav-dropdown { position: relative; }
-        .dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.98); backdrop-filter: blur(20px); border: 1px solid var(--border-color); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 8px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+.brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.brand img { height: 60px; width: auto; object-fit: contain; }
+.brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
+.brand-text span { font-size: 0.55rem; color: var(--text-muted); letter-spacing: 0.2em; font-weight: 500; margin-top: 2px; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links > li { position: relative; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text-primary); }
+
+/* Dropdown */
+.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+.nav-dropdown > a::after { content: ''; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid currentColor; transition: transform 0.3s; }
+.nav-dropdown:hover > a::after { transform: rotate(180deg); }
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
         .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
         .dropdown-menu a { display: block; padding: 10px 20px; color: var(--text-secondary); font-size: 0.9rem; }
-        .dropdown-menu a:hover { color: var(--accent-primary); background: rgba(16, 185, 129, 0.05); }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-            padding: 4rem 2rem;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .breadcrumb {
-            padding: 1rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .breadcrumb a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .breadcrumb a:hover {
-            color: var(--accent-primary);
-        }
-        
-        .breadcrumb span {
-            color: var(--text-muted);
-            margin: 0 0.5rem;
-        }
-        
-        .breadcrumb .current {
-            color: var(--text-secondary);
-        }
-        
-        .articles-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-        
-        .article-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .article-card:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.15);
-        }
-        
-        .article-image {
-            height: 200px;
-            background: var(--bg-tertiary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        
-        .article-image.has-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-        
-        .article-card:hover .article-image.has-image img {
-            transform: scale(1.05);
-        }
-        
-        .article-image svg {
-            width: 64px;
-            height: 64px;
-            color: var(--accent-primary);
-            opacity: 0.5;
-        }
-        
-        .article-content {
-            padding: 1.5rem;
-        }
-        
-        .article-content h3 {
-            color: var(--text-primary);
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-        }
-        
-        .article-content p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-        
-        .article-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-        
-        .read-more {
-            color: var(--accent-primary);
-            font-weight: 500;
-        }
-        
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 2rem;
-            text-align: center;
-            margin-top: 4rem;
-        }
-        
-        .footer p {
-            color: var(--text-muted);
-        }
-        
-        .footer a {
-            color: var(--accent-primary);
-            text-decoration: none;
-        }
+.dropdown-menu a:hover { color: var(--accent-primary); background: var(--glass-bg); }
+
+.nav-cta { padding: 12px 28px; background: var(--accent-gradient); color: var(--bg-primary); font-weight: 600; border-radius: 100px; text-decoration: none; transition: all 0.3s; }
+.nav-cta:hover { transform: translateY(-2px); box-shadow: var(--glow-primary); }
+
+.hero { padding: 160px 0 80px; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 24px; text-decoration: none; transition: all 0.3s; }
+.hero-badge:hover { border-color: var(--accent-primary); }
+.hero h1 { font-size: clamp(2.5rem, 6vw, 3.5rem); margin-bottom: 24px; line-height: 1.15; }
+.gradient-text { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-description { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin-bottom: 40px; line-height: 1.7; }
+
+.section { padding: 80px 0; }
+.section-title { font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 40px; }
+
+.articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; }
+.article-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; overflow: hidden; transition: all 0.3s; text-decoration: none; color: var(--text-primary); display: flex; flex-direction: column; }
+.article-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); }
+.article-image { height: 180px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(52, 211, 153, 0.08) 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.article-image.has-image { background: var(--bg-tertiary); }
+.article-image.has-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+.article-card:hover .article-image.has-image img { transform: scale(1.05); }
+.article-image .icon-box { width: 64px; height: 64px; background: linear-gradient(135deg, #10b981 0%, #34d399 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3); }
+.article-image .icon-box svg { width: 32px; height: 32px; color: #0a0a0f; }
+.article-content { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+.article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: var(--text-muted); }
+.article-card h3 { font-size: 1.375rem; margin-bottom: 12px; line-height: 1.3; }
+.article-card p { color: var(--text-secondary); line-height: 1.6; flex: 1; }
+.read-more { display: inline-flex; align-items: center; gap: 8px; color: var(--accent-primary); font-weight: 600; margin-top: 16px; }
+.read-more svg { transition: transform 0.3s; }
+.article-card:hover .read-more svg { transform: translateX(4px); }
+
+.cta-banner { padding: 60px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; text-align: center; margin-top: 60px; }
+.cta-banner h3 { font-size: 1.5rem; margin-bottom: 16px; }
+.cta-banner p { color: var(--text-secondary); margin-bottom: 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-weight: 600; border-radius: 12px; text-decoration: none; transition: all 0.3s; }
+.btn-primary { background: var(--accent-gradient); color: var(--bg-primary); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--glow-primary); }
+
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: var(--text-muted); }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+.breadcrumb { padding: 0 0 24px; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+.breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+.breadcrumb a:hover { color: var(--accent-primary); }
+.breadcrumb span { color: var(--text-muted); }
+.breadcrumb .current { color: var(--text-secondary); }
         
         @media (max-width: 768px) {
-            .nav {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .articles-grid {
-                grid-template-columns: 1fr;
-            }
+  .nav-links, .nav-cta { display: none; }
+  .hero { padding: 120px 0 60px; }
+  .articles-grid { grid-template-columns: 1fr; }
+  .cta-banner { padding: 40px 24px; }
         }
     </style>
 </head>
+
 <body>
 <!-- Glow Effects -->
 <div class="bg-mesh"></div>
@@ -335,15 +164,15 @@
 <div class="corner-glow corner-glow-tl"></div>
 <div class="corner-glow corner-glow-br"></div>
 
-    <header class="header">
-        <div class="header-content">
-            <a class="brand" href="/">
-                <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/>
-                <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
-            </a>
-            <nav class="nav">
-                <a href="/">Home</a>
-                <span class="nav-dropdown">
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-wrapper">
+      <a class="brand" href="/">
+        <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/>
+        <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-dropdown">
                     <a href="/services/">Services</a>
                     <div class="dropdown-menu">
                         <a href="/services/adobe-analytics/">Adobe Analytics</a>
@@ -353,8 +182,8 @@
                         <a href="/services/marketing-automation/">Marketing Automation</a>
                         <a href="/small-business/" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 8px; padding-top: 16px;">Small Business Solutions</a>
                     </div>
-                </span>
-                <span class="nav-dropdown">
+        </li>
+        <li class="nav-dropdown">
                     <a href="/blog/">Blog</a>
                     <div class="dropdown-menu">
                         <a href="/blog/adobe-analytics/">Adobe Analytics</a>
@@ -366,17 +195,17 @@
                         <a href="/blog/salesforce/">Salesforce</a>
                         <a href="/blog/segment-cdp/">Segment CDP</a>
                     </div>
-                </span>
-                <a href="/contact/">Contact</a>
+        </li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+      <a class="nav-cta" href="/contact/">Get Started</a>
             </nav>
         </div>
     </header>
     
     <section class="hero">
-        <h1>Adobe Experience Platform Insights</h1>
-        <p>Master AEP, Real-Time CDP, and unified customer profiles with expert guides from WegWorks consultants.</p>
-    </section>
-    
+  <div class="container">
     <nav class="breadcrumb">
         <a href="/">Home</a>
         <span>›</span>
@@ -384,57 +213,90 @@
         <span>›</span>
         <span class="current">Adobe Experience Platform</span>
     </nav>
+    <h1><span class="gradient-text">Adobe Experience Platform</span> Insights</h1>
+    <p class="hero-description">
+      Master AEP, Real-Time CDP, and unified customer profiles with expert guides from our 
+      Adobe Experience Platform consultants.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Articles</h2>
     
-    <section class="articles-section">
         <div class="articles-grid">
             <a class="article-card" href="/blog/adobe-experience-platform/what-is-aep/">
                 <div class="article-image has-image">
-                    <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/aep.png" alt="What is Adobe Experience Platform" loading="lazy">
+          <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/aep-overview.png" alt="What is Adobe Experience Platform" loading="lazy"/>
                 </div>
                 <div class="article-content">
-                    <h3>What is Adobe Experience Platform?</h3>
-                    <p>A comprehensive introduction to AEP's architecture, capabilities, and how it unifies customer data across channels.</p>
                     <div class="article-meta">
                         <span>Feb 20, 2025</span>
-                        <span class="read-more">Read More →</span>
+            <span>15 min read</span>
                     </div>
+          <h3>What is Adobe Experience Platform?</h3>
+          <p>A comprehensive introduction to AEP's architecture, capabilities, and how it unifies customer data across channels.</p>
+          <span class="read-more">
+            Read Article
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
                 </div>
             </a>
             
             <a class="article-card" href="/blog/adobe-experience-platform/real-time-cdp-guide/">
                 <div class="article-image has-image">
-                    <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/realtime-cdp.png" alt="Real-Time CDP Implementation Guide" loading="lazy">
+          <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/rtcdp-guide.png" alt="Real-Time CDP Implementation Guide" loading="lazy"/>
                 </div>
                 <div class="article-content">
-                    <h3>Real-Time CDP Implementation Guide</h3>
-                    <p>Step-by-step guide to implementing Adobe Real-Time CDP for unified customer profiles and activation.</p>
                     <div class="article-meta">
                         <span>Mar 5, 2025</span>
-                        <span class="read-more">Read More →</span>
+            <span>16 min read</span>
                     </div>
+          <h3>Real-Time CDP Implementation Guide</h3>
+          <p>Step-by-step guide to implementing Adobe Real-Time CDP for unified customer profiles and activation.</p>
+          <span class="read-more">
+            Read Article
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
                 </div>
             </a>
             
             <a class="article-card" href="/blog/adobe-experience-platform/aep-integrations/">
                 <div class="article-image has-image">
-                    <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/aep-integrations.png" alt="AEP Integrations Guide" loading="lazy">
+          <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/aep-integrations.png" alt="AEP Integrations Guide" loading="lazy"/>
                 </div>
                 <div class="article-content">
-                    <h3>AEP Integrations Guide: All Supported Connections</h3>
-                    <p>Complete guide to Adobe Experience Platform integrations—sources, destinations, and third-party connectors.</p>
                     <div class="article-meta">
                         <span>Apr 10, 2025</span>
-                        <span class="read-more">Read More →</span>
+            <span>12 min read</span>
                     </div>
+          <h3>AEP Integrations Guide: All Supported Connections</h3>
+          <p>Complete guide to Adobe Experience Platform integrations—sources, destinations, and third-party connectors.</p>
+          <span class="read-more">
+            Read Article
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
                 </div>
             </a>
+    </div>
+    
+    <div class="cta-banner">
+      <h3>Need Help with Adobe Experience Platform?</h3>
+      <p>Our certified experts can implement, optimize, or train your team on AEP and Real-Time CDP.</p>
+      <a class="btn btn-primary" href="/services/adobe-experience-cloud/">
+        View Our Services
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
         </div>
     </section>
     
     <footer class="footer">
-        <p>&copy; 2025 WegWorks. Expert MarTech consulting services.</p>
-        <p><a href="/">Home</a> · <a href="/services/">Services</a> · <a href="/blog/">Blog</a></p>
+  <div class="container">
+    <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved.</p>
+  </div>
     </footer>
+
 </body>
 </html>
-
