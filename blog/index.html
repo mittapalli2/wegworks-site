@@ -76,9 +76,12 @@
   "@context": "https://schema.org",
   "@type": "ItemList",
   "name": "WegWorks MarTech Blog Articles",
-  "numberOfItems": 20,
+  "numberOfItems": 23,
   "itemListElement": [
-    {"@type": "ListItem", "position": 1, "url": "https://www.wegworks.com/blog/adobe-analytics/data-layer-best-practices/", "name": "Data Layer Best Practices for Adobe Analytics Implementation"},
+    {"@type": "ListItem", "position": 1, "url": "https://www.wegworks.com/blog/adobe-experience-platform/identity-graph-collapse-fix/", "name": "Solving Identity Graph Collapse in AEP: A Healthcare Case Study"},
+    {"@type": "ListItem", "position": 2, "url": "https://www.wegworks.com/blog/aem/dispatcher-cache-invalidation-debugging/", "name": "Debugging AEM Dispatcher Cache Invalidation: A Retail Black Friday Post-Mortem"},
+    {"@type": "ListItem", "position": 3, "url": "https://www.wegworks.com/blog/adobe-analytics/cross-domain-tracking-ios-fix/", "name": "Fixing Cross-Domain Tracking After ITP 2.3: A Fintech Case Study"},
+    {"@type": "ListItem", "position": 4, "url": "https://www.wegworks.com/blog/adobe-analytics/data-layer-best-practices/", "name": "Data Layer Best Practices for Adobe Analytics Implementation"},
     {"@type": "ListItem", "position": 2, "url": "https://www.wegworks.com/blog/segment-cdp/what-is-a-cdp/", "name": "What is a Customer Data Platform? A Complete Guide"},
     {"@type": "ListItem", "position": 3, "url": "https://www.wegworks.com/blog/salesforce/sales-cloud-vs-marketing-cloud/", "name": "Sales Cloud vs Marketing Cloud: Understanding the Difference"},
     {"@type": "ListItem", "position": 4, "url": "https://www.wegworks.com/blog/adobe-analytics/analysis-workspace-tips/", "name": "10 Analysis Workspace Tips Every Analyst Should Know"},
@@ -580,7 +583,7 @@ h1, h2, h3, h4, h5, h6 {
     <p class="section-subtitle">Fresh insights from our MarTech experts.</p>
     
     <div class="filter-bar">
-      <span class="article-count">20 articles</span>
+      <span class="article-count">23 articles</span>
       <div class="sort-controls">
         <label for="sort-select">Sort by:</label>
         <select id="sort-select" class="sort-select" onchange="sortArticles(this.value)">
@@ -592,6 +595,51 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
     <div class="articles-grid" id="articles-grid">
+      <a class="article-card" href="/blog/adobe-experience-platform/identity-graph-collapse-fix/" data-date="2025-12-20" data-title="Identity Graph Collapse Fix" title="Read: Solving Identity Graph Collapse in AEP">
+        <div class="article-image has-image">
+          <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/indentity-graph.png" alt="AEP Identity Graph Collapse Fix" loading="lazy"/>
+        </div>
+        <div class="article-content">
+          <div class="article-meta">
+            <span>Adobe Experience Platform</span>
+            <span>Dec 20, 2025</span>
+          </div>
+          <h3>Solving Identity Graph Collapse in AEP: A Healthcare Case Study</h3>
+          <p>How we diagnosed and fixed a critical identity graph collapse where 2.3M patient profiles incorrectly merged into 47K super-profiles.</p>
+          <span class="read-more">Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+      
+      <a class="article-card" href="/blog/aem/dispatcher-cache-invalidation-debugging/" data-date="2025-12-18" data-title="Dispatcher Cache Debugging" title="Read: Debugging AEM Dispatcher Cache Invalidation">
+        <div class="article-image has-image">
+          <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/Dispatcher-cache.jpg" alt="AEM Dispatcher Cache Debugging" loading="lazy"/>
+        </div>
+        <div class="article-content">
+          <div class="article-meta">
+            <span>AEM</span>
+            <span>Dec 18, 2025</span>
+          </div>
+          <h3>Debugging AEM Dispatcher Cache Invalidation: A Retail Black Friday Post-Mortem</h3>
+          <p>Deep technical analysis of how we fixed a cache invalidation bug that served stale prices during Black Friday.</p>
+          <span class="read-more">Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+      
+      <a class="article-card" href="/blog/adobe-analytics/cross-domain-tracking-ios-fix/" data-date="2025-12-15" data-title="Cross-Domain Tracking ITP Fix" title="Read: Fixing Cross-Domain Tracking After ITP 2.3">
+        <div class="article-image has-image">
+          <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/cross-domain.png" alt="Cross-Domain Tracking ITP Fix" loading="lazy"/>
+        </div>
+        <div class="article-content">
+          <div class="article-meta">
+            <span>Adobe Analytics</span>
+            <span>Dec 15, 2025</span>
+          </div>
+          <h3>Fixing Cross-Domain Tracking After ITP 2.3: A Fintech Case Study</h3>
+          <p>How we solved a 67% visitor stitching failure in Adobe Analytics after Safari's ITP update broke cross-domain tracking.</p>
+          <span class="read-more">Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+      
       <a class="article-card" href="/blog/adobe-analytics/data-layer-best-practices/" data-date="2025-03-12" data-title="Data Layer Best Practices" title="Read: Data Layer Best Practices for Adobe Analytics Implementation">
         <div class="article-image has-image">
           <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/datalayer.png" alt="Data Layer Best Practices for Adobe Analytics" loading="lazy"/>
