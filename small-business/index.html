@@ -1105,6 +1105,13 @@
       .btn-submit { width: 100%; justify-content: center; }
     }
 
+    /* Mobile Menu */
+    .mobile-toggle { display: none; background: none; border: none; color: var(--text-white); font-size: 28px; cursor: pointer; padding: 8px; }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-dark); z-index: 999; padding: 100px 24px 24px; overflow-y: auto; }
+    .mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .mobile-menu a { font-size: 1.2rem; color: var(--text-white); text-decoration: none; font-weight: 500; }
+    .mobile-menu a:hover { color: var(--accent-lime); }
+
     /* Footer */
     footer {
       padding: 48px 0;
@@ -1141,7 +1148,8 @@
       .business-grid { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: 1fr; }
       .step-card { flex: 1 1 100%; }
-      .nav-cta { display: none; }
+      .nav-links, .nav-cta { display: none; }
+      .mobile-toggle { display: block; }
     }
 
     /* Scroll Animations */
@@ -1321,9 +1329,25 @@
           <li><a href="/#about">About</a></li>
         </ul>
         <a class="nav-cta" href="/contact/">Get Started Free →</a>
+        <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
       </nav>
     </div>
   </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">Home</a>
+    <a href="/services/">All Services</a>
+    <a href="/services/adobe-analytics/">→ Adobe Analytics</a>
+    <a href="/services/adobe-experience-cloud/">→ Adobe Experience Cloud</a>
+    <a href="/services/segment-cdp/">→ Segment CDP</a>
+    <a href="/services/salesforce/">→ Salesforce</a>
+    <a href="/services/marketing-automation/">→ Marketing Automation</a>
+    <a href="/small-business/">→ Small Business Solutions</a>
+    <a href="/blog/">Blog</a>
+    <a href="/#about">About</a>
+    <a href="/contact/">Contact</a>
+  </div>
 
   <main>
     <!-- Visible Breadcrumbs -->
@@ -1830,6 +1854,24 @@
       submitBtn.disabled = false;
       submitBtn.textContent = 'Send Message →';
       generateCaptcha();
+    }
+    
+    // Mobile nav toggle
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        mobileToggle.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('active');
+          mobileToggle.textContent = '☰';
+        });
+      });
     }
   </script>
 </body>
