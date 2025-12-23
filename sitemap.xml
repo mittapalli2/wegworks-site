@@ -122,6 +122,12 @@
   
   <!-- Blog Articles -->
   <url>
+    <loc>https://www.wegworks.com/blog/adobe-analytics/cross-domain-tracking-ios-fix/</loc>
+    <lastmod>2025-12-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.wegworks.com/blog/adobe-analytics/data-layer-best-practices/</loc>
     <lastmod>2025-12-22</lastmod>
     <changefreq>monthly</changefreq>
@@ -159,6 +165,12 @@
   </url>
   
   <!-- AEM Articles -->
+  <url>
+    <loc>https://www.wegworks.com/blog/aem/dispatcher-cache-invalidation-debugging/</loc>
+    <lastmod>2025-12-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <url>
     <loc>https://www.wegworks.com/blog/aem/aem-replication-cloud-vs-ams/</loc>
     <lastmod>2025-12-22</lastmod>
@@ -217,6 +229,12 @@
   </url>
   
   <!-- Adobe Experience Platform Articles -->
+  <url>
+    <loc>https://www.wegworks.com/blog/adobe-experience-platform/identity-graph-collapse-fix/</loc>
+    <lastmod>2025-12-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <url>
     <loc>https://www.wegworks.com/blog/adobe-experience-platform/what-is-aep/</loc>
     <lastmod>2025-12-22</lastmod>
