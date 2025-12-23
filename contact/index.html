@@ -143,9 +143,31 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 .breadcrumb .current { color: var(--text-secondary); }
 
 /* Hero */
-.hero { padding: 60px 0 80px; text-align: center; }
-.hero h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 20px; }
-.hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+.hero { padding: 80px 0 100px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: 50%; left: 50%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%); transform: translate(-50%, -50%); pointer-events: none; }
+.hero .container { position: relative; z-index: 1; }
+.contact-icons { display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 32px; }
+.contact-icon-item { width: 56px; height: 56px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; animation: iconBounceIn 0.6s ease-out backwards; }
+.contact-icon-item:nth-child(1) { animation-delay: 0.1s; }
+.contact-icon-item:nth-child(2) { animation-delay: 0.2s; }
+.contact-icon-item:nth-child(3) { animation-delay: 0.3s; }
+.contact-icon-item svg { width: 24px; height: 24px; stroke: var(--text-secondary); transition: all 0.3s; animation: iconSpin 0.8s ease-out backwards; }
+.contact-icon-item:nth-child(1) svg { animation-delay: 0.3s; }
+.contact-icon-item:nth-child(2) svg { animation-delay: 0.4s; }
+.contact-icon-item:nth-child(3) svg { animation-delay: 0.5s; }
+.contact-icon-item:hover { border-color: var(--accent-primary); transform: translateY(-4px); }
+.contact-icon-item:hover svg { stroke: var(--accent-primary); transform: rotate(360deg); }
+.contact-icon-item.main { width: 72px; height: 72px; background: var(--accent-gradient); border: none; box-shadow: 0 8px 32px rgba(16, 185, 129, 0.4); animation: mainIconPulse 2s ease-in-out infinite, iconBounceIn 0.6s ease-out backwards; animation-delay: 0.2s, 0.2s; }
+.contact-icon-item.main svg { width: 32px; height: 32px; stroke: var(--bg-primary); }
+@keyframes iconSpin { 0% { transform: rotate(-180deg) scale(0); opacity: 0; } 100% { transform: rotate(0deg) scale(1); opacity: 1; } }
+@keyframes iconBounceIn { 0% { transform: scale(0) translateY(20px); opacity: 0; } 60% { transform: scale(1.1) translateY(-5px); } 100% { transform: scale(1) translateY(0); opacity: 1; } }
+@keyframes mainIconPulse { 0%, 100% { box-shadow: 0 8px 32px rgba(16, 185, 129, 0.4); } 50% { box-shadow: 0 8px 48px rgba(16, 185, 129, 0.6), 0 0 0 8px rgba(16, 185, 129, 0.1); } }
+.hero h1 { font-size: clamp(3rem, 6vw, 4.5rem); margin-bottom: 24px; background: linear-gradient(135deg, #ffffff 0%, #10b981 50%, #34d399 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.02em; }
+.hero p { font-size: 1.35rem; color: var(--text-secondary); max-width: 620px; margin: 0 auto; line-height: 1.7; }
+.hero-decoration { display: flex; justify-content: center; gap: 12px; margin-top: 40px; }
+.hero-decoration span { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-primary); opacity: 0.6; }
+.hero-decoration span:nth-child(2) { width: 40px; border-radius: 100px; opacity: 1; }
+.hero-decoration span:nth-child(3) { opacity: 0.6; }
 
 /* Contact Section */
 .contact-section { padding: 40px 0 100px; }
@@ -153,14 +175,17 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 
 /* Locations */
 .locations { display: flex; flex-direction: column; gap: 24px; }
-.location-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 28px; transition: all 0.3s; }
-.location-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); }
-.location-card.headquarters { border-color: var(--accent-primary); background: rgba(16, 185, 129, 0.05); }
-.location-badge { display: inline-block; padding: 4px 12px; background: var(--accent-gradient); color: var(--bg-primary); font-size: 0.75rem; font-weight: 600; border-radius: 100px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
-.location-card h3 { font-size: 1.25rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.location-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 28px; transition: all 0.3s; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.location-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(16, 185, 129, 0.1); }
+.location-card.headquarters { border-color: var(--accent-primary); background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(52, 211, 153, 0.03) 100%); }
+.location-content { flex: 1; }
+.location-badge { display: inline-block; padding: 6px 14px; background: var(--accent-gradient); color: var(--bg-primary); font-size: 0.7rem; font-weight: 700; border-radius: 100px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.08em; }
+.location-card h3 { font-size: 1.5rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
 .location-card h3 svg { width: 20px; height: 20px; stroke: var(--accent-primary); }
 .location-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
-.location-card .address { margin-bottom: 16px; }
+.location-card .address { margin-bottom: 0; }
+.location-image { flex-shrink: 0; width: 120px; height: 120px; border-radius: 16px; overflow: hidden; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); }
+.location-image img { width: 100%; height: 100%; object-fit: cover; }
 
 /* Contact Info */
 .contact-info-section { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--glass-border); }
@@ -219,6 +244,8 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 @media (max-width: 900px) {
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .map-grid { grid-template-columns: 1fr; }
+  .location-card { flex-direction: column; text-align: center; }
+  .location-image { width: 100px; height: 100px; }
 }
 @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
@@ -278,8 +305,24 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 
   <section class="hero">
     <div class="container">
-      <h1>Get in Touch</h1>
+      <div class="contact-icons">
+        <div class="contact-icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="contact-icon-item main">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div class="contact-icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        </div>
+      </div>
+      <h1>Contact Us</h1>
       <p>Have a MarTech challenge? Let's talk about how we can help transform your marketing technology stack.</p>
+      <div class="hero-decoration">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   </section>
 
@@ -291,21 +334,25 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
         <div class="locations-wrapper">
           <div class="locations">
             <div class="location-card headquarters">
-              <span class="location-badge">Headquarters</span>
-              <h3>
-                <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/sfo.png" alt="San Francisco Golden Gate Bridge" style="width: 52px; height: 52px; object-fit: contain;"/>
-                SFO Bay Area
-              </h3>
-              <p class="address">Walnut Creek, CA<br/>United States</p>
+              <div class="location-content">
+                <span class="location-badge">Headquarters</span>
+                <h3>SFO Bay Area</h3>
+                <p class="address">Walnut Creek, CA<br/>United States</p>
+              </div>
+              <div class="location-image">
+                <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/sfo.png" alt="San Francisco Golden Gate Bridge"/>
+              </div>
             </div>
             
             <div class="location-card">
-              <span class="location-badge" style="background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);">Austin Office</span>
-              <h3>
-                <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/austin.png" alt="Austin Texas Skyline" style="width: 52px; height: 52px; object-fit: contain;"/>
-                Austin
-              </h3>
-              <p class="address">5900 Balcones Drive STE 100<br/>Austin, TX 78731<br/>United States</p>
+              <div class="location-content">
+                <span class="location-badge" style="background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);">Austin Office</span>
+                <h3>Austin</h3>
+                <p class="address">5900 Balcones Drive STE 100<br/>Austin, TX 78731<br/>United States</p>
+              </div>
+              <div class="location-image">
+                <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/austin.png" alt="Austin Texas Skyline"/>
+              </div>
             </div>
           </div>
           
