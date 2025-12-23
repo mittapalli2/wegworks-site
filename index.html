@@ -393,6 +393,15 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  background: url('https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/banner%20image.webp') 60% center/cover no-repeat;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.85) 45%, rgba(10, 10, 15, 0.4) 70%, rgba(10, 10, 15, 0.2) 100%);
+  z-index: 0;
 }
 
 /* Floating Orbs */
@@ -600,11 +609,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-graphic {
-  position: relative;
-  width: 100%;
-  max-width: 450px;
-  height: 450px;
-  margin: 0 auto;
+  display: none;
 }
 
 /* Nucleus (Center) - Vibrant */
