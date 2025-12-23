@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9VH11ZH9Y4');
+    </script>
+    <title>Solving Identity Graph Collapse in AEP: A Healthcare Case Study | WegWorks</title>
+    <meta name="description" content="How we diagnosed and fixed a critical identity graph collapse issue in Adobe Experience Platform for a healthcare client where 2.3M patient profiles incorrectly merged into 47K super-profiles.">
+    <meta name="keywords" content="AEP identity graph, identity collapse, profile merge, Real-Time CDP, healthcare HIPAA, Adobe Experience Platform, identity resolution, WegWorks">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.wegworks.com/blog/adobe-experience-platform/identity-graph-collapse-fix/">
+    <link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Solving Identity Graph Collapse in AEP | WegWorks">
+    <meta property="og:description" content="Deep technical dive into diagnosing and fixing identity graph collapse in Adobe Experience Platform for healthcare.">
+    <meta property="og:url" content="https://www.wegworks.com/blog/adobe-experience-platform/identity-graph-collapse-fix/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="WegWorks">
+    <meta property="article:published_time" content="2025-12-20">
+    <meta property="og:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/indentity-graph.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Solving Identity Graph Collapse in AEP">
+    <meta name="twitter:description" content="Deep technical dive into diagnosing and fixing identity graph collapse.">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Solving Identity Graph Collapse in AEP: A Healthcare Case Study",
+        "description": "How we diagnosed and fixed a critical identity graph collapse issue in Adobe Experience Platform for a healthcare client.",
+        "datePublished": "2025-12-20",
+        "dateModified": "2025-12-20",
+        "author": {"@type": "Organization", "name": "WegWorks"},
+        "publisher": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com/"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "Adobe Experience Platform", "item": "https://www.wegworks.com/blog/adobe-experience-platform/"},
+            {"@type": "ListItem", "position": 4, "name": "Identity Graph Collapse Fix", "item": "https://www.wegworks.com/blog/adobe-experience-platform/identity-graph-collapse-fix/"}
+        ]
+    }
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #10b981;
+            --accent-secondary: #34d399;
+            --accent-warning: #f59e0b;
+            --accent-error: #ef4444;
+            --border-color: #2a2a3a;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+        .brand img { height: 60px; width: auto; object-fit: contain; }
+        .brand-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #ffffff;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+        .brand-text span {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav > a, .nav-dropdown > a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover { color: var(--accent-primary); }
+        
+        .nav-dropdown { position: relative; }
+        .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+        .dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
+        .nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+        .dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+        .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu a { display: block; padding: 10px 20px; font-size: 0.9rem; }
+        .dropdown-menu a:hover { background: rgba(16, 185, 129, 0.1); }
+        
+        .breadcrumb {
+            padding: 1rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .breadcrumb a:hover { color: var(--accent-primary); }
+        .breadcrumb span { color: var(--text-muted); margin: 0 0.5rem; }
+        .breadcrumb .current { color: var(--text-secondary); }
+        
+        .article {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .article-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .article-header h1 {
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .article-meta { color: var(--text-muted); font-size: 0.95rem; }
+        
+        .severity-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-error);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 12px;
+        }
+        
+        .article-content h2 {
+            font-size: 1.75rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--text-primary);
+        }
+        
+        .article-content h3 {
+            font-size: 1.35rem;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+        
+        .article-content h4 {
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--accent-primary);
+        }
+        
+        .article-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-content ul, .article-content ol {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .article-content li { margin-bottom: 0.5rem; }
+        
+        .article-content code {
+            background: var(--bg-tertiary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Monaco', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-secondary);
+        }
+        
+        .article-content pre {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+        
+        .article-content pre::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .article-content pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .highlight-box h4 {
+            color: var(--accent-primary);
+            margin-bottom: 0.75rem;
+            margin-top: 0;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-box h4 {
+            color: var(--accent-warning);
+            margin-bottom: 0.75rem;
+            margin-top: 0;
+        }
+        
+        .error-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .error-box h4 {
+            color: var(--accent-error);
+            margin-bottom: 0.75rem;
+            margin-top: 0;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .metric-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .metric-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .metric-card .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .metric-card.error .value { color: var(--accent-error); }
+        .metric-card.warning .value { color: var(--accent-warning); }
+        
+        .diagram {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .diagram pre {
+            background: transparent;
+            border: none;
+            margin: 0;
+            text-align: left;
+            display: inline-block;
+        }
+        
+        .timeline {
+            border-left: 2px solid var(--border-color);
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+        }
+        
+        .timeline-item h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-item p {
+            margin-bottom: 0;
+        }
+        
+        .related-topics {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .related-topics h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .topic-tag {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        
+        .topic-tag:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+        
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer p { color: var(--text-muted); }
+        .footer a { color: var(--accent-primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .article-header h1 { font-size: 1.75rem; }
+            .metrics-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a class="brand" href="/">
+                <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/>
+                <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
+            </a>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <span class="nav-dropdown">
+                    <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
+                    <div class="dropdown-menu">
+                        <a href="/services/adobe-analytics/">Adobe Analytics</a>
+                        <a href="/services/segment-cdp/">Segment CDP</a>
+                        <a href="/services/salesforce/">Salesforce</a>
+                        <a href="/services/marketing-automation/">Marketing Automation</a>
+                        <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+                    </div>
+                </span>
+                <span class="nav-dropdown">
+                    <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+                    <div class="dropdown-menu">
+                        <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+                        <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+                        <a href="/blog/adobe-target/">Adobe Target</a>
+                        <a href="/blog/aem/">AEM</a>
+                        <a href="/blog/google-analytics-4/">Google Analytics 4</a>
+                    </div>
+                </span>
+                <a href="/#about">About</a>
+                <a href="/contact/">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <nav class="breadcrumb">
+        <a href="/">Home</a>
+        <span>›</span>
+        <a href="/blog/">Blog</a>
+        <span>›</span>
+        <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+        <span>›</span>
+        <span class="current">Identity Graph Collapse Fix</span>
+    </nav>
+    
+    <article class="article">
+        <header class="article-header">
+            <h1>Solving Identity Graph Collapse in AEP <span class="severity-badge">P0 Incident</span></h1>
+            <p class="article-meta">Published December 20, 2025 · 22 min read · Healthcare Case Study</p>
+        </header>
+        
+        <div class="article-content">
+            <p>When our healthcare client's Real-Time CDP instance suddenly showed 2.3 million patient profiles collapsing into just 47,000 "super-profiles," we had 72 hours to diagnose the root cause, implement a fix, and restore profile integrity—all while maintaining HIPAA compliance. This is the technical deep-dive of how we did it.</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card error">
+                    <div class="value">2.3M → 47K</div>
+                    <div class="label">Profile Collapse</div>
+                </div>
+                <div class="metric-card warning">
+                    <div class="value">72 hrs</div>
+                    <div class="label">Resolution Window</div>
+                </div>
+                <div class="metric-card">
+                    <div class="value">100%</div>
+                    <div class="label">Profiles Restored</div>
+                </div>
+            </div>
+            
+            <h2>The Problem: Identity Graph Collapse</h2>
+            
+            <p>Identity graph collapse occurs when AEP's identity service incorrectly links profiles that should remain separate. In healthcare, this is catastrophic—imagine Patient A receiving Patient B's medication reminders or test results being associated with the wrong individual.</p>
+            
+            <h3>Initial Symptoms</h3>
+            
+            <p>The client's data engineering team noticed the anomaly during routine monitoring:</p>
+            
+            <ul>
+                <li>Profile count dropped 98% overnight (2.3M → 47K)</li>
+                <li>Individual profiles showed 50+ linked identities (normal: 2-4)</li>
+                <li>Segment populations spiked then crashed</li>
+                <li>Audience activation to their CRM failed validation</li>
+            </ul>
+            
+            <div class="error-box">
+                <h4>⚠️ Critical Finding</h4>
+                <p>One "super-profile" contained 12,847 distinct CRM IDs, 8,234 email addresses, and 15,000+ phone numbers. These were clearly thousands of unrelated patients incorrectly merged.</p>
+            </div>
+            
+            <h2>Root Cause Analysis</h2>
+            
+            <h3>Step 1: Audit the Identity Graph</h3>
+            
+            <p>We started by examining the identity graph structure using AEP's Identity Service API:</p>
+            
+<pre data-lang="javascript"><code>// Query to examine identity graph for a collapsed profile
+const response = await fetch(
+  'https://platform.adobe.io/data/core/identity/cluster/members',
+  {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'x-api-key': apiKey,
+      'x-gw-ims-org-id': orgId,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "xid": "collapsed-profile-xid",
+      "graph-type": "private"
+    })
+  }
+);
+
+// Response showed 12,847 linked identities - RED FLAG
+const graph = await response.json();
+console.log(`Linked identities: ${graph.members.length}`);</code></pre>
+            
+            <h3>Step 2: Trace the Linking Chain</h3>
+            
+            <p>Identity collapse typically happens through "bridge identities"—shared values that incorrectly link unrelated profiles. We traced the linking chain:</p>
+            
+            <div class="diagram">
+<pre><code>Patient A ──[email]──► shared@hospital.com ◄──[email]── Patient B
+                              │
+                              ▼
+                    [Incorrect Merge]
+                              │
+        ┌─────────────────────┼─────────────────────┐
+        ▼                     ▼                     ▼
+   Patient A              Patient B            Patient C
+   (merged)               (merged)             (merged)
+        │                     │                     │
+        └─────────────────────┴─────────────────────┘
+                              │
+                              ▼
+                    SUPER-PROFILE (47K)</code></pre>
+            </div>
+            
+            <h3>Step 3: Identify the Poison Data</h3>
+            
+            <p>We discovered the root cause: a batch ingestion job had loaded appointment scheduling data with a critical flaw. The scheduling system used a default placeholder email when patients didn't provide one:</p>
+            
+<pre data-lang="json"><code>// Problematic ingestion payload
+{
+  "identityMap": {
+    "Email": [{
+      "id": "noreply@healthsystem.com",  // ← SHARED ACROSS 47K PATIENTS
+      "authenticatedState": "authenticated",
+      "primary": false
+    }],
+    "CRM_ID": [{
+      "id": "PAT-2847291",
+      "authenticatedState": "authenticated", 
+      "primary": true
+    }]
+  },
+  "person": {
+    "name": { "firstName": "John", "lastName": "Doe" }
+  },
+  "appointmentDetails": { ... }
+}</code></pre>
+            
+            <div class="warning-box">
+                <h4>The Culprit</h4>
+                <p><code>noreply@healthsystem.com</code> was ingested as an "authenticated" identity for 47,000 different patient records. AEP's identity stitching correctly (from its perspective) merged all profiles sharing this email.</p>
+            </div>
+            
+            <h2>The Fix: Multi-Phase Recovery</h2>
+            
+            <h3>Phase 1: Stop the Bleeding (Hour 0-4)</h3>
+            
+            <p>First priority: prevent additional collapse while we investigated.</p>
+            
+<pre data-lang="bash"><code># Disable the problematic dataflow immediately
+curl -X PATCH \
+  'https://platform.adobe.io/data/foundation/flowservice/flows/{flowId}' \
+  -H 'Authorization: Bearer {accessToken}' \
+  -H 'x-api-key: {apiKey}' \
+  -H 'Content-Type: application/json' \
+  -d '{"state": "disabled"}'</code></pre>
+            
+            <h3>Phase 2: Implement Identity Filter (Hour 4-12)</h3>
+            
+            <p>We created a pre-ingestion filter using AEP Data Prep to block poison identities:</p>
+            
+<pre data-lang="json"><code>// Data Prep mapping with identity validation
+{
+  "mappings": [
+    {
+      "sourceType": "EXPRESSION",
+      "source": "iif(
+        Email != 'noreply@healthsystem.com' 
+        && Email != 'unknown@healthsystem.com'
+        && !contains(Email, 'placeholder'),
+        Email,
+        null
+      )",
+      "destination": "identityMap.Email[0].id"
+    },
+    {
+      "sourceType": "ATTRIBUTE",
+      "source": "CRM_ID",
+      "destination": "identityMap.CRM_ID[0].id"
+    }
+  ]
+}</code></pre>
+            
+            <h3>Phase 3: Delete Collapsed Profile Data (Hour 12-36)</h3>
+            
+            <p>This was the most delicate operation. We needed to surgically remove the corrupted profiles without affecting legitimate data. AEP doesn't support direct identity unlinking, so we used the Profile Delete API:</p>
+            
+<pre data-lang="javascript"><code>// Identify all profiles linked to the poison email
+async function getCollapsedProfiles(poisonEmail) {
+  const profiles = [];
+  
+  // Get all XIDs linked to the poison identity
+  const clusterResponse = await fetch(
+    'https://platform.adobe.io/data/core/identity/cluster/members',
+    {
+      method: 'POST',
+      headers: authHeaders,
+      body: JSON.stringify({
+        "nsid": 6,  // Email namespace
+        "id": poisonEmail,
+        "graph-type": "private"
+      })
+    }
+  );
+  
+  const cluster = await clusterResponse.json();
+  return cluster.members.map(m => m.xid);
+}
+
+// Delete the corrupted super-profile
+async function deleteCorruptedProfile(xid) {
+  const response = await fetch(
+    `https://platform.adobe.io/data/core/ups/delete`,
+    {
+      method: 'POST',
+      headers: authHeaders,
+      body: JSON.stringify({
+        "profileId": xid,
+        "targetDatasets": [
+          "appointment_scheduling_dataset",
+          // Only delete from affected datasets
+        ]
+      })
+    }
+  );
+  
+  return response.json();
+}</code></pre>
+            
+            <div class="highlight-box">
+                <h4>💡 Critical Insight</h4>
+                <p>We specifically targeted only the poisoned dataset for deletion. Patient profiles ingested from other sources (EHR, patient portal, etc.) remained intact. This surgical approach preserved 94% of patient data while removing the collapse trigger.</p>
+            </div>
+            
+            <h3>Phase 4: Re-ingest Clean Data (Hour 36-60)</h3>
+            
+            <p>After profile deletion propagated (24-48 hours in AEP), we re-ingested the appointment data with proper identity handling:</p>
+            
+<pre data-lang="javascript"><code>// Transform function to handle missing emails properly
+function transformAppointmentRecord(record) {
+  const identityMap = {
+    "CRM_ID": [{
+      "id": record.patientId,
+      "authenticatedState": "authenticated",
+      "primary": true
+    }]
+  };
+  
+  // ONLY include email if it's a real patient email
+  if (record.email && 
+      !isPlaceholderEmail(record.email) &&
+      isValidEmailFormat(record.email)) {
+    identityMap["Email"] = [{
+      "id": record.email.toLowerCase().trim(),
+      "authenticatedState": "authenticated",
+      "primary": false
+    }];
+  }
+  
+  return {
+    ...record,
+    identityMap
+  };
+}
+
+function isPlaceholderEmail(email) {
+  const blocklist = [
+    'noreply@',
+    'unknown@',
+    'placeholder@',
+    'donotreply@',
+    'no-reply@',
+    'test@'
+  ];
+  return blocklist.some(p => email.toLowerCase().includes(p));
+}</code></pre>
+            
+            <h3>Phase 5: Implement Identity Guardrails (Hour 60-72)</h3>
+            
+            <p>To prevent future incidents, we implemented multiple layers of protection:</p>
+            
+            <h4>1. Identity Namespace Limits</h4>
+            
+<pre data-lang="json"><code>// Custom merge policy with identity limits
+{
+  "name": "Healthcare_Strict_Merge",
+  "identityGraph": {
+    "type": "pdg",
+    "options": {
+      "maxClusterSize": 100,  // Alert if exceeded
+      "strictValidation": true
+    }
+  },
+  "attributeMerge": {
+    "type": "dataSetPrecedence",
+    "order": ["EHR_Dataset", "PatientPortal_Dataset", "Scheduling_Dataset"]
+  }
+}</code></pre>
+            
+            <h4>2. Automated Anomaly Detection</h4>
+            
+<pre data-lang="python"><code># Daily identity health check script
+import requests
+from datetime import datetime
+
+def check_identity_health():
+    # Query for profiles with abnormal identity counts
+    query = """
+    SELECT 
+        COUNT(DISTINCT _id) as profile_count,
+        AVG(cardinality(identityMap.Email)) as avg_emails,
+        MAX(cardinality(identityMap.Email)) as max_emails
+    FROM profile_snapshot
+    WHERE _acp_ingestionTimestamp > CURRENT_DATE - INTERVAL '1' DAY
+    """
+    
+    result = execute_query(query)
+    
+    # Alert thresholds
+    if result['max_emails'] > 10:
+        send_alert(
+            severity='HIGH',
+            message=f"Profile with {result['max_emails']} emails detected",
+            timestamp=datetime.now()
+        )
+    
+    if result['avg_emails'] > 2:
+        send_alert(
+            severity='MEDIUM', 
+            message=f"Average emails per profile: {result['avg_emails']:.2f}",
+            timestamp=datetime.now()
+        )</code></pre>
+            
+            <h4>3. Pre-Ingestion Validation</h4>
+            
+<pre data-lang="yaml"><code># Dataflow validation rules (pseudocode)
+validation_rules:
+  - name: block_shared_emails
+    type: identity_blocklist
+    namespace: Email
+    blocklist:
+      - "noreply@healthsystem.com"
+      - "unknown@healthsystem.com"
+      - "*@noreply.*"
+    action: drop_identity
+    
+  - name: identity_count_limit
+    type: max_identities_per_namespace
+    namespace: Email
+    max_count: 5
+    action: reject_record
+    
+  - name: email_format_validation
+    type: regex
+    namespace: Email
+    pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    action: drop_identity</code></pre>
+            
+            <h2>Timeline Summary</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Hour 0: Detection</h4>
+                    <p>Data engineering noticed 98% profile count drop during morning monitoring.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Hour 2: Triage</h4>
+                    <p>WegWorks engaged. Initial assessment confirmed identity graph collapse.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Hour 4: Root Cause</h4>
+                    <p>Traced collapse to poison email in appointment scheduling ingestion.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Hour 8: Fix Deployed</h4>
+                    <p>Data Prep filters implemented, problematic dataflow disabled.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Hour 36: Deletion Complete</h4>
+                    <p>Corrupted profile data removed from all affected datasets.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Hour 60: Re-ingestion Complete</h4>
+                    <p>Clean appointment data successfully ingested with proper identity handling.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Hour 72: Validation</h4>
+                    <p>Profile counts restored to 2.28M (99% recovery). Guardrails in place.</p>
+                </div>
+            </div>
+            
+            <h2>Lessons Learned</h2>
+            
+            <h3>1. Identity is Everything in CDP</h3>
+            <p>Your identity strategy is the foundation of your CDP. A single misconfigured identity can collapse millions of profiles. Treat identity configuration as a P0 architectural decision.</p>
+            
+            <h3>2. Placeholder Values Are Poison</h3>
+            <p>Any shared value—placeholder emails, test phone numbers, default IDs—can become a "bridge" that incorrectly links profiles. Always filter these at ingestion.</p>
+            
+            <h3>3. Monitor Identity Health Continuously</h3>
+            <p>Don't wait for downstream failures. Monitor identity graph metrics daily:</p>
+            <ul>
+                <li>Average identities per profile by namespace</li>
+                <li>Maximum identities per profile</li>
+                <li>Profile count trends</li>
+                <li>Identity linking velocity</li>
+            </ul>
+            
+            <h3>4. Have a Recovery Playbook</h3>
+            <p>We resolved this in 72 hours because we had a documented playbook for identity incidents. Without it, this could have been a multi-week recovery.</p>
+            
+            <div class="highlight-box">
+                <h4>Need Help with AEP Identity Issues?</h4>
+                <p>Identity resolution problems in Adobe Experience Platform can be complex. <a href="/contact/" style="color: var(--accent-primary);">Contact WegWorks</a> for expert assistance with identity strategy, incident response, and preventive architecture.</p>
+            </div>
+        </div>
+        
+        <section class="related-topics">
+            <h3>Related Topics</h3>
+            <div class="topic-tags">
+                <span class="topic-tag">Adobe Experience Platform</span>
+                <span class="topic-tag">Identity Graph</span>
+                <span class="topic-tag">Real-Time CDP</span>
+                <span class="topic-tag">Profile Merge</span>
+                <span class="topic-tag">Healthcare</span>
+                <span class="topic-tag">HIPAA</span>
+                <span class="topic-tag">Data Recovery</span>
+                <span class="topic-tag">Identity Resolution</span>
+                <span class="topic-tag">WegWorks</span>
+            </div>
+        </section>
+    </article>
+    
+    <footer class="footer">
+        <p>&copy; 2025 WegWorks. Expert MarTech consulting services.</p>
+        <p><a href="/">Home</a> · <a href="/services/">Services</a> · <a href="/blog/">Blog</a> · <a href="/contact/">Contact</a></p>
+    </footer>
+</body>
+</html>
+

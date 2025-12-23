@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9VH11ZH9Y4');
+    </script>
+    <title>Fixing Cross-Domain Tracking After ITP 2.3: A Fintech Case Study | WegWorks</title>
+    <meta name="description" content="How we solved a 67% visitor stitching failure in Adobe Analytics after Safari's ITP 2.3 update broke cross-domain tracking for a fintech client's loan application funnel spanning 3 domains.">
+    <meta name="keywords" content="Adobe Analytics, cross-domain tracking, ITP, Safari, WebKit, ECID, visitor stitching, fintech, first-party cookies, WegWorks">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.wegworks.com/blog/adobe-analytics/cross-domain-tracking-ios-fix/">
+    <link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Fixing Cross-Domain Tracking After ITP 2.3 | WegWorks">
+    <meta property="og:description" content="How we solved visitor stitching failures in Adobe Analytics after Safari's ITP update.">
+    <meta property="og:url" content="https://www.wegworks.com/blog/adobe-analytics/cross-domain-tracking-ios-fix/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="WegWorks">
+    <meta property="article:published_time" content="2025-12-15">
+    <meta property="og:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/cross-domain.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fixing Cross-Domain Tracking After ITP 2.3">
+    <meta name="twitter:description" content="How we solved visitor stitching failures in Adobe Analytics after Safari's ITP update.">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/cross-domain.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Fixing Cross-Domain Tracking After ITP 2.3: A Fintech Case Study",
+        "description": "How we solved visitor stitching failures in Adobe Analytics after Safari ITP updates for a fintech loan application funnel.",
+        "datePublished": "2025-12-15",
+        "dateModified": "2025-12-15",
+        "author": {"@type": "Organization", "name": "WegWorks"},
+        "publisher": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com/"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "Adobe Analytics", "item": "https://www.wegworks.com/blog/adobe-analytics/"},
+            {"@type": "ListItem", "position": 4, "name": "Cross-Domain Tracking ITP Fix", "item": "https://www.wegworks.com/blog/adobe-analytics/cross-domain-tracking-ios-fix/"}
+        ]
+    }
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #10b981;
+            --accent-secondary: #34d399;
+            --accent-warning: #f59e0b;
+            --accent-error: #ef4444;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --border-color: #2a2a3a;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+        .brand img { height: 60px; width: auto; object-fit: contain; }
+        .brand-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #ffffff;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+        .brand-text span {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+        
+        .nav { display: flex; gap: 2rem; align-items: center; }
+        .nav > a, .nav-dropdown > a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav a:hover { color: var(--accent-primary); }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+        .dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
+        .nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+        .dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+        .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu a { display: block; padding: 10px 20px; font-size: 0.9rem; }
+        .dropdown-menu a:hover { background: rgba(16, 185, 129, 0.1); }
+        
+        .breadcrumb { padding: 1rem 2rem; max-width: 900px; margin: 0 auto; }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a:hover { color: var(--accent-primary); }
+        .breadcrumb span { color: var(--text-muted); margin: 0 0.5rem; }
+        .breadcrumb .current { color: var(--text-secondary); }
+        
+        .article { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        
+        .article-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-color); }
+        
+        .article-header h1 {
+            font-size: 2.1rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .article-meta { color: var(--text-muted); font-size: 0.95rem; }
+        
+        .industry-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-purple);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 12px;
+        }
+        
+        .article-content h2 { font-size: 1.75rem; margin: 2.5rem 0 1rem; color: var(--text-primary); }
+        .article-content h3 { font-size: 1.35rem; margin: 2rem 0 1rem; color: var(--text-primary); }
+        .article-content h4 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: var(--accent-primary); }
+        .article-content p { color: var(--text-secondary); margin-bottom: 1.5rem; }
+        .article-content ul, .article-content ol { color: var(--text-secondary); margin-bottom: 1.5rem; padding-left: 2rem; }
+        .article-content li { margin-bottom: 0.5rem; }
+        
+        .article-content code {
+            background: var(--bg-tertiary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Monaco', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-secondary);
+        }
+        
+        .article-content pre {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+        
+        .article-content pre::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        
+        .article-content pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .highlight-box h4 { color: var(--accent-primary); margin-bottom: 0.75rem; margin-top: 0; }
+        
+        .warning-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-box h4 { color: var(--accent-warning); margin-bottom: 0.75rem; margin-top: 0; }
+        
+        .error-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .error-box h4 { color: var(--accent-error); margin-bottom: 0.75rem; margin-top: 0; }
+        
+        .info-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .info-box h4 { color: var(--accent-blue); margin-bottom: 0.75rem; margin-top: 0; }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .metric-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .metric-card .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .metric-card .label { font-size: 0.85rem; color: var(--text-muted); }
+        .metric-card.error .value { color: var(--accent-error); }
+        .metric-card.warning .value { color: var(--accent-warning); }
+        .metric-card.success .value { color: var(--accent-primary); }
+        
+        .diagram {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        
+        .diagram pre { background: transparent; border: none; margin: 0; }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .comparison-table th {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .comparison-table td { color: var(--text-secondary); }
+        .comparison-table tr:hover td { background: var(--bg-secondary); }
+        
+        .browser-support {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .browser-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .browser-item .name { font-weight: 600; margin-bottom: 4px; }
+        .browser-item .status { font-size: 0.85rem; }
+        .browser-item.affected .status { color: var(--accent-error); }
+        .browser-item.safe .status { color: var(--accent-primary); }
+        
+        .related-topics { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-color); }
+        .related-topics h3 { color: var(--text-primary); margin-bottom: 1rem; }
+        .topic-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .topic-tag {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        .topic-tag:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+        
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        .footer p { color: var(--text-muted); }
+        .footer a { color: var(--accent-primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .article-header h1 { font-size: 1.6rem; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .browser-support { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a class="brand" href="/">
+                <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/>
+                <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
+            </a>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <span class="nav-dropdown">
+                    <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
+                    <div class="dropdown-menu">
+                        <a href="/services/adobe-analytics/">Adobe Analytics</a>
+                        <a href="/services/segment-cdp/">Segment CDP</a>
+                        <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+                    </div>
+                </span>
+                <span class="nav-dropdown">
+                    <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+                    <div class="dropdown-menu">
+                        <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+                        <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+                        <a href="/blog/aem/">AEM</a>
+                        <a href="/blog/google-analytics-4/">Google Analytics 4</a>
+                    </div>
+                </span>
+                <a href="/#about">About</a>
+                <a href="/contact/">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <nav class="breadcrumb">
+        <a href="/">Home</a>
+        <span>›</span>
+        <a href="/blog/">Blog</a>
+        <span>›</span>
+        <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+        <span>›</span>
+        <span class="current">Cross-Domain Tracking ITP Fix</span>
+    </nav>
+    
+    <article class="article">
+        <header class="article-header">
+            <h1>Fixing Cross-Domain Tracking After ITP 2.3 <span class="industry-badge">Fintech</span></h1>
+            <p class="article-meta">Published December 15, 2025 · 20 min read · Fintech Loan Application Case Study</p>
+        </header>
+        
+        <div class="article-content">
+            <p>When our fintech client's conversion attribution dropped 67% overnight—specifically for Safari users—we traced the problem to Apple's ITP (Intelligent Tracking Prevention) 2.3 update silently breaking their cross-domain loan application funnel. Here's the technical deep-dive on how we diagnosed the issue and implemented a compliant fix.</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card error">
+                    <div class="value">67%</div>
+                    <div class="label">Attribution Loss (Safari)</div>
+                </div>
+                <div class="metric-card warning">
+                    <div class="value">3 Domains</div>
+                    <div class="label">In Loan Funnel</div>
+                </div>
+                <div class="metric-card success">
+                    <div class="value">98.7%</div>
+                    <div class="label">Recovery Achieved</div>
+                </div>
+            </div>
+            
+            <h2>The Business Context</h2>
+            
+            <p>Our client, a consumer lending fintech, has a loan application process spanning three domains:</p>
+            
+            <ul>
+                <li><strong>quickloans.com</strong> — Marketing site with rate calculator</li>
+                <li><strong>apply.quickloans.com</strong> — Loan application (different subdomain, same root)</li>
+                <li><strong>secure.lendingpartner.com</strong> — Third-party KYC verification (completely different domain)</li>
+            </ul>
+            
+            <p>Marketing needed to attribute completed loans back to campaigns, but Safari users were showing as "Direct" traffic with no campaign attribution—destroying their ability to optimize ad spend.</p>
+            
+            <div class="diagram">
+<pre><code>LOAN APPLICATION FUNNEL
+═══════════════════════════════════════════════════════════════════════
+
+   quickloans.com          apply.quickloans.com      secure.lendingpartner.com
+   ┌──────────────┐        ┌──────────────────┐      ┌────────────────────────┐
+   │              │        │                  │      │                        │
+   │  Marketing   │ ────►  │  Application     │ ───► │  KYC Verification     │
+   │  Landing     │        │  Form            │      │  (3rd party)          │
+   │              │        │                  │      │                        │
+   └──────────────┘        └──────────────────┘      └────────────────────────┘
+         │                        │                           │
+         │                        │                           │
+         ▼                        ▼                           ▼
+   [ECID: ABC123]          [ECID: ???]                [ECID: ???]
+   [Campaign: FB_Q4]       [Campaign: ???]            [Campaign: ???]
+
+   BEFORE FIX: Safari users lose identity at each domain transition
+</code></pre>
+            </div>
+            
+            <h2>Understanding the Problem: ITP 2.3</h2>
+            
+            <h3>What ITP Does</h3>
+            
+            <p>Apple's Intelligent Tracking Prevention (ITP) is a privacy feature in Safari that restricts cross-site tracking. Key restrictions affecting analytics:</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>ITP Version</th>
+                        <th>Cookie Restriction</th>
+                        <th>Impact on Analytics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ITP 1.0</td>
+                        <td>3rd-party cookies blocked after 24h</td>
+                        <td>Mild - most tracking still worked</td>
+                    </tr>
+                    <tr>
+                        <td>ITP 2.0</td>
+                        <td>3rd-party cookies blocked immediately</td>
+                        <td>Moderate - cross-domain issues begin</td>
+                    </tr>
+                    <tr>
+                        <td>ITP 2.1</td>
+                        <td>Client-side cookies capped at 7 days</td>
+                        <td>Severe - returning visitor tracking broken</td>
+                    </tr>
+                    <tr>
+                        <td>ITP 2.3</td>
+                        <td>URL decoration (query params) stripped</td>
+                        <td>Critical - cross-domain stitching fails</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="error-box">
+                <h4>The ITP 2.3 Killer Feature</h4>
+                <p>ITP 2.3 identifies "link decoration" (query parameters used for tracking) and strips them when navigating between sites classified as cross-site trackers. Adobe's <code>adobe_mc</code> parameter was being stripped on domain transitions.</p>
+            </div>
+            
+            <h3>How Adobe Analytics Cross-Domain Works</h3>
+            
+            <p>Adobe Analytics uses the <code>adobe_mc</code> query parameter to pass visitor identity between domains:</p>
+            
+<pre data-lang="text"><code># Standard cross-domain URL structure
+https://apply.quickloans.com/start?adobe_mc=MCMID%3D12345678%7CMCORGID%3DORG%40AdobeOrg%7CTS%3D1699876543
+
+# Decoded components:
+# MCMID=12345678          ← Experience Cloud ID
+# MCORGID=ORG@AdobeOrg    ← Organization ID  
+# TS=1699876543           ← Timestamp</code></pre>
+            
+            <p>When ITP strips this parameter, the destination domain can't identify the visitor and generates a new ECID—breaking the session continuity.</p>
+            
+            <h3>Affected Browsers</h3>
+            
+            <div class="browser-support">
+                <div class="browser-item affected">
+                    <div class="name">Safari (macOS)</div>
+                    <div class="status">⚠️ Affected</div>
+                </div>
+                <div class="browser-item affected">
+                    <div class="name">Safari (iOS)</div>
+                    <div class="status">⚠️ Affected</div>
+                </div>
+                <div class="browser-item affected">
+                    <div class="name">All iOS Browsers*</div>
+                    <div class="status">⚠️ Affected</div>
+                </div>
+                <div class="browser-item safe">
+                    <div class="name">Chrome/Firefox</div>
+                    <div class="status">✓ Not Affected</div>
+                </div>
+            </div>
+            
+            <p><em>*All iOS browsers use WebKit engine, so Chrome/Firefox on iOS are also affected by ITP.</em></p>
+            
+            <h2>Diagnosing the Issue</h2>
+            
+            <h3>Step 1: Segment by Browser</h3>
+            
+            <p>First, we segmented conversion data by browser to isolate the problem:</p>
+            
+<pre data-lang="sql"><code>-- Adobe Analytics Data Warehouse query
+SELECT 
+    browser,
+    COUNT(DISTINCT visitor_id) as visitors,
+    SUM(CASE WHEN event = 'loan_complete' THEN 1 ELSE 0 END) as conversions,
+    SUM(CASE WHEN marketing_channel = 'Direct' AND event = 'loan_complete' 
+        THEN 1 ELSE 0 END) as direct_conversions
+FROM loan_funnel_data
+WHERE date_range = 'last_30_days'
+GROUP BY browser
+ORDER BY visitors DESC;</code></pre>
+            
+            <p>Results clearly showed the problem:</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Browser</th>
+                        <th>Conversions</th>
+                        <th>"Direct" Attribution</th>
+                        <th>Direct %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Chrome Desktop</td>
+                        <td>4,521</td>
+                        <td>892</td>
+                        <td>19.7%</td>
+                    </tr>
+                    <tr>
+                        <td>Safari Desktop</td>
+                        <td>2,103</td>
+                        <td>1,789</td>
+                        <td style="color: var(--accent-error);">85.1%</td>
+                    </tr>
+                    <tr>
+                        <td>Safari iOS</td>
+                        <td>3,847</td>
+                        <td>3,412</td>
+                        <td style="color: var(--accent-error);">88.7%</td>
+                    </tr>
+                    <tr>
+                        <td>Chrome iOS</td>
+                        <td>1,203</td>
+                        <td>1,067</td>
+                        <td style="color: var(--accent-error);">88.7%</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Step 2: Verify Parameter Stripping</h3>
+            
+            <p>We added diagnostic logging to catch the exact moment of failure:</p>
+            
+<pre data-lang="javascript"><code>// Diagnostic code added to apply.quickloans.com
+(function() {
+    // Log incoming URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const adobeMc = params.get('adobe_mc');
+    
+    // Check referrer domain
+    const referrer = document.referrer;
+    const referrerDomain = referrer ? new URL(referrer).hostname : 'none';
+    
+    // Log to custom dimension for analysis
+    s.eVar99 = JSON.stringify({
+        has_adobe_mc: !!adobeMc,
+        referrer_domain: referrerDomain,
+        user_agent: navigator.userAgent.substring(0, 100),
+        timestamp: Date.now()
+    });
+    
+    // Send diagnostic beacon
+    if (!adobeMc && referrerDomain.includes('quickloans.com')) {
+        // Parameter should exist but doesn't - ITP stripped it
+        s.events = 'event99'; // Custom "ITP Impact" event
+        s.tl(true, 'o', 'ITP Parameter Strip Detected');
+    }
+})();</code></pre>
+            
+            <h3>Step 3: Confirm ECID Fragmentation</h3>
+            
+            <p>We queried the identity graph to see the fragmentation:</p>
+            
+<pre data-lang="javascript"><code>// Check for multiple ECIDs per user session
+async function analyzeEcidFragmentation() {
+    const query = `
+        SELECT 
+            session_id,
+            COUNT(DISTINCT ecid) as ecid_count,
+            ARRAY_AGG(DISTINCT ecid) as ecids,
+            browser
+        FROM analytics_hits
+        WHERE date = CURRENT_DATE - 7
+          AND page_url LIKE '%quickloans%'
+        GROUP BY session_id, browser
+        HAVING COUNT(DISTINCT ecid) > 1
+    `;
+    
+    const results = await runQuery(query);
+    
+    // Found: Safari sessions averaging 2.3 ECIDs per session
+    // Chrome sessions: 1.02 ECIDs per session
+    console.log('Safari fragmentation:', 
+        results.filter(r => r.browser.includes('Safari'))
+               .reduce((sum, r) => sum + r.ecid_count, 0) / 
+        results.filter(r => r.browser.includes('Safari')).length
+    );
+}</code></pre>
+            
+            <h2>The Solution: Server-Side Identity Passing</h2>
+            
+            <p>ITP can't strip what it can't see. We moved identity passing from client-side URL parameters to server-side mechanisms.</p>
+            
+            <h3>Architecture Overview</h3>
+            
+            <div class="diagram">
+<pre><code>AFTER FIX: Server-side identity passing
+═══════════════════════════════════════════════════════════════════════
+
+   quickloans.com                    apply.quickloans.com
+   ┌──────────────────┐              ┌──────────────────────┐
+   │                  │              │                      │
+   │  1. User clicks  │              │  4. Server reads     │
+   │     "Apply Now"  │              │     session cookie   │
+   │                  │              │                      │
+   │  2. JS captures  │   HTTP 302   │  5. Injects ECID     │
+   │     ECID + data  │─────────────►│     into page        │
+   │                  │   + Cookie   │                      │
+   │  3. Sets 1st-    │              │  6. Analytics loads  │
+   │     party cookie │              │     with correct ID  │
+   │                  │              │                      │
+   └──────────────────┘              └──────────────────────┘
+                                              │
+                                              │ Same pattern
+                                              ▼
+                                     secure.lendingpartner.com
+</code></pre>
+            </div>
+            
+            <h3>Implementation: Step by Step</h3>
+            
+            <h4>Step 1: Capture Identity on Source Domain</h4>
+            
+<pre data-lang="javascript"><code>// quickloans.com - capture ECID before navigation
+document.querySelectorAll('a[href*="apply.quickloans.com"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetUrl = this.href;
+        const ecid = Visitor.getInstance('ORG@AdobeOrg').getMarketingCloudVisitorID();
+        const mcorgid = 'ORG@AdobeOrg';
+        const timestamp = Math.floor(Date.now() / 1000);
+        
+        // Capture additional context
+        const sessionData = {
+            ecid: ecid,
+            orgId: mcorgid,
+            ts: timestamp,
+            campaign: s.campaign || '',
+            referrer: document.referrer,
+            landingPage: s.eVar1 || window.location.href
+        };
+        
+        // Set first-party cookie (not affected by ITP)
+        setCookie('ql_identity', btoa(JSON.stringify(sessionData)), {
+            domain: '.quickloans.com',  // Shared across subdomains
+            path: '/',
+            secure: true,
+            sameSite: 'Lax',
+            maxAge: 1800  // 30 minutes
+        });
+        
+        // Also send to server for cross-domain handoff
+        fetch('/api/identity-handoff', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                ...sessionData,
+                targetDomain: 'apply.quickloans.com'
+            })
+        }).then(() => {
+            // Navigate after identity is stored server-side
+            window.location.href = targetUrl;
+        });
+    });
+});</code></pre>
+            
+            <h4>Step 2: Server-Side Identity Storage</h4>
+            
+<pre data-lang="javascript"><code>// Node.js API endpoint - /api/identity-handoff
+const express = require('express');
+const redis = require('redis');
+const crypto = require('crypto');
+
+const app = express();
+const redisClient = redis.createClient();
+
+app.post('/api/identity-handoff', async (req, res) => {
+    const { ecid, orgId, ts, campaign, referrer, landingPage, targetDomain } = req.body;
+    
+    // Generate secure handoff token
+    const handoffToken = crypto.randomBytes(32).toString('hex');
+    
+    // Store identity data in Redis (TTL: 5 minutes)
+    const identityData = {
+        ecid,
+        orgId, 
+        ts,
+        campaign,
+        referrer,
+        landingPage,
+        targetDomain,
+        createdAt: Date.now(),
+        userAgent: req.headers['user-agent'],
+        ip: req.ip  // For fraud detection
+    };
+    
+    await redisClient.setEx(
+        `identity:${handoffToken}`,
+        300,  // 5 minute TTL
+        JSON.stringify(identityData)
+    );
+    
+    // Set secure handoff cookie
+    res.cookie('ql_handoff', handoffToken, {
+        domain: '.quickloans.com',
+        httpOnly: true,
+        secure: true,
+        sameSite: 'Lax',
+        maxAge: 300000  // 5 minutes
+    });
+    
+    res.json({ success: true, token: handoffToken });
+});
+
+// Endpoint for apply.quickloans.com to retrieve identity
+app.get('/api/identity-retrieve', async (req, res) => {
+    const handoffToken = req.cookies.ql_handoff;
+    
+    if (!handoffToken) {
+        return res.status(404).json({ error: 'No handoff token' });
+    }
+    
+    const identityData = await redisClient.get(`identity:${handoffToken}`);
+    
+    if (!identityData) {
+        return res.status(404).json({ error: 'Token expired or invalid' });
+    }
+    
+    // Validate request origin
+    const data = JSON.parse(identityData);
+    if (data.userAgent !== req.headers['user-agent']) {
+        // Potential token theft - log and reject
+        console.warn('User agent mismatch on identity retrieve', {
+            expected: data.userAgent,
+            actual: req.headers['user-agent']
+        });
+        return res.status(403).json({ error: 'Validation failed' });
+    }
+    
+    // Delete token after use (one-time use)
+    await redisClient.del(`identity:${handoffToken}`);
+    
+    res.json(data);
+});</code></pre>
+            
+            <h4>Step 3: Inject Identity on Destination Domain</h4>
+            
+<pre data-lang="javascript"><code>// apply.quickloans.com - retrieve and inject identity
+(async function() {
+    // Check if we have a handoff token
+    const handoffCookie = getCookie('ql_handoff');
+    
+    if (handoffCookie) {
+        try {
+            const response = await fetch('/api/identity-retrieve', {
+                credentials: 'include'
+            });
+            
+            if (response.ok) {
+                const identityData = await response.json();
+                
+                // Configure Visitor API with retrieved ECID
+                Visitor.getInstance('ORG@AdobeOrg', {
+                    // Force the ECID to match the source domain
+                    marketingCloudServer: 'quickloans.d1.sc.omtrdc.net',
+                    marketingCloudServerSecure: 'quickloans.d1.sc.omtrdc.net'
+                });
+                
+                // Set the retrieved ECID
+                window.s_account = 'quickloansprod';
+                
+                // Inject ECID before Visitor API initializes
+                document.cookie = `AMCV_ORG@AdobeOrg=${encodeAMCVCookie(identityData.ecid)}; domain=.quickloans.com; path=/; secure`;
+                
+                // Restore campaign attribution
+                if (identityData.campaign) {
+                    s.campaign = identityData.campaign;
+                }
+                
+                // Restore referrer for accurate channel attribution  
+                if (identityData.referrer) {
+                    s.referrer = identityData.referrer;
+                }
+                
+                console.log('Identity restored from source domain', identityData.ecid);
+            }
+        } catch (error) {
+            console.error('Identity retrieval failed', error);
+            // Fall back to new ECID - better than blocking the page
+        }
+    }
+    
+    // Continue with normal Analytics initialization
+    initializeAnalytics();
+})();
+
+function encodeAMCVCookie(ecid) {
+    // AMCV cookie format
+    return `MCMID|${ecid}|vVersion|5.5.0`;
+}</code></pre>
+            
+            <h4>Step 4: Handle Third-Party Domain (lendingpartner.com)</h4>
+            
+            <p>For the completely separate third-party domain, we used a postMessage-based approach:</p>
+            
+<pre data-lang="javascript"><code>// apply.quickloans.com - Before redirect to lendingpartner.com
+function prepareThirdPartyHandoff() {
+    const ecid = Visitor.getInstance('ORG@AdobeOrg').getMarketingCloudVisitorID();
+    
+    // Store in our API for cross-domain retrieval
+    const handoffId = await createSecureHandoff({
+        ecid: ecid,
+        targetDomain: 'secure.lendingpartner.com',
+        returnUrl: window.location.href,
+        applicationId: getApplicationId()
+    });
+    
+    // Navigate with handoff ID (not the actual identity)
+    window.location.href = `https://secure.lendingpartner.com/verify?handoff=${handoffId}&return=${encodeURIComponent(window.location.href)}`;
+}
+
+// secure.lendingpartner.com - Partner implements this
+// They call our API with the handoff ID to get identity
+async function retrievePartnerIdentity(handoffId) {
+    const response = await fetch(
+        `https://api.quickloans.com/partner/identity/${handoffId}`,
+        {
+            headers: {
+                'X-Partner-Key': PARTNER_API_KEY
+            }
+        }
+    );
+    
+    if (response.ok) {
+        const data = await response.json();
+        // Partner can now fire Analytics with our ECID
+        // Using their own report suite but shared ECID
+        return data.ecid;
+    }
+}</code></pre>
+            
+            <h3>CNAME/First-Party Data Collection</h3>
+            
+            <p>We also implemented Adobe's first-party data collection to further mitigate ITP:</p>
+            
+<pre data-lang="apache"><code># DNS Configuration
+# CNAME: metrics.quickloans.com -> quickloans.d1.sc.omtrdc.net
+
+# Apache/Nginx proxy config for first-party collection
+location /b/ss/ {
+    proxy_pass https://quickloans.d1.sc.omtrdc.net/b/ss/;
+    proxy_set_header Host quickloans.d1.sc.omtrdc.net;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+}</code></pre>
+            
+<pre data-lang="javascript"><code>// Analytics configuration with first-party tracking
+s.trackingServer = 'metrics.quickloans.com';
+s.trackingServerSecure = 'metrics.quickloans.com';
+
+// Visitor API configuration
+Visitor.getInstance('ORG@AdobeOrg', {
+    trackingServer: 'metrics.quickloans.com',
+    trackingServerSecure: 'metrics.quickloans.com'
+});</code></pre>
+            
+            <h2>Results</h2>
+            
+            <div class="metrics-grid">
+                <div class="metric-card success">
+                    <div class="value">98.7%</div>
+                    <div class="label">Safari Attribution Recovered</div>
+                </div>
+                <div class="metric-card success">
+                    <div class="value">2.1 → 1.03</div>
+                    <div class="label">ECIDs per Safari Session</div>
+                </div>
+                <div class="metric-card success">
+                    <div class="value">$2.3M</div>
+                    <div class="label">Recovered Ad Attribution/Year</div>
+                </div>
+            </div>
+            
+            <p>After implementation, Safari "Direct" attribution dropped from 87% to 12% (in line with Chrome's baseline). The marketing team could finally see which campaigns drove loan completions across all browsers.</p>
+            
+            <h2>Privacy Considerations</h2>
+            
+            <div class="info-box">
+                <h4>⚖️ Compliance Notes</h4>
+                <p>This solution maintains user privacy while enabling legitimate first-party analytics:</p>
+                <ul style="margin-bottom: 0; margin-top: 1rem;">
+                    <li>Only first-party cookies used (no third-party tracking)</li>
+                    <li>Identity only shared between properties user explicitly navigates to</li>
+                    <li>Handoff tokens are one-time-use and expire quickly</li>
+                    <li>Solution respects user's browser privacy settings for third-party contexts</li>
+                    <li>All data collection disclosed in privacy policy</li>
+                </ul>
+            </div>
+            
+            <h2>Lessons Learned</h2>
+            
+            <h3>1. Browser Privacy Changes Are Ongoing</h3>
+            <p>ITP continues to evolve. Build your analytics architecture with adaptability in mind—server-side solutions are more resilient than client-side parameter passing.</p>
+            
+            <h3>2. Segment Everything by Browser</h3>
+            <p>Safari represents 25-35% of web traffic. If you're not segmenting analytics by browser, you're missing critical data quality issues.</p>
+            
+            <h3>3. First-Party Is the Future</h3>
+            <p>Third-party cookies are dying across all browsers. Invest in first-party data collection infrastructure now.</p>
+            
+            <h3>4. Test Cross-Domain Flows Regularly</h3>
+            <p>This issue existed for weeks before detection. Automated testing of cross-domain visitor stitching would have caught it immediately.</p>
+            
+            <div class="highlight-box">
+                <h4>Need Help with Analytics Privacy Compliance?</h4>
+                <p>Browser privacy changes are constantly evolving. <a href="/contact/" style="color: var(--accent-primary);">Contact WegWorks</a> for expert assistance with first-party data collection, cross-domain tracking, and ITP-resilient analytics implementations.</p>
+            </div>
+        </div>
+        
+        <section class="related-topics">
+            <h3>Related Topics</h3>
+            <div class="topic-tags">
+                <span class="topic-tag">Adobe Analytics</span>
+                <span class="topic-tag">Cross-Domain Tracking</span>
+                <span class="topic-tag">ITP</span>
+                <span class="topic-tag">Safari</span>
+                <span class="topic-tag">WebKit</span>
+                <span class="topic-tag">ECID</span>
+                <span class="topic-tag">Visitor Stitching</span>
+                <span class="topic-tag">Fintech</span>
+                <span class="topic-tag">First-Party Cookies</span>
+                <span class="topic-tag">Privacy</span>
+                <span class="topic-tag">WegWorks</span>
+            </div>
+        </section>
+    </article>
+    
+    <footer class="footer">
+        <p>&copy; 2025 WegWorks. Expert MarTech consulting services.</p>
+        <p><a href="/">Home</a> · <a href="/services/">Services</a> · <a href="/blog/">Blog</a> · <a href="/contact/">Contact</a></p>
+    </footer>
+</body>
+</html>
+
