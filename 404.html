@@ -15,7 +15,7 @@
   <meta name="robots" content="noindex, nofollow"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
   <link rel="icon" type="image/svg+xml" href="/images/ww.svg"/>
   <style>
     :root {
@@ -78,23 +78,33 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 6px;
       text-decoration: none;
     }
 
     .brand img {
-      height: 40px;
+      height: 60px;
       width: auto;
     }
 
     .brand-text {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.5rem;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: #ffffff;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    
+    .brand-text span {
+      font-size: 0.55rem;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+      font-weight: 500;
+      margin-top: 2px;
     }
 
     /* Main Content */
@@ -238,7 +248,7 @@
     <div class="container">
       <a class="brand" href="/">
         <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/>
-        <span class="brand-text">WegWorks</span>
+        <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
       </a>
     </div>
   </header>
