@@ -16,6 +16,10 @@
     <meta name="keywords" content="GA4 migration, Universal Analytics, Google Analytics 4, analytics migration, UA to GA4, WegWorks, Weg Works, GTM migration">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.wegworks.com/blog/google-analytics-4/ga4-migration-guide/">
+    <link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
     
     <!-- Open Graph -->
     <meta property="og:title" content="Complete GA4 Migration Guide | WegWorks">
@@ -112,15 +116,25 @@
             align-items: center;
         }
         
-        .logo {
-            font-size: 1.5rem;
+        .brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+        .brand img { height: 60px; width: auto; object-fit: contain; }
+        .brand-text {
+            font-family: 'Rajdhani', sans-serif;
             font-weight: 700;
-            color: var(--text-primary);
-            text-decoration: none;
+            font-size: 1.6rem;
+            color: #ffffff;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
         }
-        
-        .logo span {
-            color: var(--accent-primary);
+        .brand-text span {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+            font-weight: 500;
+            margin-top: 2px;
         }
         
         .nav {
@@ -338,7 +352,10 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="/" class="logo">Weg<span>Works</span></a>
+            <a class="brand" href="/">
+                <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/>
+                <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
+            </a>
             <nav class="nav">
                 <a href="/">Home</a>
                 <span class="nav-dropdown">
