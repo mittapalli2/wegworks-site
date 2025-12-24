@@ -226,7 +226,9 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 60px; }
 .service-card { padding: 40px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; transition: all 0.4s ease; }
 .service-card:hover { border-color: var(--accent-primary); transform: translateY(-8px); box-shadow: var(--glow-primary); }
-.service-icon { width: 64px; height: 64px; background: var(--accent-gradient); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 1.75rem; }
+.service-icon { width: 64px; height: 64px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 1.75rem; color: var(--accent-primary); transition: all 0.3s; }
+.service-icon svg { width: 28px; height: 28px; stroke: var(--accent-primary); }
+.service-card:hover .service-icon { background: rgba(255, 255, 255, 0.08); border-color: var(--accent-primary); transform: scale(1.05); }
 .service-card h3 { font-size: 1.375rem; margin-bottom: 16px; }
 .service-card p { color: #ffffff; line-height: 1.7; }
 
@@ -320,7 +322,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
           </div>
         </li>
         <li class="nav-dropdown">
-          <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+          <a href="/blog/">Blog</a>
           <div class="dropdown-menu">
             <a href="/blog/adobe-analytics/">Adobe Analytics</a>
             <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
@@ -420,37 +422,37 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
     
     <div class="services-grid">
       <div class="service-card">
-        <div class="service-icon">🚀</div>
+        <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg></div>
         <h3>Platform Implementation</h3>
         <p>Full setup of your marketing automation platform including data integration, template creation, and workflow configuration.</p>
       </div>
       
       <div class="service-card">
-        <div class="service-icon">🗺️</div>
+        <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/></svg></div>
         <h3>Journey Design</h3>
         <p>Map and build customer journeys that guide prospects through awareness, consideration, and conversion with personalized touchpoints.</p>
       </div>
       
       <div class="service-card">
-        <div class="service-icon">📧</div>
+        <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg></div>
         <h3>Email Program Development</h3>
         <p>Create high-performing email programs including welcome series, nurture campaigns, re-engagement, and transactional messaging.</p>
       </div>
       
       <div class="service-card">
-        <div class="service-icon">🎯</div>
+        <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"/></svg></div>
         <h3>Segmentation & Targeting</h3>
         <p>Build dynamic segments based on behavioral, demographic, and transactional data for precision targeting.</p>
       </div>
       
       <div class="service-card">
-        <div class="service-icon">🔗</div>
+        <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/></svg></div>
         <h3>Integration Services</h3>
         <p>Connect your automation platform with CRM, CDP, analytics, and e-commerce tools for unified customer data.</p>
       </div>
       
       <div class="service-card">
-        <div class="service-icon">📊</div>
+        <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg></div>
         <h3>Reporting & Optimization</h3>
         <p>Implement comprehensive reporting and A/B testing frameworks to continuously improve campaign performance.</p>
       </div>
