@@ -135,7 +135,7 @@ img { max-width: 100%; height: auto; }
         }
         .brand-text span {
             font-size: 0.7rem;
-            color: #ffffff;
+            color: var(--accent-primary);
             letter-spacing: 0.15em;
             font-weight: 600;
             margin-top: 2px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
@@ -166,6 +166,9 @@ img { max-width: 100%; height: auto; }
         .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
         .dropdown-menu a { display: block; padding: 10px 20px; font-size: 0.9rem; }
         .dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); }
+        
+        .nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; transition: all 0.3s; }
+        .nav-cta:hover { border-color: var(--accent-light); color: var(--accent-light); box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2); }
         
         .breadcrumb {
             padding: 1rem 2rem;
@@ -339,11 +342,13 @@ img { max-width: 100%; height: auto; }
             }
         }
     /* Code Block Styles - IDE Theme */ .code-block { background: #1e1e1e; border-radius: 12px; margin: 24px 0; overflow: hidden; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); } .code-block::before { content: ""; display: block; background: linear-gradient(90deg, #333 0%, #2d2d2d 100%); padding: 10px 16px; border-bottom: 1px solid #333; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='14'%3E%3Ccircle cx='6' cy='7' r='5' fill='%23ff5f56'/%3E%3Ccircle cx='26' cy='7' r='5' fill='%23ffbd2e'/%3E%3Ccircle cx='46' cy='7' r='5' fill='%2327ca40'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: 12px center; } .code-block code { display: block; padding: 20px; overflow-x: auto; font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.875rem; line-height: 1.7; color: #d4d4d4; white-space: pre; } pre { background: #1e1e1e; border-radius: 12px; padding: 20px; overflow-x: auto; margin: 24px 0; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); } pre code { font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.875rem; line-height: 1.7; color: #d4d4d4; background: none; padding: 0; } code { font-family: "SF Mono", Monaco, Consolas, monospace; background: rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.875em; color: #e06c75; } table { display: block; overflow-x: auto; max-width: 100%; } img { max-width: 100%; height: auto; } .mobile-toggle { display: none; background: none; border: none; color: var(--text-primary, #fff); font-size: 28px; cursor: pointer; padding: 8px; }
+.mobile-toggle { display: none; background: none; border: none; color: var(--text-primary, #fff); font-size: 28px; cursor: pointer; padding: 8px; }
 .mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary, #0a0a0f); z-index: 999; padding: 100px 24px 24px; overflow-y: auto; }
 .mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
 .mobile-menu a { font-size: 1.2rem; color: var(--text-primary, #fff); text-decoration: none; font-weight: 600; }
-.mobile-menu a:hover { color: var(--accent-primary, #ffffff); }
-@media (max-width: 768px) { .article-hero-image img { height: 250px; } .nav, .nav-links, .nav-cta { display: none; } .mobile-toggle { display: block; } }
+.mobile-menu a:hover { color: var(--accent-primary, #86bc25); }
+@media (max-width: 900px) { .nav > a, .nav .nav-dropdown, .nav-cta { display: none; } .mobile-toggle { display: block; } }
+@media (max-width: 768px) { .article-hero-image img { height: 250px; } }
 </style>
 </head>
 <body>
@@ -381,6 +386,7 @@ img { max-width: 100%; height: auto; }
                 </span>
                 <a href="/#about">About</a>
                 <a href="/contact/">Contact</a>
+                <a class="nav-cta" href="/contact/">Get Started</a>
                 <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
             </nav>
         </div>
