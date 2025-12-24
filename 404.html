@@ -19,17 +19,18 @@
   <link rel="icon" type="image/svg+xml" href="/images/logo-ww-1.svg"/>
   <style>
     :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #12121a;
-      --bg-tertiary: #1a1a24;
+      --bg-primary: #000000;
+      --bg-secondary: #0a0a0a;
+      --bg-tertiary: #141414;
       --text-primary: #ffffff;
-      --text-secondary: #a1a1aa;
-      --text-muted: #71717a;
-      --accent-primary: #10b981;
-      --accent-secondary: #34d399;
-      --accent-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      --text-secondary: #a3a3a3;
+      --text-muted: #737373;
+      --accent-primary: #86bc25;
+      --accent-light: #a4d44a;
+      --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
       --glass-bg: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glow-primary: 0 0 40px rgba(134, 188, 37, 0.25);
     }
 
     * {
@@ -56,7 +57,7 @@
       transform: translate(-50%, -50%);
       width: 600px;
       height: 600px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(134, 188, 37, 0.15) 0%, transparent 70%);
       filter: blur(80px);
       pointer-events: none;
       z-index: 0;
@@ -83,21 +84,20 @@
     }
 
     .brand img {
-      height: 60px;
+      height: 42px;
       width: auto;
       object-fit: contain;
     }
 
     .brand-text {
-      font-family: 'Rajdhani', sans-serif;
+      font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       color: #ffffff;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: -0.01em;
       display: flex;
       flex-direction: column;
-      line-height: 1;
+      line-height: 1.1;
     }
     
     .brand-text span {
