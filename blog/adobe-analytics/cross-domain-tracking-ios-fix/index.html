@@ -127,23 +127,23 @@ img { max-width: 100%; height: auto; }
             font-family: 'Rajdhani', sans-serif;
             font-weight: 700;
             font-size: 1.5rem;
-            color: #ffffff;
+            color: var(--accent-primary);
             letter-spacing: 0.08em;
             text-transform: uppercase;
             display: flex;
             flex-direction: column;
             line-height: 1;
         }
-        .brand-text span {
+        .brand-text span { color: var(--accent-primary);
             font-size: 0.7rem;
-            color: #ffffff;
+            color: var(--accent-primary);
             letter-spacing: 0.15em;
             font-weight: 600;
             margin-top: 2px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
         }
         
         .nav { display: flex; gap: 2rem; align-items: center; }
-        .nav > a, .nav-dropdown > a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; font-size: 0.95rem; }
+        .nav > a, .nav-dropdown > a { color: var(--accent-primary); text-decoration: none; font-weight: 600; transition: color 0.3s; font-size: 0.95rem; }
         .nav a:hover { color: var(--accent-primary); }
         .nav-dropdown { position: relative; }
         .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
@@ -174,10 +174,10 @@ img { max-width: 100%; height: auto; }
             margin: 0 auto;
             font-size: 0.9rem;
         }
-        .breadcrumb a { color: #ffffff; text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a { color: var(--accent-primary); text-decoration: none; transition: color 0.3s; }
         .breadcrumb a:hover { color: var(--accent-primary); }
-        .breadcrumb span { color: #ffffff; margin: 0 0.5rem; }
-        .breadcrumb .current { color: #ffffff; }
+        .breadcrumb span { color: var(--accent-primary); margin: 0 0.5rem; }
+        .breadcrumb .current { color: var(--accent-primary); }
         
         /* Article */
         .article { max-width: 900px; margin: 0 auto; padding: 2rem; }
@@ -200,7 +200,7 @@ img { max-width: 100%; height: auto; }
         }
         
         .article-meta { 
-            color: #ffffff; 
+            color: var(--accent-primary); 
             font-size: 0.95rem;
             display: flex;
             align-items: center;
@@ -257,13 +257,13 @@ img { max-width: 100%; height: auto; }
         }
         
         .article-content p { 
-            color: #ffffff; 
+            color: var(--accent-primary); 
             margin-bottom: 1.5rem;
             line-height: 1.8;
         }
         
         .article-content ul, .article-content ol { 
-            color: #ffffff; 
+            color: var(--accent-primary); 
             margin-bottom: 1.5rem; 
             padding-left: 1.5rem;
         }
@@ -307,7 +307,7 @@ img { max-width: 100%; height: auto; }
             right: 0;
             padding: 6px 14px;
             font-size: 0.7rem;
-            color: #ffffff;
+            color: var(--accent-primary);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             background: rgba(255, 255, 255, 0.05);
@@ -407,7 +407,7 @@ img { max-width: 100%; height: auto; }
         
         .metric-card .label { 
             font-size: 0.9rem; 
-            color: #ffffff;
+            color: var(--accent-primary);
             font-weight: 600;
         }
         
@@ -437,7 +437,7 @@ img { max-width: 100%; height: auto; }
         .diagram pre code {
             font-size: 0.8rem;
             line-height: 1.5;
-            color: #ffffff;
+            color: var(--accent-primary);
         }
         
         /* Tables */
@@ -465,7 +465,7 @@ img { max-width: 100%; height: auto; }
         }
         
         .comparison-table td { 
-            color: #ffffff;
+            color: var(--accent-primary);
             border-bottom: 1px solid var(--border-color);
             font-size: 0.95rem;
         }
@@ -532,7 +532,7 @@ img { max-width: 100%; height: auto; }
         
         .topic-tag {
             background: var(--bg-tertiary);
-            color: #ffffff;
+            color: var(--accent-primary);
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.85rem;
@@ -556,7 +556,7 @@ img { max-width: 100%; height: auto; }
             margin-top: 4rem;
         }
         
-        .footer p { color: #ffffff; margin-bottom: 0.5rem; }
+        .footer p { color: var(--accent-primary); margin-bottom: 0.5rem; }
         .footer a { color: var(--accent-primary); text-decoration: none; transition: color 0.3s; }
         .footer a:hover { color: var(--accent-secondary); }
         
