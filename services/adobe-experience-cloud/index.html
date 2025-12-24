@@ -163,7 +163,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
 .brand img { height: 42px; width: auto; object-fit: contain; }
 .brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
-.brand-text span { color: var(--accent-primary); letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
+.brand-text span { font-size: 0.7rem; color: var(--accent-primary); letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
 .nav-links { display: flex; gap: 40px; list-style: none; }
 .nav-links > li { position: relative; }
 .nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
@@ -178,8 +178,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
 .dropdown-menu a:hover { color: var(--accent-primary); background: var(--glass-bg); }
 
-.nav-cta { padding: 12px 28px; background: var(--accent-gradient); color: var(--bg-primary); font-weight: 600; border-radius: 100px; text-decoration: none; transition: all 0.3s; }
-.nav-cta:hover { transform: translateY(-2px); box-shadow: var(--glow-primary); }
+.nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; transition: all 0.3s; }
+.nav-cta:hover { border-color: var(--accent-light); color: var(--accent-light); box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2); }
 .breadcrumb { padding: 100px 0 0; }
 .breadcrumb .container { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
 .breadcrumb a { color: #ffffff; text-decoration: none; transition: color 0.3s; }
@@ -187,13 +187,15 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .breadcrumb .separator { color: #ffffff; }
 .breadcrumb .current { color: #ffffff; }
 .hero { padding: 60px 0 100px; }
-.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: #ffffff; margin-bottom: 24px; }
+.hero-badge { display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 100px; font-size: 0.85rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 28px; }
+.hero-badge-dot { width: 10px; height: 10px; background: var(--accent-primary); border-radius: 50%; animation: pulse-dot 1.5s ease-in-out infinite; box-shadow: 0 0 12px rgba(134, 188, 37, 0.5); }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.1); } }
 .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 24px; line-height: 1.15; }
 .gradient-text { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .hero-description { font-size: 1.25rem; color: #ffffff; max-width: 700px; margin-bottom: 40px; line-height: 1.7; }
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; font-weight: 600; border-radius: 12px; text-decoration: none; transition: all 0.3s; }
-.btn-primary { background: var(--accent-gradient); color: var(--bg-primary); }
-.btn-primary:hover { transform: translateY(-3px); box-shadow: var(--glow-primary); }
+.btn-primary { background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); }
+.btn-primary:hover { transform: translateY(-2px); border-color: var(--accent-light); color: var(--accent-light); box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2); }
 .section { padding: 100px 0; }
 .section.grid-bg { 
   background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); 
@@ -206,12 +208,13 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .product-card { padding: 32px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; transition: all 0.3s; }
 .product-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); }
 .product-card h3 { font-size: 1.25rem; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
-.product-card h3 span { font-size: 1.5rem; }
+.product-card .product-icon { width: 40px; height: 40px; background: transparent; border: 2px solid var(--accent-primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.product-card .product-icon svg { width: 20px; height: 20px; stroke: var(--accent-primary); fill: none; }
 .product-card p { color: #ffffff; line-height: 1.6; font-size: 0.95rem; }
 
 .features-list { margin-top: 40px; }
 .feature-item { display: flex; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--glass-border); }
-.feature-icon { width: 48px; height: 48px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent-primary); }
+.feature-icon { width: 48px; height: 48px; background: transparent; border: 2px solid var(--accent-primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent-primary); }
 .feature-content h3 { font-size: 1.125rem; margin-bottom: 8px; }
 .feature-content p { color: #ffffff; line-height: 1.6; }
 
@@ -348,14 +351,10 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 
 <section class="hero">
   <div class="container">
-    <span class="hero-badge">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-        <polyline points="2 17 12 22 22 17"/>
-        <polyline points="2 12 12 17 22 12"/>
-      </svg>
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
       Adobe Solution Partner
-    </span>
+    </div>
     <h1>
       <span class="gradient-text">Adobe Experience Cloud</span><br/>
       Full-Suite Implementation
@@ -383,52 +382,52 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
     
     <div class="products-grid">
       <div class="product-card">
-        <h3><span>📊</span> Adobe Analytics</h3>
+        <h3><span class="product-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></span> Adobe Analytics</h3>
         <p>Advanced web and mobile analytics with real-time insights, custom segmentation, and Attribution IQ for full-funnel visibility.</p>
       </div>
       
       <div class="product-card">
-        <h3><span>🏗️</span> Adobe Experience Manager (AEM)</h3>
+        <h3><span class="product-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></span> Adobe Experience Manager (AEM)</h3>
         <p>Enterprise content management and digital asset management. Sites, Assets, and Forms implementation for omnichannel experiences.</p>
       </div>
       
       <div class="product-card">
-        <h3><span>🎯</span> Adobe Target</h3>
+        <h3><span class="product-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span> Adobe Target</h3>
         <p>AI-powered personalization and A/B testing. Automated personalization, recommendations, and multivariate testing at scale.</p>
       </div>
       
       <div class="product-card">
-        <h3><span>📧</span> Adobe Campaign</h3>
+        <h3><span class="product-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span> Adobe Campaign</h3>
         <p>Cross-channel campaign management for email, mobile, direct mail, and more with advanced journey orchestration.</p>
       </div>
       
       <div class="product-card">
-        <h3><span>🚀</span> Adobe Journey Optimizer</h3>
+        <h3><span class="product-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span> Adobe Journey Optimizer</h3>
         <p>Real-time customer journey orchestration with AI-driven decisioning and omnichannel message delivery.</p>
       </div>
       
       <div class="product-card">
-        <h3><span>👤</span> Adobe Real-Time CDP</h3>
+        <h3><span class="product-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Adobe Real-Time CDP</h3>
         <p>Unified customer profiles with real-time data collection, identity resolution, and audience activation.</p>
       </div>
       
       <div class="product-card">
-        <h3><span>🎭</span> Adobe Audience Manager</h3>
+        <h3><span class="product-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Adobe Audience Manager</h3>
         <p>Data management platform for audience segmentation, lookalike modeling, and cross-device identity graphs.</p>
       </div>
       
       <div class="product-card">
-        <h3><span>⚡</span> Adobe Marketo Engage</h3>
+        <h3><span class="product-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span> Adobe Marketo Engage</h3>
         <p>B2B marketing automation with lead management, account-based marketing, and revenue attribution.</p>
       </div>
       
       <div class="product-card">
-        <h3><span>🛒</span> Adobe Commerce</h3>
+        <h3><span class="product-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></span> Adobe Commerce</h3>
         <p>Enterprise e-commerce platform (Magento) with B2B and B2C capabilities and Experience Cloud integration.</p>
       </div>
       
       <div class="product-card">
-        <h3><span>📋</span> Adobe Workfront</h3>
+        <h3><span class="product-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6"/><path d="M9 16h6"/></svg></span> Adobe Workfront</h3>
         <p>Marketing work management for planning, collaboration, and resource allocation across creative teams.</p>
       </div>
     </div>
