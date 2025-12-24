@@ -145,6 +145,8 @@ img { max-width: 100%; height: auto; }
         .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
         .dropdown-menu a { display: block; padding: 10px 20px; font-size: 0.9rem; }
         .dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); }
+        .nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+        .nav-cta:hover { border-color: var(--accent-secondary); color: var(--accent-secondary); }
         
         .breadcrumb { padding: 1rem 2rem; max-width: 900px; margin: 0 auto; }
         .breadcrumb a { color: #ffffff; text-decoration: none; transition: color 0.3s; }
@@ -417,12 +419,13 @@ img { max-width: 100%; height: auto; }
         .footer a { color: var(--accent-primary); text-decoration: none; }
         
         @media (max-width: 900px) {
+            .nav, .nav-cta { display: none; }
+            .mobile-toggle { display: block; }
             .article-header h1 { font-size: 2rem; }
             .article-content h2 { font-size: 1.5rem; }
         }
         
-        
-            .nav { display: none; }
+        @media (max-width: 768px) {
             .article { padding: 1.5rem; }
             .article-header h1 { font-size: 1.75rem; }
             .metrics-grid { grid-template-columns: repeat(2, 1fr); }
@@ -471,8 +474,9 @@ img { max-width: 100%; height: auto; }
                 </span>
                 <a href="/#about">About</a>
                 <a href="/contact/">Contact</a>
-                <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
             </nav>
+            <a class="nav-cta" href="/contact/">Get Started</a>
+            <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
         </div>
     </header>
 
