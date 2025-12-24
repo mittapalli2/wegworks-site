@@ -50,12 +50,12 @@
   --text-primary: #ffffff;
   --text-secondary: #a3a3a3;
   --text-muted: #737373;
-  --accent-primary: #ffffff;
-  --accent-light: #e5e5e5;
-  --accent-gradient: linear-gradient(135deg, #ffffff 0%, #a3a3a3 100%);
+  --accent-primary: #86bc25;
+  --accent-light: #a4d44a;
+  --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.1);
-  --glow-primary: 0 0 40px rgba(255, 255, 255, 0.15);
+  --glow-primary: 0 0 40px rgba(134, 188, 37, 0.25);
 }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -112,8 +112,8 @@ main {
   right: 0;
   bottom: 0;
   background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
   background-size: 80px 80px;
   pointer-events: none;
   z-index: 0;
@@ -284,7 +284,7 @@ main {
 
 .brand-text span {
   font-size: 0.7rem;
-  color: #ffffff;
+  color: var(--accent-primary);
   letter-spacing: 0.15em;
   font-weight: 600;
   margin-top: 2px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
@@ -384,17 +384,20 @@ main {
 
 .nav-cta {
   padding: 12px 28px;
-  background: var(--accent-gradient);
-  color: var(--bg-primary);
+  background: transparent;
+  color: var(--accent-primary);
   font-weight: 600;
+  border: 2px solid var(--accent-primary);
   border-radius: 100px;
   text-decoration: none;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: all 0.3s;
 }
 
 .nav-cta:hover {
   transform: translateY(-2px);
-  box-shadow: var(--glow-primary);
+  border-color: var(--accent-light);
+  color: var(--accent-light);
+  box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2);
 }
 
 .mobile-toggle {
@@ -595,40 +598,31 @@ main {
 }
 
 .btn-primary {
-  background: var(--accent-gradient);
-  color: var(--bg-primary);
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.6s;
-}
-
-.btn-primary:hover::before {
-  transform: translateX(100%);
+  background: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
 }
 
 .btn-primary:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(255, 255, 255, 0.2);
+  background: transparent;
+  border-color: var(--accent-light);
+  color: var(--accent-light);
+  box-shadow: 0 20px 50px rgba(134, 188, 37, 0.2);
 }
 
 .btn-secondary {
   background: transparent;
-  color: var(--text-primary);
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
 }
 
 .btn-secondary:hover {
-  border-color: var(--accent-primary);
-  color: #000000;
-  background: var(--accent-primary);
+  border-color: var(--accent-light);
+  color: var(--accent-light);
+  background: transparent;
   transform: translateY(-4px);
-  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 40px rgba(134, 188, 37, 0.2);
 }
 
 @keyframes float {
@@ -669,13 +663,16 @@ main {
 }
 
 .stat-number {
-  font-family: 'Syne', sans-serif;
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: var(--accent-primary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent-primary);
+  text-stroke: 1.5px var(--accent-primary);
   margin-bottom: 12px;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .stat-label {
@@ -701,8 +698,8 @@ main {
 .section-label {
   display: inline-block;
   padding: 8px 16px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: transparent;
+  border: 1px solid var(--accent-primary);
   border-radius: 100px;
   font-size: 0.875rem;
   color: var(--accent-primary);
@@ -765,25 +762,27 @@ main {
 .service-icon {
   width: 64px;
   height: 64px;
-  background: var(--accent-gradient);
+  background: transparent;
+  border: 2px solid var(--accent-primary);
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 24px;
-  color: var(--bg-primary);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: var(--accent-primary);
+  transition: all 0.3s ease;
 }
 
 .service-icon svg {
   width: 28px;
   height: 28px;
-  stroke: var(--bg-primary);
+  stroke: var(--accent-primary);
 }
 
 .service-card:hover .service-icon {
-  transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+  border-color: var(--accent-light);
+  box-shadow: 0 8px 24px rgba(134, 188, 37, 0.2);
 }
 
 .service-card h3 {
@@ -836,6 +835,8 @@ main {
 .tech-stack {
   padding: 100px 0;
   background: var(--bg-secondary);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
   overflow: hidden;
 }
 
@@ -868,11 +869,11 @@ main {
 }
 
 .tech-logo:hover {
-  color: var(--bg-primary);
-  background: var(--accent-primary);
+  color: var(--accent-light);
+  background: transparent;
   border-color: var(--accent-primary);
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 5px 20px rgba(134, 188, 37, 0.2);
 }
 
 /* Clients Section */
@@ -992,83 +993,78 @@ main {
   text-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
 }
 
-/* Adobe - Iconic red */
+/* Adobe */
 .logo-adobe {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
-  color: #ff4444;
+  color: #ffffff;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-size: 1.3rem;
   line-height: 1.4;
-  text-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
 }
 
 .client-logo:hover .logo-adobe {
-  color: #ff6666;
-  text-shadow: 0 0 25px rgba(255, 68, 68, 0.6);
+  color: var(--accent-primary);
+  text-shadow: 0 0 25px rgba(134, 188, 37, 0.4);
 }
 
-/* Johnson & Johnson - Classic red */
+/* Johnson & Johnson */
 .logo-jnj {
   font-family: 'Syne', sans-serif;
   font-weight: 600;
-  color: #e63946;
+  color: #ffffff;
   font-size: 1.1rem;
   letter-spacing: 0;
   line-height: 1.4;
-  text-shadow: 0 0 10px rgba(230, 57, 70, 0.3);
 }
 
 .client-logo:hover .logo-jnj {
-  color: #ff5a67;
-  text-shadow: 0 0 25px rgba(230, 57, 70, 0.6);
+  color: var(--accent-primary);
+  text-shadow: 0 0 25px rgba(134, 188, 37, 0.4);
 }
 
-/* Sogeti - Blue brand */
+/* Sogeti */
 .logo-sogeti {
   font-family: 'Syne', sans-serif;
   font-weight: 700;
-  color: #2196f3;
+  color: #ffffff;
   letter-spacing: 1px;
   line-height: 1.4;
-  text-shadow: 0 0 10px rgba(33, 150, 243, 0.3);
 }
 
 .client-logo:hover .logo-sogeti {
-  color: #64b5f6;
-  text-shadow: 0 0 25px rgba(33, 150, 243, 0.6);
+  color: var(--accent-primary);
+  text-shadow: 0 0 25px rgba(134, 188, 37, 0.4);
 }
 
-/* TCS - Professional blue */
+/* TCS */
 .logo-tcs {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
-  color: #2962ff;
+  color: #ffffff;
   letter-spacing: 3px;
   font-size: 1.5rem;
   line-height: 1.4;
-  text-shadow: 0 0 10px rgba(41, 98, 255, 0.3);
 }
 
 .client-logo:hover .logo-tcs {
-  color: #5c85ff;
-  text-shadow: 0 0 25px rgba(41, 98, 255, 0.6);
+  color: var(--accent-primary);
+  text-shadow: 0 0 25px rgba(134, 188, 37, 0.4);
 }
 
-/* Infosys - Blue brand */
+/* Infosys */
 .logo-infosys {
   font-family: 'Syne', sans-serif;
   font-weight: 700;
-  color: #00bcd4;
+  color: #ffffff;
   letter-spacing: 1px;
   line-height: 1.4;
-  text-shadow: 0 0 10px rgba(0, 188, 212, 0.3);
 }
 
 .client-logo:hover .logo-infosys {
-  color: #4dd0e1;
-  text-shadow: 0 0 25px rgba(0, 188, 212, 0.6);
+  color: var(--accent-primary);
+  text-shadow: 0 0 25px rgba(134, 188, 37, 0.4);
 }
 
 @media (max-width: 768px) {
@@ -1171,13 +1167,14 @@ main {
 .about-feature-icon {
   width: 40px;
   height: 40px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: transparent;
+  border: 2px solid var(--accent-primary);
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent-primary);
+  font-weight: 700;
 }
 
 .about-feature span {
@@ -1375,10 +1372,11 @@ main {
 }
 
 .view-all-blogs .btn:hover {
-  background: var(--accent-primary);
-  color: var(--bg-primary);
+  background: transparent;
+  border-color: var(--accent-light);
+  color: var(--accent-light);
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2);
 }
 
 @media (max-width: 1024px) {
@@ -1637,8 +1635,10 @@ main {
 }
 
 .btn-secondary:hover {
-  background: var(--accent-primary);
-  color: var(--bg-primary);
+  background: transparent;
+  border-color: var(--accent-light);
+  color: var(--accent-light);
+  box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2);
 }
 
 .contact-info {
@@ -1674,19 +1674,25 @@ main {
 .contact-icon {
   width: 52px;
   height: 52px;
-  background: var(--accent-gradient);
+  background: transparent;
+  border: 2px solid var(--accent-primary);
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+  transition: all 0.3s;
 }
 
 .contact-icon svg {
   width: 24px;
   height: 24px;
-  stroke: var(--bg-primary);
+  stroke: var(--accent-primary);
+}
+
+.contact-item:hover .contact-icon {
+  border-color: var(--accent-light);
+  box-shadow: 0 8px 24px rgba(134, 188, 37, 0.2);
 }
 
 .contact-item h4 {
@@ -1864,7 +1870,7 @@ main {
   .btn { width: 100%; max-width: 280px; justify-content: center; padding: 16px 24px; font-size: 0.95rem; }
   
   /* Fix stat numbers */
-  .stat-number { font-size: 2.5rem; }
+  .stat-number { font-size: 3rem; -webkit-text-stroke: 1px var(--accent-primary); }
   
   /* Fix service cards */
   .service-card { padding: 28px; }
@@ -2316,7 +2322,7 @@ main {
   <div class="container">
     <nav class="nav-wrapper">
       <a class="brand" href="#home">
-        <img alt="WegWorks logo" src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logo-ww.svg"/>
+        <img alt="WegWorks logo" src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/logo-ww-1.svg"/>
         <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
       </a>
       <ul class="nav-links">
@@ -2840,7 +2846,7 @@ main {
           
           <div class="location-card">
             <div class="location-content">
-              <span class="location-badge" style="background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);">Austin Office</span>
+              <span class="location-badge">Austin Office</span>
               <h4>Austin</h4>
               <p class="address">5900 Balcones Drive STE 100<br/>Austin, TX 78731<br/>United States</p>
             </div>

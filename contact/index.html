@@ -97,14 +97,14 @@
   --bg-secondary: #0a0a0a;
   --bg-tertiary: #141414;
   --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-  --accent-primary: #ffffff;
-  --accent-secondary: #e5e5e5;
-  --accent-gradient: linear-gradient(135deg, #ffffff 0%, #a3a3a3 100%);
+  --text-secondary: #a3a3a3;
+  --text-muted: #737373;
+  --accent-primary: #86bc25;
+  --accent-light: #a4d44a;
+  --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
   --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glow-primary: 0 0 40px rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glow-primary: 0 0 40px rgba(134, 188, 37, 0.25);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -122,7 +122,7 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 .brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
 .brand img { height: 42px; width: auto; }
 .brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
-.brand-text span { font-size: 0.7rem; color: #ffffff; letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
+.brand-text span { font-size: 0.7rem; color: var(--accent-primary); letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
 .nav-links { display: flex; gap: 40px; list-style: none; }
 .nav-links > li { position: relative; }
 .nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
@@ -134,7 +134,8 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
 .dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
 .dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); color: var(--accent-primary); }
-.nav-cta { padding: 12px 28px; background: var(--accent-gradient); color: var(--bg-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+.nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; transition: all 0.3s; }
+.nav-cta:hover { border-color: var(--accent-light); color: var(--accent-light); box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2); }
 
 /* Breadcrumb */
 .breadcrumb { padding: 100px 0 0; }
@@ -149,18 +150,18 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10, 10, 15, 0.85) 0%, rgba(10, 10, 15, 0.7) 50%, rgba(10, 10, 15, 0.6) 100%); }
 .hero .container { position: relative; z-index: 1; }
 .contact-icons { display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 32px; }
-.contact-icon-item { width: 56px; height: 56px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; animation: iconBounceIn 0.6s ease-out backwards; }
+.contact-icon-item { width: 56px; height: 56px; background: transparent; border: 2px solid var(--accent-primary); border-radius: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; animation: iconBounceIn 0.6s ease-out backwards; }
 .contact-icon-item:nth-child(1) { animation-delay: 0.1s; }
 .contact-icon-item:nth-child(2) { animation-delay: 0.2s; }
 .contact-icon-item:nth-child(3) { animation-delay: 0.3s; }
-.contact-icon-item svg { width: 24px; height: 24px; stroke: var(--text-secondary); transition: all 0.3s; animation: iconSpin 0.8s ease-out backwards; }
+.contact-icon-item svg { width: 24px; height: 24px; stroke: var(--accent-primary); transition: all 0.3s; animation: iconSpin 0.8s ease-out backwards; }
 .contact-icon-item:nth-child(1) svg { animation-delay: 0.3s; }
 .contact-icon-item:nth-child(2) svg { animation-delay: 0.4s; }
 .contact-icon-item:nth-child(3) svg { animation-delay: 0.5s; }
 .contact-icon-item:hover { border-color: var(--accent-primary); transform: translateY(-4px); }
 .contact-icon-item:hover svg { stroke: var(--accent-primary); transform: rotate(360deg); }
-.contact-icon-item.main { width: 72px; height: 72px; background: var(--accent-gradient); border: none; box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2); animation: mainIconPulse 2s ease-in-out infinite, iconBounceIn 0.6s ease-out backwards; animation-delay: 0.2s, 0.2s; }
-.contact-icon-item.main svg { width: 32px; height: 32px; stroke: var(--bg-primary); }
+.contact-icon-item.main { width: 72px; height: 72px; background: transparent; border: 2px solid var(--accent-primary); box-shadow: 0 8px 32px rgba(134, 188, 37, 0.2); animation: mainIconPulse 2s ease-in-out infinite, iconBounceIn 0.6s ease-out backwards; animation-delay: 0.2s, 0.2s; }
+.contact-icon-item.main svg { width: 32px; height: 32px; stroke: var(--accent-primary); }
 @keyframes iconSpin { 0% { transform: rotate(-180deg) scale(0); opacity: 0; } 100% { transform: rotate(0deg) scale(1); opacity: 1; } }
 @keyframes iconBounceIn { 0% { transform: scale(0) translateY(20px); opacity: 0; } 60% { transform: scale(1.1) translateY(-5px); } 100% { transform: scale(1) translateY(0); opacity: 1; } }
 @keyframes mainIconPulse { 0%, 100% { box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2); } 50% { box-shadow: 0 8px 48px rgba(255, 255, 255, 0.3), 0 0 0 8px rgba(255, 255, 255, 0.05); } }
@@ -175,7 +176,7 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 .contact-section { 
   padding: 40px 0 100px; 
   position: relative; 
-  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); 
+  background-image: linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px); 
   background-size: 60px 60px; 
 }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
@@ -186,7 +187,7 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 .location-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(255, 255, 255, 0.05); }
 .location-card.headquarters { border-color: var(--accent-primary); background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.02) 100%); }
 .location-content { flex: 1; }
-.location-badge { display: inline-block; padding: 6px 14px; background: var(--accent-gradient); color: var(--bg-primary); font-size: 0.7rem; font-weight: 700; border-radius: 100px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.08em; }
+.location-badge { display: inline-block; padding: 6px 14px; background: transparent; border: 1px solid var(--accent-primary); color: var(--accent-primary); font-size: 0.7rem; font-weight: 700; border-radius: 100px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.08em; }
 .location-card h3 { font-size: 1.5rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
 .location-card h3 svg { width: 20px; height: 20px; stroke: var(--accent-primary); }
 .location-card p { color: #ffffff; font-size: 0.95rem; line-height: 1.7; }
@@ -198,7 +199,8 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 .contact-info-section { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--glass-border); }
 .contact-info-section h3 { font-size: 1.1rem; margin-bottom: 20px; color: var(--text-primary); }
 .contact-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
-.contact-icon { width: 44px; height: 44px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; color: var(--accent-primary); transition: all 0.3s; }
+.contact-icon { width: 44px; height: 44px; background: transparent; border: 2px solid var(--accent-primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; color: var(--accent-primary); transition: all 0.3s; }
+.contact-icon svg { width: 20px; height: 20px; stroke: var(--accent-primary); }
 .contact-icon svg { width: 20px; height: 20px; stroke: var(--accent-primary); }
 .contact-item:hover .contact-icon { background: rgba(255, 255, 255, 0.08); border-color: var(--accent-primary); transform: scale(1.05); }
 .contact-item h4 { font-size: 0.85rem; color: #ffffff; margin-bottom: 4px; font-weight: 600; }
@@ -220,8 +222,8 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 #captcha-question { color: var(--accent-primary); font-weight: 600; }
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 32px; font-weight: 600; border-radius: 12px; text-decoration: none; border: none; cursor: pointer; font-size: 1rem; transition: all 0.3s; }
-.btn-primary { background: var(--accent-gradient); color: var(--bg-primary); }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--glow-primary); }
+.btn-primary { background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); }
+.btn-primary:hover { transform: translateY(-2px); border-color: var(--accent-light); color: var(--accent-light); box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2); }
 .btn-secondary { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-primary); }
 
 /* Success Message */
@@ -277,7 +279,7 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 
 <header class="site-header">
   <nav class="nav-wrapper">
-    <a class="brand" href="/"><img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logo-ww.svg" alt="WegWorks Logo"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
+    <a class="brand" href="/"><img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/logo-ww-1.svg" alt="WegWorks Logo"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
     <ul class="nav-links">
       <li class="nav-dropdown">
         <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
@@ -379,7 +381,7 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
             
             <div class="location-card">
               <div class="location-content">
-                <span class="location-badge" style="background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);">Austin Office</span>
+                <span class="location-badge">Austin Office</span>
                 <h3>Austin</h3>
               <p class="address">5900 Balcones Drive STE 100<br/>Austin, TX 78731<br/>United States</p>
               </div>
