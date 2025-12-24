@@ -259,6 +259,10 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--glow-primary); }
 
 .section { padding: 100px 0; }
+.section.grid-bg { 
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); 
+  background-size: 60px 60px; 
+}
 .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
 .section-subtitle { font-size: 1.125rem; color: #ffffff; max-width: 600px; margin-bottom: 60px; line-height: 1.7; }
 
@@ -305,7 +309,11 @@ h1, h2, h3, h4, h5, h6 {
 .footer p { color: #ffffff; }
 .footer a { color: var(--accent-primary); text-decoration: none; }
 
-.faq-section { padding: 100px 0; }
+.faq-section { 
+  padding: 100px 0; 
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); 
+  background-size: 60px 60px; 
+}
 .faq-list { max-width: 800px; margin-top: 40px; }
 .faq-item { border: 1px solid var(--glass-border); border-radius: 16px; margin-bottom: 16px; overflow: hidden; background: var(--glass-bg); }
 .faq-question { width: 100%; padding: 24px 32px; background: transparent; border: none; color: var(--text-primary); font-family: 'Syne', sans-serif; font-size: 1.125rem; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: all 0.3s; }
@@ -466,7 +474,7 @@ h1, h2, h3, h4, h5, h6 {
   </div>
 </section>
 
-<section class="section">
+<section class="section grid-bg">
   <div class="container">
     <h2 class="section-title">Explore Our Services</h2>
     <p class="section-subtitle">

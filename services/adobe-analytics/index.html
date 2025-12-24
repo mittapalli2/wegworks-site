@@ -381,6 +381,10 @@ h1, h2, h3, h4, h5, h6 {
 .section {
   padding: 100px 0;
 }
+.section.grid-bg { 
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); 
+  background-size: 60px 60px; 
+}
 
 .section-title {
   font-size: clamp(2rem, 4vw, 3rem);
@@ -641,6 +645,8 @@ h1, h2, h3, h4, h5, h6 {
 /* FAQ Section */
 .faq-section {
   padding: 100px 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); 
+  background-size: 60px 60px;
 }
 
 .faq-list {
@@ -876,7 +882,7 @@ h1, h2, h3, h4, h5, h6 {
 </section>
 
 <!-- Services -->
-<section class="section">
+<section class="section grid-bg">
   <div class="container">
     <h2 class="section-title">Our Adobe Analytics Services</h2>
     <p class="section-subtitle">
