@@ -239,6 +239,20 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .related-card h4 { margin-bottom: 8px; }
 .related-card p { color: #ffffff; font-size: 0.9rem; }
 
+.related-resources { padding: 100px 0; background: var(--bg-secondary); }
+.related-resources h2 { text-align: center; font-size: 2.5rem; margin-bottom: 16px; }
+.related-resources .section-subtitle { text-align: center; color: #ffffff; margin-bottom: 48px; }
+.resources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+.resource-card { padding: 32px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; text-decoration: none; transition: all 0.3s; }
+.resource-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15); }
+.resource-tag { display: inline-block; padding: 4px 12px; background: rgba(16, 185, 129, 0.15); color: var(--accent-primary); border-radius: 100px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+.resource-card h3 { font-size: 1.25rem; color: #ffffff; margin-bottom: 12px; }
+.resource-card p { color: #a1a1aa; font-size: 0.9rem; line-height: 1.6; }
+.view-all-resources { text-align: center; }
+.btn-outline { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: transparent; border: 2px solid var(--accent-primary); color: var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; transition: all 0.3s; }
+.btn-outline:hover { background: var(--accent-primary); color: #0a0a0f; }
+@media (max-width: 768px) { .resources-grid { grid-template-columns: 1fr; } .related-resources h2 { font-size: 1.75rem; } }
+
 .cta-section { padding: 100px 0; text-align: center; background: var(--bg-secondary); }
 .cta-box { padding: 80px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 32px; max-width: 800px; margin: 0 auto; }
 .cta-box h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 20px; }
@@ -602,6 +616,33 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
           <p>Yes, WegWorks optimizes email deliverability by configuring SPF, DKIM, and DMARC authentication; setting up dedicated sending domains and IPs; implementing list hygiene practices; monitoring sender reputation; and designing engagement-based suppression rules. We help you reach the inbox, not the spam folder.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="related-resources">
+  <div class="container">
+    <h2>Marketing Automation Resources</h2>
+    <p class="section-subtitle">Explore our latest insights and guides on Marketing Automation</p>
+    <div class="resources-grid">
+      <a href="/blog/marketing-automation/email-deliverability-guide/" class="resource-card">
+        <span class="resource-tag">Guide</span>
+        <h3>Email Deliverability Guide</h3>
+        <p>Best practices for improving email deliverability and inbox placement.</p>
+      </a>
+      <a href="/blog/salesforce/sales-cloud-vs-marketing-cloud/" class="resource-card">
+        <span class="resource-tag">Comparison</span>
+        <h3>Sales Cloud vs Marketing Cloud</h3>
+        <p>Understanding the differences between Salesforce clouds for marketing.</p>
+      </a>
+      <a href="/blog/segment-cdp/tracking-plan-guide/" class="resource-card">
+        <span class="resource-tag">Integration</span>
+        <h3>Tracking Plan Guide</h3>
+        <p>How to create tracking plans that power your marketing automation.</p>
+      </a>
+    </div>
+    <div class="view-all-resources">
+      <a href="/blog/marketing-automation/" class="btn btn-outline">View All Marketing Automation Articles →</a>
     </div>
   </div>
 </section>

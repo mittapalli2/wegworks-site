@@ -511,6 +511,91 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.9rem;
 }
 
+/* Related Resources */
+.related-resources {
+  padding: 100px 0;
+  background: var(--bg-secondary);
+}
+.related-resources h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+.related-resources .section-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 48px;
+}
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.resource-card {
+  padding: 32px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.resource-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+}
+.resource-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-primary);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+.resource-card h3 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+.resource-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.view-all-resources {
+  text-align: center;
+}
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: transparent;
+  border: 2px solid var(--accent-primary);
+  color: var(--accent-primary);
+  font-weight: 600;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-outline:hover {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+@media (max-width: 768px) {
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+  .related-resources h2 {
+    font-size: 1.75rem;
+  }
+}
+
 /* CTA Section */
 .cta-section {
   padding: 100px 0;
@@ -1029,6 +1114,34 @@ h1, h2, h3, h4, h5, h6 {
           <p>Analysis Workspace is Adobe Analytics' powerful drag-and-drop interface for building custom reports, dashboards, and visualizations. WegWorks builds tailored Workspace projects for your teams including executive dashboards, marketing performance reports, conversion funnels, cohort analysis, and attribution models—all designed to surface actionable insights for your specific business needs.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Related Resources -->
+<section class="related-resources">
+  <div class="container">
+    <h2>Adobe Analytics Resources</h2>
+    <p class="section-subtitle">Explore our latest insights and guides on Adobe Analytics</p>
+    <div class="resources-grid">
+      <a href="/blog/adobe-analytics/data-layer-best-practices/" class="resource-card">
+        <span class="resource-tag">Guide</span>
+        <h3>Data Layer Best Practices</h3>
+        <p>Learn how to design and implement a robust data layer for Adobe Analytics.</p>
+      </a>
+      <a href="/blog/adobe-analytics/analysis-workspace-tips/" class="resource-card">
+        <span class="resource-tag">Tips</span>
+        <h3>Analysis Workspace Tips</h3>
+        <p>Advanced tips and tricks to get more from Analysis Workspace.</p>
+      </a>
+      <a href="/blog/adobe-analytics/cross-domain-tracking-ios-fix/" class="resource-card">
+        <span class="resource-tag">Technical</span>
+        <h3>Cross-Domain Tracking Fix</h3>
+        <p>How to fix cross-domain tracking issues on iOS devices.</p>
+      </a>
+    </div>
+    <div class="view-all-resources">
+      <a href="/blog/adobe-analytics/" class="btn btn-outline">View All Adobe Analytics Articles →</a>
     </div>
   </div>
 </section>
