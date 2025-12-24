@@ -16,21 +16,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="icon" type="image/svg+xml" href="/images/logo-ww-1.svg"/>
+  <link rel="icon" type="image/svg+xml" href="/images/blog/logo-ww.svg"/>
   <style>
     :root {
-      --bg-primary: #000000;
-      --bg-secondary: #0a0a0a;
-      --bg-tertiary: #141414;
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-tertiary: #1a1a24;
       --text-primary: #ffffff;
-      --text-secondary: #a3a3a3;
-      --text-muted: #737373;
-      --accent-primary: #86bc25;
-      --accent-light: #a4d44a;
-      --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent-primary: #10b981;
+      --accent-secondary: #34d399;
+      --accent-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
       --glass-bg: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(255, 255, 255, 0.1);
-      --glow-primary: 0 0 40px rgba(134, 188, 37, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.08);
     }
 
     * {
@@ -57,7 +56,7 @@
       transform: translate(-50%, -50%);
       width: 600px;
       height: 600px;
-      background: radial-gradient(circle, rgba(134, 188, 37, 0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
       filter: blur(80px);
       pointer-events: none;
       z-index: 0;
@@ -84,25 +83,26 @@
     }
 
     .brand img {
-      height: 42px;
+      height: 60px;
       width: auto;
       object-fit: contain;
     }
 
     .brand-text {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Rajdhani', sans-serif;
       font-weight: 700;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       color: #ffffff;
-      letter-spacing: -0.01em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       display: flex;
       flex-direction: column;
-      line-height: 1.1;
+      line-height: 1;
     }
     
     .brand-text span {
       font-size: 0.7rem;
-      color: var(--accent-primary);
+      color: #ffffff;
       letter-spacing: 0.15em;
       font-weight: 600;
       margin-top: 2px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
@@ -248,7 +248,7 @@
   <header>
     <div class="container">
       <a class="brand" href="/">
-        <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/logo-ww-1.svg" alt="WegWorks Logo"/>
+        <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logo-ww.svg" alt="WegWorks Logo"/>
         <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
       </a>
     </div>
