@@ -17,7 +17,7 @@
 <meta name="author" content="WegWorks"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://www.wegworks.com/blog/segment-cdp/tracking-plan-guide/"/>
-<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
+<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logowhite.png" rel="icon" type="image/png"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
@@ -45,7 +45,7 @@
   "description": "A step-by-step guide to creating a tracking plan for Segment CDP. Learn naming conventions, event structures, and how to use Protocols for data governance.",
   "image": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/segments.webp",
   "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
-  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png"}},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logowhite.png"}},
   "datePublished": "2025-12-17",
   "dateModified": "2025-12-17"
 }
@@ -67,18 +67,18 @@
 
 <style>
 :root {
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #12121a;
-  --bg-tertiary: #1a1a24;
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
   --text-primary: #ffffff;
   --text-secondary: #a1a1aa;
   --text-muted: #71717a;
-  --accent-primary: #10b981;
-  --accent-secondary: #34d399;
-  --accent-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --accent-primary: #ffffff;
+  --accent-secondary: #e5e5e5;
+  --accent-gradient: linear-gradient(135deg, #ffffff 0%, #a3a3a3 100%);
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --glow-primary: 0 0 40px rgba(16, 185, 129, 0.3);
+  --glow-primary: 0 0 40px rgba(255, 255, 255, 0.15);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -90,7 +90,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
 .nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
-.brand img { height: 60px; width: auto; }
+.brand img { height: 42px; width: auto; }
 .brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
 .brand-text span { font-size: 0.7rem; color: #ffffff; letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
 .nav-links { display: flex; gap: 40px; list-style: none; }
@@ -103,12 +103,12 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
 .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
 .dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
-.dropdown-menu a:hover { background: rgba(16, 185, 129, 0.1); color: var(--accent-primary); }
+.dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); color: var(--accent-primary); }
 .nav-cta { padding: 12px 28px; background: var(--accent-gradient); color: var(--bg-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
 
 .article-header { padding: 160px 0 40px; }
-.article-hero-image { margin: 0 auto 60px; max-width: 900px; padding: 0 24px; }
-.article-hero-image img { width: 100%; height: auto; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
+.article-hero-image { margin: 0 auto 60px; max-width: 1200px; padding: 0 24px; }
+.article-hero-image img { width: 100%; height: 400px; object-fit: cover; object-position: center; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
 .back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: #ffffff; margin-bottom: 24px; text-decoration: none; transition: all 0.3s; }
 .back-link:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
 .article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: #ffffff; }
@@ -129,7 +129,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .code-block { background: var(--bg-tertiary); border: 1px solid var(--glass-border); border-radius: 12px; padding: 24px; margin: 24px 0; overflow-x: auto; }
 .code-block code { font-family: 'Monaco', 'Consolas', monospace; font-size: 0.875rem; color: var(--accent-secondary); white-space: pre; }
 
-.callout { padding: 24px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; margin: 32px 0; }
+.callout { padding: 24px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; margin: 32px 0; }
 .callout-title { font-weight: 700; color: var(--accent-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
 .callout p { margin: 0; color: #ffffff; }
 
@@ -155,26 +155,26 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .footer p { color: #ffffff; }
 .footer a { color: var(--accent-primary); text-decoration: none; }
 
-@media (max-width: 768px) {
+
   .nav-links, .nav-cta { display: none; }
   .article-header { padding: 120px 0 40px; }
   .cta-box { padding: 32px 24px; }
   .example-table { font-size: 0.8rem; }
   .example-table th, .example-table td { padding: 8px; }
 }
-pre, code, .code-block { overflow-x: auto; max-width: 100%; } table { display: block; overflow-x: auto; max-width: 100%; } img { max-width: 100%; height: auto; } .mobile-toggle { display: none; background: none; border: none; color: var(--text-primary, #fff); font-size: 28px; cursor: pointer; padding: 8px; }
+/* Code Block Styles - IDE Theme */ .code-block { background: #1e1e1e; border-radius: 12px; margin: 24px 0; overflow: hidden; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); } .code-block::before { content: ""; display: block; background: linear-gradient(90deg, #333 0%, #2d2d2d 100%); padding: 10px 16px; border-bottom: 1px solid #333; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='14'%3E%3Ccircle cx='6' cy='7' r='5' fill='%23ff5f56'/%3E%3Ccircle cx='26' cy='7' r='5' fill='%23ffbd2e'/%3E%3Ccircle cx='46' cy='7' r='5' fill='%2327ca40'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: 12px center; } .code-block code { display: block; padding: 20px; overflow-x: auto; font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.875rem; line-height: 1.7; color: #d4d4d4; white-space: pre; } pre { background: #1e1e1e; border-radius: 12px; padding: 20px; overflow-x: auto; margin: 24px 0; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); } pre code { font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.875rem; line-height: 1.7; color: #d4d4d4; background: none; padding: 0; } code { font-family: "SF Mono", Monaco, Consolas, monospace; background: rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.875em; color: #e06c75; } table { display: block; overflow-x: auto; max-width: 100%; } img { max-width: 100%; height: auto; } .mobile-toggle { display: none; background: none; border: none; color: var(--text-primary, #fff); font-size: 28px; cursor: pointer; padding: 8px; }
 .mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary, #0a0a0f); z-index: 999; padding: 100px 24px 24px; overflow-y: auto; }
 .mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
 .mobile-menu a { font-size: 1.2rem; color: var(--text-primary, #fff); text-decoration: none; font-weight: 600; }
-.mobile-menu a:hover { color: var(--accent-primary, #10b981); }
-@media (max-width: 768px) { .nav, .nav-links, .nav-cta { display: none; } .mobile-toggle { display: block; } }
+.mobile-menu a:hover { color: var(--accent-primary, #ffffff); }
+@media (max-width: 768px) { .article-hero-image img { height: 250px; } .nav, .nav-links, .nav-cta { display: none; } .mobile-toggle { display: block; } }
 </style>
 </head>
 
 <body>
 <header class="site-header">
   <nav class="nav-wrapper">
-    <a class="brand" href="/"><img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
+    <a class="brand" href="/"><img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logo-ww.svg" alt="WegWorks Logo"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
     <ul class="nav-links">
       <li class="nav-dropdown">
         <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>

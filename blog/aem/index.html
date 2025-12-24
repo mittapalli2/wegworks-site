@@ -17,7 +17,7 @@
 <meta name="author" content="WegWorks"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://www.wegworks.com/blog/aem/"/>
-<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
+<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logowhite.png" rel="icon" type="image/png"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
@@ -49,39 +49,39 @@
 
 <style>
 :root {
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #12121a;
-  --bg-tertiary: #1a1a24;
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
   --text-primary: #ffffff;
   --text-secondary: #a1a1aa;
   --text-muted: #71717a;
-  --accent-primary: #10b981;
-  --accent-secondary: #34d399;
-  --accent-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --accent-primary: #ffffff;
+  --accent-secondary: #e5e5e5;
+  --accent-gradient: linear-gradient(135deg, #ffffff 0%, #a3a3a3 100%);
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --glow-primary: 0 0 40px rgba(16, 185, 129, 0.3);
+  --glow-primary: 0 0 40px rgba(255, 255, 255, 0.15);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
 
 /* Animated Background */
-.bg-mesh { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse 80% 50% at 20% -20%, rgba(16, 185, 129, 0.15), transparent), radial-gradient(ellipse 60% 40% at 80% 100%, rgba(52, 211, 153, 0.1), transparent), var(--bg-primary); }
+.bg-mesh { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse 80% 50% at 20% -20%, rgba(255, 255, 255, 0.04), transparent), radial-gradient(ellipse 60% 40% at 80% 100%, rgba(255, 255, 255, 0.015), transparent), var(--bg-primary); }
 .edge-glow { position: fixed; pointer-events: none; z-index: 0; }
-.edge-glow-top { top: 0; left: 0; right: 0; height: 300px; background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(16, 185, 129, 0.08), transparent); }
-.edge-glow-left { top: 0; left: 0; bottom: 0; width: 200px; background: radial-gradient(ellipse 100% 50% at 0% 50%, rgba(16, 185, 129, 0.06), transparent); }
-.edge-glow-right { top: 0; right: 0; bottom: 0; width: 200px; background: radial-gradient(ellipse 100% 50% at 100% 50%, rgba(16, 185, 129, 0.06), transparent); }
+.edge-glow-top { top: 0; left: 0; right: 0; height: 300px; background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(255, 255, 255, 0.015), transparent); }
+.edge-glow-left { top: 0; left: 0; bottom: 0; width: 200px; background: radial-gradient(ellipse 100% 50% at 0% 50%, rgba(255, 255, 255, 0.02), transparent); }
+.edge-glow-right { top: 0; right: 0; bottom: 0; width: 200px; background: radial-gradient(ellipse 100% 50% at 100% 50%, rgba(255, 255, 255, 0.02), transparent); }
 .corner-glow { position: fixed; width: 400px; height: 400px; pointer-events: none; z-index: 0; opacity: 0.5; }
-.corner-glow-tl { top: -100px; left: -100px; background: radial-gradient(circle, rgba(16, 185, 129, 0.15), transparent 60%); }
-.corner-glow-br { bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(52, 211, 153, 0.1), transparent 60%); }
+.corner-glow-tl { top: -100px; left: -100px; background: radial-gradient(circle, rgba(255, 255, 255, 0.04), transparent 60%); }
+.corner-glow-br { bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(255, 255, 255, 0.03), transparent 60%); }
 h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.2; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
 .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
 .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
 .brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
-.brand img { height: 60px; width: auto; object-fit: contain; }
+.brand img { height: 42px; width: auto; object-fit: contain; }
 .brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
 .brand-text span { font-size: 0.7rem; color: #ffffff; letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
 .nav-links { display: flex; gap: 40px; list-style: none; }
@@ -114,8 +114,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; }
 .article-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; overflow: hidden; transition: all 0.3s; text-decoration: none; color: var(--text-primary); display: flex; flex-direction: column; }
 .article-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); }
-.article-image { height: 180px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(52, 211, 153, 0.08) 100%); display: flex; align-items: center; justify-content: center; position: relative; }
-.article-image .icon-box { width: 64px; height: 64px; background: linear-gradient(135deg, #10b981 0%, #34d399 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3); }
+.article-image { height: 180px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.03) 100%); display: flex; align-items: center; justify-content: center; position: relative; }
+.article-image .icon-box { width: 64px; height: 64px; background: linear-gradient(135deg, #ffffff 0%, #e5e5e5 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(255, 255, 255, 0.15); }
 .article-image .icon-box svg { width: 32px; height: 32px; color: #0a0a0f; }
 .article-image.has-image { background: var(--bg-tertiary); }
 .article-image.has-image::before { display: none; }
@@ -156,7 +156,7 @@ pre, code, .code-block { overflow-x: auto; max-width: 100%; } table { display: b
 .mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary, #0a0a0f); z-index: 999; padding: 100px 24px 24px; overflow-y: auto; }
 .mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
 .mobile-menu a { font-size: 1.2rem; color: var(--text-primary, #fff); text-decoration: none; font-weight: 600; }
-.mobile-menu a:hover { color: var(--accent-primary, #10b981); }
+.mobile-menu a:hover { color: var(--accent-primary, #ffffff); }
 @media (max-width: 768px) { .nav, .nav-links, .nav-cta { display: none; } .mobile-toggle { display: block; } }
 </style>
 </head>
@@ -174,7 +174,7 @@ pre, code, .code-block { overflow-x: auto; max-width: 100%; } table { display: b
   <div class="container">
     <nav class="nav-wrapper">
       <a class="brand" href="/">
-        <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks Logo"/>
+        <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logo-ww.svg" alt="WegWorks Logo"/>
         <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
       </a>
       <ul class="nav-links">

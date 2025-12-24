@@ -9,8 +9,8 @@
   <meta name="author" content="WegWorks"/>
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
 <link href="https://www.wegworks.com/" rel="canonical"/>
-<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png" rel="icon" type="image/png"/>
-<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.png"/>
+<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logowhite.png" rel="icon" type="image/png"/>
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logowhite.png"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
@@ -44,18 +44,18 @@
 
 <style>
 :root {
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #12121a;
-  --bg-tertiary: #1a1a24;
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
   --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-  --accent-primary: #10b981;
-  --accent-light: #34d399;
-  --accent-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --text-secondary: #a3a3a3;
+  --text-muted: #737373;
+  --accent-primary: #ffffff;
+  --accent-light: #e5e5e5;
+  --accent-gradient: linear-gradient(135deg, #ffffff 0%, #a3a3a3 100%);
   --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glow-primary: 0 0 40px rgba(16, 185, 129, 0.3);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glow-primary: 0 0 40px rgba(255, 255, 255, 0.15);
 }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -112,8 +112,8 @@ main {
   right: 0;
   bottom: 0;
   background-image: 
-    linear-gradient(rgba(16, 185, 129, 0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 185, 129, 0.015) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 80px 80px;
   pointer-events: none;
   z-index: 0;
@@ -133,7 +133,7 @@ main {
 .orb-1 {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
   top: -150px;
   left: -150px;
   animation-delay: 0s;
@@ -142,7 +142,7 @@ main {
 .orb-2 {
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
   top: 40%;
   right: -100px;
   animation-delay: -7s;
@@ -151,7 +151,7 @@ main {
 .orb-3 {
   width: 350px;
   height: 350px;
-  background: radial-gradient(circle, rgba(52, 211, 153, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.025) 0%, transparent 70%);
   bottom: 10%;
   left: 20%;
   animation-delay: -14s;
@@ -178,7 +178,7 @@ main {
   left: 0;
   right: 0;
   height: 200px;
-  background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(16, 185, 129, 0.03), transparent);
+  background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(255, 255, 255, 0.02), transparent);
 }
 
 .edge-glow-left {
@@ -186,7 +186,7 @@ main {
   left: 0;
   bottom: 0;
   width: 150px;
-  background: radial-gradient(ellipse 100% 50% at 0% 50%, rgba(16, 185, 129, 0.02), transparent);
+  background: radial-gradient(ellipse 100% 50% at 0% 50%, rgba(255, 255, 255, 0.015), transparent);
 }
 
 .edge-glow-right {
@@ -194,7 +194,7 @@ main {
   right: 0;
   bottom: 0;
   width: 150px;
-  background: radial-gradient(ellipse 100% 50% at 100% 50%, rgba(16, 185, 129, 0.02), transparent);
+  background: radial-gradient(ellipse 100% 50% at 100% 50%, rgba(255, 255, 255, 0.015), transparent);
 }
 
 .edge-glow-bottom {
@@ -202,7 +202,7 @@ main {
   left: 0;
   right: 0;
   height: 150px;
-  background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(16, 185, 129, 0.02), transparent);
+  background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(255, 255, 255, 0.015), transparent);
 }
 
 /* Corner accents */
@@ -219,19 +219,19 @@ main {
 .corner-glow-tl {
   top: -80px;
   left: -80px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.06), transparent 60%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03), transparent 60%);
 }
 
 .corner-glow-tr {
   top: -80px;
   right: -80px;
-  background: radial-gradient(circle, rgba(52, 211, 153, 0.04), transparent 60%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.02), transparent 60%);
 }
 
 .corner-glow-br {
   bottom: -80px;
   right: -80px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.05), transparent 60%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.025), transparent 60%);
 }
 
 /* Header */
@@ -265,7 +265,7 @@ main {
 }
 
 .brand img {
-  height: 60px;
+  height: 42px;
   width: auto;
   object-fit: contain;
 }
@@ -374,7 +374,7 @@ main {
 }
 
 .dropdown-menu a:hover {
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: var(--accent-primary);
 }
 
@@ -440,7 +440,7 @@ main {
 .hero-orb-1 {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.25) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
   top: -150px;
   left: -150px;
   animation-delay: 0s;
@@ -449,7 +449,7 @@ main {
 .hero-orb-2 {
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
   bottom: -100px;
   right: -100px;
   animation-delay: -7s;
@@ -458,7 +458,7 @@ main {
 .hero-orb-3 {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(236, 72, 153, 0.18) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
   top: 40%;
   right: 20%;
   animation-delay: -14s;
@@ -489,8 +489,8 @@ main {
   align-items: center;
   gap: 10px;
   padding: 10px 20px;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 100px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -505,7 +505,7 @@ main {
   background: var(--accent-primary);
   border-radius: 50%;
   animation: pulse-dot 1.5s ease-in-out infinite;
-  box-shadow: 0 0 12px var(--accent-primary);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
 }
 
 @keyframes pulse-dot {
@@ -543,7 +543,14 @@ main {
 }
 
 .hero h1 .gradient-text {
-  background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #a3a3a3 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #a3a3a3 50%, #ffffff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -607,7 +614,7 @@ main {
 
 .btn-primary:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 20px 50px rgba(255, 255, 255, 0.2);
 }
 
 .btn-secondary {
@@ -618,286 +625,10 @@ main {
 
 .btn-secondary:hover {
   border-color: var(--accent-primary);
-  color: var(--accent-primary);
+  color: #000000;
+  background: var(--accent-primary);
   transform: translateY(-4px);
-  box-shadow: 0 15px 40px rgba(16, 185, 129, 0.2);
-}
-
-.hero-visual {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  min-height: 400px;
-}
-
-.hero-graphic {
-  display: none;
-}
-
-/* Nucleus (Center) - Vibrant */
-.nucleus-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 250px;
-  height: 250px;
-  background: 
-    radial-gradient(circle, rgba(34, 211, 238, 0.4) 0%, transparent 50%),
-    radial-gradient(circle, rgba(16, 185, 129, 0.2) 20%, transparent 70%);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.nucleus {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, #22d3ee 0%, #10b981 50%, #ec4899 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 
-    0 0 30px rgba(34, 211, 238, 0.6),
-    0 0 60px rgba(16, 185, 129, 0.4),
-    0 0 100px rgba(236, 72, 153, 0.3),
-    inset 0 -5px 20px rgba(0, 0, 0, 0.3);
-  z-index: 10;
-  animation: nucleus-rotate 10s linear infinite;
-}
-
-@keyframes nucleus-rotate {
-  from { background: linear-gradient(135deg, #22d3ee 0%, #10b981 50%, #ec4899 100%); }
-  33% { background: linear-gradient(135deg, #10b981 0%, #ec4899 50%, #22d3ee 100%); }
-  66% { background: linear-gradient(135deg, #ec4899 0%, #22d3ee 50%, #10b981 100%); }
-  to { background: linear-gradient(135deg, #22d3ee 0%, #10b981 50%, #ec4899 100%); }
-}
-
-.nucleus-logo {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 2.5rem;
-  color: var(--bg-primary);
-}
-
-.nucleus-logo-img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-}
-
-/* Orbital Rings - Vibrant */
-.orbit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-}
-
-.orbit-1 {
-  width: 180px;
-  height: 180px;
-  border: 1.5px solid rgba(34, 211, 238, 0.4);
-  transform: translate(-50%, -50%) rotateX(70deg);
-  animation: orbit-spin 8s linear infinite;
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
-}
-
-.orbit-2 {
-  width: 260px;
-  height: 260px;
-  border: 1.5px solid rgba(16, 185, 129, 0.35);
-  transform: translate(-50%, -50%) rotateX(70deg) rotateZ(60deg);
-  animation: orbit-spin 12s linear infinite reverse;
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
-}
-
-.orbit-3 {
-  width: 340px;
-  height: 340px;
-  border: 1.5px solid rgba(236, 72, 153, 0.3);
-  transform: translate(-50%, -50%) rotateX(70deg) rotateZ(120deg);
-  animation: orbit-spin 16s linear infinite;
-  box-shadow: 0 0 20px rgba(236, 72, 153, 0.1);
-}
-
-@keyframes orbit-spin {
-  from { transform: translate(-50%, -50%) rotateX(70deg) rotateZ(0deg); }
-  to { transform: translate(-50%, -50%) rotateX(70deg) rotateZ(360deg); }
-}
-
-/* Electrons (orbiting dots) - Vibrant */
-.electron {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-}
-
-.electron-1 {
-  top: -7px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #22d3ee;
-  box-shadow: 0 0 15px #22d3ee, 0 0 30px #22d3ee, 0 0 45px rgba(34, 211, 238, 0.5);
-}
-
-.electron-2 {
-  top: -7px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #10b981;
-  box-shadow: 0 0 15px #10b981, 0 0 30px #10b981, 0 0 45px rgba(16, 185, 129, 0.5);
-}
-
-.electron-3 {
-  top: -7px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #ec4899;
-  box-shadow: 0 0 15px #ec4899, 0 0 30px #ec4899, 0 0 45px rgba(236, 72, 153, 0.5);
-}
-
-/* MarTech Nodes */
-/* Tech Nodes - Vibrant */
-.tech-node {
-  position: absolute;
-  width: 56px;
-  height: 56px;
-  background: rgba(15, 15, 25, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1.5px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: node-float 4s ease-in-out infinite;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-}
-
-.tech-node svg {
-  width: 26px;
-  height: 26px;
-  transition: all 0.3s ease;
-}
-
-.tech-node:hover {
-  transform: scale(1.15);
-}
-
-/* Individual node colors */
-.node-1 {
-  border-color: rgba(34, 211, 238, 0.4);
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.15);
-}
-.node-1 svg { color: #22d3ee; }
-.node-1:hover {
-  border-color: #22d3ee;
-  box-shadow: 0 0 30px rgba(34, 211, 238, 0.4);
-  background: rgba(34, 211, 238, 0.1);
-}
-
-.node-2 {
-  border-color: rgba(16, 185, 129, 0.4);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
-}
-.node-2 svg { color: #10b981; }
-.node-2:hover {
-  border-color: #10b981;
-  box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
-  background: rgba(16, 185, 129, 0.1);
-}
-
-.node-3 {
-  border-color: rgba(236, 72, 153, 0.4);
-  box-shadow: 0 0 20px rgba(236, 72, 153, 0.15);
-}
-.node-3 svg { color: #ec4899; }
-.node-3:hover {
-  border-color: #ec4899;
-  box-shadow: 0 0 30px rgba(236, 72, 153, 0.4);
-  background: rgba(236, 72, 153, 0.1);
-}
-
-.node-4 {
-  border-color: rgba(245, 158, 11, 0.4);
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
-}
-.node-4 svg { color: #f59e0b; }
-.node-4:hover {
-  border-color: #f59e0b;
-  box-shadow: 0 0 30px rgba(245, 158, 11, 0.4);
-  background: rgba(245, 158, 11, 0.1);
-}
-
-.node-5 {
-  border-color: rgba(16, 185, 129, 0.4);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
-}
-.node-5 svg { color: #10b981; }
-.node-5:hover {
-  border-color: #10b981;
-  box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
-  background: rgba(16, 185, 129, 0.1);
-}
-
-.node-6 {
-  border-color: rgba(99, 102, 241, 0.4);
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
-}
-.node-6 svg { color: #6366f1; }
-.node-6:hover {
-  border-color: #6366f1;
-  box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
-  background: rgba(99, 102, 241, 0.1);
-}
-
-/* Node positions - around the orbits */
-.node-1 { top: 0%; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
-.node-2 { top: 20%; right: 0%; animation-delay: 0.3s; }
-.node-3 { bottom: 20%; right: 0%; animation-delay: 0.6s; }
-.node-4 { bottom: 0%; left: 50%; transform: translateX(-50%); animation-delay: 0.9s; }
-.node-5 { bottom: 20%; left: 0%; animation-delay: 1.2s; }
-.node-6 { top: 20%; left: 0%; animation-delay: 1.5s; }
-
-@keyframes node-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-.node-1, .node-4 {
-  animation-name: node-float-center;
-}
-
-@keyframes node-float-center {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-8px); }
-}
-
-/* Hero graphic responsive */
-@media (max-width: 1200px) {
-  .hero-graphic {
-    max-width: 380px;
-    height: 380px;
-  }
-  .nucleus { width: 80px; height: 80px; }
-  .nucleus-logo { font-size: 2rem; }
-  .nucleus-logo-img { width: 50px; height: 50px; }
-  .nucleus-glow { width: 160px; height: 160px; }
-  .orbit-1 { width: 150px; height: 150px; }
-  .orbit-2 { width: 220px; height: 220px; }
-  .orbit-3 { width: 290px; height: 290px; }
-  .tech-node { width: 48px; height: 48px; }
-  .tech-node svg { width: 22px; height: 22px; }
-  .electron { width: 10px; height: 10px; }
+  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.15);
 }
 
 @keyframes float {
@@ -919,9 +650,9 @@ main {
 /* Stats Bar */
 .stats-bar {
   padding: 80px 0;
-  border-top: 1px solid rgba(34, 211, 238, 0.15);
-  border-bottom: 1px solid rgba(16, 185, 129, 0.15);
-  background: linear-gradient(180deg, rgba(34, 211, 238, 0.03) 0%, transparent 50%, rgba(16, 185, 129, 0.03) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 50%, rgba(255, 255, 255, 0.02) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -1023,8 +754,8 @@ main {
 
 .service-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(16, 185, 129, 0.4);
-  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15), 0 10px 20px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(255, 255, 255, 0.08), 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .service-card:hover::before {
@@ -1052,7 +783,7 @@ main {
 
 .service-card:hover .service-icon {
   transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
 }
 
 .service-card h3 {
@@ -1130,8 +861,8 @@ main {
   color: var(--text-primary);
   transition: all 0.3s;
   padding: 14px 24px 16px;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 100px;
   line-height: 1.4;
 }
@@ -1141,7 +872,7 @@ main {
   background: var(--accent-primary);
   border-color: var(--accent-primary);
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
 }
 
 /* Clients Section */
@@ -1162,7 +893,7 @@ main {
   transform: translate(-50%, -50%);
   width: 800px;
   height: 400px;
-  background: radial-gradient(ellipse, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -1231,8 +962,8 @@ main {
 .client-logo:hover {
   border-color: var(--accent-primary);
   transform: scale(1.05);
-  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.2), 0 0 30px rgba(16, 185, 129, 0.1);
-  background: rgba(16, 185, 129, 0.08);
+  box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* CSS Logo Styles */
@@ -1251,14 +982,14 @@ main {
 .logo-1digitals {
   font-family: 'Syne', sans-serif;
   font-weight: 700;
-  color: #10b981;
+  color: #ffffff;
   letter-spacing: 1px;
-  text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .client-logo:hover .logo-1digitals {
-  color: #41f5e8;
-  text-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
+  color: #ffffff;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
 }
 
 /* Adobe - Iconic red */
@@ -1546,7 +1277,7 @@ main {
 .blog-card:hover {
   transform: translateY(-8px);
   border-color: var(--accent-primary);
-  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 20px 40px rgba(255, 255, 255, 0.08);
 }
 
 .blog-card-image {
@@ -1585,7 +1316,7 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--accent-primary);
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 4px 10px;
   border-radius: 4px;
 }
@@ -1647,7 +1378,7 @@ main {
   background: var(--accent-primary);
   color: var(--bg-primary);
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 1024px) {
@@ -1683,7 +1414,7 @@ main {
   }
   
   .brand img {
-    height: 45px;
+    height: 36px;
   }
 }
 
@@ -1703,8 +1434,8 @@ main {
   width: 800px;
   height: 400px;
   background: 
-    radial-gradient(ellipse at center, rgba(16, 185, 129, 0.2), transparent 60%),
-    radial-gradient(ellipse at center, rgba(52, 211, 153, 0.15), transparent 70%);
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0.08), transparent 60%),
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05), transparent 70%);
   filter: blur(60px);
   z-index: -1;
 }
@@ -1749,8 +1480,8 @@ main {
 /* Location Cards */
 .locations { display: flex; flex-direction: column; gap: 20px; margin: 28px 0; }
 .location-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; transition: all 0.3s; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-.location-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); box-shadow: 0 16px 32px rgba(16, 185, 129, 0.1); }
-.location-card.headquarters { border-color: var(--accent-primary); background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(52, 211, 153, 0.03) 100%); }
+.location-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); box-shadow: 0 16px 32px rgba(255, 255, 255, 0.05); }
+.location-card.headquarters { border-color: var(--accent-primary); background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%); }
 .location-content { flex: 1; text-align: left; }
 .location-badge { display: inline-block; padding: 5px 12px; background: var(--accent-gradient); color: var(--bg-primary); font-size: 0.65rem; font-weight: 700; border-radius: 100px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
 .location-card h4 { font-size: 1.25rem; margin-bottom: 6px; }
@@ -1949,7 +1680,7 @@ main {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
 }
 
 .contact-icon svg {
@@ -2072,7 +1803,6 @@ main {
   .hero .container { grid-template-columns: 1fr; text-align: center; }
   .hero-content { max-width: 100%; margin: 0 auto; }
   .hero-cta { justify-content: center; }
-  .hero-visual { display: none; }
   .about-grid { gap: 48px; }
   
   /* Hide overflow-causing elements on tablet */
@@ -2586,7 +2316,7 @@ main {
   <div class="container">
     <nav class="nav-wrapper">
       <a class="brand" href="#home">
-        <img alt="WegWorks logo" src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg"/>
+        <img alt="WegWorks logo" src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logo-ww.svg"/>
         <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
       </a>
       <ul class="nav-links">
@@ -2668,65 +2398,6 @@ main {
       <div class="hero-cta">
         <a class="btn btn-primary" href="/contact/">Start Your Transformation →</a>
         <a class="btn btn-secondary" href="#services">Explore Services</a>
-</div>
-</div>
-<div class="hero-visual">
-      <div class="hero-graphic">
-        <!-- Nucleus glow -->
-        <div class="nucleus-glow"></div>
-        
-<!-- Central nucleus with logo -->
-        <div class="nucleus">
-          <img class="nucleus-logo-img" src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/ww.svg" alt="WegWorks"/>
-</div>
-        
-        <!-- Orbital rings -->
-        <div class="orbit orbit-1">
-          <div class="electron electron-1"></div>
-        </div>
-        <div class="orbit orbit-2">
-          <div class="electron electron-2"></div>
-        </div>
-        <div class="orbit orbit-3">
-          <div class="electron electron-3"></div>
-        </div>
-        
-        <!-- MarTech nodes on orbits -->
-        <div class="tech-node node-1" title="Customer Data Platform">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="7" r="4"/>
-            <path d="M5 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/>
-          </svg>
-        </div>
-        <div class="tech-node node-2" title="Analytics">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 3v18h18"/>
-            <path d="M7 16l4-4 4 4 5-6"/>
-          </svg>
-        </div>
-        <div class="tech-node node-3" title="Attribution">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="3"/>
-            <circle cx="12" cy="12" r="8"/>
-          </svg>
-        </div>
-        <div class="tech-node node-4" title="Automation">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-          </svg>
-        </div>
-        <div class="tech-node node-5" title="Personalization">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-        </div>
-        <div class="tech-node node-6" title="Content">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-          </svg>
-        </div>
       </div>
 </div>
 </div>
