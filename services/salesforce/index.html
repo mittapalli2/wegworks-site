@@ -212,9 +212,9 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
 .section-subtitle { font-size: 1.125rem; color: #ffffff; max-width: 600px; margin-bottom: 60px; line-height: 1.7; }
 .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 60px; }
-.service-card { padding: 40px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; transition: all 0.4s ease; }
+.service-card { padding: 40px; background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 24px; transition: all 0.4s ease; }
 .service-card:hover { border-color: var(--accent-primary); transform: translateY(-8px); box-shadow: var(--glow-primary); }
-.service-icon { width: 64px; height: 64px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 1.75rem; color: var(--accent-primary); transition: all 0.3s; }
+.service-icon { width: 64px; height: 64px; background: transparent; border: 2px solid var(--accent-primary); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 1.75rem; color: var(--accent-primary); transition: all 0.3s; }
 .service-icon svg { width: 28px; height: 28px; stroke: var(--accent-primary); }
 .service-card:hover .service-icon { background: rgba(255, 255, 255, 0.08); border-color: var(--accent-primary); transform: scale(1.05); }
 .service-card h3 { font-size: 1.375rem; margin-bottom: 16px; }
@@ -226,7 +226,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .feature-content p { color: #ffffff; line-height: 1.6; }
 .related-services { padding: 80px 0; background: var(--bg-secondary); }
 .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 40px; }
-.related-card { padding: 32px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; text-decoration: none; color: var(--text-primary); transition: all 0.3s; }
+.related-card { padding: 32px; background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 16px; text-decoration: none; color: var(--text-primary); transition: all 0.3s; }
 .related-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); }
 .related-card h4 { margin-bottom: 8px; }
 .related-card p { color: #ffffff; font-size: 0.9rem; }
@@ -234,7 +234,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .related-resources h2 { text-align: center; font-size: 2.5rem; margin-bottom: 16px; }
 .related-resources .section-subtitle { text-align: center; color: #ffffff; margin-bottom: 48px; }
 .resources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
-.resource-card { padding: 32px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; text-decoration: none; transition: all 0.3s; }
+.resource-card { padding: 32px; background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 16px; text-decoration: none; transition: all 0.3s; }
 .resource-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(255, 255, 255, 0.04); }
 .resource-tag { display: inline-block; padding: 4px 12px; background: rgba(255, 255, 255, 0.04); color: var(--accent-primary); border-radius: 100px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
 .resource-card h3 { font-size: 1.25rem; color: #ffffff; margin-bottom: 12px; }
@@ -245,7 +245,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 @media (max-width: 768px) { .resources-grid { grid-template-columns: 1fr; } .related-resources h2 { font-size: 1.75rem; } }
 
 .cta-section { padding: 100px 0; text-align: center; }
-.cta-box { padding: 80px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 32px; max-width: 800px; margin: 0 auto; }
+.cta-box { padding: 80px; background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 32px; max-width: 800px; margin: 0 auto; }
 .cta-box h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 20px; }
 .cta-box p { color: #ffffff; margin-bottom: 40px; font-size: 1.125rem; }
 .footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
@@ -257,7 +257,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
   background-size: 60px 60px; 
 }
 .faq-list { max-width: 800px; margin-top: 40px; }
-.faq-item { border: 1px solid var(--glass-border); border-radius: 16px; margin-bottom: 16px; overflow: hidden; background: var(--glass-bg); }
+.faq-item { border: 1px solid var(--glass-border); border-radius: 16px; margin-bottom: 16px; overflow: hidden; background: var(--bg-secondary); }
 .faq-question { width: 100%; padding: 24px 32px; background: transparent; border: none; color: var(--text-primary); font-family: 'Syne', sans-serif; font-size: 1.125rem; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: all 0.3s; }
 .faq-question:hover { color: var(--accent-primary); }
 .faq-question svg { flex-shrink: 0; transition: transform 0.3s; }
