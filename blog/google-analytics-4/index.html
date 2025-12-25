@@ -149,6 +149,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
         @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
   .hero { padding: 120px 0 60px; }
+  .hero .container { grid-template-columns: 1fr; gap: 40px; }
+  .hero-image { order: -1; }
   .articles-grid { grid-template-columns: 1fr; }
   .cta-banner { padding: 40px 24px; }
         }
@@ -228,18 +230,23 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
     
     <section class="hero">
   <div class="container">
-    <nav class="breadcrumb">
+    <div class="hero-content">
+      <nav class="breadcrumb">
         <a href="/">Home</a>
         <span>›</span>
         <a href="/blog/">Blog</a>
         <span>›</span>
         <span class="current">Google Analytics 4</span>
-    </nav>
-    <h1><span class="gradient-text">Google Analytics 4</span> Insights</h1>
-    <p class="hero-description">
-      Expert guides on GA4 migration, implementation, event tracking, and reporting 
-      from our analytics consultants.
-    </p>
+      </nav>
+      <h1><span class="gradient-text">Google Analytics 4</span> Insights</h1>
+      <p class="hero-description">
+        Expert guides on GA4 migration, implementation, event tracking, and reporting 
+        from our analytics consultants.
+      </p>
+    </div>
+    <div class="hero-image">
+      <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/GA-analytics.svg" alt="Google Analytics 4 Insights"/>
+    </div>
   </div>
 </section>
 
