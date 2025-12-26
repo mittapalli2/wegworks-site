@@ -458,23 +458,23 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
           
           <form class="contact-form" onsubmit="handleFormSubmit(event)">
             <div class="form-group">
-              <label for="name">Full Name</label>
+              <label for="name">Full Name <span style="color: var(--accent-primary);">*</span></label>
               <input type="text" id="name" name="name" required placeholder="Your name"/>
             </div>
             <div class="form-group">
-              <label for="email">Work Email</label>
+              <label for="email">Work Email <span style="color: var(--accent-primary);">*</span></label>
               <input type="email" id="email" name="email" required placeholder="you@company.com"/>
             </div>
             <div class="form-group">
-              <label for="company">Company</label>
+              <label for="company">Company <span style="color: var(--accent-primary);">*</span></label>
               <input type="text" id="company" name="company" placeholder="Your company"/>
             </div>
             <div class="form-group">
-              <label for="message">How Can We Help?</label>
+              <label for="message">How Can We Help? <span style="color: var(--accent-primary);">*</span></label>
               <textarea id="message" name="message" required placeholder="Tell us about your MarTech challenges..."></textarea>
             </div>
             <div class="form-group captcha-group">
-              <label for="captcha">🤖 Prove you're human: <span id="captcha-question"></span></label>
+              <label for="captcha">🤖 Prove you're human: <span id="captcha-question"></span> <span style="color: var(--accent-primary);">*</span></label>
               <input type="number" id="captcha" name="captcha" required placeholder="Enter answer" autocomplete="off"/>
             </div>
             <button class="btn btn-primary" type="submit" style="width: 100%;">Send Message →</button>
