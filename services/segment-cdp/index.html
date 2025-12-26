@@ -303,6 +303,11 @@ h1, h2, h3, h4, h5, h6 {
 .breadcrumb .current { color: #ffffff; }
 
 .hero { padding: 60px 0 100px; position: relative; }
+.hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.hero-content { }
+.hero-image { display: flex; justify-content: center; align-items: center; }
+.hero-image img { max-width: 100%; height: auto; border-radius: 16px; }
+@media (max-width: 900px) { .hero .container { grid-template-columns: 1fr; } .hero-image { order: -1; } }
 
 .hero-badge {
   display: inline-flex;
@@ -518,25 +523,30 @@ h1, h2, h3, h4, h5, h6 {
 
 <section class="hero">
   <div class="container">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      Customer Data Platform
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Customer Data Platform
+      </div>
+      <h1>
+        <span class="gradient-text">Segment CDP</span><br/>
+        Implementation & Strategy
+      </h1>
+      <p class="hero-description">
+        Build a unified view of your customers with Segment CDP. We help brands implement 
+        real-time customer data infrastructure that powers personalized experiences across 
+        every touchpoint while maintaining data privacy and governance.
+      </p>
+      <a class="btn btn-primary" href="/contact/">
+        Start Your CDP Journey
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
     </div>
-    <h1>
-      <span class="gradient-text">Segment CDP</span><br/>
-      Implementation & Strategy
-    </h1>
-    <p class="hero-description">
-      Build a unified view of your customers with Segment CDP. We help brands implement 
-      real-time customer data infrastructure that powers personalized experiences across 
-      every touchpoint while maintaining data privacy and governance.
-    </p>
-    <a class="btn btn-primary" href="/contact/">
-      Start Your CDP Journey
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
-    </a>
+    <div class="hero-image">
+      <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/cdp.svg" alt="Segment CDP Implementation"/>
+    </div>
   </div>
 </section>
 
