@@ -20,7 +20,7 @@
 <meta name="author" content="WegWorks"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://www.wegworks.com/blog/aem/aem-replication-cloud-vs-ams/"/>
-<link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logowhite.png" rel="icon" type="image/png"/>
+<link href="/images/blog/logowhite.png" rel="icon" type="image/png"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
@@ -31,13 +31,13 @@
 <meta property="og:site_name" content="WegWorks"/>
 <meta property="og:title" content="AEM Replication: Why Cloud Service Doesn't Have Replication Agents"/>
 <meta property="og:description" content="Understanding how content distribution works in AEM Cloud vs traditional replication in AMS."/>
-<meta property="og:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/replication-publish-aem.jpg"/>
+<meta property="og:image" content="/images/blog/replication-publish-aem.jpg"/>
 <meta property="article:published_time" content="2025-05-15"/>
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:site" content="@Wegworks_"/>
-<meta name="twitter:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/replication-publish-aem.jpg"/>
+<meta name="twitter:image" content="/images/blog/replication-publish-aem.jpg"/>
 
 <!-- Schema.org Article -->
 <script type="application/ld+json">
@@ -46,9 +46,9 @@
   "@type": "Article",
   "headline": "AEM Replication: Why Cloud Service Doesn't Have Replication Agents",
   "description": "Understanding why AEM Cloud Service removed traditional replication agents and how Sling Content Distribution handles author-to-publish content sync.",
-  "image": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/replication-publish-aem.jpg",
+  "image": "/images/blog/replication-publish-aem.jpg",
   "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
-  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logowhite.png"}},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "/images/blog/logowhite.png"}},
   "datePublished": "2025-05-15",
   "dateModified": "2025-05-15"
 }
@@ -291,7 +291,7 @@ pre code { background: none; padding: 0; font-size: 0.85rem; color: #ffffff; }
 <body>
 <header class="site-header">
   <nav class="nav-wrapper">
-    <a class="brand" href="/"><img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
+    <a class="brand" href="/"><img src="/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
     <ul class="nav-links">
       <li class="nav-dropdown">
         <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
@@ -362,7 +362,7 @@ pre code { background: none; padding: 0; font-size: 0.85rem; color: #ffffff; }
   </header>
 
   <div class="article-hero-image">
-    <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/replication-publish-aem.jpg" alt="AEM Replication - Cloud vs AMS Architecture" loading="eager" width="1000" height="667" onerror="this.style.display='none'"/>
+    <img src="/images/blog/replication-publish-aem.jpg" alt="AEM Replication - Cloud vs AMS Architecture" loading="eager" width="1000" height="667" onerror="this.style.display='none'"/>
   </div>
 
   <div class="article-content">
@@ -379,7 +379,7 @@ pre code { background: none; padding: 0; font-size: 0.85rem; color: #ffffff; }
       <h3>How Traditional Replication Works</h3>
 
       <div class="diagram-image">
-        <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/replication-aem-ams.png" alt="AEM AMS/6.5 Replication Flow - Author to Replication Agent to Publish to Dispatcher" loading="lazy" width="1564" height="238"/>
+        <img src="/images/blog/replication-aem-ams.png" alt="AEM AMS/6.5 Replication Flow - Author to Replication Agent to Publish to Dispatcher" loading="lazy" width="1564" height="238"/>
       </div>
 
       <p>When you activate a page in AEM AMS:</p>
@@ -438,7 +438,7 @@ Agent Enabled: true</code></pre>
       </p>
 
       <div class="diagram-image">
-        <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/replication-aem-cloud.png" alt="AEM Cloud Service Content Distribution Flow - Author to Distribution Queue to Adobe I/O Pipeline to Publish Pods to CDN" loading="lazy" width="1558" height="362"/>
+        <img src="/images/blog/replication-aem-cloud.png" alt="AEM Cloud Service Content Distribution Flow - Author to Distribution Queue to Adobe I/O Pipeline to Publish Pods to CDN" loading="lazy" width="1558" height="362"/>
       </div>
 
       <h3>The Distribution Process Step-by-Step</h3>
