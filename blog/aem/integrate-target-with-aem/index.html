@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9VH11ZH9Y4');
+</script>
+<title>Integrate Adobe Target with AEM: Complete Setup Guide | WegWorks</title>
+<meta name="description" content="Learn how to integrate Adobe Target with AEM for personalization. Step-by-step guide covering IMS setup, Experience Fragments, Visual Experience Composer, and A4T reporting."/>
+<meta name="keywords" content="Adobe Target AEM integration, AEM personalization, Experience Fragments Target, AEM Cloud Service Target, Adobe IMS, Visual Experience Composer AEM, A4T AEM, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/aem/integrate-target-with-aem/"/>
+<link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/aem/integrate-target-with-aem/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="Integrate Adobe Target with AEM: Complete Setup Guide"/>
+<meta property="og:description" content="Step-by-step guide to integrating Adobe Target with AEM for personalization and A/B testing."/>
+<meta property="og:image" content="https://www.wegworks.com/images/blog/target.svg"/>
+<meta property="article:published_time" content="2025-01-15"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:image" content="https://www.wegworks.com/images/blog/target.svg"/>
+
+<!-- Schema.org Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Integrate Adobe Target with AEM: Complete Setup Guide",
+  "description": "Learn how to integrate Adobe Target with AEM for personalization, A/B testing, and automated optimization.",
+  "image": "https://www.wegworks.com/images/blog/target.svg",
+  "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "https://www.wegworks.com/images/blog/logowhite.png"}},
+  "datePublished": "2025-01-15",
+  "dateModified": "2025-01-15"
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "AEM", "item": "https://www.wegworks.com/blog/aem/"},
+    {"@type": "ListItem", "position": 4, "name": "Integrate Target with AEM", "item": "https://www.wegworks.com/blog/aem/integrate-target-with-aem/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I integrate Adobe Target with AEM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In AEM Cloud Service, use Adobe IMS authentication. Go to Tools > Cloud Services > Adobe Target, create a configuration with your Target tenant code and IMS credentials. For AEM 6.5, you can use legacy cloud configuration or IMS. Once connected, you can export Experience Fragments to Target and use the Visual Experience Composer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are Experience Fragments in AEM Target integration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Experience Fragments are reusable content components in AEM that can be exported to Adobe Target as HTML offers. This lets you create and manage content in AEM while using Target for personalization and A/B testing. Changes in AEM automatically sync to Target."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use Visual Experience Composer with AEM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, but you need to configure your AEM dispatcher and CORS settings to allow Target's VEC to load your pages. You may also need the Enhanced Experience Composer or VEC Helper browser extension for sites with strict security policies."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #86bc25;
+  --accent-light: #a4d44a;
+  --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(134, 188, 37, 0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100vw; overflow-x: hidden; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+h1, h2, h3 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.brand img { height: 42px; width: auto; }
+.brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
+.brand-text span { font-size: 0.7rem; color: var(--accent-primary); letter-spacing: 0.15em; font-weight: 600; margin-top: 2px; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links > li { position: relative; }
+.nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
+.nav-links a:hover { color: var(--accent-primary); }
+.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+.dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
+.nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
+.dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); color: var(--accent-primary); }
+.nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+
+.article-header { padding: 160px 0 40px; }
+.article-hero-image { margin: 0 auto 60px; max-width: 1200px; padding: 0 24px; }
+.article-hero-image img { width: 100%; max-height: 400px; object-fit: contain; object-position: center; border-radius: 16px; background: var(--bg-secondary); padding: 40px; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: #ffffff; margin-bottom: 24px; text-decoration: none; }
+.article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: #ffffff; }
+.article-category { color: var(--accent-primary); font-weight: 600; text-decoration: none; }
+.article-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
+.article-intro { font-size: 1.25rem; color: #ffffff; line-height: 1.7; }
+
+.article-content { padding: 60px 0 100px; }
+.article-content h2 { font-size: 1.75rem; margin: 48px 0 20px; color: var(--text-primary); }
+.article-content h3 { font-size: 1.375rem; margin: 36px 0 16px; color: var(--text-primary); }
+.article-content p { margin-bottom: 20px; color: #ffffff; line-height: 1.8; }
+.article-content ul, .article-content ol { margin: 20px 0 20px 24px; color: #ffffff; }
+.article-content li { margin-bottom: 12px; line-height: 1.7; }
+.article-content strong { color: var(--text-primary); }
+.article-content a { color: var(--accent-primary); text-decoration: none; }
+
+.step-box { background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 16px; padding: 24px 32px; margin: 24px 0; }
+.step-box h4 { color: var(--accent-primary); margin-bottom: 16px; font-size: 1.1rem; display: flex; align-items: center; gap: 12px; }
+.step-number { background: var(--accent-primary); color: #000; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; }
+
+.comparison-table { width: 100%; border-collapse: collapse; margin: 32px 0; background: var(--glass-bg); border-radius: 12px; overflow: hidden; }
+.comparison-table th, .comparison-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--glass-border); }
+.comparison-table th { background: var(--bg-tertiary); color: var(--text-primary); font-weight: 600; font-size: 0.9rem; }
+.comparison-table td { color: #ffffff; font-size: 0.95rem; }
+.comparison-table tr:last-child td { border-bottom: none; }
+
+.callout { padding: 24px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; margin: 32px 0; }
+.callout-title { font-weight: 700; color: var(--accent-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.callout p { margin: 0; color: #ffffff; }
+.callout-warning { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); }
+.callout-warning .callout-title { color: #fbbf24; }
+.callout-info { background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3); }
+.callout-info .callout-title { color: #60a5fa; }
+
+code { background: var(--bg-tertiary); padding: 3px 8px; border-radius: 4px; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.85em; color: #e06c75; }
+pre { background: #1e1e1e; border-radius: 12px; padding: 20px; overflow-x: auto; margin: 24px 0; border: 1px solid #333; }
+pre code { background: none; padding: 0; font-size: 0.85rem; color: #d4d4d4; font-family: "SF Mono", Monaco, Consolas, monospace; }
+
+.cta-box { padding: 48px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; text-align: center; margin-top: 60px; }
+.cta-box h3 { font-size: 1.5rem; margin-bottom: 16px; }
+.cta-box p { color: #ffffff; margin-bottom: 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-weight: 600; border-radius: 12px; text-decoration: none; }
+.btn-primary { background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); }
+
+.keywords-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--glass-border); }
+.keywords-section h4 { font-size: 0.875rem; color: #ffffff; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+.keyword-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.keyword-tags span { padding: 6px 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.8rem; color: #ffffff; }
+
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: #ffffff; }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+.mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 28px; cursor: pointer; padding: 8px; }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary); z-index: 999; padding: 100px 24px 24px; overflow-y: auto; }
+.mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.mobile-menu a { font-size: 1.2rem; color: var(--text-primary); text-decoration: none; font-weight: 600; }
+.mobile-menu a:hover { color: var(--accent-primary); }
+
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
+  .article-header { padding: 120px 0 40px; }
+  .comparison-table { font-size: 0.85rem; }
+  .comparison-table th, .comparison-table td { padding: 12px; }
+}
+@media (max-width: 768px) {
+  .article-hero-image img { max-height: 250px; padding: 20px; }
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <nav class="nav-wrapper">
+    <a class="brand" href="/"><img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/services/adobe-analytics/">Adobe Analytics</a>
+          <a href="/services/segment-cdp/">Segment CDP</a>
+          <a href="/services/salesforce/">Salesforce</a>
+          <a href="/services/marketing-automation/">Marketing Automation</a>
+          <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+          <a href="/small-business/" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 8px; padding-top: 16px;">Small Business Solutions</a>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+          <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+          <a href="/blog/adobe-target/">Adobe Target</a>
+          <a href="/blog/aem/">AEM</a>
+          <a href="/blog/google-analytics-4/">Google Analytics 4</a>
+          <a href="/blog/marketing-automation/">Marketing Automation</a>
+          <a href="/blog/salesforce/">Salesforce</a>
+          <a href="/blog/segment-cdp/">Segment CDP</a>
+        </div>
+      </li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="/contact/">Get Started</a>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Home</a>
+  <a href="/services/">Services</a>
+  <a href="/blog/">Blog</a>
+  <a href="/blog/aem/">→ AEM</a>
+  <a href="/blog/adobe-target/">→ Adobe Target</a>
+  <a href="/blog/adobe-analytics/">→ Adobe Analytics</a>
+  <a href="/#about">About</a>
+  <a href="/contact/">Contact</a>
+</div>
+
+<article>
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="/blog/aem/">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        AEM
+      </a>
+      <div class="article-meta">
+        <a class="article-category" href="/blog/aem/">AEM</a>
+        <span>January 15, 2025</span>
+        <span>10 min read</span>
+      </div>
+      <h1>Integrate Adobe Target with AEM: Complete Setup Guide</h1>
+      <p class="article-intro">
+        Want to personalize your AEM site? Adobe Target integration lets you run A/B tests, 
+        target content to segments, and optimize experiences. This guide walks you through 
+        the setup step by step.
+      </p>
+    </div>
+  </header>
+
+  <div class="article-hero-image">
+    <img src="https://www.wegworks.com/images/blog/target.svg" alt="Adobe Target and AEM Integration" loading="eager" width="400" height="300"/>
+  </div>
+
+  <div class="article-content">
+    <div class="container">
+
+      <h2>Why Integrate Target with AEM?</h2>
+      
+      <p>
+        Adobe Target and AEM work great together. AEM handles your content. Target handles 
+        personalization. When connected, you can:
+      </p>
+
+      <ul>
+        <li><strong>Run A/B tests</strong> on AEM pages without developer help</li>
+        <li><strong>Personalize content</strong> based on visitor behavior, location, or segments</li>
+        <li><strong>Export Experience Fragments</strong> from AEM to use as Target offers</li>
+        <li><strong>Use the Visual Experience Composer</strong> to edit AEM pages in Target</li>
+        <li><strong>Track results</strong> with Analytics for Target (A4T) reporting</li>
+      </ul>
+
+      <h2>Integration Methods</h2>
+
+      <p>How you connect depends on your AEM version:</p>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>AEM Version</th>
+            <th>Method</th>
+            <th>Authentication</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>AEM Cloud Service</td>
+            <td>Adobe IMS (required)</td>
+            <td>Adobe Developer Console</td>
+          </tr>
+          <tr>
+            <td>AEM 6.5</td>
+            <td>Adobe IMS (recommended)</td>
+            <td>Adobe Developer Console</td>
+          </tr>
+          <tr>
+            <td>AEM 6.5</td>
+            <td>Legacy Cloud Config</td>
+            <td>Client Code + API Token</td>
+          </tr>
+          <tr>
+            <td>AEM 6.4 and older</td>
+            <td>Legacy Cloud Config</td>
+            <td>Client Code + API Token</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-info">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          Recommendation
+        </div>
+        <p>
+          Use Adobe IMS whenever possible. It's more secure and required for Cloud Service. 
+          Legacy authentication still works but Adobe may deprecate it.
+        </p>
+      </div>
+
+      <h2>Prerequisites</h2>
+
+      <p>Before you start, make sure you have:</p>
+
+      <ul>
+        <li>Admin access to AEM (author instance)</li>
+        <li>Admin access to Adobe Target</li>
+        <li>Access to Adobe Admin Console (for IMS setup)</li>
+        <li>Your Target tenant code (found in Target UI under Setup > Implementation)</li>
+        <li>Your IMS Organization ID</li>
+      </ul>
+
+      <h2>Step-by-Step: IMS Integration (AEM Cloud Service & 6.5)</h2>
+
+      <div class="step-box">
+        <h4><span class="step-number">1</span> Create Adobe I/O Project</h4>
+        <p>Go to <a href="https://developer.adobe.com/console" target="_blank" rel="noopener">Adobe Developer Console</a> and create a new project:</p>
+        <ol>
+          <li>Click "Create new project"</li>
+          <li>Add API → Select "Adobe Target"</li>
+          <li>Choose "Service Account (JWT)" or "OAuth Server-to-Server"</li>
+          <li>Generate or upload a certificate (for JWT)</li>
+          <li>Save your credentials</li>
+        </ol>
+      </div>
+
+      <div class="step-box">
+        <h4><span class="step-number">2</span> Configure IMS in AEM</h4>
+        <p>In AEM, go to <strong>Tools → Security → Adobe IMS Configurations</strong>:</p>
+        <ol>
+          <li>Click "Create"</li>
+          <li>Select "Adobe Target" as the cloud solution</li>
+          <li>Enter your IMS Organization ID</li>
+          <li>Paste the API Key (Client ID) from Developer Console</li>
+          <li>Paste the Client Secret</li>
+          <li>Add your certificate (for JWT auth)</li>
+          <li>Click "Create"</li>
+        </ol>
+      </div>
+
+      <div class="step-box">
+        <h4><span class="step-number">3</span> Create Target Cloud Configuration</h4>
+        <p>Go to <strong>Tools → Cloud Services → Adobe Target</strong>:</p>
+        <ol>
+          <li>Click "Create" and choose a configuration folder</li>
+          <li>Enter a title (e.g., "Adobe Target Production")</li>
+          <li>Select the IMS configuration you just created</li>
+          <li>Enter your Target tenant code (e.g., "mycompany")</li>
+          <li>Select your Target client code</li>
+          <li>Click "Connect to Target" to verify</li>
+          <li>Save the configuration</li>
+        </ol>
+      </div>
+
+      <div class="step-box">
+        <h4><span class="step-number">4</span> Apply to Your Site</h4>
+        <p>Link the configuration to your site:</p>
+        <ol>
+          <li>Go to <strong>Sites</strong> console</li>
+          <li>Select your site root</li>
+          <li>Click <strong>Properties → Cloud Services</strong></li>
+          <li>Add the Adobe Target configuration</li>
+          <li>Save and close</li>
+        </ol>
+      </div>
+
+      <h2>Using Experience Fragments with Target</h2>
+
+      <p>
+        Experience Fragments (XF) are a powerful way to manage Target offers in AEM. You 
+        create content in AEM, export it to Target, and use it in activities.
+      </p>
+
+      <h3>Export an Experience Fragment</h3>
+
+      <ol>
+        <li>Open the Experience Fragment editor</li>
+        <li>Create or edit your fragment variation</li>
+        <li>Click the <strong>Export to Target</strong> action in the toolbar</li>
+        <li>Select your Target configuration</li>
+        <li>Choose "Export as HTML" or "Export as JSON"</li>
+        <li>Click Export</li>
+      </ol>
+
+      <p>The fragment appears in Target under <strong>Offers → Code Offers</strong>.</p>
+
+      <div class="callout">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          Pro Tip
+        </div>
+        <p>
+          Name your XF variations clearly (e.g., "Homepage Hero - Promo A"). This makes them 
+          easy to find in Target when building activities.
+        </p>
+      </div>
+
+      <h3>Experience Fragment Offer Structure</h3>
+
+<pre><code>// Target offer created from XF export
+{
+  "name": "homepage-hero-promo-a",
+  "type": "html",
+  "content": "&lt;div class='hero'&gt;...&lt;/div&gt;",
+  "modifiedAt": "2025-01-15T10:30:00Z",
+  "workspace": "default"
+}</code></pre>
+
+      <h2>Visual Experience Composer with AEM</h2>
+
+      <p>
+        The Visual Experience Composer (VEC) lets you edit pages visually in Target. To use 
+        it with AEM, you need to configure CORS and possibly your dispatcher.
+      </p>
+
+      <h3>Enable VEC Access</h3>
+
+      <p>Add these headers to your AEM dispatcher or CDN:</p>
+
+<pre><code># Dispatcher config for VEC
+&lt;IfModule mod_headers.c&gt;
+  # Allow Target VEC to frame your pages
+  Header always set X-Frame-Options "ALLOW-FROM https://experience.adobe.com"
+  
+  # Or use Content-Security-Policy
+  Header always set Content-Security-Policy "frame-ancestors 'self' https://experience.adobe.com"
+  
+  # CORS for Target API calls
+  Header always set Access-Control-Allow-Origin "https://experience.adobe.com"
+  Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+  Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
+&lt;/IfModule&gt;</code></pre>
+
+      <div class="callout callout-warning">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          VEC Troubleshooting
+        </div>
+        <p>
+          If VEC can't load your page, try the <strong>Enhanced Experience Composer</strong> 
+          (proxy mode) or install the <strong>VEC Helper</strong> browser extension. These 
+          bypass most CORS issues.
+        </p>
+      </div>
+
+      <h2>Analytics for Target (A4T)</h2>
+
+      <p>
+        A4T lets you use Adobe Analytics as the reporting source for Target activities. 
+        This gives you richer data and avoids duplicate tracking.
+      </p>
+
+      <h3>Enable A4T</h3>
+
+      <ol>
+        <li>Ensure Analytics and Target share the same IMS org</li>
+        <li>In Target, go to <strong>Administration → Reporting</strong></li>
+        <li>Select "Adobe Analytics" as default reporting source</li>
+        <li>Choose your Analytics report suite</li>
+        <li>In AEM, make sure both Analytics and Target cloud configs are applied to your site</li>
+      </ol>
+
+      <h3>A4T Data Flow</h3>
+
+      <p>With A4T enabled:</p>
+      <ul>
+        <li>Target activity impressions go to Analytics</li>
+        <li>Success metrics are measured in Analytics</li>
+        <li>Reports appear in both Target and Analytics Workspace</li>
+        <li>You can segment Target data by any Analytics dimension</li>
+      </ul>
+
+      <h2>Common Integration Patterns</h2>
+
+      <h3>Pattern 1: XF-Based Personalization</h3>
+      <p>Best for: Content-heavy sites managed by marketers</p>
+      <ol>
+        <li>Create Experience Fragment variations in AEM</li>
+        <li>Export variations to Target</li>
+        <li>Build Target activity using XF offers</li>
+        <li>Target decides which variation to show</li>
+      </ol>
+
+      <h3>Pattern 2: VEC-Based Testing</h3>
+      <p>Best for: Quick A/B tests without AEM changes</p>
+      <ol>
+        <li>Open VEC in Target</li>
+        <li>Load your AEM page URL</li>
+        <li>Make visual edits (text, images, layout)</li>
+        <li>Set up audience targeting</li>
+        <li>Launch the activity</li>
+      </ol>
+
+      <h3>Pattern 3: Form-Based Activities</h3>
+      <p>Best for: Single-page apps, headless AEM</p>
+      <ol>
+        <li>Create mbox locations in your code</li>
+        <li>Build activity using Form-Based Composer</li>
+        <li>Return JSON offers from Target</li>
+        <li>Render content client-side</li>
+      </ol>
+
+      <h2>Troubleshooting</h2>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Issue</th>
+            <th>Solution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>IMS connection fails</td>
+            <td>Check certificate expiration, verify API credentials, ensure correct IMS org</td>
+          </tr>
+          <tr>
+            <td>XF export fails</td>
+            <td>Verify Target cloud config, check user permissions, review error logs</td>
+          </tr>
+          <tr>
+            <td>VEC won't load page</td>
+            <td>Check CORS headers, try Enhanced EEC, use VEC Helper extension</td>
+          </tr>
+          <tr>
+            <td>Activity not showing</td>
+            <td>Verify at.js is loaded, check activity status, clear browser cache</td>
+          </tr>
+          <tr>
+            <td>A4T data missing</td>
+            <td>Ensure Analytics tracking fires, verify SDID stitching, check report suite</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Best Practices</h2>
+
+      <ol>
+        <li>
+          <strong>Use IMS auth</strong> — It's more secure and future-proof than legacy tokens.
+        </li>
+        <li>
+          <strong>Organize XFs clearly</strong> — Create folders by campaign or page type.
+        </li>
+        <li>
+          <strong>Enable A4T</strong> — Unified reporting saves time and gives better insights.
+        </li>
+        <li>
+          <strong>Test in lower environments</strong> — Always verify on stage before production.
+        </li>
+        <li>
+          <strong>Document your setup</strong> — Record tenant codes, configs, and permissions.
+        </li>
+      </ol>
+
+      <h2>Conclusion</h2>
+
+      <p>
+        Integrating Adobe Target with AEM unlocks powerful personalization. Start with the 
+        IMS setup, test Experience Fragment exports, and explore the Visual Experience 
+        Composer. Once connected, your content team can run tests without developer help.
+      </p>
+
+      <p>
+        The key is getting the foundation right. A proper IMS configuration and clear 
+        XF naming conventions make everything else easier.
+      </p>
+
+      <!-- Keywords Section -->
+      <div class="keywords-section">
+        <h4>Related Topics</h4>
+        <div class="keyword-tags">
+          <span>Adobe Target</span>
+          <span>AEM Integration</span>
+          <span>Experience Fragments</span>
+          <span>Visual Experience Composer</span>
+          <span>A4T</span>
+          <span>Adobe IMS</span>
+          <span>AEM Cloud Service</span>
+          <span>Personalization</span>
+          <span>A/B Testing</span>
+          <span>WegWorks</span>
+          <span>Adobe Experience Cloud</span>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h3>Need Help with Target + AEM Integration?</h3>
+        <p>Our team at WegWorks has set up Target integrations for many AEM sites. We can help you get it right the first time.</p>
+        <a class="btn btn-primary" href="/contact/">
+          Get Expert Help
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container-wide">
+    <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const mobileToggle = document.querySelector(".mobile-toggle");
+const mobileMenu = document.getElementById("mobile-menu");
+if (mobileToggle && mobileMenu) {
+  mobileToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    mobileToggle.textContent = mobileMenu.classList.contains("active") ? "✕" : "☰";
+  });
+  mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("active");
+      mobileToggle.textContent = "☰";
+    });
+  });
+}
+</script>
+</body>
+</html>
+
