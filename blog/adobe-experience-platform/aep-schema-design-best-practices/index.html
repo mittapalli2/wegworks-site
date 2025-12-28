@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9VH11ZH9Y4');
+</script>
+<title>AEP Schema Design Best Practices to Avoid Technical Debt | WegWorks</title>
+<meta name="description" content="Design Adobe Experience Platform schemas that scale. Learn XDM best practices, field group strategy, and how to avoid costly schema migrations."/>
+<meta name="keywords" content="AEP schema design, XDM best practices, schema field groups, AEP technical debt, Adobe Experience Platform, data modeling, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/adobe-experience-platform/aep-schema-design-best-practices/"/>
+<link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
+<link rel="apple-touch-icon" href="https://www.wegworks.com/images/blog/logowhite.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/adobe-experience-platform/aep-schema-design-best-practices/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="AEP Schema Design Best Practices to Avoid Technical Debt"/>
+<meta property="og:description" content="Design Adobe Experience Platform schemas that scale without costly migrations."/>
+<meta property="og:image" content="https://www.wegworks.com/images/blog/SCHEMA-DESIGN-BEST-PRACTISE-AEP.svg"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:title" content="AEP Schema Design Best Practices to Avoid Technical Debt"/>
+<meta name="twitter:image" content="https://www.wegworks.com/images/blog/SCHEMA-DESIGN-BEST-PRACTISE-AEP.svg"/>
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AEP Schema Design Best Practices to Avoid Technical Debt",
+  "image": "https://www.wegworks.com/images/blog/SCHEMA-DESIGN-BEST-PRACTISE-AEP.svg",
+  "author": {
+    "@type": "Organization",
+    "name": "WegWorks",
+    "url": "https://www.wegworks.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "WegWorks",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.wegworks.com/images/logo-white-green-ww.svg"
+    }
+  },
+  "datePublished": "2025-01-20",
+  "dateModified": "2025-01-20",
+  "description": "Design Adobe Experience Platform schemas that scale. Learn XDM best practices and field group strategy.",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.wegworks.com/blog/adobe-experience-platform/aep-schema-design-best-practices/"
+  }
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #86bc25;
+  --accent-light: #a4d44a;
+  --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; }
+
+.bg-mesh { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse 80% 50% at 20% -20%, rgba(255, 255, 255, 0.04), transparent), var(--bg-primary); }
+
+h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.brand img { height: 42px; width: auto; }
+.brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
+.brand-text span { font-size: 0.7rem; color: var(--accent-primary); letter-spacing: 0.15em; font-weight: 600; margin-top: 2px; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; }
+.nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+
+.article-header { padding: 140px 0 60px; }
+.breadcrumb { display: flex; gap: 8px; font-size: 0.9rem; margin-bottom: 24px; flex-wrap: wrap; }
+.breadcrumb a { color: var(--text-secondary); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent-primary); }
+.breadcrumb span { color: var(--text-muted); }
+
+.article-meta { display: flex; gap: 24px; margin-bottom: 24px; color: var(--text-secondary); font-size: 0.95rem; flex-wrap: wrap; }
+.article-meta span { display: flex; align-items: center; gap: 6px; }
+
+h1 { font-size: clamp(2rem, 5vw, 2.75rem); margin-bottom: 20px; }
+.gradient-text { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.article-intro { font-size: 1.2rem; color: var(--text-secondary); line-height: 1.8; }
+
+.article-hero-image { margin: 40px 0; text-align: center; }
+.article-hero-image img { max-width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--glass-border); }
+
+.article-content { padding-bottom: 80px; }
+.article-content h2 { font-size: 1.75rem; margin: 48px 0 20px; padding-top: 24px; border-top: 1px solid var(--glass-border); }
+.article-content h2:first-of-type { border-top: none; padding-top: 0; }
+.article-content h3 { font-size: 1.35rem; margin: 32px 0 16px; color: var(--accent-light); }
+.article-content h4 { font-size: 1.1rem; margin: 24px 0 12px; }
+.article-content p { margin-bottom: 20px; color: var(--text-secondary); }
+.article-content ul, .article-content ol { margin: 0 0 24px 24px; color: var(--text-secondary); }
+.article-content li { margin-bottom: 12px; }
+.article-content strong { color: var(--text-primary); }
+
+.article-content pre { background: var(--bg-tertiary); border: 1px solid var(--glass-border); border-radius: 12px; padding: 20px; overflow-x: auto; margin: 24px 0; }
+.article-content code { font-family: 'Monaco', 'Consolas', monospace; font-size: 0.9rem; color: var(--accent-light); }
+.article-content p code { background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px; }
+
+.info-box { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 24px; margin: 24px 0; }
+.info-box.warning { border-left: 4px solid #f59e0b; }
+.info-box.tip { border-left: 4px solid var(--accent-primary); }
+.info-box.error { border-left: 4px solid #ef4444; }
+.info-box h4 { margin-top: 0; color: var(--text-primary); }
+
+.comparison-table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+.comparison-table th, .comparison-table td { padding: 14px 16px; text-align: left; border: 1px solid var(--glass-border); }
+.comparison-table th { background: var(--bg-tertiary); color: var(--text-primary); font-weight: 600; }
+.comparison-table td { color: var(--text-secondary); }
+
+.cta-banner { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 48px; text-align: center; margin: 48px 0; }
+.cta-banner h3 { margin-bottom: 16px; }
+.cta-banner p { color: var(--text-secondary); margin-bottom: 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-weight: 600; border-radius: 12px; text-decoration: none; transition: all 0.3s; }
+.btn-primary { background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); }
+.btn-primary:hover { border-color: var(--accent-light); color: var(--accent-light); }
+
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: var(--text-secondary); }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--glass-border); }
+.tag { padding: 6px 14px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.85rem; color: var(--text-secondary); }
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .article-header { padding: 120px 0 40px; }
+  .cta-banner { padding: 32px 20px; }
+}
+</style>
+</head>
+
+<body>
+<div class="bg-mesh"></div>
+
+<header class="site-header">
+  <div class="nav-wrapper">
+    <a class="brand" href="/"><img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
+    <ul class="nav-links">
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="/contact/">Get Started</a>
+  </div>
+</header>
+
+<article>
+  <header class="article-header">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="/blog/">Blog</a><span>›</span>
+        <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a><span>›</span>
+        <span>Schema Design Best Practices</span>
+      </nav>
+      
+      <div class="article-meta">
+        <span>📅 January 20, 2025</span>
+        <span>⏱️ 16 min read</span>
+        <span>🏷️ Data Modeling</span>
+      </div>
+      
+      <h1>AEP Schema Design <span class="gradient-text">Best Practices</span></h1>
+      <p class="article-intro">
+        Poor schema design is the #1 cause of technical debt in AEP implementations. Once data is flowing, schema changes become painful. This guide shows you how to design schemas that scale from day one.
+      </p>
+      
+      <div class="article-hero-image">
+        <img src="https://www.wegworks.com/images/blog/SCHEMA-DESIGN-BEST-PRACTISE-AEP.svg" alt="AEP Schema Design Best Practices" loading="eager" width="1080" height="1080"/>
+      </div>
+    </div>
+  </header>
+
+  <div class="article-content">
+    <div class="container">
+      
+      <h2>Why Schema Design Matters</h2>
+      <p>In Adobe Experience Platform, schemas are <strong>immutable after data ingestion</strong>. You can add fields, but you can't:</p>
+      <ul>
+        <li>Rename existing fields</li>
+        <li>Change field data types</li>
+        <li>Delete fields with data</li>
+        <li>Restructure nested objects</li>
+      </ul>
+      <p>This means mistakes made during initial schema design follow you forever—or require expensive data migration projects.</p>
+
+      <h2>Understanding XDM Architecture</h2>
+      
+      <h3>Schema Building Blocks</h3>
+      <p>Every AEP schema is built from these components:</p>
+      
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Description</th>
+            <th>Can Modify?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Class</strong></td>
+            <td>Base behavior (Profile, ExperienceEvent, Record)</td>
+            <td>No (after creation)</td>
+          </tr>
+          <tr>
+            <td><strong>Field Group</strong></td>
+            <td>Reusable collection of related fields</td>
+            <td>Can add fields only</td>
+          </tr>
+          <tr>
+            <td><strong>Data Type</strong></td>
+            <td>Reusable complex structure (address, consent)</td>
+            <td>Can add fields only</td>
+          </tr>
+          <tr>
+            <td><strong>Field</strong></td>
+            <td>Individual data element with type</td>
+            <td>Cannot change type</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Choosing the Right Class</h3>
+      <ul>
+        <li><strong>XDM Individual Profile:</strong> Person-level attributes (preferences, demographics)</li>
+        <li><strong>XDM ExperienceEvent:</strong> Time-series behavioral data (clicks, purchases)</li>
+        <li><strong>XDM Record:</strong> Non-person entities (products, locations, accounts)</li>
+      </ul>
+      
+      <div class="info-box warning">
+        <h4>⚠️ Class Cannot Be Changed</h4>
+        <p>Once a schema is created with a class, you cannot change it. If you pick ExperienceEvent but needed Profile, you must create a new schema and migrate data.</p>
+      </div>
+
+      <h2>Field Group Strategy</h2>
+      
+      <h3>Use Adobe Field Groups First</h3>
+      <p>Adobe provides pre-built field groups for common use cases. Always check these before creating custom ones:</p>
+      <ul>
+        <li><strong>Demographic Details:</strong> Name, birth date, gender</li>
+        <li><strong>Personal Contact Details:</strong> Email, phone, address</li>
+        <li><strong>Commerce Details:</strong> Cart, purchases, product views</li>
+        <li><strong>Web Details:</strong> Page views, referrer, browser</li>
+        <li><strong>Consent and Preference Details:</strong> GDPR/CCPA compliance</li>
+      </ul>
+
+      <h3>When to Create Custom Field Groups</h3>
+      <p>Create custom field groups for:</p>
+      <ul>
+        <li>Industry-specific data (healthcare, finance, retail)</li>
+        <li>Proprietary business attributes</li>
+        <li>Integration-specific fields</li>
+        <li>Computed/derived attributes</li>
+      </ul>
+
+      <h3>Field Group Design Principles</h3>
+      <ol>
+        <li><strong>Single Responsibility:</strong> Each field group should represent one concept</li>
+        <li><strong>Reusability:</strong> Design for use across multiple schemas</li>
+        <li><strong>Namespace Properly:</strong> Use your tenant namespace for custom fields</li>
+        <li><strong>Document Everything:</strong> Add descriptions to every field</li>
+      </ol>
+
+      <h2>Naming Conventions</h2>
+      
+      <h3>Schema Names</h3>
+      <pre><code>// Good naming pattern
+[Tenant]_[EntityType]_[Purpose]_Schema
+
+// Examples
+Acme_Profile_Loyalty_Schema
+Acme_Event_WebBehavior_Schema
+Acme_Record_Product_Schema</code></pre>
+
+      <h3>Field Names</h3>
+      <pre><code>// Use camelCase for field names
+loyaltyTier
+purchaseCount
+lastActivityDate
+
+// NOT
+loyalty_tier    // Snake case
+LoyaltyTier     // PascalCase
+LOYALTYTIER     // All caps</code></pre>
+
+      <h3>Field Group Names</h3>
+      <pre><code>// Pattern
+[Tenant] [Domain] [Entity] Details
+
+// Examples
+Acme Loyalty Member Details
+Acme Commerce Purchase Details
+Acme Healthcare Patient Details</code></pre>
+
+      <h2>Data Type Selection</h2>
+      
+      <h3>Choose Types Carefully</h3>
+      <p>You cannot change a field's data type after creation. Choose wisely:</p>
+      
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Use Case</th>
+            <th>Recommended Type</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>IDs, codes</td>
+            <td>String</td>
+            <td>Flexible, handles leading zeros</td>
+          </tr>
+          <tr>
+            <td>Counts, quantities</td>
+            <td>Integer</td>
+            <td>Efficient for whole numbers</td>
+          </tr>
+          <tr>
+            <td>Prices, scores</td>
+            <td>Number (Double)</td>
+            <td>Handles decimals</td>
+          </tr>
+          <tr>
+            <td>Dates</td>
+            <td>DateTime</td>
+            <td>ISO 8601 format required</td>
+          </tr>
+          <tr>
+            <td>Yes/No flags</td>
+            <td>Boolean</td>
+            <td>True/false only</td>
+          </tr>
+          <tr>
+            <td>Categories</td>
+            <td>String + Enum</td>
+            <td>Enforces valid values</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box tip">
+        <h4>💡 String for IDs</h4>
+        <p>Always use String for IDs, even if they look numeric. Phone numbers, ZIP codes, and account numbers often have leading zeros that Integer would strip.</p>
+      </div>
+
+      <h2>Identity Design</h2>
+      
+      <h3>Primary vs Secondary Identities</h3>
+      <ul>
+        <li><strong>Primary Identity:</strong> The main identifier for the record (one per schema)</li>
+        <li><strong>Secondary Identities:</strong> Additional identifiers for matching</li>
+      </ul>
+
+      <h3>Identity Best Practices</h3>
+      <ol>
+        <li>Use stable, persistent IDs as primary (CRM ID, loyalty ID)</li>
+        <li>Mark email and phone as identities with correct namespace</li>
+        <li>Never use PII directly—hash or use namespaced identifiers</li>
+        <li>Plan your identity graph before implementation</li>
+      </ol>
+      
+      <pre><code>// Good identity structure
+{
+  "identityMap": {
+    "CRMID": [{"id": "ABC123", "primary": true}],
+    "Email": [{"id": "hash_abc...", "primary": false}],
+    "Phone": [{"id": "hash_123...", "primary": false}]
+  }
+}</code></pre>
+
+      <h2>Common Schema Mistakes</h2>
+      
+      <h3>Mistake #1: Flat Schemas</h3>
+      <p><strong>Problem:</strong> Putting all fields at the root level</p>
+      <pre><code>// Bad: Flat structure
+{
+  "firstName": "...",
+  "lastName": "...",
+  "email": "...",
+  "phone": "...",
+  "addressLine1": "...",
+  "addressCity": "..."
+}</code></pre>
+      
+      <p><strong>Solution:</strong> Use proper nesting with field groups</p>
+      <pre><code>// Good: Structured with field groups
+{
+  "person": {
+    "name": {"firstName": "...", "lastName": "..."}
+  },
+  "personalEmail": {"address": "..."},
+  "homeAddress": {
+    "street1": "...",
+    "city": "..."
+  }
+}</code></pre>
+
+      <h3>Mistake #2: Over-Engineering</h3>
+      <p><strong>Problem:</strong> Creating overly complex nested structures for simple data</p>
+      <p><strong>Solution:</strong> Keep nesting to 3-4 levels maximum. If deeper, reconsider your data model.</p>
+
+      <h3>Mistake #3: Ignoring Cardinality</h3>
+      <p><strong>Problem:</strong> Using arrays when single values needed, or vice versa</p>
+      <pre><code>// Ask: Can a person have multiple?
+email: single value? or array?
+// Usually array - people have work/personal emails
+
+loyaltyTier: single value? or array?
+// Usually single - one tier at a time</code></pre>
+
+      <h3>Mistake #4: Missing Timestamps</h3>
+      <p><strong>Problem:</strong> Not tracking when attributes changed</p>
+      <p><strong>Solution:</strong> Add timestamp fields for important attributes</p>
+      <pre><code>{
+  "loyaltyTier": "Gold",
+  "loyaltyTierUpdatedAt": "2025-01-15T10:30:00Z",
+  "loyaltyTierPreviousValue": "Silver"
+}</code></pre>
+
+      <h2>Schema Evolution Strategy</h2>
+      
+      <h3>What You Can Change</h3>
+      <ul>
+        <li>✅ Add new fields to existing field groups</li>
+        <li>✅ Add new field groups to schemas</li>
+        <li>✅ Update field descriptions</li>
+        <li>✅ Add enum values (not remove)</li>
+      </ul>
+
+      <h3>What You Cannot Change</h3>
+      <ul>
+        <li>❌ Rename fields</li>
+        <li>❌ Change data types</li>
+        <li>❌ Delete fields with data</li>
+        <li>❌ Change cardinality (single ↔ array)</li>
+        <li>❌ Change schema class</li>
+      </ul>
+
+      <h3>Versioning Approach</h3>
+      <p>When major changes needed:</p>
+      <ol>
+        <li>Create new schema version: <code>Acme_Profile_Loyalty_v2_Schema</code></li>
+        <li>Set up parallel data flows during transition</li>
+        <li>Migrate historical data if needed</li>
+        <li>Deprecate old schema after cutover</li>
+      </ol>
+
+      <h2>Pre-Launch Checklist</h2>
+      
+      <p>Before enabling schemas for Profile or going to production:</p>
+      
+      <ul>
+        <li>☐ All field names follow naming conventions</li>
+        <li>☐ Every field has a description</li>
+        <li>☐ Data types are appropriate for the data</li>
+        <li>☐ Identity fields are properly configured</li>
+        <li>☐ Consent fields are included (GDPR/CCPA)</li>
+        <li>☐ Adobe field groups used where applicable</li>
+        <li>☐ Schema tested with sample data</li>
+        <li>☐ Downstream dependencies documented</li>
+        <li>☐ Stakeholders have reviewed and approved</li>
+      </ul>
+
+      <div class="tags">
+        <span class="tag">AEP</span>
+        <span class="tag">XDM</span>
+        <span class="tag">Schema Design</span>
+        <span class="tag">Data Modeling</span>
+        <span class="tag">Best Practices</span>
+        <span class="tag">Technical Debt</span>
+        <span class="tag">WegWorks</span>
+      </div>
+
+      <div class="cta-banner">
+        <h3>Need Help With Schema Design?</h3>
+        <p>Our AEP architects have designed schemas for Fortune 500 companies. Let us help you build a foundation that scales.</p>
+        <a class="btn btn-primary" href="/contact/">
+          Schedule a Review
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
+
