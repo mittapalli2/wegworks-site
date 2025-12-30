@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9VH11ZH9Y4');
+    </script>
+    <title>AEM Assets Content Hub: Fixing Move Listener Timeout with Asynchronous Processing | WegWorks</title>
+    <meta name="description" content="How to fix AEM Assets Content Hub move listener timeout issues caused by heavy metadata operations. Implement Sling Jobs for asynchronous processing to prevent listener kills.">
+    <meta name="keywords" content="AEM Assets, Content Hub, move listener, timeout, metadata enhancement, Sling Jobs, asynchronous processing, AEM Cloud Service, WegWorks">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.wegworks.com/blog/aem/aem-assets-content-hub-listener-timeout/">
+    <link href="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/logowhite.png" rel="icon" type="image/png"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AEM Assets Content Hub: Fixing Move Listener Timeout | WegWorks">
+    <meta property="og:description" content="How to fix move listener timeout issues with Sling Jobs for asynchronous metadata processing.">
+    <meta property="og:url" content="https://www.wegworks.com/blog/aem/aem-assets-content-hub-listener-timeout/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="WegWorks">
+    <meta property="article:published_time" content="2025-12-30">
+    <meta property="og:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/aemcloud.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AEM Assets Content Hub: Fixing Move Listener Timeout">
+    <meta name="twitter:description" content="How to fix move listener timeout issues with Sling Jobs for asynchronous metadata processing.">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/blog/aemcloud.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "AEM Assets Content Hub: Fixing Move Listener Timeout with Asynchronous Processing",
+        "description": "How to fix AEM Assets Content Hub move listener timeout issues caused by heavy metadata operations using Sling Jobs.",
+        "datePublished": "2025-12-30",
+        "dateModified": "2025-12-30",
+        "author": {"@type": "Organization", "name": "WegWorks"},
+        "publisher": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com/"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "AEM", "item": "https://www.wegworks.com/blog/aem/"},
+            {"@type": "ListItem", "position": 4, "name": "Content Hub Listener Timeout", "item": "https://www.wegworks.com/blog/aem/aem-assets-content-hub-listener-timeout/"}
+        ]
+    }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+html, body { max-width: 100vw; overflow-x: hidden; }
+.code-block { background: #1e1e1e; border-radius: 12px; margin: 24px 0; overflow: hidden; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+.code-block::before { content: ""; display: block; background: linear-gradient(90deg, #333 0%, #2d2d2d 100%); padding: 10px 16px; border-bottom: 1px solid #333; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='14'%3E%3Ccircle cx='6' cy='7' r='5' fill='%23ff5f56'/%3E%3Ccircle cx='26' cy='7' r='5' fill='%23ffbd2e'/%3E%3Ccircle cx='46' cy='7' r='5' fill='%2327ca40'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: 12px center; }
+.code-block code { display: block; padding: 20px; overflow-x: auto; font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.875rem; line-height: 1.7; color: #d4d4d4; white-space: pre; }
+pre { background: #1e1e1e; border-radius: 12px; padding: 20px; overflow-x: auto; margin: 24px 0; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+pre code { font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.875rem; line-height: 1.7; color: #d4d4d4; background: none; padding: 0; }
+code { font-family: "SF Mono", Monaco, Consolas, monospace; background: rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.875em; color: #e06c75; }
+table { display: block; overflow-x: auto; max-width: 100%; }
+img { max-width: 100%; height: auto; }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #141414;
+    --bg-code: #0d1117;
+    --text-primary: #f0f0f5;
+    --text-secondary: #b0b0c0;
+    --text-muted: #707080;
+    --accent-primary: #86bc25;
+    --accent-light: #a4d44a;
+    --accent-warning: #f59e0b;
+    --accent-error: #ef4444;
+    --accent-blue: #3b82f6;
+    --accent-cyan: #06b6d4;
+    --accent-purple: #a855f7;
+    --border-color: #2a2a3a;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.8;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.header {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.brand img { height: 42px; width: auto; object-fit: contain; }
+.brand-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #ffffff;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+.brand-text span {
+    font-size: 0.7rem;
+    color: var(--accent-primary);
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    margin-top: 2px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+.nav { display: flex; gap: 2rem; align-items: center; }
+.nav > a, .nav-dropdown > a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
+.nav a:hover { color: var(--accent-primary); }
+.nav-dropdown { position: relative; }
+.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+.dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
+.nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 20px; font-size: 0.9rem; }
+.dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); }
+.nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+.nav-cta:hover { border-color: var(--accent-secondary); color: var(--accent-secondary); }
+
+.breadcrumb { padding: 1rem 2rem; max-width: 900px; margin: 0 auto; }
+.breadcrumb a { color: #ffffff; text-decoration: none; transition: color 0.3s; }
+.breadcrumb a:hover { color: var(--accent-primary); }
+.breadcrumb span { color: #ffffff; margin: 0 0.5rem; }
+.breadcrumb .current { color: #ffffff; }
+
+.article { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+.article-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-color); }
+
+.article-header h1 {
+    font-size: 2.1rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.article-meta { color: #ffffff; font-size: 0.95rem; }
+
+.severity-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--accent-error);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-left: 12px;
+}
+
+.solution-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(134, 188, 37, 0.15);
+    color: var(--accent-primary);
+    border: 1px solid rgba(134, 188, 37, 0.3);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-left: 12px;
+}
+
+.article-content { font-size: 1.05rem; }
+
+.article-content > p:first-child {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+.article-content h2 { 
+    font-size: 1.85rem; 
+    margin: 3.5rem 0 1.5rem; 
+    color: var(--text-primary);
+    font-weight: 700;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--accent-primary);
+}
+
+.article-content h3 { 
+    font-size: 1.4rem; 
+    margin: 2.5rem 0 1rem; 
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.article-content h4 { 
+    font-size: 1.15rem; 
+    margin: 2rem 0 0.75rem; 
+    color: var(--accent-cyan);
+    font-weight: 600;
+}
+
+.article-content p { 
+    color: #ffffff; 
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.article-content ul, .article-content ol { 
+    color: #ffffff; 
+    margin-bottom: 1.5rem; 
+    padding-left: 1.5rem;
+}
+
+.article-content li { 
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+}
+
+.article-content li strong { color: var(--text-primary); }
+
+.article-content code {
+    background: rgba(110, 118, 129, 0.15);
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    color: var(--accent-cyan);
+    border: 1px solid rgba(110, 118, 129, 0.2);
+}
+
+.article-content pre {
+    background: var(--bg-code);
+    padding: 1.5rem;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 2rem 0;
+    border: 1px solid var(--border-color);
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.article-content pre::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 6px 14px;
+    font-size: 0.7rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0 12px 0 8px;
+}
+
+.article-content pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #c9d1d9;
+}
+
+.highlight-box, .warning-box, .error-box, .success-box {
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    margin: 2.5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.highlight-box::before, .warning-box::before, .error-box::before, .success-box::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.highlight-box::before { background: var(--accent-primary); }
+.highlight-box h4 { color: var(--accent-primary); margin-bottom: 0.75rem; margin-top: 0; font-size: 1.1rem; }
+
+.warning-box {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.03));
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+.warning-box::before { background: var(--accent-warning); }
+.warning-box h4 { color: var(--accent-warning); margin-bottom: 0.75rem; margin-top: 0; font-size: 1.1rem; }
+
+.error-box {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.03));
+    border: 1px solid rgba(239, 68, 68, 0.25);
+}
+.error-box::before { background: var(--accent-error); }
+.error-box h4 { color: var(--accent-error); margin-bottom: 0.75rem; margin-top: 0; font-size: 1.1rem; }
+
+.success-box {
+    background: linear-gradient(135deg, rgba(134, 188, 37, 0.1), rgba(134, 188, 37, 0.03));
+    border: 1px solid rgba(134, 188, 37, 0.25);
+}
+.success-box::before { background: var(--accent-primary); }
+.success-box h4 { color: var(--accent-primary); margin-bottom: 0.75rem; margin-top: 0; font-size: 1.1rem; }
+
+.diagram {
+    background: var(--bg-code);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2.5rem 0;
+    overflow-x: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.diagram pre { background: transparent; border: none; margin: 0; padding: 0; box-shadow: none; }
+.diagram pre code { font-size: 0.8rem; line-height: 1.5; color: #ffffff; }
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+}
+
+.comparison-table th, .comparison-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-table th {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.comparison-table td { color: #ffffff; }
+.comparison-table tr:hover td { background: var(--bg-secondary); }
+
+.related-topics { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-color); }
+.related-topics h3 { color: var(--text-primary); margin-bottom: 1rem; }
+.topic-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.topic-tag {
+    background: var(--bg-tertiary);
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s;
+}
+.topic-tag:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+
+.footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 2rem;
+    text-align: center;
+    margin-top: 4rem;
+}
+.footer p { color: #ffffff; }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+@media (max-width: 900px) {
+    .nav, .nav-cta { display: none; }
+    .mobile-toggle { display: block; }
+    .article-header h1 { font-size: 1.75rem; }
+    .article-content h2 { font-size: 1.5rem; }
+}
+
+@media (max-width: 768px) {
+    .article { padding: 1.5rem; }
+    .article-header h1 { font-size: 1.5rem; }
+    .article-content pre { padding: 1rem; }
+    .diagram { padding: 1rem; }
+}
+
+.mobile-toggle { display: none; background: none; border: none; color: var(--text-primary, #fff); font-size: 28px; cursor: pointer; padding: 8px; }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary, #0a0a0f); z-index: 999; padding: 100px 24px 24px; overflow-y: auto; }
+.mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.mobile-menu a { font-size: 1.2rem; color: var(--text-primary, #fff); text-decoration: none; font-weight: 600; }
+.mobile-menu a:hover { color: var(--accent-primary, #ffffff); }
+@media (max-width: 768px) { .nav, .nav-links, .nav-cta { display: none; } .mobile-toggle { display: block; } }
+</style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a class="brand" href="/">
+                <img src="https://raw.githubusercontent.com/mittapalli2/wegworks-site/main/images/logo-white-green-ww.svg" alt="WegWorks Logo"/>
+                <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
+            </a>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <span class="nav-dropdown">
+                    <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
+                    <div class="dropdown-menu">
+                        <a href="/services/adobe-analytics/">Adobe Analytics</a>
+                        <a href="/services/segment-cdp/">Segment CDP</a>
+                        <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+                    </div>
+                </span>
+                <span class="nav-dropdown">
+                    <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+                    <div class="dropdown-menu">
+                        <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+                        <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+                        <a href="/blog/aem/">AEM</a>
+                        <a href="/blog/google-analytics-4/">Google Analytics 4</a>
+                    </div>
+                </span>
+                <a href="/#about">About</a>
+                <a href="/contact/">Contact</a>
+            </nav>
+            <a class="nav-cta" href="/contact/">Get Started</a>
+            <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="/">Home</a>
+      <a href="/services/">Services</a>
+      <a href="/blog/">Blog</a>
+      <a href="/blog/adobe-analytics/">→ Adobe Analytics</a>
+      <a href="/blog/adobe-experience-platform/">→ Adobe Experience Platform</a>
+      <a href="/blog/adobe-target/">→ Adobe Target</a>
+      <a href="/blog/aem/">→ AEM</a>
+      <a href="/blog/google-analytics-4/">→ Google Analytics 4</a>
+      <a href="/blog/segment-cdp/">→ Segment CDP</a>
+      <a href="/#about">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    
+    <nav class="breadcrumb">
+        <a href="/">Home</a>
+        <span>›</span>
+        <a href="/blog/">Blog</a>
+        <span>›</span>
+        <a href="/blog/aem/">AEM</a>
+        <span>›</span>
+        <span class="current">Content Hub Listener Timeout Fix</span>
+    </nav>
+    
+    <article class="article">
+        <header class="article-header">
+            <h1>AEM Assets Content Hub: Fixing Move Listener Timeout <span class="severity-badge">Critical Issue</span></h1>
+            <p class="article-meta">Published December 30, 2025 · 18 min read · AEM Cloud Service Technical Guide</p>
+        </header>
+        
+        <div class="article-content">
+            <p>When implementing custom asset processing in AEM Assets Content Hub, a common pattern is using a ResourceChangeListener to move uploaded images and enhance their metadata. However, this approach frequently leads to the listener being killed due to timeout—especially when performing multiple heavy metadata operations. Here's how to solve it using Sling Jobs for asynchronous processing.</p>
+            
+            <h2>Understanding the Problem</h2>
+            
+            <h3>What is AEM Assets Content Hub?</h3>
+            
+            <p>AEM Assets Content Hub is a centralized portal within AEM as a Cloud Service that allows marketing teams, agencies, and distributed stakeholders to upload, discover, and distribute approved brand assets. It provides a streamlined interface for:</p>
+            
+            <ul>
+                <li><strong>Self-service uploads</strong> — Non-technical users can upload assets directly</li>
+                <li><strong>Asset discovery</strong> — Search and filter approved assets</li>
+                <li><strong>Distribution</strong> — Share assets via links or direct downloads</li>
+                <li><strong>Governance</strong> — Controlled access to brand-approved content</li>
+            </ul>
+            
+            <h3>The Custom Processing Requirement</h3>
+            
+            <p>Many organizations need custom logic when assets are uploaded via Content Hub:</p>
+            
+            <ul>
+                <li><strong>Move assets</strong> to proper folder structures based on metadata</li>
+                <li><strong>Enhance metadata</strong> with auto-tagging, AI descriptions, or taxonomy mappings</li>
+                <li><strong>Trigger workflows</strong> for approval or processing</li>
+                <li><strong>Call external APIs</strong> for enrichment (DAM systems, PIMs, AI services)</li>
+            </ul>
+            
+            <h3>The Synchronous Listener Problem</h3>
+            
+            <p>A typical implementation uses a <code>ResourceChangeListener</code> to detect uploads and process them immediately:</p>
+            
+<pre data-lang="java"><code>@Component(
+    service = ResourceChangeListener.class,
+    property = {
+        ResourceChangeListener.PATHS + "=/content/dam/content-hub-uploads",
+        ResourceChangeListener.CHANGES + "=ADDED"
+    }
+)
+public class ContentHubAssetListener implements ResourceChangeListener {
+    
+    @Reference
+    private ResourceResolverFactory resolverFactory;
+    
+    @Reference
+    private AssetManager assetManager;
+    
+    @Override
+    public void onChange(List&lt;ResourceChange&gt; changes) {
+        try (ResourceResolver resolver = getServiceResolver()) {
+            for (ResourceChange change : changes) {
+                String path = change.getPath();
+                
+                // PROBLEM: These operations are HEAVY and SYNCHRONOUS
+                moveAssetToTargetFolder(resolver, path);      // ~500ms
+                extractAndEnhanceMetadata(resolver, path);    // ~2000ms
+                callExternalAITagging(resolver, path);        // ~3000ms
+                updateTaxonomyMappings(resolver, path);       // ~800ms
+                triggerApprovalWorkflow(resolver, path);      // ~500ms
+                
+                resolver.commit();
+            }
+        } catch (Exception e) {
+            log.error("Asset processing failed", e);
+        }
+    }
+}</code></pre>
+            
+            <div class="error-box">
+                <h4>⚠️ Why This Fails</h4>
+                <p>The <code>ResourceChangeListener</code> runs on the Oak observation thread. AEM has strict timeout limits (typically 5-10 seconds) for these listeners. When your processing takes 6-7+ seconds per asset, the listener gets killed, leaving assets in an inconsistent state.</p>
+            </div>
+            
+            <h3>Symptoms of Timeout Issues</h3>
+            
+            <p>You'll see these signs in your logs and behavior:</p>
+            
+<pre data-lang="log"><code># In error.log
+*WARN* [oak-observation-1] org.apache.jackrabbit.oak.plugins.observation.ChangeProcessor 
+    Listener exceeded timeout: com.example.ContentHubAssetListener - killing listener
+
+*ERROR* [oak-observation-1] org.apache.sling.jcr.resource.internal.helper.jcr.JcrResourceListener 
+    ResourceChange listener timed out after 5000ms
+
+# Observable symptoms:
+- Assets stuck in upload folder (never moved)
+- Partial metadata updates (some fields set, others missing)
+- Workflows never triggered
+- Inconsistent state across batch uploads</code></pre>
+            
+            <h2>The Solution: Sling Jobs for Asynchronous Processing</h2>
+            
+            <p>The fix is to make the listener <strong>thin</strong>—it should only detect changes and queue work for asynchronous processing. Sling Jobs provide guaranteed execution, retry logic, and proper threading.</p>
+            
+            <div class="diagram">
+<pre><code>                    SYNCHRONOUS (Problem)
+┌─────────────────────────────────────────────────────────────────┐
+│                                                                 │
+│  Upload → Listener → Move → Metadata → AI → Taxonomy → Done    │
+│                      ↑                                          │
+│                      └── All on Oak thread (TIMEOUT!)           │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+
+
+                    ASYNCHRONOUS (Solution)
+┌─────────────────────────────────────────────────────────────────┐
+│                                                                 │
+│  Upload → Listener → Create Job → Return immediately (~50ms)   │
+│                          │                                      │
+│                          ▼                                      │
+│              ┌─────────────────────┐                            │
+│              │   Sling Job Queue   │                            │
+│              └──────────┬──────────┘                            │
+│                         │                                       │
+│                         ▼                                       │
+│              Job Consumer (separate thread)                     │
+│              Move → Metadata → AI → Taxonomy → Done             │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘</code></pre>
+            </div>
+            
+            <h3>Architecture Components</h3>
+            
+            <ol>
+                <li><strong>Content Hub Upload</strong> — User uploads asset via Content Hub UI</li>
+                <li><strong>Thin Listener</strong> — Detects change, creates job (~50ms)</li>
+                <li><strong>Job Queue</strong> — Persisted, guaranteed delivery</li>
+                <li><strong>Job Consumer</strong> — Heavy processing on separate thread (no timeout)</li>
+            </ol>
+            
+            <h2>Implementation</h2>
+            
+            <h3>Step 1: Define the Job Topic</h3>
+            
+            <p>Create a constants class to define your job topic:</p>
+            
+<pre data-lang="java"><code>package com.example.core.jobs;
+
+public final class ContentHubJobConstants {
+    
+    // Job topic for asset processing
+    public static final String TOPIC_ASSET_PROCESSING = 
+        "com/example/contenthub/asset/processing";
+    
+    // Job properties
+    public static final String PROP_ASSET_PATH = "assetPath";
+    public static final String PROP_UPLOAD_USER = "uploadUser";
+    public static final String PROP_UPLOAD_TIME = "uploadTime";
+    public static final String PROP_SOURCE_FOLDER = "sourceFolder";
+    
+    private ContentHubJobConstants() {
+        // Utility class
+    }
+}</code></pre>
+            
+            <h3>Step 2: Create the Thin Listener (Job Producer)</h3>
+            
+            <p>The listener now only creates jobs—no heavy processing:</p>
+            
+<pre data-lang="java"><code>package com.example.core.listeners;
+
+import org.apache.sling.api.resource.ResourceChange;
+import org.apache.sling.api.resource.ResourceChangeListener;
+import org.apache.sling.event.jobs.JobManager;
+import org.osgi.service.component.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.example.core.jobs.ContentHubJobConstants.*;
+
+@Component(
+    service = ResourceChangeListener.class,
+    immediate = true,
+    property = {
+        ResourceChangeListener.PATHS + "=/content/dam/content-hub-uploads",
+        ResourceChangeListener.CHANGES + "=ADDED"
+    }
+)
+public class ContentHubAssetListener implements ResourceChangeListener {
+    
+    private static final Logger log = LoggerFactory.getLogger(ContentHubAssetListener.class);
+    
+    @Reference
+    private JobManager jobManager;
+    
+    @Override
+    public void onChange(List&lt;ResourceChange&gt; changes) {
+        for (ResourceChange change : changes) {
+            String path = change.getPath();
+            
+            // Only process actual asset nodes (not subnodes like renditions)
+            if (isAssetNode(path)) {
+                createProcessingJob(path, change);
+            }
+        }
+    }
+    
+    private boolean isAssetNode(String path) {
+        // Filter to only process main asset nodes
+        return path.matches(".*/content/dam/content-hub-uploads/[^/]+") 
+            && !path.contains("/jcr:content")
+            && !path.contains("/_jcr_content");
+    }
+    
+    private void createProcessingJob(String assetPath, ResourceChange change) {
+        Map&lt;String, Object&gt; jobProperties = new HashMap&lt;&gt;();
+        jobProperties.put(PROP_ASSET_PATH, assetPath);
+        jobProperties.put(PROP_UPLOAD_TIME, System.currentTimeMillis());
+        jobProperties.put(PROP_SOURCE_FOLDER, "/content/dam/content-hub-uploads");
+        
+        // Add job to queue - returns immediately
+        jobManager.addJob(TOPIC_ASSET_PROCESSING, jobProperties);
+        
+        log.info("Created processing job for Content Hub asset: {}", assetPath);
+    }
+}</code></pre>
+            
+            <div class="success-box">
+                <h4>✓ Fast Listener</h4>
+                <p>This listener completes in ~50ms regardless of how heavy the actual processing is. The Oak observation thread is freed immediately, preventing timeout kills.</p>
+            </div>
+            
+            <h3>Step 3: Create the Job Consumer (Heavy Processing)</h3>
+            
+            <p>The job consumer handles all the heavy lifting on a separate thread:</p>
+            
+<pre data-lang="java"><code>package com.example.core.jobs;
+
+import com.day.cq.dam.api.Asset;
+import com.day.cq.dam.api.AssetManager;
+import org.apache.sling.api.resource.*;
+import org.apache.sling.event.jobs.Job;
+import org.apache.sling.event.jobs.consumer.JobConsumer;
+import org.osgi.service.component.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.jcr.Session;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.core.jobs.ContentHubJobConstants.*;
+
+@Component(
+    service = JobConsumer.class,
+    immediate = true,
+    property = {
+        JobConsumer.PROPERTY_TOPICS + "=" + TOPIC_ASSET_PROCESSING
+    }
+)
+public class ContentHubAssetJobConsumer implements JobConsumer {
+    
+    private static final Logger log = LoggerFactory.getLogger(ContentHubAssetJobConsumer.class);
+    
+    private static final String SERVICE_USER = "content-hub-processor";
+    
+    @Reference
+    private ResourceResolverFactory resolverFactory;
+    
+    @Reference
+    private AssetMetadataEnhancer metadataEnhancer;
+    
+    @Reference
+    private ExternalAIService aiService;
+    
+    @Reference
+    private TaxonomyMapper taxonomyMapper;
+    
+    @Override
+    public JobResult process(Job job) {
+        String assetPath = job.getProperty(PROP_ASSET_PATH, String.class);
+        
+        if (assetPath == null) {
+            log.error("Job missing asset path property");
+            return JobResult.CANCEL; // Don't retry - invalid job
+        }
+        
+        log.info("Processing Content Hub asset: {}", assetPath);
+        
+        try (ResourceResolver resolver = getServiceResolver()) {
+            
+            // Step 1: Validate asset still exists
+            Resource assetResource = resolver.getResource(assetPath);
+            if (assetResource == null) {
+                log.warn("Asset no longer exists: {}", assetPath);
+                return JobResult.OK; // Asset deleted - nothing to do
+            }
+            
+            Asset asset = assetResource.adaptTo(Asset.class);
+            if (asset == null) {
+                log.error("Resource is not an asset: {}", assetPath);
+                return JobResult.CANCEL;
+            }
+            
+            // Step 2: Determine target folder based on metadata/rules
+            String targetFolder = determineTargetFolder(asset);
+            
+            // Step 3: Move asset to target folder
+            String newPath = moveAsset(resolver, assetPath, targetFolder);
+            
+            // Step 4: Enhance metadata (can take 2+ seconds)
+            enhanceMetadata(resolver, newPath);
+            
+            // Step 5: Call external AI for smart tagging (can take 3+ seconds)
+            applyAITags(resolver, newPath);
+            
+            // Step 6: Map to taxonomy (can take 1+ second)
+            mapTaxonomy(resolver, newPath);
+            
+            // Step 7: Commit all changes
+            resolver.commit();
+            
+            log.info("Successfully processed Content Hub asset: {} -> {}", assetPath, newPath);
+            return JobResult.OK;
+            
+        } catch (PersistenceException e) {
+            log.error("Failed to persist changes for asset: {}", assetPath, e);
+            return JobResult.FAILED; // Will retry
+            
+        } catch (ExternalServiceException e) {
+            log.warn("External service unavailable for asset: {}", assetPath, e);
+            return JobResult.FAILED; // Will retry
+            
+        } catch (Exception e) {
+            log.error("Unexpected error processing asset: {}", assetPath, e);
+            return JobResult.CANCEL; // Don't retry - unknown error
+        }
+    }
+    
+    private ResourceResolver getServiceResolver() throws LoginException {
+        Map&lt;String, Object&gt; params = new HashMap&lt;&gt;();
+        params.put(ResourceResolverFactory.SUBSERVICE, SERVICE_USER);
+        return resolverFactory.getServiceResourceResolver(params);
+    }
+    
+    private String determineTargetFolder(Asset asset) {
+        // Logic to determine target folder based on:
+        // - Asset type (image, video, document)
+        // - Metadata values (brand, campaign, region)
+        // - File naming conventions
+        // - Custom business rules
+        
+        String assetType = asset.getMimeType();
+        String brand = asset.getMetadataValue("dam:brand");
+        String campaign = asset.getMetadataValue("dam:campaign");
+        
+        if (brand != null && campaign != null) {
+            return String.format("/content/dam/approved/%s/%s", brand, campaign);
+        } else if (assetType != null && assetType.startsWith("image/")) {
+            return "/content/dam/approved/images/uncategorized";
+        } else {
+            return "/content/dam/approved/other";
+        }
+    }
+    
+    private String moveAsset(ResourceResolver resolver, String sourcePath, String targetFolder) 
+            throws PersistenceException {
+        
+        // Ensure target folder exists
+        ensureFolderExists(resolver, targetFolder);
+        
+        // Get asset filename
+        String filename = sourcePath.substring(sourcePath.lastIndexOf('/') + 1);
+        String targetPath = targetFolder + "/" + filename;
+        
+        // Handle naming conflicts
+        targetPath = resolveNamingConflict(resolver, targetPath);
+        
+        // Move the asset
+        Resource source = resolver.getResource(sourcePath);
+        resolver.move(sourcePath, targetPath.substring(0, targetPath.lastIndexOf('/')));
+        
+        log.info("Moved asset from {} to {}", sourcePath, targetPath);
+        return targetPath;
+    }
+    
+    private void ensureFolderExists(ResourceResolver resolver, String folderPath) 
+            throws PersistenceException {
+        
+        Resource folder = resolver.getResource(folderPath);
+        if (folder != null) {
+            return;
+        }
+        
+        // Create folder hierarchy
+        String[] segments = folderPath.split("/");
+        StringBuilder currentPath = new StringBuilder();
+        
+        for (String segment : segments) {
+            if (segment.isEmpty()) continue;
+            
+            currentPath.append("/").append(segment);
+            String path = currentPath.toString();
+            
+            if (resolver.getResource(path) == null) {
+                Map&lt;String, Object&gt; props = new HashMap&lt;&gt;();
+                props.put("jcr:primaryType", "sling:Folder");
+                resolver.create(resolver.getResource(path.substring(0, path.lastIndexOf('/'))), 
+                    segment, props);
+            }
+        }
+    }
+    
+    private String resolveNamingConflict(ResourceResolver resolver, String targetPath) {
+        if (resolver.getResource(targetPath) == null) {
+            return targetPath;
+        }
+        
+        // Add timestamp suffix for uniqueness
+        String basePath = targetPath.substring(0, targetPath.lastIndexOf('.'));
+        String extension = targetPath.substring(targetPath.lastIndexOf('.'));
+        
+        return basePath + "-" + System.currentTimeMillis() + extension;
+    }
+    
+    private void enhanceMetadata(ResourceResolver resolver, String assetPath) {
+        log.debug("Enhancing metadata for: {}", assetPath);
+        
+        Resource asset = resolver.getResource(assetPath);
+        if (asset == null) return;
+        
+        // Use injected service for metadata enhancement
+        metadataEnhancer.enhance(asset.adaptTo(Asset.class));
+    }
+    
+    private void applyAITags(ResourceResolver resolver, String assetPath) 
+            throws ExternalServiceException {
+        log.debug("Applying AI tags for: {}", assetPath);
+        
+        Resource asset = resolver.getResource(assetPath);
+        if (asset == null) return;
+        
+        // Call external AI service (Adobe Sensei, AWS Rekognition, etc.)
+        aiService.tagAsset(asset.adaptTo(Asset.class));
+    }
+    
+    private void mapTaxonomy(ResourceResolver resolver, String assetPath) {
+        log.debug("Mapping taxonomy for: {}", assetPath);
+        
+        Resource asset = resolver.getResource(assetPath);
+        if (asset == null) return;
+        
+        // Map to organizational taxonomy
+        taxonomyMapper.map(asset.adaptTo(Asset.class));
+    }
+}</code></pre>
+            
+            <h3>Step 4: Configure the Service User</h3>
+            
+            <p>Create the service user mapping for the job consumer:</p>
+            
+<pre data-lang="json"><code>// ui.config/src/main/content/jcr_root/apps/example/osgiconfig/config.author/
+// org.apache.sling.serviceusermapping.impl.ServiceUserMapperImpl.amended-contenthub.cfg.json
+
+{
+    "user.mapping": [
+        "com.example.core:content-hub-processor=content-hub-service-user"
+    ]
+}</code></pre>
+            
+            <p>And ensure the service user has appropriate permissions:</p>
+            
+<pre data-lang="xml"><code>&lt;!-- repo-init script --&gt;
+create service user content-hub-service-user with path system/example
+
+set ACL for content-hub-service-user
+    allow jcr:read,jcr:write,jcr:modifyProperties on /content/dam
+    allow jcr:read on /conf
+    allow jcr:read on /apps
+end</code></pre>
+            
+            <h3>Step 5: Configure Job Queue</h3>
+            
+            <p>Optimize the job queue for your workload:</p>
+            
+<pre data-lang="json"><code>// org.apache.sling.event.jobs.QueueConfiguration-contenthub.cfg.json
+
+{
+    "queue.name": "Content Hub Asset Processing",
+    "queue.topics": [
+        "com/example/contenthub/asset/processing"
+    ],
+    "queue.type": "ORDERED",
+    "queue.maxparallel": 3,
+    "queue.retries": 5,
+    "queue.retrydelay": 2000,
+    "queue.priority": "NORM"
+}</code></pre>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Configuration</th>
+                        <th>Value</th>
+                        <th>Explanation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>queue.type</code></td>
+                        <td>ORDERED</td>
+                        <td>Process in order, prevents race conditions</td>
+                    </tr>
+                    <tr>
+                        <td><code>queue.maxparallel</code></td>
+                        <td>3</td>
+                        <td>Parallel jobs per instance (tune based on load)</td>
+                    </tr>
+                    <tr>
+                        <td><code>queue.retries</code></td>
+                        <td>5</td>
+                        <td>Retry failed jobs (external service failures)</td>
+                    </tr>
+                    <tr>
+                        <td><code>queue.retrydelay</code></td>
+                        <td>2000</td>
+                        <td>Wait 2 seconds between retries</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>The Metadata Enhancer Service</h2>
+            
+            <p>Here's an example metadata enhancement service that would be too slow for synchronous processing:</p>
+            
+<pre data-lang="java"><code>package com.example.core.services.impl;
+
+import com.day.cq.dam.api.Asset;
+import com.example.core.services.AssetMetadataEnhancer;
+import org.apache.sling.api.resource.ModifiableValueMap;
+import org.apache.sling.api.resource.Resource;
+import org.osgi.service.component.annotations.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.InputStream;
+import java.util.Calendar;
+
+@Component(service = AssetMetadataEnhancer.class)
+public class AssetMetadataEnhancerImpl implements AssetMetadataEnhancer {
+    
+    private static final Logger log = LoggerFactory.getLogger(AssetMetadataEnhancerImpl.class);
+    
+    @Override
+    public void enhance(Asset asset) {
+        if (asset == null) return;
+        
+        Resource metadataResource = asset.adaptTo(Resource.class)
+            .getChild("jcr:content/metadata");
+        
+        if (metadataResource == null) return;
+        
+        ModifiableValueMap metadata = metadataResource.adaptTo(ModifiableValueMap.class);
+        
+        // Extract and set file-based metadata
+        extractImageDimensions(asset, metadata);
+        extractColorProfile(asset, metadata);
+        calculateFileHash(asset, metadata);
+        
+        // Set processing metadata
+        metadata.put("dam:processedByContentHub", true);
+        metadata.put("dam:processingDate", Calendar.getInstance());
+        metadata.put("dam:processingVersion", "1.0");
+        
+        // Business metadata enrichment
+        enrichBusinessMetadata(asset, metadata);
+        
+        log.info("Enhanced metadata for asset: {}", asset.getPath());
+    }
+    
+    private void extractImageDimensions(Asset asset, ModifiableValueMap metadata) {
+        // This operation reads the binary and can take 500ms+
+        try {
+            String mimeType = asset.getMimeType();
+            if (mimeType != null && mimeType.startsWith("image/")) {
+                // Extract dimensions using ImageIO or similar
+                // metadata.put("dam:imageWidth", width);
+                // metadata.put("dam:imageHeight", height);
+            }
+        } catch (Exception e) {
+            log.warn("Could not extract dimensions: {}", asset.getPath(), e);
+        }
+    }
+    
+    private void extractColorProfile(Asset asset, ModifiableValueMap metadata) {
+        // Color profile extraction - can take 300ms+
+        // metadata.put("dam:colorSpace", colorSpace);
+        // metadata.put("dam:colorProfile", profileName);
+    }
+    
+    private void calculateFileHash(Asset asset, ModifiableValueMap metadata) {
+        // SHA-256 hash for deduplication - can take 1000ms+ for large files
+        try (InputStream is = asset.getOriginal().getStream()) {
+            // String hash = DigestUtils.sha256Hex(is);
+            // metadata.put("dam:sha256Hash", hash);
+        } catch (Exception e) {
+            log.warn("Could not calculate hash: {}", asset.getPath(), e);
+        }
+    }
+    
+    private void enrichBusinessMetadata(Asset asset, ModifiableValueMap metadata) {
+        // Apply business rules for metadata enrichment
+        String filename = asset.getName().toLowerCase();
+        
+        // Auto-categorize based on naming conventions
+        if (filename.contains("hero")) {
+            metadata.put("dam:assetCategory", "hero-image");
+        } else if (filename.contains("thumb")) {
+            metadata.put("dam:assetCategory", "thumbnail");
+        } else if (filename.contains("banner")) {
+            metadata.put("dam:assetCategory", "banner");
+        }
+    }
+}</code></pre>
+            
+            <h2>Handling Edge Cases</h2>
+            
+            <h3>Batch Uploads</h3>
+            
+            <p>When users upload multiple files simultaneously via Content Hub, each file triggers a separate job. The queue configuration handles this gracefully:</p>
+            
+<pre data-lang="java"><code>// In the listener, add batch tracking metadata
+private void createProcessingJob(String assetPath, ResourceChange change) {
+    Map&lt;String, Object&gt; jobProperties = new HashMap&lt;&gt;();
+    jobProperties.put(PROP_ASSET_PATH, assetPath);
+    jobProperties.put(PROP_UPLOAD_TIME, System.currentTimeMillis());
+    
+    // Add batch ID for tracking related uploads
+    String batchId = generateBatchId();
+    jobProperties.put("batchId", batchId);
+    
+    jobManager.addJob(TOPIC_ASSET_PROCESSING, jobProperties);
+}</code></pre>
+            
+            <h3>Idempotency</h3>
+            
+            <p>Jobs may be retried. Ensure your processing is idempotent:</p>
+            
+<pre data-lang="java"><code>private String moveAsset(ResourceResolver resolver, String sourcePath, String targetFolder) 
+        throws PersistenceException {
+    
+    // Check if already moved (idempotency)
+    Resource source = resolver.getResource(sourcePath);
+    if (source == null) {
+        // Asset might have been moved by a previous attempt
+        // Check if it exists in target location
+        String filename = sourcePath.substring(sourcePath.lastIndexOf('/') + 1);
+        String expectedTarget = targetFolder + "/" + filename;
+        
+        if (resolver.getResource(expectedTarget) != null) {
+            log.info("Asset already moved to: {}", expectedTarget);
+            return expectedTarget;
+        }
+        
+        throw new PersistenceException("Asset not found: " + sourcePath);
+    }
+    
+    // Proceed with move...
+}</code></pre>
+            
+            <h3>Error Notifications</h3>
+            
+            <p>Notify administrators when jobs fail permanently:</p>
+            
+<pre data-lang="java"><code>@Override
+public JobResult process(Job job) {
+    int retryCount = job.getRetryCount();
+    int maxRetries = 5;
+    
+    try {
+        // ... processing logic ...
+        return JobResult.OK;
+        
+    } catch (Exception e) {
+        if (retryCount >= maxRetries - 1) {
+            // This is the last retry - send notification
+            notifyAdminOfFailure(job, e);
+        }
+        return JobResult.FAILED;
+    }
+}
+
+private void notifyAdminOfFailure(Job job, Exception e) {
+    String assetPath = job.getProperty(PROP_ASSET_PATH, String.class);
+    
+    // Send email, Slack notification, or log to monitoring system
+    log.error("ALERT: Content Hub asset processing permanently failed: {} - {}", 
+        assetPath, e.getMessage());
+    
+    // Optionally move asset to a "failed" folder for manual review
+}</code></pre>
+            
+            <h2>Monitoring and Debugging</h2>
+            
+            <h3>Job Queue Dashboard</h3>
+            
+            <p>Monitor job queues via the Sling Jobs Console:</p>
+            
+            <ul>
+                <li>URL: <code>/system/console/slingevent</code></li>
+                <li>View active, queued, and failed jobs</li>
+                <li>Manually retry or cancel jobs</li>
+                <li>See processing statistics</li>
+            </ul>
+            
+            <h3>Custom Health Check</h3>
+            
+<pre data-lang="java"><code>@Component(
+    service = HealthCheck.class,
+    property = {
+        HealthCheck.NAME + "=Content Hub Processing Queue",
+        HealthCheck.TAGS + "=contenthub",
+        HealthCheck.MBEAN_NAME + "=contentHubProcessingQueue"
+    }
+)
+public class ContentHubQueueHealthCheck implements HealthCheck {
+    
+    @Reference
+    private JobManager jobManager;
+    
+    @Override
+    public Result execute() {
+        FormattingResultLog log = new FormattingResultLog();
+        
+        // Check queue statistics
+        Statistics stats = jobManager.getStatistics();
+        long queuedJobs = stats.getNumberOfQueuedJobs();
+        long activeJobs = stats.getNumberOfActiveJobs();
+        
+        if (queuedJobs > 100) {
+            log.warn("High queue backlog: {} jobs waiting", queuedJobs);
+        } else if (queuedJobs > 500) {
+            log.critical("Critical queue backlog: {} jobs waiting", queuedJobs);
+        } else {
+            log.info("Queue healthy: {} queued, {} active", queuedJobs, activeJobs);
+        }
+        
+        return new Result(log);
+    }
+}</code></pre>
+            
+            <h2>Performance Comparison</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Synchronous Listener</th>
+                        <th>Async with Sling Jobs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Listener execution time</td>
+                        <td>6-10 seconds (TIMEOUT)</td>
+                        <td>~50ms</td>
+                    </tr>
+                    <tr>
+                        <td>Oak thread blocking</td>
+                        <td>Full duration</td>
+                        <td>~50ms</td>
+                    </tr>
+                    <tr>
+                        <td>Failure handling</td>
+                        <td>Lost/inconsistent state</td>
+                        <td>Automatic retry</td>
+                    </tr>
+                    <tr>
+                        <td>Batch upload support</td>
+                        <td>Serial, compounds timeout</td>
+                        <td>Parallel processing</td>
+                    </tr>
+                    <tr>
+                        <td>External service failures</td>
+                        <td>Entire listener fails</td>
+                        <td>Job retries automatically</td>
+                    </tr>
+                    <tr>
+                        <td>Monitoring</td>
+                        <td>Difficult</td>
+                        <td>Built-in queue dashboard</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Best Practices Summary</h2>
+            
+            <div class="highlight-box">
+                <h4>Key Takeaways</h4>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Keep listeners thin</strong> — Only detect changes and queue work</li>
+                    <li><strong>Use Sling Jobs</strong> — Guaranteed execution, retry, and proper threading</li>
+                    <li><strong>Make jobs idempotent</strong> — Handle retries gracefully</li>
+                    <li><strong>Configure queues</strong> — Tune parallelism and retry behavior</li>
+                    <li><strong>Monitor proactively</strong> — Use health checks and queue dashboards</li>
+                    <li><strong>Handle failures</strong> — Notify admins when jobs fail permanently</li>
+                </ul>
+            </div>
+            
+            <div class="success-box">
+                <h4>Need Help with AEM Assets?</h4>
+                <p>WegWorks specializes in AEM Assets implementations, Content Hub customizations, and performance optimization. <a href="/contact/" style="color: var(--accent-primary);">Contact us</a> to discuss your asset processing challenges.</p>
+            </div>
+        </div>
+        
+        <section class="related-topics">
+            <h3>Related Topics</h3>
+            <div class="topic-tags">
+                <span class="topic-tag">AEM Assets</span>
+                <span class="topic-tag">Content Hub</span>
+                <span class="topic-tag">Sling Jobs</span>
+                <span class="topic-tag">ResourceChangeListener</span>
+                <span class="topic-tag">Asynchronous Processing</span>
+                <span class="topic-tag">Metadata Enhancement</span>
+                <span class="topic-tag">AEM Cloud Service</span>
+                <span class="topic-tag">DAM</span>
+                <span class="topic-tag">Timeout Fix</span>
+                <span class="topic-tag">WegWorks</span>
+            </div>
+        </section>
+    </article>
+    
+    <footer class="footer">
+        <p>&copy; 2025 WegWorks. Expert MarTech consulting services.</p>
+        <p><a href="/">Home</a> · <a href="/services/">Services</a> · <a href="/blog/">Blog</a> · <a href="/contact/">Contact</a></p>
+    </footer>
+
+<script>
+const mobileToggle = document.querySelector(".mobile-toggle");
+const mobileMenu = document.getElementById("mobile-menu");
+if (mobileToggle && mobileMenu) {
+  mobileToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    mobileToggle.textContent = mobileMenu.classList.contains("active") ? "✕" : "☰";
+  });
+  mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("active");
+      mobileToggle.textContent = "☰";
+    });
+  });
+}
+</script>
+</body>
+</html>
+
