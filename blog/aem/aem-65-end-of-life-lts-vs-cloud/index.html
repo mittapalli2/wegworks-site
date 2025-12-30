@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9VH11ZH9Y4');
+</script>
+<title>AEM 6.5 End of Life: LTS vs Cloud - Which Path Should You Choose? | WegWorks</title>
+<meta name="description" content="AEM 6.5 end of life is approaching (Feb 2027 core support, Feb 2028 extended). Compare AEM Long-Term Support (LTS) vs AEM Cloud Service to decide your best migration path."/>
+<meta name="keywords" content="AEM 6.5 end of life, AEM end of life, AEM EOL, AEM LTS, AEM Long-Term Support, AEM Cloud migration, AEM 6.5 support end date, AEM upgrade path, AEM 6.5 vs Cloud, Adobe Experience Manager end of life, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/aem/aem-65-end-of-life-lts-vs-cloud/"/>
+<link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/aem/aem-65-end-of-life-lts-vs-cloud/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="AEM 6.5 End of Life: LTS vs Cloud - Which Path Should You Choose?"/>
+<meta property="og:description" content="AEM 6.5 end of life is approaching. Compare LTS vs Cloud Service to decide your best migration path forward."/>
+<meta property="og:image" content="https://www.wegworks.com/images/blog/aem-end-of-life-aem-6.5-LTS.svg"/>
+<meta property="article:published_time" content="2025-12-30"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:title" content="AEM 6.5 End of Life: LTS vs Cloud - Which Path Should You Choose?"/>
+<meta name="twitter:description" content="AEM 6.5 EOL is coming. Compare LTS vs Cloud to find your best path forward."/>
+<meta name="twitter:image" content="https://www.wegworks.com/images/blog/aem-end-of-life-aem-6.5-LTS.svg"/>
+
+<!-- Schema.org Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AEM 6.5 End of Life: LTS vs Cloud - Which Path Should You Choose?",
+  "description": "AEM 6.5 end of life is approaching (Feb 2027 core support, Feb 2028 extended). Compare AEM Long-Term Support (LTS) vs AEM Cloud Service to decide your best migration path.",
+  "image": "https://www.wegworks.com/images/blog/aem-end-of-life-aem-6.5-LTS.svg",
+  "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "https://www.wegworks.com/images/blog/logowhite.png"}},
+  "datePublished": "2025-12-30",
+  "dateModified": "2025-12-30",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.wegworks.com/blog/aem/aem-65-end-of-life-lts-vs-cloud/"
+  }
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "AEM", "item": "https://www.wegworks.com/blog/aem/"},
+    {"@type": "ListItem", "position": 4, "name": "AEM 6.5 End of Life: LTS vs Cloud", "item": "https://www.wegworks.com/blog/aem/aem-65-end-of-life-lts-vs-cloud/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When does AEM 6.5 reach end of life?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AEM 6.5 core support ends in February 2027. Extended support continues until February 2028. After these dates, Adobe will no longer provide security patches, bug fixes, or feature updates for AEM 6.5."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is AEM LTS (Long-Term Support)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AEM LTS refers to Adobe's Long-Term Support releases that receive extended maintenance and security updates. LTS versions are designed for organizations that need stability and cannot upgrade frequently. However, even LTS versions eventually reach end of life."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I migrate to AEM Cloud or stay on LTS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The decision depends on your organization's needs. AEM Cloud offers automatic updates, better scalability, and modern DevOps practices but requires code refactoring. LTS provides stability and familiar infrastructure but will eventually require migration. Organizations with heavy customizations or regulatory constraints may prefer LTS, while those seeking innovation and reduced operational overhead should consider Cloud."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if I don't upgrade from AEM 6.5?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "After end of life, AEM 6.5 will no longer receive security patches, leaving your system vulnerable. You won't have access to new features or performance improvements. Technical support will be limited or unavailable. Compliance requirements may also mandate supported software versions."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #86bc25;
+  --accent-light: #a4d44a;
+  --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(134, 188, 37, 0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100vw; overflow-x: hidden; } body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.brand img { height: 42px; width: auto; }
+.brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
+.brand-text span { font-size: 0.7rem; color: var(--accent-primary); letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links > li { position: relative; }
+.nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text-primary); }
+.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+.dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
+.nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
+.dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); color: var(--accent-primary); }
+.nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+
+.article-header { padding: 160px 0 40px; }
+.article-hero-image { margin: 0 auto 60px; max-width: 1200px; padding: 0 24px; }
+.article-hero-image img { width: 100%; height: 400px; object-fit: cover; object-position: center; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
+.back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: #ffffff; margin-bottom: 24px; text-decoration: none; transition: all 0.3s; }
+.back-link:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+.article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: #ffffff; }
+.article-category { color: var(--accent-primary); font-weight: 600; text-decoration: none; }
+.article-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
+.article-intro { font-size: 1.25rem; color: #ffffff; line-height: 1.7; }
+
+.article-content { padding: 60px 0 100px; }
+.article-content h2 { font-size: 1.75rem; margin: 48px 0 20px; color: var(--text-primary); }
+.article-content h3 { font-size: 1.375rem; margin: 36px 0 16px; color: var(--text-primary); }
+.article-content h4 { font-size: 1.125rem; margin: 28px 0 12px; color: var(--accent-primary); }
+.article-content p { margin-bottom: 20px; color: #ffffff; line-height: 1.8; }
+.article-content ul, .article-content ol { margin: 0 0 24px 24px; color: #ffffff; }
+.article-content li { margin-bottom: 12px; line-height: 1.7; }
+.article-content strong { color: var(--text-primary); font-weight: 600; }
+.article-content a { color: var(--accent-primary); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+.article-content a:hover { border-bottom-color: var(--accent-primary); }
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding: 20px 0;
+  margin: 40px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--glass-border);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 32px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  background: var(--bg-primary);
+  border: 3px solid var(--accent-primary);
+  border-radius: 50%;
+}
+
+.timeline-item.warning::before {
+  border-color: #f59e0b;
+}
+
+.timeline-item.danger::before {
+  border-color: #ef4444;
+}
+
+.timeline-date {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--accent-primary);
+  margin-bottom: 4px;
+}
+
+.timeline-item.warning .timeline-date {
+  color: #f59e0b;
+}
+
+.timeline-item.danger .timeline-date {
+  color: #ef4444;
+}
+
+.timeline-content {
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+/* Comparison Table */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 32px 0;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.comparison-table th {
+  background: var(--bg-tertiary);
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.comparison-table td {
+  color: #ffffff;
+}
+
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.comparison-table .pros {
+  color: var(--accent-primary);
+}
+
+.comparison-table .cons {
+  color: #f59e0b;
+}
+
+/* Decision Matrix */
+.decision-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 24px 0;
+}
+
+.decision-card h4 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.decision-card ul {
+  margin-bottom: 0;
+}
+
+.decision-card.lts {
+  border-left: 4px solid #3b82f6;
+}
+
+.decision-card.cloud {
+  border-left: 4px solid var(--accent-primary);
+}
+
+/* Alert Boxes */
+.alert {
+  padding: 20px 24px;
+  border-radius: 12px;
+  margin: 24px 0;
+  border-left: 4px solid;
+}
+
+.alert-warning {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: #f59e0b;
+}
+
+.alert-warning strong {
+  color: #f59e0b;
+}
+
+.alert-info {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+}
+
+.alert-info strong {
+  color: #3b82f6;
+}
+
+.alert-success {
+  background: rgba(134, 188, 37, 0.1);
+  border-color: var(--accent-primary);
+}
+
+.alert-success strong {
+  color: var(--accent-primary);
+}
+
+/* Code Block */
+pre {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 24px;
+  overflow-x: auto;
+  margin: 24px 0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  background: var(--bg-tertiary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* Keywords Section */
+.keywords-section {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.keywords-section h4 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.keywords-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.keywords-list li {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* CTA Section */
+.cta-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 48px;
+  text-align: center;
+  margin: 60px 0;
+}
+
+.cta-section h3 {
+  font-size: 1.75rem;
+  margin-bottom: 16px;
+}
+
+.cta-section p {
+  color: #ffffff;
+  margin-bottom: 32px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  background: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  font-weight: 600;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background: rgba(134, 188, 37, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2);
+}
+
+/* Related Articles */
+.related-articles {
+  padding: 60px 0;
+  border-top: 1px solid var(--glass-border);
+}
+
+.related-articles h3 {
+  font-size: 1.5rem;
+  margin-bottom: 32px;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.related-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 24px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.related-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-4px);
+}
+
+.related-card h4 {
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  margin-bottom: 8px;
+}
+
+.related-card p {
+  color: #ffffff;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Footer */
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: #ffffff; }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+/* Mobile Menu */
+.mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 28px; cursor: pointer; }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary); z-index: 999; padding: 100px 24px 24px; }
+.mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.mobile-menu a { font-size: 1.2rem; color: var(--text-primary); text-decoration: none; font-weight: 600; }
+
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
+  .article-header h1 { font-size: 1.75rem; }
+  .article-content h2 { font-size: 1.5rem; }
+  .related-grid { grid-template-columns: 1fr; }
+  .comparison-table { font-size: 0.875rem; }
+  .comparison-table th, .comparison-table td { padding: 12px 16px; }
+  .cta-section { padding: 32px 24px; }
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="nav-wrapper">
+    <a class="brand" href="/">
+      <img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/>
+      <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/services/adobe-analytics/">Adobe Analytics</a>
+          <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+          <a href="/services/segment-cdp/">Segment CDP</a>
+          <a href="/services/salesforce/">Salesforce</a>
+          <a href="/services/marketing-automation/">Marketing Automation</a>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+          <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+          <a href="/blog/adobe-target/">Adobe Target</a>
+          <a href="/blog/aem/">AEM</a>
+          <a href="/blog/google-analytics-4/">Google Analytics 4</a>
+          <a href="/blog/segment-cdp/">Segment CDP</a>
+        </div>
+      </li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="/contact/">Get Started</a>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Home</a>
+  <a href="/services/">Services</a>
+  <a href="/blog/">Blog</a>
+  <a href="/blog/aem/">AEM Articles</a>
+  <a href="/about/">About</a>
+  <a href="/contact/">Contact</a>
+</div>
+
+<main>
+<article>
+<header class="article-header">
+  <div class="container">
+    <a class="back-link" href="/blog/aem/">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to AEM Articles
+    </a>
+    <div class="article-meta">
+      <a href="/blog/aem/" class="article-category">AEM</a>
+      <span>December 30, 2025</span>
+      <span>18 min read</span>
+    </div>
+    <h1>AEM 6.5 End of Life: LTS vs Cloud — Which Path Should You Choose?</h1>
+    <p class="article-intro">With AEM 6.5 heading towards End of Life (core support ends Feb 2027, extended support Feb 2028), organizations face a critical decision: stick with Long-Term Support or take the leap to AEM Cloud? Let's dig into the real questions and help you find the smartest path forward.</p>
+  </div>
+</header>
+
+<div class="article-hero-image">
+  <img src="https://www.wegworks.com/images/blog/aem-end-of-life-aem-6.5-LTS.svg" alt="AEM 6.5 End of Life - LTS vs Cloud Decision Guide" width="1200" height="400"/>
+</div>
+
+<div class="article-content">
+  <div class="container">
+    
+    <div class="alert alert-warning">
+      <strong>Timeline Alert:</strong> AEM 6.5 core support ends <strong>February 2027</strong>. Extended support continues until <strong>February 2028</strong>. If you haven't started planning your migration, now is the time.
+    </div>
+    
+    <h2>The AEM 6.5 End of Life Timeline</h2>
+    
+    <p>Before we dive into the LTS vs Cloud debate, let's be crystal clear about what "End of Life" means for AEM 6.5 and the critical dates you need to know:</p>
+    
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Now – December 2025</div>
+        <div class="timeline-content">Full support with regular service packs, security patches, and feature updates. This is your planning and preparation window.</div>
+      </div>
+      <div class="timeline-item warning">
+        <div class="timeline-date">February 2027</div>
+        <div class="timeline-content"><strong>Core Support Ends.</strong> No more regular service packs or feature updates. Only critical security patches provided.</div>
+      </div>
+      <div class="timeline-item danger">
+        <div class="timeline-date">February 2028</div>
+        <div class="timeline-content"><strong>Extended Support Ends.</strong> No more patches of any kind. You're on your own. Security vulnerabilities will go unpatched.</div>
+      </div>
+    </div>
+    
+    <h2>Why Upgrade? The Real Benefits</h2>
+    
+    <p>Is upgrading just about staying supported, or are there real benefits to moving forward? The answer is: <strong>both</strong>.</p>
+    
+    <h3>Security & Compliance</h3>
+    <p>Running unsupported software isn't just a technical risk—it's a business and legal one. Many compliance frameworks (PCI-DSS, HIPAA, SOC 2) require running supported, patched software. After February 2028, you may find yourself out of compliance simply by running AEM 6.5.</p>
+    
+    <h3>Performance & Scalability</h3>
+    <p>AEM Cloud Service offers automatic scaling, global CDN integration, and performance optimizations that simply aren't possible on legacy infrastructure. Organizations migrating to Cloud typically see:</p>
+    <ul>
+      <li><strong>40-60% improvement</strong> in page load times due to integrated CDN</li>
+      <li><strong>Zero-downtime deployments</strong> with blue-green deployment patterns</li>
+      <li><strong>Automatic scaling</strong> during traffic spikes (think Black Friday or product launches)</li>
+      <li><strong>Reduced operational overhead</strong> — Adobe manages infrastructure</li>
+    </ul>
+    
+    <h3>Innovation Velocity</h3>
+    <p>AEM Cloud receives continuous updates with new features every few weeks. Staying on 6.5 means missing out on:</p>
+    <ul>
+      <li>Adobe Sensei AI/ML capabilities for auto-tagging and smart crops</li>
+      <li>Enhanced Edge Delivery Services for lightning-fast sites</li>
+      <li>Improved Content Fragment and headless capabilities</li>
+      <li>Native integrations with Adobe Experience Platform</li>
+    </ul>
+    
+    <h2>LTS vs. Cloud: The Honest Comparison</h2>
+    
+    <p>There's no one-size-fits-all answer. Both paths have legitimate use cases. Here's an honest comparison:</p>
+    
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Factor</th>
+          <th>AEM LTS (On-Premise/AMS)</th>
+          <th>AEM Cloud Service</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Updates</strong></td>
+          <td>Manual service packs (quarterly)</td>
+          <td>Automatic, continuous updates</td>
+        </tr>
+        <tr>
+          <td><strong>Infrastructure</strong></td>
+          <td>You manage (or Adobe Managed Services)</td>
+          <td>Adobe manages everything</td>
+        </tr>
+        <tr>
+          <td><strong>Customization</strong></td>
+          <td>Unlimited (OSGi bundles, JCR mods)</td>
+          <td>More constrained (immutable deployments)</td>
+        </tr>
+        <tr>
+          <td><strong>Deployment</strong></td>
+          <td>Traditional CI/CD, manual</td>
+          <td>Cloud Manager, Git-based, automated</td>
+        </tr>
+        <tr>
+          <td><strong>Cost Model</strong></td>
+          <td>License + infrastructure costs</td>
+          <td>Consumption-based pricing</td>
+        </tr>
+        <tr>
+          <td><strong>Migration Effort</strong></td>
+          <td>Lower (upgrade in place)</td>
+          <td>Higher (code refactoring required)</td>
+        </tr>
+        <tr>
+          <td><strong>Long-term Support</strong></td>
+          <td>Eventual EOL (plan for next migration)</td>
+          <td>Evergreen (always current)</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <h3>What's Working for LTS?</h3>
+    
+    <div class="decision-card lts">
+      <h4>LTS Advantages</h4>
+      <ul>
+        <li><strong>Stability:</strong> Predictable release cycles, no surprise changes</li>
+        <li><strong>Deep customization:</strong> OSGi bundles, workflow modifications, JCR operations</li>
+        <li><strong>Familiar infrastructure:</strong> Your ops team knows how to manage it</li>
+        <li><strong>Regulatory control:</strong> Some industries require on-premise data residency</li>
+        <li><strong>Lower immediate cost:</strong> Avoid migration project investment</li>
+      </ul>
+    </div>
+    
+    <h3>What's Tempting About Cloud?</h3>
+    
+    <div class="decision-card cloud">
+      <h4>Cloud Advantages</h4>
+      <ul>
+        <li><strong>Zero operational overhead:</strong> Adobe handles patching, scaling, monitoring</li>
+        <li><strong>Always current:</strong> Automatic updates mean you're never "behind"</li>
+        <li><strong>Better developer experience:</strong> Modern CI/CD with Cloud Manager</li>
+        <li><strong>Performance:</strong> Global CDN, auto-scaling, optimized architecture</li>
+        <li><strong>Future-proof:</strong> Adobe's primary investment focus is Cloud</li>
+      </ul>
+    </div>
+    
+    <h3>Pain Points & Unexpected Wins</h3>
+    
+    <p><strong>Cloud Migration Pain Points:</strong></p>
+    <ul>
+      <li>Custom OSGi bundles need refactoring for Sling Content Distribution</li>
+      <li>Direct JCR/CRX access patterns must change</li>
+      <li>Some legacy integrations break and need rebuilding</li>
+      <li>Learning curve for Cloud Manager and Git-based deployments</li>
+      <li>Content migration can be complex for large repositories</li>
+    </ul>
+    
+    <p><strong>Unexpected Wins from Cloud Migration:</strong></p>
+    <ul>
+      <li>Development velocity often <em>increases</em> after initial adjustment</li>
+      <li>Ops teams freed up for higher-value work</li>
+      <li>Incident response improves (Adobe's SRE team is watching)</li>
+      <li>Performance gains often exceed expectations</li>
+      <li>New features "just appear" without upgrade projects</li>
+    </ul>
+    
+    <h2>Who Should Go Where?</h2>
+    
+    <p>Based on our experience migrating dozens of AEM implementations, here's our honest guidance:</p>
+    
+    <h3>Consider LTS If You...</h3>
+    <ul>
+      <li><strong>Have heavy customizations</strong> — Deep OSGi modifications, custom workflows, JCR-level integrations</li>
+      <li><strong>Face regulatory constraints</strong> — Healthcare, financial services, government with strict data residency requirements</li>
+      <li><strong>Need more time</strong> — Can't execute a migration before 2027 and need a bridge strategy</li>
+      <li><strong>Have limited budget</strong> — Need to spread migration costs over multiple years</li>
+      <li><strong>Run mission-critical workloads</strong> — Zero tolerance for any change risk in the short term</li>
+    </ul>
+    
+    <h3>Consider Cloud If You...</h3>
+    <ul>
+      <li><strong>Want to reduce ops burden</strong> — Infrastructure management consumes too much time/money</li>
+      <li><strong>Need global scale</strong> — Serving audiences across multiple geographies</li>
+      <li><strong>Value innovation</strong> — Want access to new features as they ship</li>
+      <li><strong>Have modern code</strong> — Already using best practices, minimal legacy debt</li>
+      <li><strong>Plan for the future</strong> — Want to migrate once and be done (no more EOL cycles)</li>
+    </ul>
+    
+    <div class="alert alert-info">
+      <strong>Hybrid Approach:</strong> Some organizations choose a phased approach—moving to a newer LTS version now, then migrating to Cloud later. This spreads risk and cost, but also means two migrations instead of one.
+    </div>
+    
+    <h2>End-State Business Value: Measuring Success</h2>
+    
+    <p>What does success look like after the upgrade or migration? Here's how to measure the impact on your business:</p>
+    
+    <h3>Technical Metrics</h3>
+    <ul>
+      <li><strong>Page load time:</strong> Track Core Web Vitals (LCP, FID, CLS) before and after</li>
+      <li><strong>Deployment frequency:</strong> How often can you ship changes?</li>
+      <li><strong>Incident rate:</strong> Number and severity of production issues</li>
+      <li><strong>Time to recovery:</strong> MTTR for incidents</li>
+      <li><strong>Availability:</strong> Uptime percentage</li>
+    </ul>
+    
+    <h3>Business Metrics</h3>
+    <ul>
+      <li><strong>Content velocity:</strong> Time from content creation to publication</li>
+      <li><strong>Conversion rates:</strong> Impact of performance improvements on conversions</li>
+      <li><strong>Operational costs:</strong> Infrastructure, support, and maintenance spend</li>
+      <li><strong>Time to market:</strong> Speed of launching new digital experiences</li>
+      <li><strong>Team satisfaction:</strong> Developer and author experience ratings</li>
+    </ul>
+    
+    <h3>What Success Looks Like</h3>
+    
+    <div class="alert alert-success">
+      <strong>Cloud Migration Success Story:</strong> One of our retail clients saw a <strong>52% improvement in page load times</strong>, <strong>3x increase in deployment frequency</strong>, and <strong>40% reduction in operational costs</strong> within 6 months of completing their Cloud migration. Their Black Friday traffic spike was handled automatically without any manual intervention.
+    </div>
+    
+    <h2>Making Your Decision</h2>
+    
+    <p>Here's a simple framework for making this decision:</p>
+    
+    <h3>Step 1: Assess Your Current State</h3>
+    <ul>
+      <li>What version of AEM 6.5 are you on? (Latest service pack?)</li>
+      <li>How many custom OSGi bundles do you have?</li>
+      <li>What integrations exist? (Legacy vs. modern APIs)</li>
+      <li>How large is your content repository?</li>
+      <li>What's your current infrastructure setup?</li>
+    </ul>
+    
+    <h3>Step 2: Define Your Constraints</h3>
+    <ul>
+      <li>Budget: What can you invest in migration?</li>
+      <li>Timeline: When must you be off AEM 6.5?</li>
+      <li>Team capacity: Do you have internal expertise or need partners?</li>
+      <li>Risk tolerance: How much change can the business absorb?</li>
+    </ul>
+    
+    <h3>Step 3: Evaluate Both Paths</h3>
+    <p>Run a technical assessment for both LTS upgrade and Cloud migration. Understand the effort, risk, and timeline for each. Don't assume one is better—validate with data.</p>
+    
+    <h3>Step 4: Align with Business Strategy</h3>
+    <p>Where is your organization heading? If digital transformation and agility are priorities, Cloud aligns better. If stability and cost control are paramount, LTS may be the right bridge.</p>
+    
+    <h2>Our Recommendation</h2>
+    
+    <p>If you can make the investment, <strong>AEM Cloud Service is the future</strong>. Adobe's primary R&D investment is in Cloud. New features ship there first. The "evergreen" model means you'll never face another EOL migration.</p>
+    
+    <p>However, we recognize that not every organization can migrate immediately. If you need more time:</p>
+    
+    <ol>
+      <li><strong>Upgrade to the latest AEM 6.5 service pack</strong> to maximize your support window</li>
+      <li><strong>Start Cloud readiness assessment now</strong> — understand your migration scope</li>
+      <li><strong>Begin code modernization</strong> — refactor toward Cloud-compatible patterns even if staying on 6.5</li>
+      <li><strong>Plan your migration timeline</strong> — don't wait until 2027 to start</li>
+    </ol>
+    
+    <div class="cta-section">
+      <h3>Need Help Deciding?</h3>
+      <p>Our AEM experts have guided dozens of organizations through this decision. Let us assess your environment and recommend the right path for your business.</p>
+      <a class="btn-primary" href="/contact/">
+        Schedule a Free Assessment
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    
+    <div class="keywords-section">
+      <h4>Related Topics</h4>
+      <ul class="keywords-list">
+        <li>AEM 6.5 end of life</li>
+        <li>AEM end of life</li>
+        <li>AEM EOL</li>
+        <li>AEM LTS</li>
+        <li>AEM Long-Term Support</li>
+        <li>AEM Cloud migration</li>
+        <li>AEM upgrade path</li>
+        <li>AEM 6.5 support end date</li>
+        <li>Adobe Experience Manager end of life</li>
+        <li>AEM 6.5 vs Cloud</li>
+        <li>AEM Cloud Service</li>
+        <li>AEM migration planning</li>
+        <li>AEM support timeline</li>
+        <li>AEM extended support</li>
+        <li>AEM core support</li>
+        <li>AEM 6.5 EOL 2027</li>
+        <li>WegWorks AEM</li>
+        <li>Weg Works</li>
+      </ul>
+    </div>
+    
+  </div>
+</div>
+
+<div class="related-articles">
+  <div class="container">
+    <h3>Related Articles</h3>
+    <div class="related-grid">
+      <a class="related-card" href="/blog/aem/aem-cloud-service-guide/">
+        <h4>What is AEM as a Cloud Service?</h4>
+        <p>Complete guide to AEM Cloud architecture, benefits, and pricing.</p>
+      </a>
+      <a class="related-card" href="/blog/aem/aem-cloud-migration/">
+        <h4>AEM Cloud Migration Guide</h4>
+        <p>Step-by-step guide to planning your AEM 6.5 to Cloud migration.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+</article>
+</main>
+
+<footer class="footer">
+  <div class="container-wide">
+    <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved. | WegWorks is not affiliated with WageWorks.</p>
+  </div>
+</footer>
+
+<script>
+const mobileToggle = document.querySelector('.mobile-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+if (mobileToggle && mobileMenu) {
+  mobileToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+    mobileToggle.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      mobileToggle.textContent = '☰';
+    });
+  });
+}
+</script>
+</body>
+</html>
+
