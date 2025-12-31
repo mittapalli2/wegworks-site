@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9VH11ZH9Y4');
+</script>
+<title>Real-Time CDP Collaboration: Complete Guide to Brand-to-Brand Data Partnerships | WegWorks</title>
+<meta name="description" content="Everything you need to know about Adobe Real-Time CDP Collaboration: brand-to-brand partnerships, multiple match keys, audience activation, global availability, and best practices for data collaboration."/>
+<meta name="keywords" content="Real-Time CDP Collaboration, Adobe CDP, brand-to-brand collaboration, audience collaboration, data clean room, match keys, audience activation, Adobe Experience Platform, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/adobe-experience-platform/real-time-cdp-collaboration-guide/"/>
+<link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/adobe-experience-platform/real-time-cdp-collaboration-guide/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="Real-Time CDP Collaboration: Complete Guide to Brand-to-Brand Data Partnerships"/>
+<meta property="og:description" content="Everything you need to know about Adobe Real-Time CDP Collaboration: brand-to-brand partnerships, match keys, and audience activation."/>
+<meta property="og:image" content="https://www.wegworks.com/images/blog/AEP-collaboration-guide.svg"/>
+<meta property="article:published_time" content="2025-12-30"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:title" content="Real-Time CDP Collaboration: Complete Guide to Brand-to-Brand Data Partnerships"/>
+<meta name="twitter:description" content="Everything about Adobe Real-Time CDP Collaboration: brand partnerships, match keys, and activation."/>
+<meta name="twitter:image" content="https://www.wegworks.com/images/blog/AEP-collaboration-guide.svg"/>
+
+<!-- Schema.org Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Real-Time CDP Collaboration: Complete Guide to Brand-to-Brand Data Partnerships",
+  "description": "Everything you need to know about Adobe Real-Time CDP Collaboration: brand-to-brand partnerships, multiple match keys, audience activation, and best practices.",
+  "image": "https://www.wegworks.com/images/blog/AEP-collaboration-guide.svg",
+  "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "https://www.wegworks.com/images/blog/logowhite.png"}},
+  "datePublished": "2025-12-30",
+  "dateModified": "2025-12-30",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.wegworks.com/blog/adobe-experience-platform/real-time-cdp-collaboration-guide/"
+  }
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "Adobe Experience Platform", "item": "https://www.wegworks.com/blog/adobe-experience-platform/"},
+    {"@type": "ListItem", "position": 4, "name": "Real-Time CDP Collaboration Guide", "item": "https://www.wegworks.com/blog/adobe-experience-platform/real-time-cdp-collaboration-guide/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Real-Time CDP Collaboration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Real-Time CDP Collaboration is Adobe's solution for secure brand-to-brand data partnerships. It allows advertisers and publishers (or any two brands) to collaborate on audience data, share insights, and activate audiences across each other's destinations—all while maintaining data privacy and governance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What match keys does Real-Time CDP Collaboration support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Real-Time CDP Collaboration supports multiple match keys including: Hashed email, Hashed phone number, CRM ID, Loyalty ID, Hashed IPv4, and AdFixus ID. Multiple match keys can be used simultaneously to expand audience size and improve match rates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Real-Time CDP Collaboration available in my region?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As of December 2025, Real-Time CDP Collaboration is available in North America (including Canada), Australia, New Zealand, and EMEA (Europe, Middle East, and Africa). It is automatically available to Real-Time CDP Prime and Ultimate customers in these regions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is brand-to-brand collaboration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Brand-to-brand collaboration allows any two brands to form connections and collaborate on audience data, regardless of whether they are an advertiser or publisher. This enables more flexible collaboration opportunities and allows brands to leverage each other's data and insights."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #86bc25;
+  --accent-light: #a4d44a;
+  --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(134, 188, 37, 0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100vw; overflow-x: hidden; } body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.brand img { height: 42px; width: auto; }
+.brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
+.brand-text span { font-size: 0.7rem; color: var(--accent-primary); letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links > li { position: relative; }
+.nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text-primary); }
+.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+.dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
+.nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
+.dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); color: var(--accent-primary); }
+.nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+
+.article-header { padding: 160px 0 40px; }
+.article-hero-image { margin: 0 auto 60px; max-width: 1200px; padding: 0 24px; }
+.article-hero-image img { width: 100%; height: 400px; object-fit: cover; object-position: center; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
+.back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: #ffffff; margin-bottom: 24px; text-decoration: none; transition: all 0.3s; }
+.back-link:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+.article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: #ffffff; }
+.article-category { color: var(--accent-primary); font-weight: 600; text-decoration: none; }
+.article-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
+.article-intro { font-size: 1.25rem; color: #ffffff; line-height: 1.7; }
+
+.article-content { padding: 60px 0 100px; }
+.article-content h2 { font-size: 1.75rem; margin: 48px 0 20px; color: var(--text-primary); }
+.article-content h3 { font-size: 1.375rem; margin: 36px 0 16px; color: var(--text-primary); }
+.article-content h4 { font-size: 1.125rem; margin: 28px 0 12px; color: var(--accent-primary); }
+.article-content p { margin-bottom: 20px; color: #ffffff; line-height: 1.8; }
+.article-content ul, .article-content ol { margin: 0 0 24px 24px; color: #ffffff; }
+.article-content li { margin-bottom: 12px; line-height: 1.7; }
+.article-content strong { color: var(--text-primary); font-weight: 600; }
+.article-content a { color: var(--accent-primary); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+.article-content a:hover { border-bottom-color: var(--accent-primary); }
+
+/* Timeline */
+.release-timeline {
+  position: relative;
+  padding: 20px 0;
+  margin: 40px 0;
+}
+
+.release-timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--glass-border);
+}
+
+.release-item {
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 40px;
+}
+
+.release-item::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  background: var(--bg-primary);
+  border: 3px solid var(--accent-primary);
+  border-radius: 50%;
+}
+
+.release-date {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--accent-primary);
+  margin-bottom: 12px;
+}
+
+.release-content {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.release-content h4 {
+  margin-top: 0;
+  color: var(--text-primary);
+}
+
+.release-content ul {
+  margin-bottom: 0;
+}
+
+/* Feature Cards */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.feature-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.feature-card h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.feature-card p {
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+/* Match Key Table */
+.match-key-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 32px 0;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.match-key-table th,
+.match-key-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.match-key-table th {
+  background: var(--bg-tertiary);
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.match-key-table td {
+  color: #ffffff;
+}
+
+.match-key-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Alert Boxes */
+.alert {
+  padding: 20px 24px;
+  border-radius: 12px;
+  margin: 24px 0;
+  border-left: 4px solid;
+}
+
+.alert-warning {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: #f59e0b;
+}
+
+.alert-warning strong {
+  color: #f59e0b;
+}
+
+.alert-info {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+}
+
+.alert-info strong {
+  color: #3b82f6;
+}
+
+.alert-success {
+  background: rgba(134, 188, 37, 0.1);
+  border-color: var(--accent-primary);
+}
+
+.alert-success strong {
+  color: var(--accent-primary);
+}
+
+/* Code Block */
+pre {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 24px;
+  overflow-x: auto;
+  margin: 24px 0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  background: var(--bg-tertiary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* Keywords Section */
+.keywords-section {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.keywords-section h4 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.keywords-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.keywords-list li {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* CTA Section */
+.cta-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 48px;
+  text-align: center;
+  margin: 60px 0;
+}
+
+.cta-section h3 {
+  font-size: 1.75rem;
+  margin-bottom: 16px;
+}
+
+.cta-section p {
+  color: #ffffff;
+  margin-bottom: 32px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  background: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  font-weight: 600;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background: rgba(134, 188, 37, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2);
+}
+
+/* Related Articles */
+.related-articles {
+  padding: 60px 0;
+  border-top: 1px solid var(--glass-border);
+}
+
+.related-articles h3 {
+  font-size: 1.5rem;
+  margin-bottom: 32px;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.related-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 24px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.related-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-4px);
+}
+
+.related-card h4 {
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  margin-bottom: 8px;
+}
+
+.related-card p {
+  color: #ffffff;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Footer */
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: #ffffff; }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+/* Mobile Menu */
+.mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 28px; cursor: pointer; }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary); z-index: 999; padding: 100px 24px 24px; }
+.mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.mobile-menu a { font-size: 1.2rem; color: var(--text-primary); text-decoration: none; font-weight: 600; }
+
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
+  .article-header h1 { font-size: 1.75rem; }
+  .article-content h2 { font-size: 1.5rem; }
+  .related-grid { grid-template-columns: 1fr; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .match-key-table { font-size: 0.875rem; }
+  .match-key-table th, .match-key-table td { padding: 12px 16px; }
+  .cta-section { padding: 32px 24px; }
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="nav-wrapper">
+    <a class="brand" href="/">
+      <img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/>
+      <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/services/adobe-analytics/">Adobe Analytics</a>
+          <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+          <a href="/services/segment-cdp/">Segment CDP</a>
+          <a href="/services/salesforce/">Salesforce</a>
+          <a href="/services/marketing-automation/">Marketing Automation</a>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+          <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+          <a href="/blog/adobe-target/">Adobe Target</a>
+          <a href="/blog/aem/">AEM</a>
+          <a href="/blog/google-analytics-4/">Google Analytics 4</a>
+          <a href="/blog/segment-cdp/">Segment CDP</a>
+        </div>
+      </li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="/contact/">Get Started</a>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Home</a>
+  <a href="/services/">Services</a>
+  <a href="/blog/">Blog</a>
+  <a href="/blog/adobe-experience-platform/">AEP Articles</a>
+  <a href="/about/">About</a>
+  <a href="/contact/">Contact</a>
+</div>
+
+<main>
+<article>
+<header class="article-header">
+  <div class="container">
+    <a class="back-link" href="/blog/adobe-experience-platform/">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to AEP Articles
+    </a>
+    <div class="article-meta">
+      <a href="/blog/adobe-experience-platform/" class="article-category">Adobe Experience Platform</a>
+      <span>December 30, 2025</span>
+      <span>15 min read</span>
+    </div>
+    <h1>Real-Time CDP Collaboration: Complete Guide to Brand-to-Brand Data Partnerships</h1>
+    <p class="article-intro">Adobe Real-Time CDP Collaboration is transforming how brands partner on audience data. With global expansion, multiple match keys, and brand-to-brand collaboration now available, here's everything you need to know about this powerful capability.</p>
+  </div>
+</header>
+
+<div class="article-hero-image">
+  <img src="https://www.wegworks.com/images/blog/AEP-collaboration-guide.svg" alt="Real-Time CDP Collaboration - Brand-to-Brand Data Partnerships" width="1200" height="400"/>
+</div>
+
+<div class="article-content">
+  <div class="container">
+    
+    <div class="alert alert-success">
+      <strong>Now Globally Available:</strong> As of December 2025, Real-Time CDP Collaboration is available in North America (including Canada), Australia, New Zealand, and EMEA. It's automatically available to Real-Time CDP Prime and Ultimate customers.
+    </div>
+    
+    <h2>What is Real-Time CDP Collaboration?</h2>
+    
+    <p>Real-Time CDP Collaboration is Adobe's solution for secure, privacy-compliant data partnerships between brands. Think of it as a <strong>data clean room</strong> built directly into Adobe Experience Platform that enables:</p>
+    
+    <ul>
+      <li><strong>Audience sharing</strong> between partners without exposing raw customer data</li>
+      <li><strong>Overlap analysis</strong> to understand shared audience segments</li>
+      <li><strong>Joint activation</strong> to reach customers across partner destinations</li>
+      <li><strong>Measurement</strong> of campaign performance across partner data</li>
+    </ul>
+    
+    <p>Whether you're an advertiser looking to reach publisher audiences, or two brands wanting to leverage each other's customer insights, Collaboration provides the infrastructure to do it securely.</p>
+    
+    <h2>Release Timeline: What's New</h2>
+    
+    <p>Adobe has been rapidly expanding Collaboration capabilities. Here's the complete release timeline:</p>
+    
+    <div class="release-timeline">
+      <div class="release-item">
+        <div class="release-date">December 2025</div>
+        <div class="release-content">
+          <h4>EMEA Expansion</h4>
+          <p>Real-Time CDP Collaboration is now available to customers in <strong>Europe, the Middle East, and Africa (EMEA)</strong>. Automatically available to Real-Time CDP Prime and Ultimate customers in these regions.</p>
+        </div>
+      </div>
+      
+      <div class="release-item">
+        <div class="release-date">August 2025</div>
+        <div class="release-content">
+          <h4>Canada Launch + Multiple Match Keys</h4>
+          <ul>
+            <li>Now available to customers in <strong>Canada</strong></li>
+            <li>Support for <strong>6 match key types</strong>: Hashed email, Hashed phone, CRM ID, Loyalty ID, Hashed IPv4, AdFixus ID</li>
+            <li><strong>Multiple match keys</strong> can be used simultaneously</li>
+            <li>Adobe Experience Platform destination supports multi-key activation</li>
+            <li><strong>Bulk edit tool</strong> for managing multiple audiences at once</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="release-item">
+        <div class="release-date">July 2025</div>
+        <div class="release-content">
+          <h4>Brand-to-Brand Collaboration</h4>
+          <ul>
+            <li><strong>Brand-to-brand collaboration</strong> — no longer limited to advertiser-publisher model</li>
+            <li><strong>Private connection invites</strong> via unique connect codes</li>
+            <li><strong>Self-serve destinations</strong> for both advertisers and publishers</li>
+            <li><strong>Bidirectional activation</strong> — both collaborators can activate audiences</li>
+            <li><strong>Audience index scores</strong> for measuring audience match quality</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="release-item">
+        <div class="release-date">May 2025</div>
+        <div class="release-content">
+          <h4>Australia/New Zealand + Self-Serve Destinations</h4>
+          <ul>
+            <li>Available in <strong>Australia and New Zealand</strong></li>
+            <li><strong>Self-serve destinations</strong> through My destinations tab</li>
+            <li>View Collaboration audiences in <strong>AEP Audience Portal</strong></li>
+            <li><strong>Configurable refresh frequency</strong> (daily or every 2-6 days)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <h2>Supported Match Keys</h2>
+    
+    <p>Match keys are the identifiers used to find overlapping audiences between collaborators. Real-Time CDP Collaboration now supports <strong>six match key types</strong>:</p>
+    
+    <table class="match-key-table">
+      <thead>
+        <tr>
+          <th>Match Key</th>
+          <th>Description</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Hashed Email</strong></td>
+          <td>SHA-256 hashed email addresses</td>
+          <td>Highest match rates; universal identifier</td>
+        </tr>
+        <tr>
+          <td><strong>Hashed Phone</strong></td>
+          <td>SHA-256 hashed phone numbers</td>
+          <td>Mobile-first audiences; SMS marketing</td>
+        </tr>
+        <tr>
+          <td><strong>CRM ID</strong></td>
+          <td>Your internal customer identifier</td>
+          <td>B2B partnerships; known customer matching</td>
+        </tr>
+        <tr>
+          <td><strong>Loyalty ID</strong></td>
+          <td>Loyalty program identifiers</td>
+          <td>Retail partnerships; coalition loyalty programs</td>
+        </tr>
+        <tr>
+          <td><strong>Hashed IPv4</strong></td>
+          <td>SHA-256 hashed IP addresses</td>
+          <td>Household-level targeting; connected TV</td>
+        </tr>
+        <tr>
+          <td><strong>AdFixus ID</strong></td>
+          <td>AdFixus identity graph ID</td>
+          <td>Cookieless identity resolution</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <h3>Using Multiple Match Keys</h3>
+    
+    <p>One of the most powerful recent updates is support for <strong>multiple match keys simultaneously</strong>. This dramatically expands your potential audience size and improves match rates.</p>
+    
+    <p>Multiple match keys can be used when:</p>
+    <ul>
+      <li><strong>Sourcing audiences</strong> — Pull in audiences using multiple identifiers</li>
+      <li><strong>Establishing connections</strong> — Match with collaborators across multiple ID types</li>
+      <li><strong>Activating audiences</strong> — Send audiences with multiple keys to destinations</li>
+    </ul>
+    
+    <div class="alert alert-warning">
+      <strong>Important:</strong> When activating audiences with multiple match keys, if <em>any</em> match key has no overlaps, no audience counts, or falls below the minimum threshold, the <strong>entire activation will fail</strong>. Ensure your audiences have sufficient overlap and meet the minimum threshold of 1,000 IDs across <em>all</em> match keys before activating.
+    </div>
+    
+    <h2>Brand-to-Brand Collaboration</h2>
+    
+    <p>The July 2025 release introduced a game-changing capability: <strong>brand-to-brand collaboration</strong>. Previously, Collaboration was limited to advertiser-publisher relationships. Now, any two brands can partner.</p>
+    
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>Flexible Partnerships</h4>
+        <p>No longer limited to advertiser-publisher model. Two retailers, two financial services companies, or any brand combination can collaborate.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Private Connections</h4>
+        <p>Share your unique connect code with partners who can then connect directly—no need to be in the public Discover directory.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Bidirectional Activation</h4>
+        <p>Both collaborators can activate audiences, not just one direction. Configure activation permissions when establishing connections.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Audience Index Scores</h4>
+        <p>Measure how well your audience matches your collaborator's with index scores based on underlying audience counts and overlaps.</p>
+      </div>
+    </div>
+    
+    <h3>Collaboration Patterns</h3>
+    
+    <p>Real-Time CDP Collaboration supports two collaboration patterns:</p>
+    
+    <ol>
+      <li><strong>Advertiser-to-Publisher:</strong> The traditional model where advertisers collaborate with publishers to reach their audiences and measure campaign performance.</li>
+      <li><strong>Brand-to-Brand:</strong> Two brands (regardless of advertiser/publisher role) collaborate to share audience insights, expand reach, and jointly activate audiences.</li>
+    </ol>
+    
+    <h2>Self-Serve Destinations</h2>
+    
+    <p>The <strong>My destinations</strong> tab in the Setup section now allows both advertisers and publishers to configure destinations self-serve. This means you can:</p>
+    
+    <ul>
+      <li>Activate audiences to third-party platforms (ad networks, DMPs, etc.)</li>
+      <li>Configure Adobe Experience Platform as a destination</li>
+      <li>Use <strong>linked keys</strong> to specify which match key is sent during activation</li>
+      <li>View Collaboration audiences in the AEP Audience Portal</li>
+    </ul>
+    
+    <div class="alert alert-info">
+      <strong>Note:</strong> Currently, only Adobe Experience Platform destinations are available for self-serve configuration. For other destination types, contact your Adobe representative.
+    </div>
+    
+    <h2>Managing Audiences at Scale</h2>
+    
+    <p>The August 2025 release introduced a <strong>bulk edit tool</strong> that makes managing multiple audiences significantly easier:</p>
+    
+    <ul>
+      <li>Edit audience metadata for multiple audiences at once</li>
+      <li>Update connection access permissions in bulk</li>
+      <li>Modify names, descriptions, and categories across audiences</li>
+      <li>Configure audience refresh frequency (daily or every 2-6 days)</li>
+    </ul>
+    
+    <h2>Global Availability</h2>
+    
+    <p>Real-Time CDP Collaboration is now available in multiple regions:</p>
+    
+    <table class="match-key-table">
+      <thead>
+        <tr>
+          <th>Region</th>
+          <th>Available Since</th>
+          <th>Eligibility</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>United States</strong></td>
+          <td>Initial Launch</td>
+          <td>RT-CDP Prime & Ultimate</td>
+        </tr>
+        <tr>
+          <td><strong>Canada</strong></td>
+          <td>August 2025</td>
+          <td>RT-CDP Prime & Ultimate</td>
+        </tr>
+        <tr>
+          <td><strong>Australia & New Zealand</strong></td>
+          <td>May 2025</td>
+          <td>RT-CDP Prime & Ultimate</td>
+        </tr>
+        <tr>
+          <td><strong>EMEA</strong></td>
+          <td>December 2025</td>
+          <td>RT-CDP Prime & Ultimate</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <p>Collaboration is <strong>automatically available</strong> to Real-Time CDP Prime and Ultimate customers in supported regions—no additional licensing required.</p>
+    
+    <h2>Best Practices for CDP Collaboration</h2>
+    
+    <h3>1. Start with High-Quality Match Keys</h3>
+    <p>Your match rates are only as good as your data quality. Before starting a collaboration:</p>
+    <ul>
+      <li>Ensure email addresses are properly formatted and hashed consistently (SHA-256)</li>
+      <li>Standardize phone numbers to E.164 format before hashing</li>
+      <li>Validate CRM and Loyalty IDs are populated across your customer base</li>
+    </ul>
+    
+    <h3>2. Validate Overlap Before Activation</h3>
+    <p>Use the Discover tab to analyze audience overlaps before activating. The new <strong>audience index scores</strong> help you understand:</p>
+    <ul>
+      <li>How well your audience matches your collaborator's</li>
+      <li>Which segments have the highest overlap potential</li>
+      <li>Whether you'll meet the minimum 1,000 ID threshold</li>
+    </ul>
+    
+    <h3>3. Leverage Multiple Match Keys Strategically</h3>
+    <p>Don't just enable all match keys—be strategic:</p>
+    <ul>
+      <li>Start with your strongest identifier (usually hashed email)</li>
+      <li>Add secondary keys to expand reach incrementally</li>
+      <li>Monitor match rates and adjust key combinations</li>
+    </ul>
+    
+    <h3>4. Configure Refresh Frequency Appropriately</h3>
+    <p>Choose your audience refresh frequency based on campaign needs:</p>
+    <ul>
+      <li><strong>Daily refresh:</strong> For real-time campaigns, flash sales, or rapidly changing audiences</li>
+      <li><strong>2-6 day refresh:</strong> For evergreen campaigns or stable audience segments</li>
+    </ul>
+    
+    <h2>Getting Started</h2>
+    
+    <p>Ready to start using Real-Time CDP Collaboration? Here's your action plan:</p>
+    
+    <ol>
+      <li><strong>Verify eligibility:</strong> Confirm you have Real-Time CDP Prime or Ultimate</li>
+      <li><strong>Set up match keys:</strong> Configure which identifiers you'll use for matching</li>
+      <li><strong>Source your audiences:</strong> Import audiences into Collaboration</li>
+      <li><strong>Find collaborators:</strong> Use Discover directory or private connection codes</li>
+      <li><strong>Establish connections:</strong> Configure activation permissions and access</li>
+      <li><strong>Analyze overlaps:</strong> Use Discover tab and index scores</li>
+      <li><strong>Activate audiences:</strong> Send to destinations or receive from collaborators</li>
+    </ol>
+    
+    <div class="cta-section">
+      <h3>Need Help with CDP Collaboration?</h3>
+      <p>Our Real-Time CDP experts can help you set up collaboration partnerships, optimize match rates, and maximize the value of your data partnerships.</p>
+      <a class="btn-primary" href="/contact/">
+        Schedule a Consultation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    
+    <div class="keywords-section">
+      <h4>Related Topics</h4>
+      <ul class="keywords-list">
+        <li>Real-Time CDP Collaboration</li>
+        <li>Adobe CDP</li>
+        <li>Brand-to-Brand Collaboration</li>
+        <li>Data Clean Room</li>
+        <li>Audience Collaboration</li>
+        <li>Match Keys</li>
+        <li>Audience Activation</li>
+        <li>Adobe Experience Platform</li>
+        <li>Customer Data Platform</li>
+        <li>Privacy-Safe Data Sharing</li>
+        <li>Audience Overlap Analysis</li>
+        <li>Self-Serve Destinations</li>
+        <li>WegWorks CDP</li>
+      </ul>
+    </div>
+    
+  </div>
+</div>
+
+<div class="related-articles">
+  <div class="container">
+    <h3>Related Articles</h3>
+    <div class="related-grid">
+      <a class="related-card" href="/blog/adobe-experience-platform/real-time-cdp-guide/">
+        <h4>Real-Time CDP Implementation Guide</h4>
+        <p>Complete guide to implementing Adobe Real-Time CDP for unified profiles and activation.</p>
+      </a>
+      <a class="related-card" href="/blog/adobe-experience-platform/what-is-aep/">
+        <h4>What is Adobe Experience Platform?</h4>
+        <p>Understanding the foundation of Adobe's customer experience technology.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+</article>
+</main>
+
+<footer class="footer">
+  <div class="container-wide">
+    <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved. | WegWorks is not affiliated with WageWorks.</p>
+  </div>
+</footer>
+
+<script>
+const mobileToggle = document.querySelector('.mobile-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+if (mobileToggle && mobileMenu) {
+  mobileToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+    mobileToggle.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      mobileToggle.textContent = '☰';
+    });
+  });
+}
+</script>
+</body>
+</html>
+

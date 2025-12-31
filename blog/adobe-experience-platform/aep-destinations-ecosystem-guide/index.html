@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9VH11ZH9Y4');
+</script>
+<title>AEP Destinations Explained: How CJA, Journey Optimizer, Analytics & Target Integrate | WegWorks</title>
+<meta name="description" content="Complete guide to Adobe Experience Platform destinations. Learn how CJA, Journey Optimizer, Adobe Analytics, Adobe Target, and Adobe Campaign integrate with AEP and what data flows between them."/>
+<meta name="keywords" content="AEP destinations, Adobe Experience Platform integrations, CJA AEP, Journey Optimizer AEP, Adobe Analytics AEP, Adobe Target AEP, Adobe Campaign AEP, Real-Time CDP destinations, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/adobe-experience-platform/aep-destinations-ecosystem-guide/"/>
+<link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/adobe-experience-platform/aep-destinations-ecosystem-guide/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="AEP Destinations Explained: How CJA, Journey Optimizer, Analytics & Target Integrate"/>
+<meta property="og:description" content="Complete guide to AEP destinations and how Adobe products integrate with Experience Platform."/>
+<meta property="og:image" content="https://www.wegworks.com/images/blog/aep-Destinations-guide.svg"/>
+<meta property="article:published_time" content="2025-12-30"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:title" content="AEP Destinations Explained: How CJA, Journey Optimizer, Analytics & Target Integrate"/>
+<meta name="twitter:description" content="How Adobe products integrate with Experience Platform and what data flows between them."/>
+<meta name="twitter:image" content="https://www.wegworks.com/images/blog/aep-Destinations-guide.svg"/>
+
+<!-- Schema.org Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AEP Destinations Explained: How CJA, Journey Optimizer, Analytics & Target Integrate",
+  "description": "Complete guide to Adobe Experience Platform destinations. Learn how CJA, Journey Optimizer, Adobe Analytics, Adobe Target, and Adobe Campaign integrate with AEP.",
+  "image": "https://www.wegworks.com/images/blog/aep-Destinations-guide.svg",
+  "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "https://www.wegworks.com/images/blog/logowhite.png"}},
+  "datePublished": "2025-12-30",
+  "dateModified": "2025-12-30",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.wegworks.com/blog/adobe-experience-platform/aep-destinations-ecosystem-guide/"
+  }
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "Adobe Experience Platform", "item": "https://www.wegworks.com/blog/adobe-experience-platform/"},
+    {"@type": "ListItem", "position": 4, "name": "AEP Destinations Ecosystem Guide", "item": "https://www.wegworks.com/blog/adobe-experience-platform/aep-destinations-ecosystem-guide/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Customer Journey Analytics (CJA) in the AEP destinations list?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, CJA is not a destination in AEP. Instead, CJA is a consumer of AEP data. CJA connects to AEP datasets directly and reads data from them for analysis. The data flows FROM AEP TO CJA, but CJA doesn't appear as a destination because it uses a connection-based architecture rather than audience activation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Journey Optimizer in the AEP destinations list?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Journey Optimizer (AJO) is built natively on AEP and shares the same infrastructure. It doesn't appear as a traditional destination because it directly accesses AEP profiles and segments. AJO uses Real-Time Customer Profile data to trigger journeys and deliver personalized experiences across email, push, SMS, and in-app channels."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Adobe Analytics in the AEP destinations list?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Adobe Analytics appears as a SOURCE in AEP (via the Analytics Source Connector), not as a destination. Data flows FROM Analytics TO AEP. However, you can use the Adobe Analytics extension with tags or Experience Platform Web SDK to send data to both Analytics and AEP simultaneously."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Adobe Target in the AEP destinations list?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, Adobe Target is available as a destination in AEP. You can activate AEP segments to Target for personalization. Target uses edge-based segment sharing for real-time personalization decisions. This enables you to use unified AEP profiles to power Target experiences."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #86bc25;
+  --accent-light: #a4d44a;
+  --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(134, 188, 37, 0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100vw; overflow-x: hidden; } body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.brand img { height: 42px; width: auto; }
+.brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
+.brand-text span { font-size: 0.7rem; color: var(--accent-primary); letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links > li { position: relative; }
+.nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text-primary); }
+.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+.dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
+.nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
+.dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); color: var(--accent-primary); }
+.nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+
+.article-header { padding: 160px 0 40px; }
+.article-hero-image { margin: 0 auto 60px; max-width: 1200px; padding: 0 24px; }
+.article-hero-image img { width: 100%; height: 400px; object-fit: cover; object-position: center; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
+.back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: #ffffff; margin-bottom: 24px; text-decoration: none; transition: all 0.3s; }
+.back-link:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+.article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: #ffffff; }
+.article-category { color: var(--accent-primary); font-weight: 600; text-decoration: none; }
+.article-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
+.article-intro { font-size: 1.25rem; color: #ffffff; line-height: 1.7; }
+
+.article-content { padding: 60px 0 100px; }
+.article-content h2 { font-size: 1.75rem; margin: 48px 0 20px; color: var(--text-primary); }
+.article-content h3 { font-size: 1.375rem; margin: 36px 0 16px; color: var(--text-primary); }
+.article-content h4 { font-size: 1.125rem; margin: 28px 0 12px; color: var(--accent-primary); }
+.article-content p { margin-bottom: 20px; color: #ffffff; line-height: 1.8; }
+.article-content ul, .article-content ol { margin: 0 0 24px 24px; color: #ffffff; }
+.article-content li { margin-bottom: 12px; line-height: 1.7; }
+.article-content strong { color: var(--text-primary); font-weight: 600; }
+.article-content a { color: var(--accent-primary); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+.article-content a:hover { border-bottom-color: var(--accent-primary); }
+
+/* Product Cards */
+.product-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 32px 0;
+}
+
+.product-card.destination {
+  border-left: 4px solid var(--accent-primary);
+}
+
+.product-card.source {
+  border-left: 4px solid #3b82f6;
+}
+
+.product-card.native {
+  border-left: 4px solid #8b5cf6;
+}
+
+.product-card.consumer {
+  border-left: 4px solid #f59e0b;
+}
+
+.product-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.product-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.product-badge {
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-destination {
+  background: rgba(134, 188, 37, 0.2);
+  color: var(--accent-primary);
+}
+
+.badge-source {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+.badge-native {
+  background: rgba(139, 92, 246, 0.2);
+  color: #8b5cf6;
+}
+
+.badge-consumer {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+.product-card ul {
+  margin-bottom: 0;
+}
+
+/* Data Flow Diagram */
+.data-flow {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 32px 0;
+  text-align: center;
+}
+
+.flow-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+
+.flow-box {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--glass-border);
+  padding: 16px 24px;
+  border-radius: 12px;
+  min-width: 140px;
+}
+
+.flow-box.aep {
+  background: linear-gradient(135deg, rgba(134, 188, 37, 0.2) 0%, rgba(134, 188, 37, 0.1) 100%);
+  border-color: var(--accent-primary);
+}
+
+.flow-arrow {
+  color: var(--text-muted);
+  font-size: 1.5rem;
+}
+
+/* Comparison Table */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 32px 0;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.comparison-table th {
+  background: var(--bg-tertiary);
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.comparison-table td {
+  color: #ffffff;
+}
+
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.status-yes {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.status-no {
+  color: #ef4444;
+}
+
+.status-partial {
+  color: #f59e0b;
+}
+
+/* Alert Boxes */
+.alert {
+  padding: 20px 24px;
+  border-radius: 12px;
+  margin: 24px 0;
+  border-left: 4px solid;
+}
+
+.alert-info {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+}
+
+.alert-info strong {
+  color: #3b82f6;
+}
+
+.alert-success {
+  background: rgba(134, 188, 37, 0.1);
+  border-color: var(--accent-primary);
+}
+
+.alert-success strong {
+  color: var(--accent-primary);
+}
+
+.alert-warning {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: #f59e0b;
+}
+
+.alert-warning strong {
+  color: #f59e0b;
+}
+
+/* Use Case Cards */
+.use-case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.use-case-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.use-case-card h4 {
+  margin-top: 0;
+}
+
+.use-case-card p {
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+/* Keywords Section */
+.keywords-section {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.keywords-section h4 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.keywords-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.keywords-list li {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* CTA Section */
+.cta-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 48px;
+  text-align: center;
+  margin: 60px 0;
+}
+
+.cta-section h3 {
+  font-size: 1.75rem;
+  margin-bottom: 16px;
+}
+
+.cta-section p {
+  color: #ffffff;
+  margin-bottom: 32px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  background: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  font-weight: 600;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background: rgba(134, 188, 37, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2);
+}
+
+/* Related Articles */
+.related-articles {
+  padding: 60px 0;
+  border-top: 1px solid var(--glass-border);
+}
+
+.related-articles h3 {
+  font-size: 1.5rem;
+  margin-bottom: 32px;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.related-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 24px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.related-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-4px);
+}
+
+.related-card h4 {
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  margin-bottom: 8px;
+}
+
+.related-card p {
+  color: #ffffff;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Footer */
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: #ffffff; }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+/* Mobile */
+.mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 28px; cursor: pointer; }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary); z-index: 999; padding: 100px 24px 24px; }
+.mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.mobile-menu a { font-size: 1.2rem; color: var(--text-primary); text-decoration: none; font-weight: 600; }
+
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
+  .article-header h1 { font-size: 1.75rem; }
+  .article-content h2 { font-size: 1.5rem; }
+  .related-grid { grid-template-columns: 1fr; }
+  .use-case-grid { grid-template-columns: 1fr; }
+  .comparison-table { font-size: 0.875rem; }
+  .comparison-table th, .comparison-table td { padding: 12px 16px; }
+  .cta-section { padding: 32px 24px; }
+  .flow-row { flex-direction: column; }
+  .flow-arrow { transform: rotate(90deg); }
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="nav-wrapper">
+    <a class="brand" href="/">
+      <img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/>
+      <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/services/adobe-analytics/">Adobe Analytics</a>
+          <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+          <a href="/services/segment-cdp/">Segment CDP</a>
+          <a href="/services/salesforce/">Salesforce</a>
+          <a href="/services/marketing-automation/">Marketing Automation</a>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+          <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+          <a href="/blog/adobe-target/">Adobe Target</a>
+          <a href="/blog/aem/">AEM</a>
+          <a href="/blog/google-analytics-4/">Google Analytics 4</a>
+          <a href="/blog/segment-cdp/">Segment CDP</a>
+        </div>
+      </li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="/contact/">Get Started</a>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Home</a>
+  <a href="/services/">Services</a>
+  <a href="/blog/">Blog</a>
+  <a href="/blog/adobe-experience-platform/">AEP Articles</a>
+  <a href="/about/">About</a>
+  <a href="/contact/">Contact</a>
+</div>
+
+<main>
+<article>
+<header class="article-header">
+  <div class="container">
+    <a class="back-link" href="/blog/adobe-experience-platform/">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to AEP Articles
+    </a>
+    <div class="article-meta">
+      <a href="/blog/adobe-experience-platform/" class="article-category">Adobe Experience Platform</a>
+      <span>December 30, 2025</span>
+      <span>20 min read</span>
+    </div>
+    <h1>AEP Destinations Explained: How CJA, Journey Optimizer, Analytics & Target Integrate</h1>
+    <p class="article-intro">One of the most common questions we get: "What's in the AEP destinations list? Are CJA and Journey Optimizer there? What about Analytics and Target?" Let's clear up the confusion about how Adobe products integrate with Experience Platform.</p>
+  </div>
+</header>
+
+<div class="article-hero-image">
+  <img src="https://www.wegworks.com/images/blog/aep-Destinations-guide.svg" alt="AEP Destinations and Adobe Product Ecosystem" width="1200" height="400"/>
+</div>
+
+<div class="article-content">
+  <div class="container">
+    
+    <h2>The Quick Answer</h2>
+    
+    <p>Before we dive deep, here's the direct answer to the most common questions:</p>
+    
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>In Destinations List?</th>
+          <th>How It Integrates</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Customer Journey Analytics (CJA)</strong></td>
+          <td><span class="status-no">No</span></td>
+          <td>Data Consumer — reads AEP datasets directly</td>
+        </tr>
+        <tr>
+          <td><strong>Journey Optimizer (AJO)</strong></td>
+          <td><span class="status-no">No</span></td>
+          <td>Native to AEP — shares same infrastructure</td>
+        </tr>
+        <tr>
+          <td><strong>Adobe Analytics</strong></td>
+          <td><span class="status-partial">As Source</span></td>
+          <td>Source Connector — sends data TO AEP</td>
+        </tr>
+        <tr>
+          <td><strong>Adobe Target</strong></td>
+          <td><span class="status-yes">Yes</span></td>
+          <td>Destination — receives segments for personalization</td>
+        </tr>
+        <tr>
+          <td><strong>Adobe Campaign</strong></td>
+          <td><span class="status-yes">Yes</span></td>
+          <td>Destination — receives audiences for campaigns</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <p>The reason for these differences? Each product has a <strong>fundamentally different relationship</strong> with AEP. Let's explore each one.</p>
+    
+    <h2>Understanding AEP's Architecture</h2>
+    
+    <p>To understand why some products are destinations and others aren't, you need to understand AEP's role in the Adobe ecosystem:</p>
+    
+    <div class="data-flow">
+      <p style="margin-bottom: 24px; color: var(--text-muted);"><strong>AEP is the Central Data Hub</strong></p>
+      <div class="flow-row">
+        <div class="flow-box">Data Sources<br/><small>(Analytics, Web SDK, etc.)</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box aep"><strong>AEP</strong><br/><small>Unified Profiles & Segments</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Destinations<br/><small>(Target, Campaign, etc.)</small></div>
+      </div>
+      <div class="flow-row" style="margin-top: 24px;">
+        <div class="flow-box aep"><strong>AEP</strong></div>
+        <span class="flow-arrow">↔</span>
+        <div class="flow-box">Native Apps<br/><small>(Journey Optimizer)</small></div>
+      </div>
+      <div class="flow-row" style="margin-top: 24px;">
+        <div class="flow-box aep"><strong>AEP Datasets</strong></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Consumers<br/><small>(CJA, Query Service)</small></div>
+      </div>
+    </div>
+    
+    <p>Products integrate with AEP in four distinct ways:</p>
+    <ol>
+      <li><strong>Sources</strong> — Send data INTO AEP (e.g., Adobe Analytics)</li>
+      <li><strong>Destinations</strong> — Receive data FROM AEP (e.g., Target, Campaign)</li>
+      <li><strong>Native Applications</strong> — Built on AEP infrastructure (e.g., Journey Optimizer)</li>
+      <li><strong>Data Consumers</strong> — Read AEP datasets for analysis (e.g., CJA)</li>
+    </ol>
+    
+    <h2>Customer Journey Analytics (CJA)</h2>
+    
+    <div class="product-card consumer">
+      <div class="product-header">
+        <h3>CJA</h3>
+        <span class="product-badge badge-consumer">Data Consumer</span>
+      </div>
+      <p><strong>Is CJA in the AEP destinations list?</strong> No.</p>
+      <p>CJA doesn't appear as a destination because it uses a <strong>connection-based architecture</strong>. Rather than receiving activated audiences, CJA directly connects to and reads AEP datasets.</p>
+      
+      <h4>How CJA Uses AEP Data:</h4>
+      <ul>
+        <li><strong>Connections:</strong> CJA creates connections to AEP datasets (both profile and event data)</li>
+        <li><strong>Data Views:</strong> You define how CJA interprets the connected data</li>
+        <li><strong>Analysis:</strong> CJA reads data directly from AEP's data lake for analysis</li>
+        <li><strong>Audience Publishing:</strong> CJA can publish audiences BACK to AEP (reverse flow)</li>
+      </ul>
+      
+      <h4>What CJA Contributes:</h4>
+      <ul>
+        <li>Cross-channel journey analysis across all AEP data</li>
+        <li>Flexible data modeling without schema changes</li>
+        <li>Ad-hoc exploration and reporting</li>
+        <li>Audience discovery that can be published to AEP</li>
+      </ul>
+    </div>
+    
+    <div class="alert alert-info">
+      <strong>Key Point:</strong> CJA and AEP have a bidirectional relationship. CJA reads AEP datasets for analysis, and can publish discovered audiences back to AEP for activation. But it's not a "destination" in the traditional sense.
+    </div>
+    
+    <h2>Journey Optimizer (AJO)</h2>
+    
+    <div class="product-card native">
+      <div class="product-header">
+        <h3>Journey Optimizer</h3>
+        <span class="product-badge badge-native">Native to AEP</span>
+      </div>
+      <p><strong>Is Journey Optimizer in the AEP destinations list?</strong> No.</p>
+      <p>Journey Optimizer is <strong>built natively on AEP</strong>. It doesn't need to be a "destination" because it directly accesses the same Real-Time Customer Profiles and segments that AEP uses.</p>
+      
+      <h4>How AJO Uses AEP Data:</h4>
+      <ul>
+        <li><strong>Shared Profiles:</strong> AJO reads directly from AEP's Real-Time Customer Profile</li>
+        <li><strong>Shared Segments:</strong> AEP segments are automatically available in AJO</li>
+        <li><strong>Unified Identity:</strong> Uses the same identity graph as AEP</li>
+        <li><strong>Event Triggers:</strong> AEP events can trigger AJO journeys in real-time</li>
+      </ul>
+      
+      <h4>What AJO Contributes:</h4>
+      <ul>
+        <li>Journey orchestration across email, push, SMS, in-app</li>
+        <li>Real-time decisioning and offer management</li>
+        <li>Journey event data flows back into AEP</li>
+        <li>Message interaction data enriches profiles</li>
+      </ul>
+    </div>
+    
+    <div class="alert alert-success">
+      <strong>Key Point:</strong> Think of Journey Optimizer as an <em>application layer</em> on top of AEP, not a separate product that receives data from AEP. When you create a segment in AEP, it's immediately available in AJO without any "activation" step.
+    </div>
+    
+    <h2>Adobe Analytics</h2>
+    
+    <div class="product-card source">
+      <div class="product-header">
+        <h3>Adobe Analytics</h3>
+        <span class="product-badge badge-source">Source</span>
+      </div>
+      <p><strong>Is Adobe Analytics in the AEP destinations list?</strong> No — it's a <strong>Source</strong>.</p>
+      <p>Adobe Analytics is one of the primary data sources for AEP. The Analytics Source Connector streams data FROM Analytics TO AEP, not the other direction.</p>
+      
+      <h4>How Analytics Sends Data to AEP:</h4>
+      <ul>
+        <li><strong>Analytics Source Connector:</strong> Backfills historical data and streams new data to AEP</li>
+        <li><strong>Data Mapping:</strong> Analytics variables map to AEP XDM schema fields</li>
+        <li><strong>Classification Data:</strong> Can include classification/lookup data</li>
+        <li><strong>Report Suite Data:</strong> Choose which report suites to send</li>
+      </ul>
+      
+      <h4>What Analytics Contributes to AEP:</h4>
+      <ul>
+        <li>Rich behavioral data from web and app</li>
+        <li>Historical interaction data</li>
+        <li>eVar and prop values mapped to profile attributes</li>
+        <li>Events that can trigger journeys or qualify for segments</li>
+      </ul>
+      
+      <h4>Dual Collection Strategy:</h4>
+      <p>Many organizations use <strong>Experience Platform Web SDK</strong> to send data to both Analytics AND AEP simultaneously:</p>
+      <ul>
+        <li>Single tag implementation</li>
+        <li>Data flows to both products in parallel</li>
+        <li>Ensures data consistency</li>
+        <li>Future-proofs your implementation</li>
+      </ul>
+    </div>
+    
+    <h2>Adobe Target</h2>
+    
+    <div class="product-card destination">
+      <div class="product-header">
+        <h3>Adobe Target</h3>
+        <span class="product-badge badge-destination">Destination</span>
+      </div>
+      <p><strong>Is Adobe Target in the AEP destinations list?</strong> Yes!</p>
+      <p>Target is a first-class destination in AEP. You can activate AEP segments to Target for personalization across web, mobile, and other channels.</p>
+      
+      <h4>How to Activate Segments to Target:</h4>
+      <ol>
+        <li>Navigate to <strong>Destinations</strong> in AEP</li>
+        <li>Find <strong>Adobe Target</strong> in the catalog</li>
+        <li>Configure the destination connection</li>
+        <li>Select segments to activate</li>
+        <li>Map attributes if needed</li>
+      </ol>
+      
+      <h4>What Target Does with AEP Data:</h4>
+      <ul>
+        <li><strong>Same-page/Next-page Personalization:</strong> Edge-based segment sharing enables real-time decisions</li>
+        <li><strong>Audience Targeting:</strong> Use AEP segments as Target audiences</li>
+        <li><strong>Profile Attributes:</strong> Access unified profile attributes in Target activities</li>
+        <li><strong>Recommendations:</strong> Use AEP data to power product recommendations</li>
+      </ul>
+      
+      <h4>What Target Contributes Back:</h4>
+      <ul>
+        <li>A/B test and activity data can flow to AEP</li>
+        <li>Experience decisions enrich customer profiles</li>
+        <li>Conversion data closes the feedback loop</li>
+      </ul>
+    </div>
+    
+    <div class="alert alert-warning">
+      <strong>Important:</strong> For real-time personalization, ensure you're using the <strong>Edge Network</strong> integration. This enables same-page personalization decisions based on AEP segments without page reload latency.
+    </div>
+    
+    <h2>Adobe Campaign</h2>
+    
+    <div class="product-card destination">
+      <div class="product-header">
+        <h3>Adobe Campaign</h3>
+        <span class="product-badge badge-destination">Destination</span>
+      </div>
+      <p><strong>Is Adobe Campaign in the AEP destinations list?</strong> Yes!</p>
+      <p>Both Adobe Campaign Standard and Campaign v8 are available as destinations in AEP. You can activate audiences for email, SMS, and direct mail campaigns.</p>
+      
+      <h4>Available Campaign Destinations:</h4>
+      <ul>
+        <li><strong>Adobe Campaign Standard:</strong> Cloud-based campaign management</li>
+        <li><strong>Adobe Campaign v8:</strong> Hybrid deployment option</li>
+        <li><strong>Adobe Campaign Managed Services:</strong> Fully managed option</li>
+      </ul>
+      
+      <h4>What Campaign Does with AEP Data:</h4>
+      <ul>
+        <li>Receives activated audiences for campaign targeting</li>
+        <li>Uses profile attributes for personalization</li>
+        <li>Triggers campaigns based on segment membership</li>
+        <li>Executes cross-channel campaigns (email, SMS, push, direct mail)</li>
+      </ul>
+      
+      <h4>What Campaign Contributes Back:</h4>
+      <ul>
+        <li>Email opens, clicks, bounces flow back to AEP</li>
+        <li>Campaign engagement enriches profiles</li>
+        <li>Delivery and response data available for analysis</li>
+      </ul>
+    </div>
+    
+    <h2>Complete Destinations Catalog</h2>
+    
+    <p>Beyond Adobe products, AEP's destinations catalog includes hundreds of integrations:</p>
+    
+    <h3>Adobe Destinations</h3>
+    <ul>
+      <li><strong>Adobe Target</strong> — Personalization</li>
+      <li><strong>Adobe Campaign</strong> — Campaign management</li>
+      <li><strong>Adobe Advertising Cloud</strong> — Paid media</li>
+      <li><strong>Marketo Engage</strong> — B2B marketing automation</li>
+      <li><strong>Adobe Commerce</strong> — E-commerce personalization</li>
+    </ul>
+    
+    <h3>Advertising Destinations</h3>
+    <ul>
+      <li>Google Ads, Google DV360, Google Ad Manager</li>
+      <li>Meta (Facebook, Instagram)</li>
+      <li>The Trade Desk, Amazon Ads, TikTok</li>
+      <li>LinkedIn, Twitter, Pinterest, Snapchat</li>
+    </ul>
+    
+    <h3>Cloud Storage Destinations</h3>
+    <ul>
+      <li>Amazon S3, Azure Blob, Google Cloud Storage</li>
+      <li>SFTP, Data Landing Zone</li>
+    </ul>
+    
+    <h3>Email Marketing Destinations</h3>
+    <ul>
+      <li>Salesforce Marketing Cloud</li>
+      <li>Oracle Eloqua, Oracle Responsys</li>
+      <li>Mailchimp, Braze, Iterable</li>
+    </ul>
+    
+    <h3>Personalization Destinations</h3>
+    <ul>
+      <li>Custom Personalization (for your own systems)</li>
+      <li>Pega, Adobe Target</li>
+    </ul>
+    
+    <h2>Use Cases: How They Work Together</h2>
+    
+    <div class="use-case-grid">
+      <div class="use-case-card">
+        <h4>Unified Customer View</h4>
+        <p><strong>Analytics → AEP → CJA</strong><br/>Analytics behavioral data flows to AEP, gets unified with other sources, and CJA provides cross-channel journey analysis.</p>
+      </div>
+      <div class="use-case-card">
+        <h4>Real-Time Personalization</h4>
+        <p><strong>AEP → Target</strong><br/>Segments built in AEP activate to Target for same-page personalization based on unified profile data.</p>
+      </div>
+      <div class="use-case-card">
+        <h4>Journey Orchestration</h4>
+        <p><strong>AEP → Journey Optimizer</strong><br/>AEP segments and events trigger personalized journeys across email, push, SMS, and in-app.</p>
+      </div>
+      <div class="use-case-card">
+        <h4>Campaign Targeting</h4>
+        <p><strong>AEP → Campaign</strong><br/>High-value segments identified in AEP activate to Campaign for targeted email and direct mail campaigns.</p>
+      </div>
+    </div>
+    
+    <h3>Example: Cross-Product Journey</h3>
+    
+    <p>Here's how data might flow through the ecosystem for a retail customer:</p>
+    
+    <ol>
+      <li><strong>Data Collection:</strong> Web SDK sends browsing data to both Analytics and AEP</li>
+      <li><strong>Profile Unification:</strong> AEP merges web behavior with CRM data, email engagement, and store purchases</li>
+      <li><strong>Segment Creation:</strong> AEP identifies "High-value customers who browsed but didn't purchase"</li>
+      <li><strong>Multi-Channel Activation:</strong>
+        <ul>
+          <li><strong>Target:</strong> Shows personalized product recommendations on next visit</li>
+          <li><strong>Journey Optimizer:</strong> Sends abandoned browse email sequence</li>
+          <li><strong>Campaign:</strong> Includes in weekly promotional email</li>
+          <li><strong>Google Ads:</strong> Retargets with display ads</li>
+        </ul>
+      </li>
+      <li><strong>Analysis:</strong> CJA analyzes the cross-channel journey to measure effectiveness</li>
+      <li><strong>Feedback Loop:</strong> Engagement data flows back to AEP, updating profiles</li>
+    </ol>
+    
+    <h2>Summary: Integration Quick Reference</h2>
+    
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Relationship</th>
+          <th>Data Direction</th>
+          <th>Primary Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>CJA</strong></td>
+          <td>Consumer</td>
+          <td>AEP → CJA (bidirectional via Audience Publishing)</td>
+          <td>Cross-channel analysis</td>
+        </tr>
+        <tr>
+          <td><strong>Journey Optimizer</strong></td>
+          <td>Native App</td>
+          <td>Shared infrastructure</td>
+          <td>Journey orchestration</td>
+        </tr>
+        <tr>
+          <td><strong>Adobe Analytics</strong></td>
+          <td>Source</td>
+          <td>Analytics → AEP</td>
+          <td>Behavioral data ingestion</td>
+        </tr>
+        <tr>
+          <td><strong>Adobe Target</strong></td>
+          <td>Destination</td>
+          <td>AEP → Target</td>
+          <td>Personalization</td>
+        </tr>
+        <tr>
+          <td><strong>Adobe Campaign</strong></td>
+          <td>Destination</td>
+          <td>AEP → Campaign</td>
+          <td>Campaign execution</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="cta-section">
+      <h3>Need Help with AEP Integrations?</h3>
+      <p>Our Adobe Experience Platform experts can help you design the right integration architecture and get the most value from your Adobe ecosystem.</p>
+      <a class="btn-primary" href="/contact/">
+        Schedule a Consultation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    
+    <div class="keywords-section">
+      <h4>Related Topics</h4>
+      <ul class="keywords-list">
+        <li>AEP destinations</li>
+        <li>Adobe Experience Platform integrations</li>
+        <li>CJA AEP integration</li>
+        <li>Journey Optimizer AEP</li>
+        <li>Adobe Analytics AEP connector</li>
+        <li>Adobe Target AEP destination</li>
+        <li>Adobe Campaign AEP</li>
+        <li>Real-Time CDP destinations</li>
+        <li>AEP source connectors</li>
+        <li>Adobe ecosystem</li>
+        <li>Experience Platform Web SDK</li>
+        <li>Cross-channel activation</li>
+        <li>WegWorks Adobe</li>
+      </ul>
+    </div>
+    
+  </div>
+</div>
+
+<div class="related-articles">
+  <div class="container">
+    <h3>Related Articles</h3>
+    <div class="related-grid">
+      <a class="related-card" href="/blog/adobe-experience-platform/what-is-aep/">
+        <h4>What is Adobe Experience Platform?</h4>
+        <p>Understanding the foundation of Adobe's customer experience technology.</p>
+      </a>
+      <a class="related-card" href="/blog/adobe-experience-platform/aep-integrations/">
+        <h4>AEP Integrations Guide</h4>
+        <p>Complete guide to connecting your data sources and destinations with AEP.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+</article>
+</main>
+
+<footer class="footer">
+  <div class="container-wide">
+    <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved. | WegWorks is not affiliated with WageWorks.</p>
+  </div>
+</footer>
+
+<script>
+const mobileToggle = document.querySelector('.mobile-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+if (mobileToggle && mobileMenu) {
+  mobileToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+    mobileToggle.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      mobileToggle.textContent = '☰';
+    });
+  });
+}
+</script>
+</body>
+</html>
+
