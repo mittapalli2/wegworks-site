@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9VH11ZH9Y4');
+</script>
+<title>AEM Java Version Compatibility Guide: JDK Requirements 2025 | WegWorks</title>
+<meta name="description" content="Complete AEM Java compatibility guide. Learn which Java JDK version works with AEM 6.5, AEM Cloud Service, including Oracle JDK, OpenJDK, and Azul Zulu options."/>
+<meta name="keywords" content="aem java, java aem, aem 6.5 java version, aem java version, AEM JDK compatibility, AEM Oracle JDK, AEM OpenJDK, AEM Cloud Java, WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/aem/aem-java-compatibility/"/>
+<link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/aem/aem-java-compatibility/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="AEM Java Version Compatibility Guide 2025"/>
+<meta property="og:description" content="Complete guide to AEM Java JDK compatibility for AEM 6.5 and Cloud Service."/>
+<meta property="og:image" content="/images/blog/AEM-JAVA-COMPAT.svg"/>
+<meta property="article:published_time" content="2026-01-01"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:title" content="AEM Java Version Compatibility Guide"/>
+<meta name="twitter:description" content="Which Java version works with AEM? Complete JDK compatibility guide."/>
+
+<style>
+body { font-family: 'DM Sans', sans-serif; line-height: 1.8; color: #1a1a2e; margin: 0; padding: 0; }
+.container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+h1 { font-family: 'Syne', sans-serif; font-size: 2.5rem; color: #0f0f23; margin-bottom: 20px; }
+h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; color: #16213e; margin-top: 40px; }
+h3 { font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; color: #1a1a2e; margin-top: 30px; }
+.draft-notice { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+.outline-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #00d9ff; }
+ul { margin: 15px 0; padding-left: 25px; }
+li { margin: 8px 0; }
+code { background: #e9ecef; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+th { background: #16213e; color: white; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="draft-notice">
+    <strong>📝 DRAFT ARTICLE OUTLINE</strong><br>
+    This is a content outline for a new SEO-optimized article. Target keywords: <code>aem java</code>, <code>java aem</code>, <code>aem 6.5 java version</code>
+  </div>
+
+  <h1>AEM Java Version Compatibility: Complete JDK Guide 2025</h1>
+  
+  <p><em>Target Word Count: 1,800-2,200 words | Reading Time: 8-10 minutes</em></p>
+
+  <div class="outline-section">
+    <h2>Article Outline</h2>
+    
+    <h3>1. Introduction (150 words)</h3>
+    <ul>
+      <li>Why Java version matters for AEM</li>
+      <li>Common compatibility issues developers face</li>
+      <li>Quick reference table preview</li>
+    </ul>
+
+    <h3>2. AEM Java Compatibility Matrix (400 words)</h3>
+    <p><strong>Include comprehensive table:</strong></p>
+    <table>
+      <tr><th>AEM Version</th><th>Minimum Java</th><th>Recommended Java</th><th>Maximum Java</th></tr>
+      <tr><td>AEM 6.5.0 - 6.5.12</td><td>Java 8</td><td>Java 11</td><td>Java 11</td></tr>
+      <tr><td>AEM 6.5.13+</td><td>Java 11</td><td>Java 11</td><td>Java 11</td></tr>
+      <tr><td>AEM Cloud Service</td><td>Java 11</td><td>Java 11/17</td><td>Java 21</td></tr>
+    </table>
+    <ul>
+      <li>Detailed breakdown of each version</li>
+      <li>LTS vs non-LTS considerations</li>
+    </ul>
+
+    <h3>3. Supported JDK Distributions (350 words)</h3>
+    <ul>
+      <li>Oracle JDK - licensing considerations</li>
+      <li>OpenJDK (AdoptOpenJDK/Adoptium)</li>
+      <li>Azul Zulu - Adobe's recommended distribution</li>
+      <li>Amazon Corretto</li>
+      <li>Which distribution to choose?</li>
+    </ul>
+
+    <h3>4. AEM 6.5 Java Configuration (400 words)</h3>
+    <ul>
+      <li>Setting JAVA_HOME correctly</li>
+      <li>JVM arguments for AEM 6.5</li>
+      <li>Memory allocation best practices</li>
+      <li>Garbage collection settings</li>
+      <li>Example startup scripts</li>
+    </ul>
+
+    <h3>5. AEM Cloud Service Java Configuration (350 words)</h3>
+    <ul>
+      <li>Java version in Cloud Manager</li>
+      <li>Local SDK Java requirements</li>
+      <li>Dispatcher SDK Java needs</li>
+      <li>CI/CD pipeline Java settings</li>
+    </ul>
+
+    <h3>6. Troubleshooting Java Issues (300 words)</h3>
+    <ul>
+      <li>"Unsupported major.minor version" error</li>
+      <li>JAVA_HOME not set correctly</li>
+      <li>Multiple Java versions conflict</li>
+      <li>Memory/heap issues</li>
+      <li>GC pause problems</li>
+    </ul>
+
+    <h3>7. Upgrading Java for AEM (200 words)</h3>
+    <ul>
+      <li>When to upgrade Java version</li>
+      <li>Testing process before upgrade</li>
+      <li>Rollback strategy</li>
+    </ul>
+
+    <h3>8. Conclusion (100 words)</h3>
+    <ul>
+      <li>Summary of key compatibility points</li>
+      <li>Link to AEM Installation guide</li>
+      <li>Link to AEM SDK Download guide</li>
+    </ul>
+  </div>
+
+  <h2>Internal Linking Strategy</h2>
+  <ul>
+    <li>Link TO: <code>/blog/aem/install-java-run-aem/</code></li>
+    <li>Link TO: <code>/blog/aem/aem-sdk-download/</code> (new)</li>
+    <li>Link TO: <code>/blog/aem/aem-cloud-migration/</code></li>
+    <li>Link FROM: Update install-java-run-aem to link here</li>
+  </ul>
+
+  <h2>Target Keywords</h2>
+  <ul>
+    <li><strong>Primary:</strong> aem java, java aem, aem 6.5 java version</li>
+    <li><strong>Secondary:</strong> aem java version, aem jdk, aem oracle jdk</li>
+    <li><strong>Long-tail:</strong> which java version for aem 6.5, aem cloud service java requirements</li>
+  </ul>
+
+</div>
+
+</body>
+</html>
+

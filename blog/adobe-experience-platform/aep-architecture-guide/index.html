@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9VH11ZH9Y4');
+</script>
+<title>Adobe Experience Platform Architecture: Complete Technical Guide | WegWorks</title>
+<meta name="description" content="Deep dive into Adobe Experience Platform architecture. Learn about AEP components, data flow, XDM schemas, identity service, unified profiles, and real-time streaming."/>
+<meta name="keywords" content="adobe experience platform architecture, aep architecture, adobe aep architecture, AEP components, XDM schema, identity service, unified profile, AEP data flow, WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/adobe-experience-platform/aep-architecture-guide/"/>
+<link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/adobe-experience-platform/aep-architecture-guide/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="Adobe Experience Platform Architecture: Complete Technical Guide"/>
+<meta property="og:description" content="Deep dive into AEP architecture, components, and data flow."/>
+<meta property="og:image" content="/images/blog/AEP-ARCHITECTURE.svg"/>
+<meta property="article:published_time" content="2026-01-01"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:title" content="Adobe Experience Platform Architecture Guide"/>
+<meta name="twitter:description" content="Complete technical guide to AEP architecture and components."/>
+
+<style>
+body { font-family: 'DM Sans', sans-serif; line-height: 1.8; color: #1a1a2e; margin: 0; padding: 0; }
+.container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+h1 { font-family: 'Syne', sans-serif; font-size: 2.5rem; color: #0f0f23; margin-bottom: 20px; }
+h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; color: #16213e; margin-top: 40px; }
+h3 { font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; color: #1a1a2e; margin-top: 30px; }
+.draft-notice { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+.outline-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ff6b35; }
+ul { margin: 15px 0; padding-left: 25px; }
+li { margin: 8px 0; }
+code { background: #e9ecef; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="draft-notice">
+    <strong>📝 DRAFT ARTICLE OUTLINE</strong><br>
+    This is a content outline for a new SEO-optimized article. Target keywords: <code>adobe experience platform architecture</code>, <code>aep architecture</code>
+  </div>
+
+  <h1>Adobe Experience Platform Architecture: Complete Technical Guide</h1>
+  
+  <p><em>Target Word Count: 2,500-3,000 words | Reading Time: 12-15 minutes</em></p>
+
+  <div class="outline-section">
+    <h2>Article Outline</h2>
+    
+    <h3>1. Introduction (200 words)</h3>
+    <ul>
+      <li>Why understanding AEP architecture matters</li>
+      <li>Overview of AEP as Adobe's foundation</li>
+      <li>Architecture diagram preview</li>
+    </ul>
+
+    <h3>2. AEP Architecture Overview (400 words)</h3>
+    <ul>
+      <li>High-level architecture diagram</li>
+      <li>Core layers: Data, Services, Applications</li>
+      <li>How components interact</li>
+      <li>Real-time vs batch processing</li>
+    </ul>
+
+    <h3>3. Data Ingestion Layer (450 words)</h3>
+    <ul>
+      <li>Streaming ingestion (Web SDK, Mobile SDK, Server API)</li>
+      <li>Batch ingestion (S3, Azure, SFTP)</li>
+      <li>Source connectors overview</li>
+      <li>Data landing zone</li>
+      <li>Ingestion guardrails and limits</li>
+    </ul>
+
+    <h3>4. XDM Schema Architecture (400 words)</h3>
+    <ul>
+      <li>What is XDM (Experience Data Model)?</li>
+      <li>Schema composition: classes, field groups, data types</li>
+      <li>Profile vs ExperienceEvent schemas</li>
+      <li>Schema versioning and evolution</li>
+      <li>Best practices for schema design</li>
+    </ul>
+
+    <h3>5. Identity Service Architecture (400 words)</h3>
+    <ul>
+      <li>How identity stitching works</li>
+      <li>Identity namespaces explained</li>
+      <li>Identity graphs and linking</li>
+      <li>Cross-device identity resolution</li>
+      <li>Privacy and identity management</li>
+    </ul>
+
+    <h3>6. Unified Profile Service (400 words)</h3>
+    <ul>
+      <li>Real-time customer profile explained</li>
+      <li>Profile merge policies</li>
+      <li>Edge profiles vs hub profiles</li>
+      <li>Profile attribute limits</li>
+      <li>Profile lookup and API access</li>
+    </ul>
+
+    <h3>7. Segmentation Architecture (350 words)</h3>
+    <ul>
+      <li>Batch vs streaming segmentation</li>
+      <li>Edge segmentation for real-time</li>
+      <li>Segment evaluation methods</li>
+      <li>Audience composition</li>
+    </ul>
+
+    <h3>8. Destinations & Activation (300 words)</h3>
+    <ul>
+      <li>Destination types (streaming, batch, edge)</li>
+      <li>Data export architecture</li>
+      <li>Activation flow</li>
+      <li>Link to destinations guide</li>
+    </ul>
+
+    <h3>9. Security & Governance (200 words)</h3>
+    <ul>
+      <li>Data governance framework</li>
+      <li>Access control (ABAC)</li>
+      <li>Encryption and compliance</li>
+    </ul>
+
+    <h3>10. Conclusion (150 words)</h3>
+    <ul>
+      <li>Key architectural takeaways</li>
+      <li>Links to related AEP guides</li>
+      <li>CTA: Contact WegWorks for AEP implementation</li>
+    </ul>
+  </div>
+
+  <h2>Internal Linking Strategy</h2>
+  <ul>
+    <li>Link TO: <code>/blog/adobe-experience-platform/what-is-aep/</code></li>
+    <li>Link TO: <code>/blog/adobe-experience-platform/aep-schema-design-best-practices/</code></li>
+    <li>Link TO: <code>/blog/adobe-experience-platform/aep-destinations-guide/</code> (new)</li>
+    <li>Link TO: <code>/blog/adobe-experience-platform/aep-profile-merge-policies/</code></li>
+    <li>Link TO: <code>/blog/adobe-experience-platform/identity-graph-collapse-fix/</code></li>
+    <li>Link FROM: Update what-is-aep to link here</li>
+  </ul>
+
+  <h2>Target Keywords</h2>
+  <ul>
+    <li><strong>Primary:</strong> adobe experience platform architecture, aep architecture</li>
+    <li><strong>Secondary:</strong> aep components, aep data flow, xdm architecture</li>
+    <li><strong>Long-tail:</strong> how does adobe experience platform work, aep technical architecture</li>
+  </ul>
+
+  <h2>Visuals Needed</h2>
+  <ul>
+    <li>AEP high-level architecture diagram</li>
+    <li>Data ingestion flow diagram</li>
+    <li>Identity stitching visualization</li>
+    <li>Profile merge diagram</li>
+  </ul>
+
+</div>
+
+</body>
+</html>
+

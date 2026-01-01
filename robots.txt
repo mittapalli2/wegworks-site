@@ -1,5 +1,6 @@
 # robots.txt for WegWorks
 # https://www.wegworks.com
+# Note: Cloudflare automatically prepends AI bot restrictions
 
 User-agent: *
 Allow: /
@@ -7,23 +8,14 @@ Allow: /
 # Sitemap location
 Sitemap: https://www.wegworks.com/sitemap.xml
 
-# Crawl-delay for polite crawling (optional)
-Crawl-delay: 1
-
 # Google-specific
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 0
 
 # Bing
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 1
 
 # Allow all images
 User-agent: Googlebot-Image
 Allow: /images/
-
-# Block common non-content paths (if any exist)
-# Disallow: /admin/
-# Disallow: /private/
