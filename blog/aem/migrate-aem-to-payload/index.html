@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9VH11ZH9Y4');
+    </script>
+    <title>How to Migrate from AEM to Payload CMS: Complete Guide 2025 | WegWorks</title>
+    <meta name="description" content="Step-by-step guide to migrating from Adobe Experience Manager (AEM) to Payload CMS. Learn content migration strategies, API integration, and best practices for a successful headless CMS transition."/>
+    <meta name="keywords" content="AEM to Payload migration, migrate from AEM, Payload CMS, headless CMS migration, AEM alternative, content migration, CMS transition, WegWorks"/>
+    <meta name="robots" content="index, follow"/>
+    <link rel="canonical" href="https://www.wegworks.com/blog/aem/migrate-aem-to-payload/"/>
+    <link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="How to Migrate from AEM to Payload CMS: Complete Guide 2025">
+    <meta property="og:description" content="Step-by-step guide to migrating from Adobe Experience Manager to Payload CMS.">
+    <meta property="og:url" content="https://www.wegworks.com/blog/aem/migrate-aem-to-payload/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="WegWorks">
+    <meta property="article:published_time" content="2025-12-05">
+    <meta property="og:image" content="https://www.wegworks.com/images/blog/aem-to-payload.svg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Migrate from AEM to Payload CMS Guide">
+    <meta name="twitter:description" content="Complete guide to migrating from Adobe Experience Manager to Payload CMS.">
+    <meta name="twitter:image" content="https://www.wegworks.com/images/blog/aem-to-payload.svg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "How to Migrate from AEM to Payload CMS: Complete Guide 2025",
+        "description": "Step-by-step guide to migrating from Adobe Experience Manager (AEM) to Payload CMS with content migration strategies and best practices.",
+        "datePublished": "2025-12-05",
+        "dateModified": "2025-12-05",
+        "author": {"@type": "Organization", "name": "WegWorks"},
+        "publisher": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com/"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "AEM", "item": "https://www.wegworks.com/blog/aem/"},
+            {"@type": "ListItem", "position": 4, "name": "Migrate AEM to Payload", "item": "https://www.wegworks.com/blog/aem/migrate-aem-to-payload/"}
+        ]
+    }
+    </script>
+    
+    <style>
+html, body { max-width: 100vw; overflow-x: hidden; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #141414;
+    --bg-code: #0d1117;
+    --text-primary: #f0f0f5;
+    --text-secondary: #b0b0c0;
+    --text-muted: #707080;
+    --accent-primary: #86bc25;
+    --accent-light: #a4d44a;
+    --accent-warning: #f59e0b;
+    --accent-error: #ef4444;
+    --accent-blue: #3b82f6;
+    --accent-cyan: #06b6d4;
+    --accent-purple: #a855f7;
+    --border-color: #2a2a3a;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.8;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.header {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+}
+
+.brand img {
+    height: 42px;
+}
+
+.brand-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #ffffff;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.brand-text span {
+    font-size: 0.55em;
+    font-weight: 500;
+    color: var(--accent-primary);
+    letter-spacing: 0.15em;
+}
+
+.desktop-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.desktop-nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.desktop-nav a:hover {
+    color: var(--accent-primary);
+}
+
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 99;
+}
+
+.mobile-menu.active {
+    display: flex;
+}
+
+.mobile-menu a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .desktop-nav { display: none; }
+    .mobile-toggle { display: block; }
+    .header { padding: 1rem; }
+}
+
+.breadcrumb {
+    max-width: 900px;
+    margin: 1.5rem auto;
+    padding: 0 2rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: var(--accent-primary);
+}
+
+.breadcrumb span {
+    color: var(--text-muted);
+    margin: 0 0.5rem;
+}
+
+article {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+article h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.article-meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.article-content {
+    color: var(--text-secondary);
+}
+
+.article-content h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 2.5rem 0 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.article-content h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 2rem 0 0.75rem;
+}
+
+.article-content h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    margin: 1.5rem 0 0.5rem;
+}
+
+.article-content p {
+    margin-bottom: 1.25rem;
+}
+
+.article-content ul, .article-content ol {
+    margin: 1rem 0 1.5rem 1.5rem;
+}
+
+.article-content li {
+    margin-bottom: 0.5rem;
+}
+
+.article-content a {
+    color: var(--accent-primary);
+    text-decoration: none;
+}
+
+.article-content a:hover {
+    text-decoration: underline;
+}
+
+.article-content strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+pre {
+    background: var(--bg-code);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+pre code {
+    color: #e6edf3;
+}
+
+code {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg-tertiary);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--accent-cyan);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+.info-box {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-left: 4px solid var(--accent-blue);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.info-box h4 {
+    color: var(--accent-blue);
+    margin-top: 0;
+}
+
+.warning-box {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.05));
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-left: 4px solid var(--accent-warning);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.warning-box h4 {
+    color: var(--accent-warning);
+    margin-top: 0;
+}
+
+.success-box {
+    background: linear-gradient(135deg, rgba(134, 188, 37, 0.1), rgba(134, 188, 37, 0.05));
+    border: 1px solid rgba(134, 188, 37, 0.3);
+    border-left: 4px solid var(--accent-primary);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.success-box h4 {
+    color: var(--accent-primary);
+    margin-top: 0;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+.comparison-table th {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.comparison-table td {
+    background: var(--bg-secondary);
+}
+
+.comparison-table tr:hover td {
+    background: var(--bg-tertiary);
+}
+
+.phase-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.phase-card h4 {
+    color: var(--accent-primary);
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.phase-number {
+    background: var(--accent-primary);
+    color: #000;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.related-topics {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.related-topics h3 {
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.topic-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.topic-tag {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+}
+
+.footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+}
+
+.footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--accent-primary);
+}
+
+@media (max-width: 768px) {
+    article { padding: 1.5rem; }
+    article h1 { font-size: 1.8rem; }
+    .article-content h2 { font-size: 1.5rem; }
+    .comparison-table { font-size: 0.85rem; }
+    .comparison-table th, .comparison-table td { padding: 0.75rem; }
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a class="brand" href="/">
+                <img alt="WegWorks Logo" src="https://www.wegworks.com/images/blog/logowhite.png"/>
+                <div class="brand-text">WEGWORKS<span>Expert MarTech</span></div>
+            </a>
+            <nav class="desktop-nav">
+                <a href="/">Home</a>
+                <a href="/services/">Services</a>
+                <a href="/blog/">Blog</a>
+                <a href="/contact/">Contact</a>
+            </nav>
+            <button class="mobile-toggle">☰</button>
+        </div>
+        <nav class="mobile-menu" id="mobile-menu">
+            <a href="/">Home</a>
+            <a href="/services/">Services</a>
+            <a href="/blog/">Blog</a>
+            <a href="/contact/">Contact</a>
+        </nav>
+    </header>
+    
+    <nav class="breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="/blog/">Blog</a><span>›</span>
+        <a href="/blog/aem/">AEM</a><span>›</span>
+        Migrate AEM to Payload
+    </nav>
+    
+    <article>
+        <h1>How to Migrate from AEM to Payload CMS: Complete Guide</h1>
+        <div class="article-meta">
+            Published: December 5, 2025 · 15 min read · AEM Migration, Headless CMS
+        </div>
+        
+        <div class="article-content">
+            <p>Adobe Experience Manager (AEM) has long been an enterprise-grade content management solution, but its complexity, licensing costs, and infrastructure requirements are driving many organizations to explore modern alternatives. <strong>Payload CMS</strong> has emerged as a compelling headless CMS option that offers flexibility, developer experience, and cost efficiency that AEM struggles to match.</p>
+            
+            <p>This guide walks you through the complete process of migrating from AEM to Payload CMS, covering content modeling, data migration, API integration, and deployment strategies.</p>
+            
+            <div class="info-box">
+                <h4>Why Organizations Are Moving Away from AEM</h4>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Cost:</strong> AEM licensing can exceed $200,000+ annually for enterprise deployments</li>
+                    <li><strong>Complexity:</strong> Steep learning curve with Java/OSGi architecture</li>
+                    <li><strong>Infrastructure:</strong> Heavy resource requirements for on-premise or Cloud Service</li>
+                    <li><strong>Flexibility:</strong> Monolithic architecture limits modern frontend frameworks</li>
+                </ul>
+            </div>
+            
+            <h2>Understanding Payload CMS</h2>
+            
+            <p>Payload CMS is an open-source, headless content management system built with TypeScript and Node.js. It provides a powerful admin panel, flexible content modeling, and a robust API—all while giving you complete control over your data and infrastructure.</p>
+            
+            <h3>Key Advantages of Payload Over AEM</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>AEM</th>
+                        <th>Payload CMS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Licensing Cost</strong></td>
+                        <td>$200K+/year</td>
+                        <td>Free (MIT License)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Technology Stack</strong></td>
+                        <td>Java, OSGi, HTL</td>
+                        <td>TypeScript, Node.js, React</td>
+                    </tr>
+                    <tr>
+                        <td><strong>API-First</strong></td>
+                        <td>Partial (Content Services)</td>
+                        <td>Native REST & GraphQL</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deployment Options</strong></td>
+                        <td>Cloud Service or On-Premise</td>
+                        <td>Any Node.js host, Docker, Serverless</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Database</strong></td>
+                        <td>JCR (Apache Oak)</td>
+                        <td>MongoDB or PostgreSQL</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Admin Customization</strong></td>
+                        <td>Complex (Coral UI, Granite)</td>
+                        <td>Simple React components</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Learning Curve</strong></td>
+                        <td>Steep (months)</td>
+                        <td>Moderate (weeks)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Migration Planning</h2>
+            
+            <p>A successful AEM to Payload migration requires careful planning across several dimensions:</p>
+            
+            <div class="phase-card">
+                <h4><span class="phase-number">1</span> Content Audit</h4>
+                <p>Inventory all content types, components, and assets in your AEM instance. Identify:</p>
+                <ul>
+                    <li>Page templates and their components</li>
+                    <li>Content Fragments and Experience Fragments</li>
+                    <li>DAM assets (images, videos, documents)</li>
+                    <li>Translations and language copies</li>
+                    <li>Custom workflows and business logic</li>
+                </ul>
+            </div>
+            
+            <div class="phase-card">
+                <h4><span class="phase-number">2</span> Content Model Mapping</h4>
+                <p>Map AEM content structures to Payload collections:</p>
+                <ul>
+                    <li>AEM Page Components → Payload Collections with blocks</li>
+                    <li>Content Fragments → Payload Collections</li>
+                    <li>DAM Assets → Payload Media library</li>
+                    <li>Tags → Payload relationship fields</li>
+                </ul>
+            </div>
+            
+            <div class="phase-card">
+                <h4><span class="phase-number">3</span> Integration Assessment</h4>
+                <p>Evaluate external integrations that need to be migrated:</p>
+                <ul>
+                    <li>Adobe Target personalization</li>
+                    <li>Adobe Analytics tracking</li>
+                    <li>Third-party DAM connections</li>
+                    <li>Custom Sling servlets and APIs</li>
+                </ul>
+            </div>
+            
+            <h2>Setting Up Payload CMS</h2>
+            
+            <p>Start by creating a new Payload project:</p>
+            
+<pre data-lang="bash"><code># Create a new Payload project
+npx create-payload-app@latest my-payload-cms
+
+# Navigate to the project
+cd my-payload-cms
+
+# Install dependencies
+npm install</code></pre>
+            
+            <h3>Configure Your Database</h3>
+            
+            <p>Payload supports MongoDB and PostgreSQL. For most AEM migrations, MongoDB provides a flexible document structure similar to JCR:</p>
+            
+<pre data-lang="typescript"><code>// payload.config.ts
+import { buildConfig } from 'payload/config';
+import { mongooseAdapter } from '@payloadcms/db-mongodb';
+
+export default buildConfig({
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+  admin: {
+    user: 'users',
+  },
+  db: mongooseAdapter({
+    url: process.env.MONGODB_URI,
+  }),
+  collections: [
+    // Your collections will go here
+  ],
+});</code></pre>
+            
+            <h2>Content Modeling in Payload</h2>
+            
+            <h3>Recreating AEM Page Structures</h3>
+            
+            <p>AEM pages with components can be modeled as Payload collections with blocks:</p>
+            
+<pre data-lang="typescript"><code>// collections/Pages.ts
+import { CollectionConfig } from 'payload/types';
+import { HeroBlock } from '../blocks/Hero';
+import { ContentBlock } from '../blocks/Content';
+import { CTABlock } from '../blocks/CTA';
+
+export const Pages: CollectionConfig = {
+  slug: 'pages',
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'slug', 'status', 'updatedAt'],
+  },
+  access: {
+    read: () => true,
+  },
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'slug',
+      type: 'text',
+      required: true,
+      unique: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'status',
+      type: 'select',
+      options: [
+        { label: 'Draft', value: 'draft' },
+        { label: 'Published', value: 'published' },
+      ],
+      defaultValue: 'draft',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'layout',
+      type: 'blocks',
+      blocks: [HeroBlock, ContentBlock, CTABlock],
+    },
+    {
+      name: 'meta',
+      type: 'group',
+      fields: [
+        { name: 'title', type: 'text' },
+        { name: 'description', type: 'textarea' },
+        { name: 'image', type: 'upload', relationTo: 'media' },
+      ],
+    },
+  ],
+};</code></pre>
+            
+            <h3>Migrating Content Fragments</h3>
+            
+            <p>AEM Content Fragments map directly to Payload collections:</p>
+            
+<pre data-lang="typescript"><code>// collections/Articles.ts (Content Fragment equivalent)
+export const Articles: CollectionConfig = {
+  slug: 'articles',
+  admin: {
+    useAsTitle: 'title',
+  },
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'author',
+      type: 'relationship',
+      relationTo: 'authors',
+    },
+    {
+      name: 'category',
+      type: 'relationship',
+      relationTo: 'categories',
+      hasMany: true,
+    },
+    {
+      name: 'content',
+      type: 'richText',
+    },
+    {
+      name: 'publishDate',
+      type: 'date',
+      admin: {
+        date: {
+          pickerAppearance: 'dayAndTime',
+        },
+      },
+    },
+  ],
+};</code></pre>
+            
+            <h2>Exporting Content from AEM</h2>
+            
+            <p>Use AEM's Content Services or QueryBuilder to export content as JSON:</p>
+            
+<pre data-lang="bash"><code># Query all pages under /content/mysite
+curl -u admin:admin \
+  "http://localhost:4502/bin/querybuilder.json?\
+path=/content/mysite&\
+type=cq:Page&\
+p.limit=-1" \
+  -o aem-pages.json
+
+# Export Content Fragments
+curl -u admin:admin \
+  "http://localhost:4502/bin/querybuilder.json?\
+path=/content/dam/mysite/content-fragments&\
+type=dam:Asset&\
+p.limit=-1" \
+  -o aem-content-fragments.json</code></pre>
+            
+            <h3>Export Assets from DAM</h3>
+            
+<pre data-lang="bash"><code># Create a package of DAM assets
+# In AEM Package Manager, create package with filter:
+# /content/dam/mysite
+
+# Or use Asset Share Commons for bulk export
+curl -u admin:admin \
+  "http://localhost:4502/content/dam/mysite.assetdownload.zip" \
+  -o dam-assets.zip</code></pre>
+            
+            <h2>Data Transformation Script</h2>
+            
+            <p>Create a migration script to transform AEM JSON to Payload format:</p>
+            
+<pre data-lang="typescript"><code>// migrate.ts
+import fs from 'fs';
+import payload from 'payload';
+
+interface AEMPage {
+  'jcr:path': string;
+  'jcr:title': string;
+  'jcr:content': {
+    'jcr:title': string;
+    'cq:template': string;
+    'sling:resourceType': string;
+    [key: string]: any;
+  };
+}
+
+async function migratePages() {
+  // Initialize Payload
+  await payload.init({
+    secret: process.env.PAYLOAD_SECRET,
+    local: true,
+  });
+
+  // Read AEM export
+  const aemData = JSON.parse(
+    fs.readFileSync('./aem-pages.json', 'utf-8')
+  );
+
+  for (const aemPage of aemData.hits as AEMPage[]) {
+    const content = aemPage['jcr:content'];
+    
+    // Transform AEM page to Payload format
+    const payloadPage = {
+      title: content['jcr:title'] || aemPage['jcr:title'],
+      slug: extractSlug(aemPage['jcr:path']),
+      status: 'draft',
+      layout: transformComponents(content),
+      meta: {
+        title: content['jcr:title'],
+        description: content['jcr:description'],
+      },
+    };
+
+    try {
+      await payload.create({
+        collection: 'pages',
+        data: payloadPage,
+      });
+      console.log(`Migrated: ${payloadPage.slug}`);
+    } catch (error) {
+      console.error(`Failed: ${payloadPage.slug}`, error);
+    }
+  }
+
+  process.exit(0);
+}
+
+function extractSlug(jcrPath: string): string {
+  return jcrPath
+    .replace('/content/mysite/', '')
+    .replace(/\/jcr:content.*/, '');
+}
+
+function transformComponents(content: any): any[] {
+  const layout: any[] = [];
+  
+  // Map AEM components to Payload blocks
+  Object.entries(content).forEach(([key, value]) => {
+    if (key.startsWith('par') && typeof value === 'object') {
+      // Parse parsys children
+      Object.entries(value as object).forEach(([compKey, compValue]) => {
+        const block = mapComponentToBlock(compValue as any);
+        if (block) layout.push(block);
+      });
+    }
+  });
+
+  return layout;
+}
+
+function mapComponentToBlock(component: any): any | null {
+  const resourceType = component['sling:resourceType'];
+  
+  switch (resourceType) {
+    case 'mysite/components/hero':
+      return {
+        blockType: 'hero',
+        heading: component.heading,
+        subheading: component.subheading,
+        backgroundImage: component.fileReference,
+      };
+    case 'mysite/components/text':
+      return {
+        blockType: 'content',
+        richText: component.text,
+      };
+    // Add more component mappings
+    default:
+      console.warn(`Unmapped component: ${resourceType}`);
+      return null;
+  }
+}
+
+migratePages();</code></pre>
+            
+            <h2>Asset Migration</h2>
+            
+            <p>Migrate DAM assets to Payload's media library:</p>
+            
+<pre data-lang="typescript"><code>// migrate-assets.ts
+import fs from 'fs';
+import path from 'path';
+import payload from 'payload';
+
+async function migrateAssets() {
+  await payload.init({
+    secret: process.env.PAYLOAD_SECRET,
+    local: true,
+  });
+
+  const assetsDir = './extracted-dam-assets';
+  const files = getAllFiles(assetsDir);
+
+  for (const filePath of files) {
+    const fileName = path.basename(filePath);
+    const fileBuffer = fs.readFileSync(filePath);
+
+    try {
+      await payload.create({
+        collection: 'media',
+        data: {
+          alt: extractAltFromPath(filePath),
+        },
+        file: {
+          data: fileBuffer,
+          name: fileName,
+          mimetype: getMimeType(fileName),
+          size: fileBuffer.length,
+        },
+      });
+      console.log(`Uploaded: ${fileName}`);
+    } catch (error) {
+      console.error(`Failed: ${fileName}`, error);
+    }
+  }
+}
+
+function getAllFiles(dir: string): string[] {
+  const files: string[] = [];
+  const items = fs.readdirSync(dir, { withFileTypes: true });
+  
+  for (const item of items) {
+    const fullPath = path.join(dir, item.name);
+    if (item.isDirectory()) {
+      files.push(...getAllFiles(fullPath));
+    } else if (isAssetFile(item.name)) {
+      files.push(fullPath);
+    }
+  }
+  
+  return files;
+}
+
+migrateAssets();</code></pre>
+            
+            <h2>Frontend Integration</h2>
+            
+            <p>Once your content is in Payload, integrate with your frontend framework:</p>
+            
+<pre data-lang="typescript"><code>// Next.js example: fetching pages from Payload
+import { getPayloadClient } from '../payload/payloadClient';
+
+export async function getStaticProps({ params }) {
+  const payload = await getPayloadClient();
+  
+  const pages = await payload.find({
+    collection: 'pages',
+    where: {
+      slug: { equals: params.slug },
+      status: { equals: 'published' },
+    },
+  });
+
+  if (!pages.docs.length) {
+    return { notFound: true };
+  }
+
+  return {
+    props: {
+      page: pages.docs[0],
+    },
+    revalidate: 60,
+  };
+}
+
+export async function getStaticPaths() {
+  const payload = await getPayloadClient();
+  
+  const pages = await payload.find({
+    collection: 'pages',
+    where: { status: { equals: 'published' } },
+    limit: 1000,
+  });
+
+  return {
+    paths: pages.docs.map((page) => ({
+      params: { slug: page.slug },
+    })),
+    fallback: 'blocking',
+  };
+}</code></pre>
+            
+            <h2>Deployment Options</h2>
+            
+            <p>Payload offers flexible deployment options compared to AEM:</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Best For</th>
+                        <th>Monthly Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Payload Cloud</strong></td>
+                        <td>Managed hosting, zero DevOps</td>
+                        <td>$35-500+</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vercel + MongoDB Atlas</strong></td>
+                        <td>Serverless, auto-scaling</td>
+                        <td>$20-200</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Docker + VPS</strong></td>
+                        <td>Full control, cost-effective</td>
+                        <td>$10-100</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AWS/GCP/Azure</strong></td>
+                        <td>Enterprise scale, compliance</td>
+                        <td>$50-500+</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="warning-box">
+                <h4>Migration Considerations</h4>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Personalization:</strong> If using Adobe Target, evaluate alternatives like LaunchDarkly or Optimizely</li>
+                    <li><strong>Analytics:</strong> Adobe Analytics can still work with Payload via client-side integration</li>
+                    <li><strong>Workflows:</strong> AEM workflows need to be rebuilt using Payload hooks or external workflow engines</li>
+                    <li><strong>Training:</strong> Plan for team training on TypeScript/Node.js stack</li>
+                </ul>
+            </div>
+            
+            <h2>Post-Migration Checklist</h2>
+            
+            <ul>
+                <li>✅ All content types migrated and verified</li>
+                <li>✅ Assets uploaded with proper metadata</li>
+                <li>✅ URL redirects configured (old AEM URLs to new)</li>
+                <li>✅ API endpoints tested for all consumers</li>
+                <li>✅ Admin users created with appropriate roles</li>
+                <li>✅ Preview and draft functionality working</li>
+                <li>✅ Search functionality implemented</li>
+                <li>✅ Performance testing completed</li>
+                <li>✅ Backup and disaster recovery configured</li>
+            </ul>
+            
+            <div class="success-box">
+                <h4>Need Help with Your AEM to Payload Migration?</h4>
+                <p>WegWorks has deep expertise in both AEM and modern headless CMS platforms. We can help you plan and execute a seamless migration that minimizes disruption while maximizing the benefits of your new platform. <a href="/contact/" style="color: var(--accent-primary);">Contact us</a> to discuss your migration project.</p>
+            </div>
+        </div>
+        
+        <section class="related-topics">
+            <h3>Related Topics</h3>
+            <div class="topic-tags">
+                <span class="topic-tag">AEM Migration</span>
+                <span class="topic-tag">Payload CMS</span>
+                <span class="topic-tag">Headless CMS</span>
+                <span class="topic-tag">Content Migration</span>
+                <span class="topic-tag">CMS Alternatives</span>
+                <span class="topic-tag">API-First CMS</span>
+                <span class="topic-tag">TypeScript</span>
+                <span class="topic-tag">WegWorks</span>
+            </div>
+        </section>
+    </article>
+    
+    <footer class="footer">
+        <p>&copy; 2025 WegWorks. Expert MarTech consulting services.</p>
+        <p><a href="/">Home</a> · <a href="/services/">Services</a> · <a href="/blog/">Blog</a> · <a href="/contact/">Contact</a></p>
+    </footer>
+
+<script>
+const mobileToggle = document.querySelector(".mobile-toggle");
+const mobileMenu = document.getElementById("mobile-menu");
+if (mobileToggle && mobileMenu) {
+  mobileToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    mobileToggle.textContent = mobileMenu.classList.contains("active") ? "✕" : "☰";
+  });
+  mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("active");
+      mobileToggle.textContent = "☰";
+    });
+  });
+}
+</script>
+</body>
+</html>
+
