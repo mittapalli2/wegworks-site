@@ -100,8 +100,22 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 .brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
 .brand-text span { font-size: 0.7rem; color: var(--accent-primary); letter-spacing: 0.15em; font-weight: 600; margin-top: 2px; }
 .nav-links { display: flex; gap: 40px; list-style: none; }
-.nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; }
+.nav-links > li { position: relative; }
+.nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text-primary); }
+.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+.dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
+.nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
+.dropdown-menu a:hover { color: var(--accent-primary); background: var(--glass-bg); }
 .nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+.mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 28px; cursor: pointer; padding: 8px; }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary); z-index: 999; padding: 100px 24px 24px; overflow-y: auto; }
+.mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.mobile-menu a { font-size: 1.2rem; color: var(--text-primary); text-decoration: none; font-weight: 600; }
+.mobile-menu a:hover { color: var(--accent-primary); }
 
 .article-header { padding: 140px 0 60px; }
 .breadcrumb { display: flex; gap: 8px; font-size: 0.9rem; margin-bottom: 24px; flex-wrap: wrap; }
@@ -160,6 +174,7 @@ h1 { font-size: clamp(2rem, 5vw, 2.75rem); margin-bottom: 20px; }
 
 @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
   .article-header { padding: 120px 0 40px; }
   .cta-banner { padding: 32px 20px; }
 }
@@ -170,17 +185,49 @@ h1 { font-size: clamp(2rem, 5vw, 2.75rem); margin-bottom: 20px; }
 <div class="bg-mesh"></div>
 
 <header class="site-header">
-  <div class="nav-wrapper">
+  <nav class="nav-wrapper">
     <a class="brand" href="/"><img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
     <ul class="nav-links">
-      <li><a href="/services/">Services</a></li>
-      <li><a href="/blog/">Blog</a></li>
+      <li class="nav-dropdown">
+        <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/services/adobe-analytics/">Adobe Analytics</a>
+          <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+          <a href="/services/segment-cdp/">Segment CDP</a>
+          <a href="/services/salesforce/">Salesforce</a>
+          <a href="/services/marketing-automation/">Marketing Automation</a>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+          <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+          <a href="/blog/adobe-target/">Adobe Target</a>
+          <a href="/blog/aem/">AEM</a>
+          <a href="/blog/google-analytics-4/">Google Analytics 4</a>
+          <a href="/blog/segment-cdp/">Segment CDP</a>
+        </div>
+      </li>
       <li><a href="/about/">About</a></li>
       <li><a href="/contact/">Contact</a></li>
     </ul>
     <a class="nav-cta" href="/contact/">Get Started</a>
-  </div>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+  </nav>
 </header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Home</a>
+  <a href="/services/">Services</a>
+  <a href="/blog/">Blog</a>
+  <a href="/blog/adobe-experience-platform/">→ Adobe Experience Platform</a>
+  <a href="/blog/aem/">→ AEM</a>
+  <a href="/blog/adobe-target/">→ Adobe Target</a>
+  <a href="/blog/adobe-analytics/">→ Adobe Analytics</a>
+  <a href="/about/">About</a>
+  <a href="/contact/">Contact</a>
+</div>
 
 <article>
   <header class="article-header">
@@ -507,6 +554,23 @@ GET /flows/{FLOW_ID}/runs
     <p>&copy; 2025 <a href="/">WegWorks</a>. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+const mobileToggle = document.querySelector(".mobile-toggle");
+const mobileMenu = document.getElementById("mobile-menu");
+if (mobileToggle && mobileMenu) {
+  mobileToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    mobileToggle.textContent = mobileMenu.classList.contains("active") ? "✕" : "☰";
+  });
+  mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("active");
+      mobileToggle.textContent = "☰";
+    });
+  });
+}
+</script>
 </body>
 </html>
 
