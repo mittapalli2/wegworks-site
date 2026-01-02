@@ -186,6 +186,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.wegworks.com/blog/aem/migrate-aem-to-payload/</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.wegworks.com/blog/aem/aem-java-compatibility/</loc>
     <lastmod>2026-01-01</lastmod>
     <changefreq>monthly</changefreq>
