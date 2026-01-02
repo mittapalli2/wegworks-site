@@ -1,189 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-9VH11ZH9Y4');
-</script>
-<title>AEP Destinations Guide: Complete List of Destination Types | WegWorks</title>
-<meta name="description" content="Complete guide to Adobe Experience Platform destinations. Learn about AEP destination types including streaming, batch, edge destinations, and how to activate audiences."/>
-<meta name="keywords" content="aep destinations, what are the destination types in aep, aep destination types, adobe experience platform destinations, aep connectors, aep connections, audience activation, WegWorks"/>
-<meta name="robots" content="index, follow"/>
-<link rel="canonical" href="https://www.wegworks.com/blog/adobe-experience-platform/aep-destinations-guide/"/>
-<link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
-
-<!-- Open Graph -->
-<meta property="og:type" content="article"/>
-<meta property="og:url" content="https://www.wegworks.com/blog/adobe-experience-platform/aep-destinations-guide/"/>
-<meta property="og:site_name" content="WegWorks"/>
-<meta property="og:title" content="AEP Destinations Guide: Complete List of Destination Types"/>
-<meta property="og:description" content="Complete guide to AEP destinations and audience activation."/>
-<meta property="og:image" content="/images/blog/aep-Destinations-guide.svg"/>
-<meta property="article:published_time" content="2026-01-01"/>
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:site" content="@Wegworks_"/>
-<meta name="twitter:title" content="AEP Destinations Guide"/>
-<meta name="twitter:description" content="Complete guide to Adobe Experience Platform destination types."/>
-
-<style>
-body { font-family: 'DM Sans', sans-serif; line-height: 1.8; color: #1a1a2e; margin: 0; padding: 0; }
-.container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-h1 { font-family: 'Syne', sans-serif; font-size: 2.5rem; color: #0f0f23; margin-bottom: 20px; }
-h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; color: #16213e; margin-top: 40px; }
-h3 { font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; color: #1a1a2e; margin-top: 30px; }
-.draft-notice { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
-.outline-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ff6b35; }
-ul { margin: 15px 0; padding-left: 25px; }
-li { margin: 8px 0; }
-code { background: #e9ecef; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-th { background: #ff6b35; color: white; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-9VH11ZH9Y4');</script>
+    <title>AEP Destinations Guide: Complete List of Destination Types | WegWorks</title>
+    <meta name="description" content="Complete guide to Adobe Experience Platform destinations. Learn about destination types in AEP, including streaming, file-based, and personalization destinations with setup examples."/>
+    <meta name="keywords" content="aep destinations, destination types in aep, adobe experience platform destinations, aep streaming destinations, aep batch destinations, aep export, WegWorks"/>
+    <meta name="robots" content="index, follow"/>
+    <link rel="canonical" href="https://www.wegworks.com/blog/adobe-experience-platform/aep-destinations-guide/"/>
+    <link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <meta property="og:title" content="AEP Destinations Guide: Complete List of Destination Types"><meta property="og:description" content="Complete guide to AEP destinations and activation."><meta property="og:url" content="https://www.wegworks.com/blog/adobe-experience-platform/aep-destinations-guide/"><meta property="og:type" content="article"><meta property="og:site_name" content="WegWorks"><meta property="article:published_time" content="2026-01-01"><meta property="og:image" content="https://www.wegworks.com/images/blog/aep-Destinations-guide.svg">
+    <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="AEP Destinations Guide"><meta name="twitter:description" content="Learn about destination types in Adobe Experience Platform."><meta name="twitter:image" content="https://www.wegworks.com/images/blog/aep-Destinations-guide.svg">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"AEP Destinations Guide: Complete List of Destination Types","description":"Complete guide to AEP destinations.","datePublished":"2026-01-01","dateModified":"2026-01-01","author":{"@type":"Organization","name":"WegWorks"},"publisher":{"@type":"Organization","name":"WegWorks","url":"https://www.wegworks.com/"}}</script>
+    <style>html,body{max-width:100vw;overflow-x:hidden}*{margin:0;padding:0;box-sizing:border-box}:root{--bg-primary:#000;--bg-secondary:#0a0a0a;--bg-tertiary:#141414;--bg-code:#0d1117;--text-primary:#f0f0f5;--accent-primary:#86bc25;--accent-light:#a4d44a;--accent-warning:#f59e0b;--accent-cyan:#06b6d4;--border-color:#2a2a3a}body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.8;font-size:16px}.header{background:var(--bg-secondary);border-bottom:1px solid var(--border-color);padding:1rem 2rem;position:sticky;top:0;z-index:100}.header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}.brand{display:flex;align-items:center;gap:6px;text-decoration:none}.brand img{height:42px}.brand-text{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:#fff;letter-spacing:.08em;text-transform:uppercase;display:flex;flex-direction:column;line-height:1}.brand-text span{font-size:.7rem;color:var(--accent-primary);letter-spacing:.15em;font-weight:600;margin-top:2px}.nav{display:flex;gap:2rem;align-items:center}.nav>a,.nav-dropdown>a{color:#fff;text-decoration:none;font-weight:600}.nav a:hover{color:var(--accent-primary)}.nav-dropdown{position:relative}.nav-dropdown>a{display:flex;align-items:center;gap:4px}.dropdown-arrow{font-size:.7rem;transition:transform .3s}.nav-dropdown:hover .dropdown-arrow{transform:rotate(180deg)}.dropdown-menu{position:absolute;top:100%;left:-16px;min-width:220px;padding:12px 0;background:rgba(18,18,26,.95);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);border-radius:12px;opacity:0;visibility:hidden;transform:translateY(10px);transition:all .3s;margin-top:16px;box-shadow:0 20px 40px rgba(0,0,0,.3);z-index:100}.nav-dropdown:hover .dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}.dropdown-menu a{display:block;padding:10px 20px;font-size:.9rem}.dropdown-menu a:hover{background:rgba(255,255,255,.05)}.nav-cta{padding:12px 28px;background:transparent;color:var(--accent-primary);border:2px solid var(--accent-primary);font-weight:600;border-radius:100px;text-decoration:none}.breadcrumb{padding:1rem 2rem;max-width:900px;margin:0 auto}.breadcrumb a{color:#fff;text-decoration:none}.breadcrumb a:hover{color:var(--accent-primary)}.breadcrumb span{color:#fff;margin:0 .5rem}.article{max-width:900px;margin:0 auto;padding:2rem}.article-header{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border-color)}.article-header h1{font-size:2.1rem;margin-bottom:1rem;background:linear-gradient(135deg,var(--accent-primary),var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.article-meta{color:#fff;font-size:.95rem}.article-content{font-size:1.05rem}.article-content>p:first-child{font-size:1.2rem;line-height:1.7}.article-content h2{font-size:1.85rem;margin:3.5rem 0 1.5rem;font-weight:700;padding-bottom:.75rem;border-bottom:2px solid var(--accent-primary)}.article-content h3{font-size:1.4rem;margin:2.5rem 0 1rem;font-weight:600}.article-content h4{font-size:1.15rem;margin:2rem 0 .75rem;color:var(--accent-cyan);font-weight:600}.article-content p{color:#fff;margin-bottom:1.5rem;line-height:1.8}.article-content ul,.article-content ol{color:#fff;margin-bottom:1.5rem;padding-left:1.5rem}.article-content li{margin-bottom:.75rem}.article-content li strong{color:var(--text-primary)}.article-content code{background:rgba(110,118,129,.15);padding:.2rem .5rem;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.88em;color:var(--accent-cyan)}.highlight-box,.warning-box,.success-box{border-radius:12px;padding:1.5rem 1.75rem;margin:2.5rem 0;position:relative;overflow:hidden}.highlight-box::before,.warning-box::before,.success-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}.highlight-box{background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.15)}.highlight-box::before{background:var(--accent-primary)}.highlight-box h4{color:var(--accent-primary);margin-bottom:.75rem;margin-top:0}.warning-box{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.25)}.warning-box::before{background:var(--accent-warning)}.warning-box h4{color:var(--accent-warning);margin-bottom:.75rem;margin-top:0}.success-box{background:linear-gradient(135deg,rgba(134,188,37,.1),rgba(134,188,37,.03));border:1px solid rgba(134,188,37,.25)}.success-box::before{background:var(--accent-primary)}.success-box h4{color:var(--accent-primary);margin-bottom:.75rem;margin-top:0}.comparison-table{width:100%;border-collapse:collapse;margin:2rem 0}.comparison-table th,.comparison-table td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--border-color)}.comparison-table th{background:var(--bg-secondary);font-weight:600}.comparison-table td{color:#fff}.comparison-table tr:hover td{background:var(--bg-secondary)}.related-topics{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border-color)}.related-topics h3{margin-bottom:1rem}.topic-tags{display:flex;flex-wrap:wrap;gap:.5rem}.topic-tag{background:var(--bg-tertiary);color:#fff;padding:.5rem 1rem;border-radius:20px;font-size:.85rem;border:1px solid var(--border-color)}.topic-tag:hover{border-color:var(--accent-primary);color:var(--accent-primary)}.footer{background:var(--bg-secondary);border-top:1px solid var(--border-color);padding:2rem;text-align:center;margin-top:4rem}.footer p{color:#fff}.footer a{color:var(--accent-primary);text-decoration:none}@media(max-width:900px){.nav,.nav-cta{display:none}.mobile-toggle{display:block}.article-header h1{font-size:1.75rem}}@media(max-width:768px){.article{padding:1.5rem}}.mobile-toggle{display:none;background:none;border:none;color:var(--text-primary);font-size:28px;cursor:pointer;padding:8px}.mobile-menu{display:none;position:fixed;inset:0;background:var(--bg-primary);z-index:999;padding:100px 24px 24px}.mobile-menu.active{display:flex;flex-direction:column;align-items:center;gap:20px}.mobile-menu a{font-size:1.2rem;color:var(--text-primary);text-decoration:none;font-weight:600}@media(max-width:768px){.nav,.nav-cta{display:none}.mobile-toggle{display:block}}</style>
 </head>
 <body>
-
-<div class="container">
-  <div class="draft-notice">
-    <strong>📝 DRAFT ARTICLE OUTLINE</strong><br>
-    This is a content outline for a new SEO-optimized article. Target keywords: <code>aep destinations</code>, <code>what are the destination types in aep</code>
-  </div>
-
-  <h1>AEP Destinations Guide: Complete List of Destination Types in Adobe Experience Platform</h1>
-  
-  <p><em>Target Word Count: 2,200-2,800 words | Reading Time: 10-12 minutes</em></p>
-
-  <div class="outline-section">
-    <h2>Article Outline</h2>
+    <header class="header"><div class="header-content"><a class="brand" href="/"><img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a><nav class="nav"><a href="/">Home</a><span class="nav-dropdown"><a href="/services/">Services <span class="dropdown-arrow">▾</span></a><div class="dropdown-menu"><a href="/services/adobe-analytics/">Adobe Analytics</a><a href="/services/segment-cdp/">Segment CDP</a><a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a></div></span><span class="nav-dropdown"><a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a><div class="dropdown-menu"><a href="/blog/adobe-analytics/">Adobe Analytics</a><a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a><a href="/blog/aem/">AEM</a><a href="/blog/google-analytics-4/">Google Analytics 4</a></div></span><a href="/about/">About</a><a href="/contact/">Contact</a></nav><a class="nav-cta" href="/contact/">Get Started</a><button class="mobile-toggle" aria-label="Toggle menu">☰</button></div></header>
+    <div class="mobile-menu" id="mobile-menu"><a href="/">Home</a><a href="/services/">Services</a><a href="/blog/">Blog</a><a href="/blog/adobe-analytics/">→ Adobe Analytics</a><a href="/blog/adobe-experience-platform/">→ Adobe Experience Platform</a><a href="/blog/aem/">→ AEM</a><a href="/about/">About</a><a href="/contact/">Contact</a></div>
+    <nav class="breadcrumb"><a href="/">Home</a><span>›</span><a href="/blog/">Blog</a><span>›</span><a href="/blog/adobe-experience-platform/">AEP</a><span>›</span><span class="current">AEP Destinations Guide</span></nav>
     
-    <h3>1. Introduction (150 words)</h3>
-    <ul>
-      <li>What are AEP destinations?</li>
-      <li>Why destinations matter for activation</li>
-      <li>Overview of destination categories</li>
-    </ul>
-
-    <h3>2. AEP Destination Types Overview (300 words)</h3>
-    <p><strong>Destination Categories Table:</strong></p>
-    <table>
-      <tr><th>Category</th><th>Type</th><th>Use Case</th></tr>
-      <tr><td>Advertising</td><td>Streaming</td><td>Paid media activation</td></tr>
-      <tr><td>Cloud Storage</td><td>Batch</td><td>Data export to S3, Azure</td></tr>
-      <tr><td>Email Marketing</td><td>Streaming</td><td>Campaign activation</td></tr>
-      <tr><td>Personalization</td><td>Edge</td><td>Real-time personalization</td></tr>
-    </table>
-    <ul>
-      <li>Streaming vs Batch vs Edge explained</li>
-      <li>When to use each type</li>
-    </ul>
-
-    <h3>3. Advertising Destinations (400 words)</h3>
-    <ul>
-      <li>Google Ads / DV360</li>
-      <li>Meta (Facebook) Ads</li>
-      <li>The Trade Desk</li>
-      <li>LinkedIn Ads</li>
-      <li>TikTok</li>
-      <li>Setup and configuration tips</li>
-    </ul>
-
-    <h3>4. Cloud Storage Destinations (350 words)</h3>
-    <ul>
-      <li>Amazon S3</li>
-      <li>Azure Blob Storage</li>
-      <li>Google Cloud Storage</li>
-      <li>SFTP</li>
-      <li>Data Landing Zone</li>
-      <li>File formats and scheduling</li>
-    </ul>
-
-    <h3>5. Email Marketing Destinations (300 words)</h3>
-    <ul>
-      <li>Adobe Campaign</li>
-      <li>Salesforce Marketing Cloud</li>
-      <li>Mailchimp</li>
-      <li>Oracle Responsys</li>
-      <li>Braze</li>
-    </ul>
-
-    <h3>6. Personalization Destinations (350 words)</h3>
-    <ul>
-      <li>Adobe Target</li>
-      <li>Custom Personalization (Edge)</li>
-      <li>Adobe Journey Optimizer</li>
-      <li>Edge destinations for real-time</li>
-    </ul>
-
-    <h3>7. Analytics Destinations (250 words)</h3>
-    <ul>
-      <li>Adobe Analytics</li>
-      <li>Google Analytics</li>
-      <li>Mixpanel</li>
-      <li>Amplitude</li>
-    </ul>
-
-    <h3>8. CRM Destinations (250 words)</h3>
-    <ul>
-      <li>Salesforce CRM</li>
-      <li>Microsoft Dynamics</li>
-      <li>HubSpot</li>
-    </ul>
-
-    <h3>9. How to Configure AEP Destinations (300 words)</h3>
-    <ul>
-      <li>Step-by-step setup process</li>
-      <li>Authentication methods</li>
-      <li>Mapping attributes</li>
-      <li>Scheduling exports</li>
-      <li>Testing and validation</li>
-    </ul>
-
-    <h3>10. Troubleshooting Destinations (200 words)</h3>
-    <ul>
-      <li>Common activation errors</li>
-      <li>Link to: AEP Destination Activation Troubleshooting</li>
-    </ul>
-
-    <h3>11. Conclusion (100 words)</h3>
-    <ul>
-      <li>Summary of destination options</li>
-      <li>Choosing the right destination</li>
-      <li>CTA: Contact WegWorks for AEP implementation</li>
-    </ul>
-  </div>
-
-  <h2>Internal Linking Strategy</h2>
-  <ul>
-    <li>Link TO: <code>/blog/adobe-experience-platform/aep-destination-activation-troubleshooting/</code></li>
-    <li>Link TO: <code>/blog/adobe-experience-platform/what-is-aep/</code></li>
-    <li>Link TO: <code>/blog/adobe-experience-platform/aep-architecture-guide/</code> (new)</li>
-    <li>Link TO: <code>/blog/adobe-experience-platform/aep-integrations/</code></li>
-    <li>Link FROM: Update aep-integrations to link here</li>
-  </ul>
-
-  <h2>Target Keywords</h2>
-  <ul>
-    <li><strong>Primary:</strong> aep destinations, what are the destination types in aep</li>
-    <li><strong>Secondary:</strong> aep connectors, aep connections, adobe experience platform destinations</li>
-    <li><strong>Long-tail:</strong> how to set up aep destinations, aep advertising destinations</li>
-  </ul>
-
-</div>
-
+    <article class="article">
+        <header class="article-header">
+            <h1>AEP Destinations Guide: Complete List of Destination Types</h1>
+            <p class="article-meta">Published January 1, 2026 · 12 min read · Adobe Experience Platform Guide</p>
+        </header>
+        
+        <div class="article-content">
+            <p>Adobe Experience Platform destinations allow you to activate your unified customer profiles and audiences to external platforms for advertising, personalization, analytics, and more. This guide covers all destination types in AEP and provides setup guidance for the most popular integrations.</p>
+            
+            <h2>Understanding AEP Destination Types</h2>
+            
+            <p>AEP destinations are categorized by their connection method and use case:</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Destination Type</th>
+                        <th>Data Transfer</th>
+                        <th>Latency</th>
+                        <th>Use Cases</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Streaming</td>
+                        <td>Real-time API</td>
+                        <td>Minutes</td>
+                        <td>Ad platforms, personalization</td>
+                    </tr>
+                    <tr>
+                        <td>File-based (Batch)</td>
+                        <td>CSV/Parquet export</td>
+                        <td>Hours</td>
+                        <td>Data warehouses, email</td>
+                    </tr>
+                    <tr>
+                        <td>Edge Personalization</td>
+                        <td>Edge Network</td>
+                        <td>Milliseconds</td>
+                        <td>Same-page personalization</td>
+                    </tr>
+                    <tr>
+                        <td>Dataset Export</td>
+                        <td>Full dataset export</td>
+                        <td>Hours</td>
+                        <td>Analytics, data lakes</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Advertising Destinations</h2>
+            
+            <p>Connect audiences to major advertising platforms:</p>
+            
+            <h3>Google Destinations</h3>
+            
+            <ul>
+                <li><strong>Google Ads</strong> — Customer Match audiences for search and display</li>
+                <li><strong>Google Display & Video 360</strong> — Programmatic display campaigns</li>
+                <li><strong>Google Ad Manager 360</strong> — Publisher ad serving</li>
+            </ul>
+            
+            <h4>Google Customer Match Setup</h4>
+            
+            <ol>
+                <li>Navigate to Destinations → Catalog → Google Ads</li>
+                <li>Click "Set up" and authenticate with Google account</li>
+                <li>Select Customer Match audience type</li>
+                <li>Map identity fields (email, phone, address)</li>
+                <li>Activate desired segments</li>
+            </ol>
+            
+            <h3>Meta Destinations</h3>
+            
+            <ul>
+                <li><strong>Facebook Custom Audiences</strong> — Retargeting on Facebook/Instagram</li>
+                <li><strong>Facebook Conversions API</strong> — Server-side event tracking</li>
+            </ul>
+            
+            <h3>Other Advertising Platforms</h3>
+            
+            <ul>
+                <li><strong>The Trade Desk</strong> — Programmatic buying</li>
+                <li><strong>Amazon Ads</strong> — Amazon DSP audiences</li>
+                <li><strong>LinkedIn</strong> — B2B advertising</li>
+                <li><strong>TikTok</strong> — Short-form video ads</li>
+                <li><strong>Snapchat</strong> — Social advertising</li>
+                <li><strong>Pinterest</strong> — Visual discovery ads</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <h4>Identity Requirements for Ad Destinations</h4>
+                <p>Most advertising destinations require hashed identities (SHA-256). AEP automatically hashes sensitive data before sending to platforms that require it.</p>
+            </div>
+            
+            <h2>Cloud Storage Destinations</h2>
+            
+            <p>Export audiences and datasets to cloud storage:</p>
+            
+            <h3>Amazon Web Services</h3>
+            
+            <ul>
+                <li><strong>Amazon S3</strong> — Object storage exports</li>
+                <li><strong>Amazon Kinesis</strong> — Real-time streaming</li>
+            </ul>
+            
+            <h3>Microsoft Azure</h3>
+            
+            <ul>
+                <li><strong>Azure Blob Storage</strong> — Blob exports</li>
+                <li><strong>Azure Event Hubs</strong> — Event streaming</li>
+                <li><strong>Azure Data Lake Gen2</strong> — Data lake storage</li>
+            </ul>
+            
+            <h3>Google Cloud</h3>
+            
+            <ul>
+                <li><strong>Google Cloud Storage</strong> — GCS bucket exports</li>
+                <li><strong>Google Pub/Sub</strong> — Message streaming</li>
+                <li><strong>BigQuery</strong> — Data warehouse export</li>
+            </ul>
+            
+            <h3>Other Storage Options</h3>
+            
+            <ul>
+                <li><strong>SFTP</strong> — Secure file transfer</li>
+                <li><strong>Snowflake</strong> — Data cloud export</li>
+                <li><strong>Databricks</strong> — Lakehouse platform</li>
+            </ul>
+            
+            <h2>Personalization Destinations</h2>
+            
+            <p>Enable real-time personalization across channels:</p>
+            
+            <h3>Adobe Solutions</h3>
+            
+            <ul>
+                <li><strong>Adobe Target</strong> — A/B testing and personalization</li>
+                <li><strong>Adobe Journey Optimizer</strong> — Cross-channel journeys</li>
+                <li><strong>Adobe Campaign</strong> — Email campaigns</li>
+            </ul>
+            
+            <h3>Edge Personalization</h3>
+            
+            <ul>
+                <li><strong>Custom Personalization</strong> — Your own personalization server</li>
+                <li><strong>Same-page evaluation</strong> — Real-time segment qualification</li>
+            </ul>
+            
+            <div class="warning-box">
+                <h4>⚠️ Edge Segmentation Requirements</h4>
+                <p>Edge personalization destinations require edge segmentation to be enabled. Only segments using simple criteria (profile attributes, single events) qualify for edge evaluation.</p>
+            </div>
+            
+            <h2>Email Marketing Destinations</h2>
+            
+            <p>Sync audiences with email platforms:</p>
+            
+            <ul>
+                <li><strong>Adobe Campaign</strong> — Enterprise email marketing</li>
+                <li><strong>Salesforce Marketing Cloud</strong> — Multi-channel marketing</li>
+                <li><strong>Oracle Eloqua</strong> — B2B marketing automation</li>
+                <li><strong>Oracle Responsys</strong> — Cross-channel campaigns</li>
+                <li><strong>Mailchimp</strong> — SMB email marketing</li>
+                <li><strong>Braze</strong> — Customer engagement</li>
+            </ul>
+            
+            <h2>CRM & Sales Destinations</h2>
+            
+            <ul>
+                <li><strong>Salesforce CRM</strong> — Sync profiles to Salesforce</li>
+                <li><strong>Microsoft Dynamics 365</strong> — CRM sync</li>
+                <li><strong>HubSpot</strong> — Inbound marketing CRM</li>
+            </ul>
+            
+            <h2>Analytics & BI Destinations</h2>
+            
+            <ul>
+                <li><strong>Adobe Analytics</strong> — Send segment data to Analytics</li>
+                <li><strong>Pendo</strong> — Product analytics</li>
+                <li><strong>Amplitude</strong> — Behavioral analytics</li>
+            </ul>
+            
+            <h2>Destination Setup Best Practices</h2>
+            
+            <h3>1. Identity Mapping</h3>
+            
+            <p>Always map the correct identity namespaces:</p>
+            
+            <ul>
+                <li>Use the destination's preferred identifier</li>
+                <li>Map multiple identities for higher match rates</li>
+                <li>Ensure hash type matches destination requirements</li>
+            </ul>
+            
+            <h3>2. Segment Scheduling</h3>
+            
+            <ul>
+                <li><strong>Streaming:</strong> Automatic, near real-time</li>
+                <li><strong>Batch:</strong> Schedule during off-peak hours</li>
+                <li><strong>File exports:</strong> Consider downstream processing needs</li>
+            </ul>
+            
+            <h3>3. Data Governance</h3>
+            
+            <ul>
+                <li>Apply appropriate data usage labels</li>
+                <li>Review destination-specific policies</li>
+                <li>Ensure compliance with privacy regulations</li>
+            </ul>
+            
+            <h2>Troubleshooting Destinations</h2>
+            
+            <h3>Common Issues</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Issue</th>
+                        <th>Cause</th>
+                        <th>Solution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Low match rates</td>
+                        <td>Identity mismatch</td>
+                        <td>Verify identity mapping and hash types</td>
+                    </tr>
+                    <tr>
+                        <td>Activation failures</td>
+                        <td>API errors</td>
+                        <td>Check destination credentials</td>
+                    </tr>
+                    <tr>
+                        <td>Delayed data</td>
+                        <td>Batch scheduling</td>
+                        <td>Review export schedule</td>
+                    </tr>
+                    <tr>
+                        <td>Missing profiles</td>
+                        <td>Segment criteria</td>
+                        <td>Verify segment qualification</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>For detailed troubleshooting, see our <a href="/blog/adobe-experience-platform/aep-destination-activation-troubleshooting/" style="color: var(--accent-primary);">AEP Destination Activation Troubleshooting</a> guide.</p>
+            
+            <div class="success-box">
+                <h4>Related AEP Guides</h4>
+                <ul style="margin-bottom: 0;">
+                    <li><a href="/blog/adobe-experience-platform/aep-architecture-guide/" style="color: var(--accent-primary);">AEP Architecture Guide</a></li>
+                    <li><a href="/blog/adobe-experience-platform/aep-segment-qualification-issues/" style="color: var(--accent-primary);">AEP Segment Qualification Issues</a></li>
+                    <li><a href="/blog/adobe-experience-platform/aep-destinations-ecosystem-guide/" style="color: var(--accent-primary);">AEP Destinations Ecosystem Guide</a></li>
+                </ul>
+            </div>
+            
+            <div class="success-box">
+                <h4>Need Destination Setup Help?</h4>
+                <p>WegWorks specializes in AEP destination configuration, audience activation, and campaign optimization. <a href="/contact/" style="color: var(--accent-primary);">Contact us</a> for expert guidance.</p>
+            </div>
+        </div>
+        
+        <section class="related-topics">
+            <h3>Related Topics</h3>
+            <div class="topic-tags">
+                <span class="topic-tag">AEP Destinations</span>
+                <span class="topic-tag">Audience Activation</span>
+                <span class="topic-tag">Google Ads</span>
+                <span class="topic-tag">Facebook</span>
+                <span class="topic-tag">Cloud Storage</span>
+                <span class="topic-tag">Real-Time CDP</span>
+                <span class="topic-tag">Data Export</span>
+                <span class="topic-tag">WegWorks</span>
+            </div>
+        </section>
+    </article>
+    
+    <footer class="footer"><p>&copy; 2026 WegWorks. Expert MarTech consulting services.</p><p><a href="/">Home</a> · <a href="/services/">Services</a> · <a href="/blog/">Blog</a> · <a href="/contact/">Contact</a></p></footer>
+<script>const mobileToggle=document.querySelector(".mobile-toggle");const mobileMenu=document.getElementById("mobile-menu");if(mobileToggle&&mobileMenu){mobileToggle.addEventListener("click",()=>{mobileMenu.classList.toggle("active");mobileToggle.textContent=mobileMenu.classList.contains("active")?"✕":"☰"});mobileMenu.querySelectorAll("a").forEach(link=>{link.addEventListener("click",()=>{mobileMenu.classList.remove("active");mobileToggle.textContent="☰"})})}</script>
 </body>
 </html>
-
