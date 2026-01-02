@@ -67,6 +67,8 @@
 }
 </script>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root {
@@ -198,11 +200,11 @@ footer a { color: #ffffff; margin: 0 10px; }
 .mobile-menu a:hover { color: var(--accent-primary, #ffffff); }
 @media (max-width: 768px) { .article-hero-image img { height: 250px; } .nav, .nav-links, .nav-cta { display: none; } .mobile-toggle { display: block; } }
 </style>
-<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/common.min.css">
 </head>
 <body>
   <nav class="nav-wrapper">
-    <a class="brand" href="/"><img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
+    <a class="brand" href="/"><img loading="eager" src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
     <ul class="nav-links">
       <li class="nav-dropdown">
         <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
@@ -492,7 +494,7 @@ if (mobileToggle && mobileMenu) {
   });
 }
 </script>
-<script src="/js/common.js"></script>
+<script src="/js/common.min.js"></script>
 </body>
 </html>
 

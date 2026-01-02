@@ -164,7 +164,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .mobile-menu a:hover { color: var(--accent-primary, #ffffff); }
 @media (max-width: 768px) { .nav, .nav-links, .nav-cta { display: none; } .mobile-toggle { display: block; } }
 </style>
-<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/common.min.css">
 </head>
 
 <body>
@@ -180,7 +180,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
   <div class="container">
     <nav class="nav-wrapper">
       <a class="brand" href="/">
-        <img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/>
+        <img loading="eager" src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/>
         <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
       </a>
       <ul class="nav-links">
@@ -249,7 +249,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
       </p>
     </div>
     <div class="hero-image">
-      <img src="https://www.wegworks.com/images/blog/GA-analytics.svg" alt="Google Analytics 4 Insights" width="400" height="300"/>
+      <img loading="lazy" src="https://www.wegworks.com/images/blog/GA-analytics.svg" alt="Google Analytics 4 Insights" width="400" height="300"/>
     </div>
   </div>
   <div class="container" style="margin-top: 40px;">
@@ -271,7 +271,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
         <div class="articles-grid">
             <a class="article-card" href="/blog/google-analytics-4/ga4-migration-guide/">
                 <div class="article-image has-image">
-          <img src="https://www.wegworks.com/images/blog/ga-a.jpg" alt="GA4 Migration Guide" loading="lazy" width="300" height="168"/>
+          <img loading="lazy" src="https://www.wegworks.com/images/blog/ga-a.jpg" alt="GA4 Migration Guide" loading="lazy" width="300" height="168"/>
                 </div>
                 <div class="article-content">
                     <div class="article-meta">
@@ -289,7 +289,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
             
             <a class="article-card" href="/blog/google-analytics-4/ga4-implementation-guide/">
                 <div class="article-image has-image">
-          <img src="https://www.wegworks.com/images/blog/ga-a.jpg" alt="GA4 Implementation Guide" loading="lazy" width="300" height="168"/>
+          <img loading="lazy" src="https://www.wegworks.com/images/blog/ga-a.jpg" alt="GA4 Implementation Guide" loading="lazy" width="300" height="168"/>
                 </div>
                 <div class="article-content">
                     <div class="article-meta">
@@ -339,6 +339,6 @@ if (mobileToggle && mobileMenu) {
   });
 }
 </script>
-<script src="/js/common.js"></script>
+<script src="/js/common.min.js"></script>
 </body>
 </html>

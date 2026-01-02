@@ -216,13 +216,13 @@ pre code { background: none; padding: 0; font-size: 0.85rem; color: #d4d4d4; fon
   .article-hero-image img { max-height: 250px; padding: 20px; }
 }
 </style>
-<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/common.min.css">
 </head>
 
 <body>
 <header class="site-header">
   <nav class="nav-wrapper">
-    <a class="brand" href="/"><img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
+    <a class="brand" href="/"><img loading="eager" src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
     <ul class="nav-links">
       <li class="nav-dropdown">
         <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
@@ -290,7 +290,7 @@ pre code { background: none; padding: 0; font-size: 0.85rem; color: #d4d4d4; fon
   </header>
 
   <div class="article-hero-image">
-    <img src="https://www.wegworks.com/images/blog/target-aem-weg-works.svg" alt="Adobe Target and AEM Integration" loading="eager" width="400" height="300"/>
+    <img loading="lazy" src="https://www.wegworks.com/images/blog/target-aem-weg-works.svg" alt="Adobe Target and AEM Integration" loading="eager" width="400" height="300"/>
   </div>
 
   <div class="article-content">
@@ -678,7 +678,7 @@ if (mobileToggle && mobileMenu) {
   });
 }
 </script>
-<script src="/js/common.js"></script>
+<script src="/js/common.min.js"></script>
 </body>
 </html>
 

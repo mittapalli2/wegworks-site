@@ -179,7 +179,7 @@ h1 { font-size: clamp(2rem, 5vw, 2.75rem); margin-bottom: 20px; }
   .cta-banner { padding: 32px 20px; }
 }
 </style>
-<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/common.min.css">
 </head>
 
 <body>
@@ -187,7 +187,7 @@ h1 { font-size: clamp(2rem, 5vw, 2.75rem); margin-bottom: 20px; }
 
 <header class="site-header">
   <nav class="nav-wrapper">
-    <a class="brand" href="/"><img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
+    <a class="brand" href="/"><img loading="eager" src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
     <ul class="nav-links">
       <li class="nav-dropdown">
         <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
@@ -252,7 +252,7 @@ h1 { font-size: clamp(2rem, 5vw, 2.75rem); margin-bottom: 20px; }
       </p>
       
       <div class="article-hero-image">
-        <img src="https://www.wegworks.com/images/blog/SCHEMA-DESIGN-BEST-PRACTISE-AEP.svg" alt="AEP Schema Design Best Practices" loading="eager" width="1080" height="1080"/>
+        <img loading="lazy" src="https://www.wegworks.com/images/blog/SCHEMA-DESIGN-BEST-PRACTISE-AEP.svg" alt="AEP Schema Design Best Practices" loading="eager" width="1080" height="1080"/>
       </div>
     </div>
   </header>
@@ -594,7 +594,7 @@ if (mobileToggle && mobileMenu) {
   });
 }
 </script>
-<script src="/js/common.js"></script>
+<script src="/js/common.min.js"></script>
 </body>
 </html>
 

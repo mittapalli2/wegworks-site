@@ -200,13 +200,13 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
 .mobile-menu a:hover { color: var(--accent-primary, #ffffff); }
 @media (max-width: 768px) { .article-hero-image img { height: 250px; } .nav, .nav-links, .nav-cta { display: none; } .mobile-toggle { display: block; } }
 </style>
-<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/common.min.css">
 </head>
 
 <body>
 <header class="site-header">
   <nav class="nav-wrapper">
-    <a class="brand" href="/"><img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
+    <a class="brand" href="/"><img loading="eager" src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
     <ul class="nav-links">
       <li class="nav-dropdown">
         <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
@@ -276,7 +276,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
   </header>
 
   <div class="article-hero-image">
-    <img src="https://www.wegworks.com/images/blog/AEM-VS-AEMCloud.svg" alt="AEM as a Cloud Service Guide" loading="eager" width="1080" height="1080"/>
+    <img loading="lazy" src="https://www.wegworks.com/images/blog/AEM-VS-AEMCloud.svg" alt="AEM as a Cloud Service Guide" loading="eager" width="1080" height="1080"/>
   </div>
 
   <div class="article-content">
@@ -512,7 +512,7 @@ if (mobileToggle && mobileMenu) {
   });
 }
 </script>
-<script src="/js/common.js"></script>
+<script src="/js/common.min.js"></script>
 </body>
 </html>
 

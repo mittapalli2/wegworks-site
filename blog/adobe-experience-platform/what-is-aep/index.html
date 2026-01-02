@@ -348,13 +348,13 @@ img { max-width: 100%; height: auto; }
 .mobile-menu a:hover { color: var(--accent-primary, #ffffff); }
 @media (max-width: 768px) { .article-hero-image img { height: 250px; } .nav, .nav-links, .nav-cta { display: none; } .mobile-toggle { display: block; } }
 </style>
-<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/common.min.css">
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a class="brand" href="/">
-                <img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/>
+                <img loading="eager" src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/>
                 <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
             </a>
             <nav class="nav">
@@ -665,7 +665,7 @@ if (mobileToggle && mobileMenu) {
   });
 }
 </script>
-<script src="/js/common.js"></script>
+<script src="/js/common.min.js"></script>
 </body>
 </html>
 

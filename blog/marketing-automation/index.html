@@ -185,7 +185,7 @@ pre, code, .code-block { overflow-x: auto; max-width: 100%; } table { display: b
 .mobile-menu a:hover { color: var(--accent-primary, #ffffff); }
 @media (max-width: 768px) { .nav, .nav-links, .nav-cta { display: none; } .mobile-toggle { display: block; } }
 </style>
-<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/common.min.css">
 </head>
 
 <body>
@@ -201,7 +201,7 @@ pre, code, .code-block { overflow-x: auto; max-width: 100%; } table { display: b
   <div class="container">
     <nav class="nav-wrapper">
       <a class="brand" href="/">
-        <img src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/>
+        <img loading="eager" src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/>
         <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
       </a>
       <ul class="nav-links">
@@ -275,7 +275,7 @@ pre, code, .code-block { overflow-x: auto; max-width: 100%; } table { display: b
         </p>
       </div>
       <div class="hero-image">
-        <img src="https://www.wegworks.com/images/blog/marketing-automation.svg" alt="Marketing Automation Illustration" width="400" height="300"/>
+        <img loading="lazy" src="https://www.wegworks.com/images/blog/marketing-automation.svg" alt="Marketing Automation Illustration" width="400" height="300"/>
       </div>
     </div>
     <div style="max-width: 900px; margin-top: 40px; padding: 24px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px;">
@@ -296,7 +296,7 @@ pre, code, .code-block { overflow-x: auto; max-width: 100%; } table { display: b
     <div class="articles-grid">
       <a class="article-card" href="/blog/marketing-automation/email-deliverability-guide/">
         <div class="article-image has-image">
-          <img src="https://www.wegworks.com/images/blog/email-delivery.png" alt="Email Deliverability Guide" loading="lazy" width="1910" height="1000"/>
+          <img loading="lazy" src="https://www.wegworks.com/images/blog/email-delivery.png" alt="Email Deliverability Guide" loading="lazy" width="1910" height="1000"/>
         </div>
         <div class="article-content">
           <div class="article-meta">
@@ -346,7 +346,7 @@ if (mobileToggle && mobileMenu) {
   });
 }
 </script>
-<script src="/js/common.js"></script>
+<script src="/js/common.min.js"></script>
 </body>
 </html>
 
