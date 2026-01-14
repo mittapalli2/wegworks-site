@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9VH11ZH9Y4');
+</script>
+<title>AEM Content Transfer Tool: A Simplified Guide | WegWorks</title>
+<meta name="description" content="Learn how to use the AEM Content Transfer Tool (CTT) for migrating content to AEM as a Cloud Service. Covers inclusion sets, exclusion sets, extraction, and ingestion steps."/>
+<meta name="keywords" content="AEM Content Transfer Tool, CTT, AEM migration, AEM Cloud migration, inclusion set, exclusion set, content extraction, AEM ingestion, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/aem/content-transfer-tool-guide/"/>
+<link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/aem/content-transfer-tool-guide/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="AEM Content Transfer Tool: A Simplified Guide"/>
+<meta property="og:description" content="Learn how to use the AEM Content Transfer Tool for migrating content to AEM Cloud. Covers inclusion sets, exclusion sets, and step-by-step migration."/>
+<meta property="og:image" content="https://www.wegworks.com/images/blog/aemcloud.png"/>
+<meta property="article:published_time" content="2026-01-14"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:image" content="https://www.wegworks.com/images/blog/aemcloud.png"/>
+
+<!-- Schema.org Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AEM Content Transfer Tool: A Simplified Guide",
+  "description": "Learn how to use the AEM Content Transfer Tool (CTT) for migrating content to AEM as a Cloud Service. Covers inclusion sets, exclusion sets, extraction, and ingestion steps.",
+  "image": "https://www.wegworks.com/images/blog/aemcloud.png",
+  "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "/images/blog/logowhite.png"}},
+  "datePublished": "2026-01-14",
+  "dateModified": "2026-01-14"
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "AEM", "item": "https://www.wegworks.com/blog/aem/"},
+    {"@type": "ListItem", "position": 4, "name": "Content Transfer Tool Guide", "item": "https://www.wegworks.com/blog/aem/content-transfer-tool-guide/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the AEM Content Transfer Tool?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Content Transfer Tool (CTT) is Adobe's official tool for migrating content from AEM 6.3+ or AMS to AEM as a Cloud Service. It extracts content from your source AEM instance and ingests it into your cloud environment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is an Inclusion Set in CTT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An Inclusion Set defines which content paths should be included in the migration. You specify paths like /content/mysite, /content/dam/myassets, and only content under these paths will be extracted and migrated."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is an Exclusion Set in CTT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An Exclusion Set defines paths that should be excluded from migration even if they fall under an inclusion path. For example, you might include /content/dam but exclude /content/dam/temp-files."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does content migration take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Migration time depends on content size. As a rough guide: 100GB of content typically takes 4-8 hours for extraction and 2-4 hours for ingestion. Large DAM repositories with many assets take longer."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #86bc25;
+  --accent-light: #a4d44a;
+  --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(134, 188, 37, 0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100vw; overflow-x: hidden; } body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.brand img { height: 42px; width: auto; }
+.brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
+.brand-text span { font-size: 0.7rem; color: var(--accent-primary); letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links > li { position: relative; }
+.nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text-primary); }
+.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+.dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
+.nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
+.dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); color: var(--accent-primary); }
+.nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+
+.article-header { padding: 160px 0 40px; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: #ffffff; margin-bottom: 24px; text-decoration: none; transition: all 0.3s; }
+.back-link:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+.article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: #ffffff; }
+.article-category { color: var(--accent-primary); font-weight: 600; text-decoration: none; }
+.article-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
+.article-intro { font-size: 1.25rem; color: #ffffff; line-height: 1.7; }
+
+.article-content { padding: 60px 0 100px; }
+.article-content h2 { font-size: 1.75rem; margin: 48px 0 20px; color: var(--text-primary); }
+.article-content h3 { font-size: 1.375rem; margin: 36px 0 16px; color: var(--text-primary); }
+.article-content p { margin-bottom: 20px; color: #ffffff; line-height: 1.8; }
+.article-content ul, .article-content ol { margin: 20px 0 20px 24px; color: #ffffff; }
+.article-content li { margin-bottom: 12px; line-height: 1.7; }
+.article-content strong { color: var(--text-primary); }
+.article-content a { color: var(--accent-primary); text-decoration: none; }
+.article-content a:hover { text-decoration: underline; }
+
+.comparison-table { width: 100%; border-collapse: collapse; margin: 32px 0; }
+.comparison-table th, .comparison-table td { padding: 16px; text-align: left; border-bottom: 1px solid var(--glass-border); }
+.comparison-table th { color: var(--text-primary); font-weight: 600; background: var(--bg-tertiary); }
+.comparison-table td { color: #ffffff; }
+
+.callout { padding: 24px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; margin: 32px 0; }
+.callout-title { font-weight: 700; color: var(--accent-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.callout p { margin: 0; color: #ffffff; }
+.callout-warning { border-color: #f59e0b; }
+.callout-warning .callout-title { color: #f59e0b; }
+.callout-tip { border-color: #10b981; }
+.callout-tip .callout-title { color: #10b981; }
+
+.step-box { padding: 24px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; margin: 24px 0; }
+.step-box h4 { color: var(--accent-primary); margin-bottom: 12px; font-size: 1.1rem; }
+.step-box p { margin: 0; }
+
+.cta-box { padding: 48px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; text-align: center; margin-top: 60px; }
+.cta-box h3 { font-size: 1.5rem; margin-bottom: 16px; }
+.cta-box p { color: #ffffff; margin-bottom: 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-weight: 600; border-radius: 12px; text-decoration: none; transition: all 0.3s; }
+.btn-primary { background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); }
+.btn-primary:hover { transform: translateY(-2px); border-color: var(--accent-light); color: var(--accent-light); box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2); }
+
+.keywords-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--glass-border); }
+.keywords-section h4 { font-size: 0.875rem; color: #ffffff; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+.keyword-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.keyword-tags span { padding: 6px 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.8rem; color: #ffffff; }
+
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: #ffffff; }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+/* Code Block Styles */
+pre { background: #1e1e1e; border-radius: 12px; padding: 20px; overflow-x: auto; margin: 24px 0; border: 1px solid #333; }
+pre code { font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.875rem; line-height: 1.7; color: #d4d4d4; background: none; padding: 0; }
+code { font-family: "SF Mono", Monaco, Consolas, monospace; background: rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.875em; color: #e06c75; }
+table { display: block; overflow-x: auto; max-width: 100%; }
+img { max-width: 100%; height: auto; }
+
+.mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 28px; cursor: pointer; padding: 8px; }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary); z-index: 999; padding: 100px 24px 24px; overflow-y: auto; }
+.mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.mobile-menu a { font-size: 1.2rem; color: var(--text-primary); text-decoration: none; font-weight: 600; }
+.mobile-menu a:hover { color: var(--accent-primary); }
+
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
+  .article-header { padding: 120px 0 40px; }
+  .cta-box { padding: 32px 24px; }
+}
+@media (max-width: 768px) {
+  .nav, .nav-links, .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
+}
+</style>
+<link rel="stylesheet" href="/css/common.min.css">
+</head>
+
+<body>
+<header class="site-header">
+  <nav class="nav-wrapper">
+    <a class="brand" href="/"><img loading="eager" src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/services/adobe-analytics/">Adobe Analytics</a>
+          <a href="/services/segment-cdp/">Segment CDP</a>
+          <a href="/services/salesforce/">Salesforce</a>
+          <a href="/services/marketing-automation/">Marketing Automation</a>
+          <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+          <a href="/small-business/" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 8px; padding-top: 16px;">Small Business Solutions</a>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+          <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+          <a href="/blog/adobe-target/">Adobe Target</a>
+          <a href="/blog/aem/">AEM</a>
+          <a href="/blog/google-analytics-4/">Google Analytics 4</a>
+          <a href="/blog/marketing-automation/">Marketing Automation</a>
+          <a href="/blog/salesforce/">Salesforce</a>
+          <a href="/blog/segment-cdp/">Segment CDP</a>
+        </div>
+      </li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="/contact/">Get Started</a>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Home</a>
+  <a href="/services/">Services</a>
+  <a href="/blog/">Blog</a>
+  <a href="/blog/adobe-analytics/">→ Adobe Analytics</a>
+  <a href="/blog/adobe-experience-platform/">→ Adobe Experience Platform</a>
+  <a href="/blog/adobe-target/">→ Adobe Target</a>
+  <a href="/blog/aem/">→ AEM</a>
+  <a href="/blog/google-analytics-4/">→ Google Analytics 4</a>
+  <a href="/blog/segment-cdp/">→ Segment CDP</a>
+  <a href="/about/">About</a>
+  <a href="/contact/">Contact</a>
+</div>
+
+<article>
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="/blog/aem/">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        AEM
+      </a>
+      <div class="article-meta">
+        <a class="article-category" href="/blog/aem/">AEM</a>
+        <span>January 14, 2026</span>
+        <span>12 min read</span>
+      </div>
+      <h1>AEM Content Transfer Tool: A Simplified Guide</h1>
+      <p class="article-intro">
+        Migrating content to AEM as a Cloud Service? The Content Transfer Tool (CTT) is Adobe's official 
+        solution. Here's a practical guide covering inclusion sets, exclusion sets, and step-by-step migration.
+      </p>
+    </div>
+  </header>
+
+  <div class="article-content">
+    <div class="container">
+      
+      <h2>What is the Content Transfer Tool?</h2>
+      <p>
+        The <strong>Content Transfer Tool (CTT)</strong> is Adobe's official tool for migrating content from 
+        AEM 6.3+ or Adobe Managed Services (AMS) to AEM as a Cloud Service. It handles the heavy lifting 
+        of moving your content repository—pages, assets, users, and more—to the cloud.
+      </p>
+      <p>
+        The tool works in two phases:
+      </p>
+      <ol>
+        <li><strong>Extraction</strong> — Pull content from your source AEM instance into a migration set</li>
+        <li><strong>Ingestion</strong> — Push that content into your AEM Cloud environment</li>
+      </ol>
+
+      <div class="callout">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          When to Use CTT
+        </div>
+        <p>
+          CTT is designed for <strong>large content migrations</strong> (hundreds of GBs). For smaller migrations 
+          or selective content moves, consider using packages or the Remote Assets feature instead.
+        </p>
+      </div>
+
+      <h2>How Content Transfer Tool Works</h2>
+      <p>
+        Here's the simplified flow:
+      </p>
+      
+      <div class="step-box">
+        <h4>1. Install CTT on Source AEM</h4>
+        <p>Download and install the Content Transfer Tool package on your source AEM instance (6.3+, 6.4, 6.5, or AMS).</p>
+      </div>
+      
+      <div class="step-box">
+        <h4>2. Create a Migration Set</h4>
+        <p>Define what content to migrate using inclusion and exclusion paths. This creates a "migration set" configuration.</p>
+      </div>
+      
+      <div class="step-box">
+        <h4>3. Run Extraction</h4>
+        <p>CTT extracts content from your source and uploads it to Adobe's cloud storage (Azure Blob). This can take hours for large repositories.</p>
+      </div>
+      
+      <div class="step-box">
+        <h4>4. Run Ingestion</h4>
+        <p>From Cloud Manager, trigger the ingestion to pull content from cloud storage into your AEM Cloud environment.</p>
+      </div>
+
+      <h2>Inclusion Sets: What to Migrate</h2>
+      <p>
+        An <strong>Inclusion Set</strong> defines which content paths should be included in your migration. 
+        Only content under these paths will be extracted.
+      </p>
+      
+      <h3>Common Inclusion Paths</h3>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Path</th>
+            <th>What It Contains</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>/content/mysite</code></td>
+            <td>Your site's pages and content</td>
+          </tr>
+          <tr>
+            <td><code>/content/dam/myassets</code></td>
+            <td>Digital assets (images, PDFs, videos)</td>
+          </tr>
+          <tr>
+            <td><code>/content/experience-fragments</code></td>
+            <td>Experience Fragments</td>
+          </tr>
+          <tr>
+            <td><code>/content/cq:tags</code></td>
+            <td>Tag definitions</td>
+          </tr>
+          <tr>
+            <td><code>/home/users</code></td>
+            <td>User accounts</td>
+          </tr>
+          <tr>
+            <td><code>/home/groups</code></td>
+            <td>User groups</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Example Inclusion Set</h3>
+      <pre><code>/content/we-retail
+/content/dam/we-retail
+/content/experience-fragments/we-retail
+/content/cq:tags/we-retail</code></pre>
+
+      <div class="callout callout-tip">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          Tip: Be Specific
+        </div>
+        <p>
+          Include only what you need. Migrating <code>/content/dam</code> entirely might bring over 
+          temporary files, old versions, and unused assets. Be specific with your paths.
+        </p>
+      </div>
+
+      <h2>Exclusion Sets: What to Skip</h2>
+      <p>
+        An <strong>Exclusion Set</strong> defines paths that should NOT be migrated, even if they fall 
+        under an inclusion path. This is useful for filtering out unwanted content.
+      </p>
+
+      <h3>Common Exclusion Paths</h3>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Path</th>
+            <th>Why Exclude It</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>/content/dam/temp</code></td>
+            <td>Temporary upload files</td>
+          </tr>
+          <tr>
+            <td><code>/content/dam/projects</code></td>
+            <td>In-progress project files</td>
+          </tr>
+          <tr>
+            <td><code>/content/mysite/test</code></td>
+            <td>Test pages not needed in production</td>
+          </tr>
+          <tr>
+            <td><code>/var/audit</code></td>
+            <td>Audit logs (regenerated in cloud)</td>
+          </tr>
+          <tr>
+            <td><code>/etc/packages</code></td>
+            <td>Content packages (deployed via code)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Example Exclusion Set</h3>
+      <pre><code>/content/dam/we-retail/temp
+/content/dam/we-retail/archive
+/content/we-retail/test-pages
+/content/we-retail/sandbox</code></pre>
+
+      <div class="callout callout-warning">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg>
+          Warning: System Paths
+        </div>
+        <p>
+          Certain paths are automatically excluded by CTT and cannot be migrated: <code>/var</code>, 
+          <code>/tmp</code>, <code>/libs</code>, <code>/apps</code>, <code>/oak:index</code>. 
+          These are managed by AEM Cloud's infrastructure.
+        </p>
+      </div>
+
+      <h2>Step-by-Step: Running a Migration</h2>
+      
+      <h3>Prerequisites</h3>
+      <ul>
+        <li>AEM source instance: 6.3 SP3+, 6.4 SP2+, 6.5, or AMS</li>
+        <li>AEM Cloud environment provisioned in Cloud Manager</li>
+        <li>Admin access to both source and target</li>
+        <li>Sufficient disk space for extraction (1.5x your content size)</li>
+      </ul>
+
+      <h3>Step 1: Install the Content Transfer Tool</h3>
+      <ol>
+        <li>Download CTT from the <a href="https://experience.adobe.com/#/downloads/content/software-distribution/en/aemcloud.html" target="_blank" rel="noopener">Software Distribution Portal</a></li>
+        <li>Install the package on your source AEM Author instance</li>
+        <li>Navigate to <strong>Tools → Cloud Services → Content Transfer</strong></li>
+      </ol>
+
+      <h3>Step 2: Create a Migration Set</h3>
+      <ol>
+        <li>Click <strong>"Create Migration Set"</strong></li>
+        <li>Enter a name (e.g., "we-retail-migration")</li>
+        <li>Add your <strong>inclusion paths</strong></li>
+        <li>Add any <strong>exclusion paths</strong></li>
+        <li>Save the configuration</li>
+      </ol>
+
+      <pre><code># Example Migration Set Configuration
+Name: we-retail-production
+Source: AEM 6.5.12
+
+Inclusion Paths:
+  - /content/we-retail
+  - /content/dam/we-retail
+  - /content/experience-fragments/we-retail
+  
+Exclusion Paths:
+  - /content/dam/we-retail/temp
+  - /content/we-retail/sandbox</code></pre>
+
+      <h3>Step 3: Run Extraction</h3>
+      <ol>
+        <li>Select your migration set</li>
+        <li>Click <strong>"Check Size"</strong> to estimate extraction time</li>
+        <li>Click <strong>"Extract"</strong></li>
+        <li>Choose <strong>"Overwrite"</strong> (first time) or <strong>"Top-Up"</strong> (incremental)</li>
+        <li>Wait for extraction to complete (monitor progress in the UI)</li>
+      </ol>
+
+      <div class="callout">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          Extraction Time Estimates
+        </div>
+        <p>
+          <strong>50 GB:</strong> 2-4 hours<br>
+          <strong>100 GB:</strong> 4-8 hours<br>
+          <strong>500 GB:</strong> 24-48 hours<br>
+          Large DAM repositories with many small files take longer than content-heavy sites.
+        </p>
+      </div>
+
+      <h3>Step 4: Run Ingestion</h3>
+      <ol>
+        <li>Go to <strong>Cloud Manager → Environments</strong></li>
+        <li>Select your target environment (Dev, Stage, or Prod)</li>
+        <li>Click <strong>"Content Transfer"</strong></li>
+        <li>Select your migration set</li>
+        <li>Choose <strong>"Ingest"</strong></li>
+        <li>Select <strong>"Wipe"</strong> (replace all) or <strong>"Non-Wipe"</strong> (merge)</li>
+      </ol>
+
+      <h3>Step 5: Validate</h3>
+      <ol>
+        <li>Access your AEM Cloud Author instance</li>
+        <li>Verify content is present in Sites and Assets consoles</li>
+        <li>Check that references and links are intact</li>
+        <li>Test Experience Fragments and Content Fragments</li>
+        <li>Validate user permissions if users were migrated</li>
+      </ol>
+
+      <h2>Top-Up Extraction: Incremental Updates</h2>
+      <p>
+        After your initial extraction, you can run <strong>Top-Up extractions</strong> to capture only 
+        the content that changed since the last extraction. This is useful for:
+      </p>
+      <ul>
+        <li>Keeping migration sets current during a long migration window</li>
+        <li>Capturing last-minute content changes before go-live</li>
+        <li>Reducing extraction time for subsequent runs</li>
+      </ul>
+      <p>
+        Top-Up only extracts content modified after the previous extraction timestamp, making it 
+        significantly faster than a full extraction.
+      </p>
+
+      <h2>Best Practices</h2>
+      
+      <h3>Before Migration</h3>
+      <ul>
+        <li><strong>Clean up your source</strong> — Delete unused assets, old versions, and test content</li>
+        <li><strong>Run the Best Practices Analyzer</strong> — Identify compatibility issues before migrating</li>
+        <li><strong>Document your content structure</strong> — Know exactly what paths contain what</li>
+        <li><strong>Test with a subset first</strong> — Run a small migration to validate the process</li>
+      </ul>
+
+      <h3>During Migration</h3>
+      <ul>
+        <li><strong>Freeze content authoring</strong> — Prevent changes to source during extraction</li>
+        <li><strong>Monitor extraction progress</strong> — CTT provides real-time status updates</li>
+        <li><strong>Use Top-Up for final sync</strong> — Capture any last-minute changes</li>
+        <li><strong>Plan for downtime</strong> — Ingestion may require author instance restart</li>
+      </ul>
+
+      <h3>After Migration</h3>
+      <ul>
+        <li><strong>Validate thoroughly</strong> — Spot-check content across different templates</li>
+        <li><strong>Check broken references</strong> — Use the Link Checker to find issues</li>
+        <li><strong>Republish content</strong> — Content may need republishing to Publish tier</li>
+        <li><strong>Update external integrations</strong> — CDN, search indexes, third-party tools</li>
+      </ul>
+
+      <h2>Common Issues & Troubleshooting</h2>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Issue</th>
+            <th>Solution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Extraction fails at XX%</td>
+            <td>Check disk space on source. CTT needs 1.5x content size free.</td>
+          </tr>
+          <tr>
+            <td>Ingestion timeout</td>
+            <td>Large migrations may need Adobe support to extend timeouts.</td>
+          </tr>
+          <tr>
+            <td>Missing assets after ingestion</td>
+            <td>Verify inclusion paths. Check that <code>/content/dam</code> subpaths were included.</td>
+          </tr>
+          <tr>
+            <td>Broken references</td>
+            <td>Ensure all referenced paths are included in the migration set.</td>
+          </tr>
+          <tr>
+            <td>User migration issues</td>
+            <td>Users may need re-mapping if using different identity providers in cloud.</td>
+          </tr>
+          <tr>
+            <td>Slow extraction</td>
+            <td>Reduce migration scope. Exclude large archives or unused assets.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Keywords Section -->
+      <div class="keywords-section">
+        <h4>Related Topics</h4>
+        <div class="keyword-tags">
+          <span>AEM Content Transfer Tool</span>
+          <span>CTT</span>
+          <span>AEM migration</span>
+          <span>inclusion set</span>
+          <span>exclusion set</span>
+          <span>AEM Cloud migration</span>
+          <span>content extraction</span>
+          <span>content ingestion</span>
+          <span>AEM as a Cloud Service</span>
+          <span>Adobe Experience Manager</span>
+          <span>WegWorks</span>
+          <span>AEM consulting</span>
+          <span>cloud migration</span>
+          <span>DAM migration</span>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h3>Need Help with AEM Migration?</h3>
+        <p>Our team has migrated enterprise AEM implementations to the cloud. We can help plan your inclusion/exclusion sets and ensure a smooth migration.</p>
+        <a class="btn btn-primary" href="/contact/">
+          Get Migration Support
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container-wide">
+    <p>&copy; 2026 <a href="/">WegWorks</a>. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const mobileToggle = document.querySelector(".mobile-toggle");
+const mobileMenu = document.getElementById("mobile-menu");
+if (mobileToggle && mobileMenu) {
+  mobileToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    mobileToggle.textContent = mobileMenu.classList.contains("active") ? "✕" : "☰";
+  });
+  mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("active");
+      mobileToggle.textContent = "☰";
+    });
+  });
+}
+</script>
+<script src="/js/common.min.js" defer></script>
+</body>
+</html>
+
