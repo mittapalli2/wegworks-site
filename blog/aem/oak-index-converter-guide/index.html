@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9VH11ZH9Y4');
+</script>
+<title>Migrating Oak Indexes from AEM 6.5 to AEM Cloud using Index Converter | WegWorks</title>
+<meta name="description" content="Step-by-step guide to migrating Oak indexes from AEM 6.5 to AEM as a Cloud Service using Adobe's Index Converter tool. Includes config setup, troubleshooting, and real-world fixes."/>
+<meta name="keywords" content="Oak index converter, AEM index migration, AEM Cloud indexes, Lucene index AEM, aio-cli AEM, Cloud Manager indexes, AEM 6.5 migration, oak:index, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/aem/oak-index-converter-guide/"/>
+<link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/aem/oak-index-converter-guide/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="Migrating Oak Indexes from AEM 6.5 to AEM Cloud using Index Converter"/>
+<meta property="og:description" content="Step-by-step guide to migrating Oak indexes using Adobe's Index Converter tool. Includes config, troubleshooting, and real-world fixes."/>
+<meta property="og:image" content="https://www.wegworks.com/images/blog/aemcloud.png"/>
+<meta property="article:published_time" content="2026-01-16"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:image" content="https://www.wegworks.com/images/blog/aemcloud.png"/>
+
+<!-- Schema.org Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Migrating Oak Indexes from AEM 6.5 to AEM Cloud using Index Converter (Step-by-Step)",
+  "description": "Step-by-step guide to migrating Oak indexes from AEM 6.5 to AEM as a Cloud Service using Adobe's Index Converter tool.",
+  "image": "https://www.wegworks.com/images/blog/aemcloud.png",
+  "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "/images/blog/logowhite.png"}},
+  "datePublished": "2026-01-16",
+  "dateModified": "2026-01-16"
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "AEM", "item": "https://www.wegworks.com/blog/aem/"},
+    {"@type": "ListItem", "position": 4, "name": "Oak Index Converter Guide", "item": "https://www.wegworks.com/blog/aem/oak-index-converter-guide/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does the AEM Index Converter tool do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Index Converter transforms AEM 6.5 Oak/Lucene index definitions into the format required by AEM as a Cloud Service. It handles property mappings, removes deprecated configurations, and restructures indexes for Cloud Manager compatibility."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do Oak indexes need to be converted for AEM Cloud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AEM as a Cloud Service uses a different index deployment model—indexes are deployed as content packages with specific structures. Additionally, Cloud Manager runs validation that rejects deprecated properties, unsupported analyzers, and legacy index configurations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the correct command to run the index converter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use: aio aem-cloud-migration index-converter --config /path/to/index-converter.yaml. Note the space-separated format, not colons. The colon-style command (index-converter:convert) is deprecated."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #86bc25;
+  --accent-light: #a4d44a;
+  --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow-primary: 0 0 40px rgba(134, 188, 37, 0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100vw; overflow-x: hidden; } body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.brand img { height: 42px; width: auto; }
+.brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
+.brand-text span { font-size: 0.7rem; color: var(--accent-primary); letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links > li { position: relative; }
+.nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text-primary); }
+.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+.dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
+.nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
+.dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); color: var(--accent-primary); }
+.nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+
+.article-header { padding: 160px 0 40px; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: #ffffff; margin-bottom: 24px; text-decoration: none; transition: all 0.3s; }
+.back-link:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+.article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: #ffffff; }
+.article-category { color: var(--accent-primary); font-weight: 600; text-decoration: none; }
+.article-header h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 24px; }
+.article-intro { font-size: 1.25rem; color: #ffffff; line-height: 1.7; }
+
+.article-content { padding: 60px 0 100px; }
+.article-content h2 { font-size: 1.75rem; margin: 48px 0 20px; color: var(--text-primary); }
+.article-content h3 { font-size: 1.375rem; margin: 36px 0 16px; color: var(--text-primary); }
+.article-content h4 { font-size: 1.125rem; margin: 28px 0 12px; color: var(--accent-primary); }
+.article-content p { margin-bottom: 20px; color: #ffffff; line-height: 1.8; }
+.article-content ul, .article-content ol { margin: 20px 0 20px 24px; color: #ffffff; }
+.article-content li { margin-bottom: 12px; line-height: 1.7; }
+.article-content strong { color: var(--text-primary); }
+.article-content a { color: var(--accent-primary); text-decoration: none; }
+.article-content a:hover { text-decoration: underline; }
+
+.callout { padding: 20px 24px; background: rgba(255, 255, 255, 0.05); border-left: 4px solid var(--accent-primary); border-radius: 0 12px 12px 0; margin: 24px 0; }
+.callout-title { font-weight: 700; color: var(--accent-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.callout p { margin: 0; color: #ffffff; }
+.callout-warning { border-left-color: #f59e0b; }
+.callout-warning .callout-title { color: #f59e0b; }
+.callout-tip { border-left-color: #10b981; }
+.callout-tip .callout-title { color: #10b981; }
+.callout-danger { border-left-color: #ef4444; }
+.callout-danger .callout-title { color: #ef4444; }
+
+.checklist { list-style: none; margin-left: 0; padding-left: 0; }
+.checklist li { position: relative; padding-left: 28px; margin-bottom: 12px; }
+.checklist li::before { content: "☐"; position: absolute; left: 0; color: var(--accent-primary); }
+
+.cta-box { padding: 48px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; text-align: center; margin-top: 60px; }
+.cta-box h3 { font-size: 1.5rem; margin-bottom: 16px; }
+.cta-box p { color: #ffffff; margin-bottom: 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-weight: 600; border-radius: 12px; text-decoration: none; transition: all 0.3s; }
+.btn-primary { background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); }
+.btn-primary:hover { transform: translateY(-2px); border-color: var(--accent-light); color: var(--accent-light); box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2); }
+
+.keywords-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--glass-border); }
+.keywords-section h4 { font-size: 0.875rem; color: #ffffff; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+.keyword-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.keyword-tags span { padding: 6px 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.8rem; color: #ffffff; }
+
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: #ffffff; }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+/* Code Block Styles */
+pre { background: #1e1e1e; border-radius: 12px; padding: 20px; overflow-x: auto; margin: 24px 0; border: 1px solid #333; }
+pre code { font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.85rem; line-height: 1.7; color: #d4d4d4; background: none; padding: 0; white-space: pre; }
+code { font-family: "SF Mono", Monaco, Consolas, monospace; background: rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; color: #e06c75; }
+.code-label { background: #333; color: #a1a1aa; padding: 8px 16px; font-size: 0.75rem; font-family: "SF Mono", Monaco, Consolas, monospace; border-radius: 8px 8px 0 0; margin-bottom: -12px; display: inline-block; }
+table { display: block; overflow-x: auto; max-width: 100%; }
+img { max-width: 100%; height: auto; }
+
+.mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 28px; cursor: pointer; padding: 8px; }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary); z-index: 999; padding: 100px 24px 24px; overflow-y: auto; }
+.mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.mobile-menu a { font-size: 1.2rem; color: var(--text-primary); text-decoration: none; font-weight: 600; }
+.mobile-menu a:hover { color: var(--accent-primary); }
+
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
+  .article-header { padding: 120px 0 40px; }
+  .cta-box { padding: 32px 24px; }
+}
+@media (max-width: 768px) {
+  .nav, .nav-links, .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
+  pre { padding: 16px; font-size: 0.8rem; }
+}
+</style>
+<link rel="stylesheet" href="/css/common.min.css">
+</head>
+
+<body>
+<header class="site-header">
+  <nav class="nav-wrapper">
+    <a class="brand" href="/"><img loading="eager" src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks Logo" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/services/adobe-analytics/">Adobe Analytics</a>
+          <a href="/services/segment-cdp/">Segment CDP</a>
+          <a href="/services/salesforce/">Salesforce</a>
+          <a href="/services/marketing-automation/">Marketing Automation</a>
+          <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+          <a href="/small-business/" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 8px; padding-top: 16px;">Small Business Solutions</a>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+          <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+          <a href="/blog/adobe-target/">Adobe Target</a>
+          <a href="/blog/aem/">AEM</a>
+          <a href="/blog/google-analytics-4/">Google Analytics 4</a>
+          <a href="/blog/marketing-automation/">Marketing Automation</a>
+          <a href="/blog/salesforce/">Salesforce</a>
+          <a href="/blog/segment-cdp/">Segment CDP</a>
+        </div>
+      </li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="/contact/">Get Started</a>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Home</a>
+  <a href="/services/">Services</a>
+  <a href="/blog/">Blog</a>
+  <a href="/blog/adobe-analytics/">→ Adobe Analytics</a>
+  <a href="/blog/adobe-experience-platform/">→ Adobe Experience Platform</a>
+  <a href="/blog/adobe-target/">→ Adobe Target</a>
+  <a href="/blog/aem/">→ AEM</a>
+  <a href="/blog/google-analytics-4/">→ Google Analytics 4</a>
+  <a href="/blog/segment-cdp/">→ Segment CDP</a>
+  <a href="/about/">About</a>
+  <a href="/contact/">Contact</a>
+</div>
+
+<article>
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="/blog/aem/">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        AEM
+      </a>
+      <div class="article-meta">
+        <a class="article-category" href="/blog/aem/">AEM</a>
+        <span>January 16, 2026</span>
+        <span>20 min read</span>
+      </div>
+      <h1>Migrating Oak Indexes from AEM 6.5 to AEM as a Cloud Service using Adobe's Index Converter (Step-by-Step)</h1>
+      <p class="article-intro">
+        Your AEM 6.5 indexes won't pass Cloud Manager validation without conversion. Here's the complete, 
+        hands-on guide to using Adobe's Index Converter—including the real errors you'll hit and how to fix them.
+      </p>
+    </div>
+  </header>
+
+  <div class="article-content">
+    <div class="container">
+      
+      <h2>Why Oak Indexes Need Conversion</h2>
+      
+      <h3>What Are Oak Indexes?</h3>
+      <p>
+        Oak indexes are the backbone of AEM's query performance. When you run a query like 
+        <code>SELECT * FROM [cq:Page] WHERE [jcr:content/cq:template] = '/conf/mysite/templates/page'</code>, 
+        Oak uses indexes to avoid scanning the entire repository.
+      </p>
+      <p>
+        In AEM 6.5, you likely have custom Lucene indexes defined under <code>/oak:index</code> with properties 
+        like <code>includedPaths</code>, <code>excludedPaths</code>, custom analyzers, and aggregation rules. 
+        These were deployed via content packages or manually created in CRXDE.
+      </p>
+
+      <h3>Why AEM Cloud Has Stricter Rules</h3>
+      <p>
+        AEM as a Cloud Service fundamentally changes how indexes are managed:
+      </p>
+      <ul>
+        <li><strong>Immutable repository</strong> — You can't create or modify indexes at runtime</li>
+        <li><strong>Deployment validation</strong> — Cloud Manager rejects deprecated properties and unsupported configurations</li>
+        <li><strong>Standardized structure</strong> — Indexes must be deployed as content packages with specific JCR paths</li>
+        <li><strong>No custom analyzers</strong> — Many AEM 6.5 analyzer configurations aren't supported</li>
+      </ul>
+      <p>
+        If you push your AEM 6.5 indexes directly to Cloud Manager, the build will fail with cryptic validation errors.
+      </p>
+
+      <h3>What the Index Converter Does (and Doesn't Do)</h3>
+      
+      <div class="callout callout-tip">
+        <div class="callout-title">✅ What It Does</div>
+        <p>
+          Transforms index definitions to Cloud-compatible format. Removes deprecated properties. 
+          Restructures paths. Generates deployment-ready content packages.
+        </p>
+      </div>
+      
+      <div class="callout callout-warning">
+        <div class="callout-title">⚠️ What It Does NOT Do</div>
+        <p>
+          It won't fix your queries. It won't optimize your indexes. It won't tell you if your indexes 
+          are even being used. You still need to validate query performance after conversion.
+        </p>
+      </div>
+
+      <h2>Prerequisites</h2>
+
+      <h3>Required Tools</h3>
+      <ul class="checklist">
+        <li><strong>Node.js</strong> (v18+ recommended)</li>
+        <li><strong>npm</strong></li>
+        <li><strong>Adobe aio-cli</strong> (Adobe I/O CLI)</li>
+        <li><strong>aem-cloud-migration plugin</strong></li>
+      </ul>
+
+      <h3>Install Adobe aio-cli</h3>
+      <pre><code># Install Adobe I/O CLI globally
+npm install -g @adobe/aio-cli
+
+# Verify installation
+aio --version</code></pre>
+
+      <h3>Install the AEM Cloud Migration Plugin</h3>
+      <pre><code># Install the migration plugin
+aio plugins:install @adobe/aio-cli-plugin-aem-cloud-migration
+
+# Verify it's installed
+aio plugins</code></pre>
+      <p>You should see <code>@adobe/aio-cli-plugin-aem-cloud-migration</code> in the list.</p>
+
+      <h3>Confirm Plugin Commands Are Available</h3>
+      <pre><code># List available commands
+aio aem-cloud-migration --help</code></pre>
+      <p>Look for <code>index-converter</code> in the command list.</p>
+
+      <div class="callout callout-warning">
+        <div class="callout-title">⚠️ Gotcha: Global aio Config vs Index Converter Config</div>
+        <p>
+          The global aio-cli config file (<code>~/.config/@adobe/aio-cli/config.yaml</code>) is NOT the 
+          same as the index converter config. The converter uses its own YAML file that you create 
+          specifically for the conversion. Don't confuse the two.
+        </p>
+      </div>
+
+      <h2>Demo Setup Using WKND</h2>
+      <p>
+        We'll use the WKND sample project. It's better maintained than We.Retail and mirrors real-world 
+        AEM project structures.
+      </p>
+
+      <h3>Clone and Build WKND</h3>
+      <pre><code># Clone WKND
+git clone https://github.com/adobe/aem-guides-wknd.git
+cd aem-guides-wknd
+
+# Build (skip tests for speed)
+mvn clean install -DskipTests</code></pre>
+
+      <h3>Create a Custom Index Folder</h3>
+      <p>
+        WKND doesn't have custom indexes by default. Let's create a sample to demonstrate the conversion process.
+      </p>
+      <pre><code># Create the _oak_index folder structure
+mkdir -p ui.apps/src/main/content/jcr_root/_oak_index/wknd-content-index</code></pre>
+
+      <h3>Add a Sample Index Definition</h3>
+      <p>Create the <code>.content.xml</code> file for your index:</p>
+      
+      <span class="code-label">ui.apps/src/main/content/jcr_root/_oak_index/wknd-content-index/.content.xml</span>
+      <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          xmlns:oak="http://jackrabbit.apache.org/oak/ns/1.0"
+    jcr:primaryType="oak:QueryIndexDefinition"
+    type="lucene"
+    async="async"
+    compatVersion="{Long}2"
+    includedPaths="[/content/wknd]"
+    queryPaths="[/content/wknd]"
+    evaluatePathRestrictions="{Boolean}true"&gt;
+    &lt;indexRules jcr:primaryType="nt:unstructured"&gt;
+        &lt;nt:unstructured jcr:primaryType="nt:unstructured"&gt;
+            &lt;properties jcr:primaryType="nt:unstructured"&gt;
+                &lt;jcrTitle
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/jcr:title"
+                    propertyIndex="{Boolean}true"/&gt;
+                &lt;cqTemplate
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/cq:template"
+                    propertyIndex="{Boolean}true"/&gt;
+            &lt;/properties&gt;
+        &lt;/nt:unstructured&gt;
+    &lt;/indexRules&gt;
+&lt;/jcr:root&gt;</code></pre>
+
+      <h3>File Structure After Setup</h3>
+      <pre><code>aem-guides-wknd/
+├── ui.apps/
+│   └── src/
+│       └── main/
+│           └── content/
+│               ├── jcr_root/
+│               │   └── _oak_index/
+│               │       └── wknd-content-index/
+│               │           └── .content.xml
+│               └── META-INF/
+│                   └── vault/
+│                       └── filter.xml</code></pre>
+
+      <h3>Update filter.xml to Include Index Path</h3>
+      <p>
+        Add the index path to your <code>filter.xml</code>:
+      </p>
+      
+      <span class="code-label">ui.apps/src/main/content/META-INF/vault/filter.xml</span>
+      <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;workspaceFilter version="1.0"&gt;
+    &lt;!-- Existing filters --&gt;
+    &lt;filter root="/apps/wknd"/&gt;
+    
+    &lt;!-- Add this line for oak indexes --&gt;
+    &lt;filter root="/_oak_index/wknd-content-index"/&gt;
+&lt;/workspaceFilter&gt;</code></pre>
+
+      <h2>Create Index Converter Config YAML</h2>
+      <p>
+        The Index Converter needs a configuration file telling it where to find your indexes and filter.xml.
+      </p>
+      
+      <h3>Full Config File</h3>
+      <p>Create <code>index-converter.yaml</code> in your project root:</p>
+      
+      <span class="code-label">index-converter.yaml</span>
+      <pre><code># AEM version of your source instance
+aemVersion: "6.5"
+
+# Path to your custom oak index definitions
+# This is where your _oak_index folder lives
+customOakIndexDirectoryPath: "/Users/yourname/aem-guides-wknd/ui.apps/src/main/content/jcr_root/_oak_index"
+
+# Path to filter.xml (must be a FILE, not directory)
+filterXMLPath: "/Users/yourname/aem-guides-wknd/ui.apps/src/main/content/META-INF/vault/filter.xml"
+
+# (Optional) Where to output the converted index definitions
+# If not set, converter creates folders in current directory
+indexConversionDefinitionContentPackageJcrRootPath: "/Users/yourname/aem-guides-wknd/ui.apps/src/main/content/jcr_root"
+
+# (Optional) Use the same path for config package output
+useIndexDefinitionConfigPackageJcrRootPath: "/Users/yourname/aem-guides-wknd/ui.apps/src/main/content/jcr_root"</code></pre>
+
+      <h3>Config Field Reference</h3>
+      <table style="width: 100%; border-collapse: collapse; margin: 24px 0;">
+        <thead>
+          <tr style="border-bottom: 1px solid var(--glass-border);">
+            <th style="padding: 12px; text-align: left; color: var(--text-primary);">Field</th>
+            <th style="padding: 12px; text-align: left; color: var(--text-primary);">What It Does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid var(--glass-border);">
+            <td style="padding: 12px;"><code>aemVersion</code></td>
+            <td style="padding: 12px;">Source AEM version. Use <code>"6.5"</code> for AEM 6.5.x. Do NOT use <code>"6.4"</code> unless you're actually on 6.4.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--glass-border);">
+            <td style="padding: 12px;"><code>customOakIndexDirectoryPath</code></td>
+            <td style="padding: 12px;">Absolute path to your <code>_oak_index</code> or <code>oak:index</code> folder containing index definitions.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--glass-border);">
+            <td style="padding: 12px;"><code>filterXMLPath</code></td>
+            <td style="padding: 12px;">Absolute path to filter.xml FILE (not directory). Must end with <code>filter.xml</code>.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--glass-border);">
+            <td style="padding: 12px;"><code>indexConversionDefinitionContentPackageJcrRootPath</code></td>
+            <td style="padding: 12px;">Where to write the converted index definition content package.</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px;"><code>useIndexDefinitionConfigPackageJcrRootPath</code></td>
+            <td style="padding: 12px;">Where to write the converted index config package.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>How to Find the Right Paths in Your Repo</h3>
+      
+      <h4>Locate filter.xml</h4>
+      <pre><code># Find all filter.xml files in your project
+find . -name "filter.xml" -type f
+
+# Typical locations:
+# ./ui.apps/src/main/content/META-INF/vault/filter.xml
+# ./ui.content/src/main/content/META-INF/vault/filter.xml</code></pre>
+
+      <h4>Locate Oak Index Content</h4>
+      <pre><code># Find _oak_index folders
+find . -type d -name "_oak_index"
+
+# Find oak:index folders (may be named differently)
+find . -type d -name "oak*index*"
+
+# Search for index definitions by content
+grep -r "oak:QueryIndexDefinition" --include="*.xml" .</code></pre>
+
+      <h4>Verify filter.xml Includes Index Paths</h4>
+      <pre><code># Check what paths are in filter.xml
+cat ui.apps/src/main/content/META-INF/vault/filter.xml | grep "filter root"</code></pre>
+      <p>
+        Make sure your <code>_oak_index</code> path is included. If not, add a filter entry for it.
+      </p>
+
+      <h2>Run the Index Converter</h2>
+
+      <h3>Correct Command Syntax</h3>
+      <div class="callout callout-danger">
+        <div class="callout-title">⚠️ Important: Use Space-Separated Format</div>
+        <p>
+          The correct command uses spaces, not colons. The old colon-style 
+          (<code>index-converter:convert</code>) is deprecated and may not work.
+        </p>
+      </div>
+
+      <pre><code># Navigate to your project root
+cd /Users/yourname/aem-guides-wknd
+
+# Run the converter
+aio aem-cloud-migration index-converter --config ./index-converter.yaml</code></pre>
+
+      <h3>Expected Output</h3>
+      <pre><code>Index Converter starting...
+Reading config from ./index-converter.yaml
+AEM Version: 6.5
+Processing custom index definitions from: /Users/yourname/aem-guides-wknd/ui.apps/src/main/content/jcr_root/_oak_index
+
+Converting index: wknd-content-index
+  - Removed deprecated property: compatVersion
+  - Updated index structure for Cloud compatibility
+  
+Writing converted indexes to: /Users/yourname/aem-guides-wknd/ui.apps/src/main/content/jcr_root
+
+Conversion complete.
+  Indexes converted: 1
+  Warnings: 0
+  Errors: 0</code></pre>
+
+      <h3>Where Results Are Written</h3>
+      <p>
+        The converter creates or modifies files in your <code>jcr_root</code> directory. Look for:
+      </p>
+      <ul>
+        <li><code>_oak_index/</code> — Updated index definitions</li>
+        <li>New <code>.content.xml</code> files with Cloud-compatible properties</li>
+        <li>Removed deprecated nodes and properties</li>
+      </ul>
+
+      <h2>Validate the Results</h2>
+
+      <h3>What Files/Folders Changed</h3>
+      <pre><code># See what the converter modified
+git status
+
+# Diff a specific index
+git diff ui.apps/src/main/content/jcr_root/_oak_index/wknd-content-index/.content.xml</code></pre>
+
+      <h3>Common Warnings and What They Mean</h3>
+      <table style="width: 100%; border-collapse: collapse; margin: 24px 0;">
+        <thead>
+          <tr style="border-bottom: 1px solid var(--glass-border);">
+            <th style="padding: 12px; text-align: left; color: var(--text-primary);">Warning</th>
+            <th style="padding: 12px; text-align: left; color: var(--text-primary);">Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid var(--glass-border);">
+            <td style="padding: 12px;"><code>Unsupported analyzer</code></td>
+            <td style="padding: 12px;">Custom Lucene analyzer not supported in Cloud. Will use default analyzer.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--glass-border);">
+            <td style="padding: 12px;"><code>Deprecated property removed</code></td>
+            <td style="padding: 12px;">Property like <code>compatVersion</code> was removed as it's not used in Cloud.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--glass-border);">
+            <td style="padding: 12px;"><code>Index path restructured</code></td>
+            <td style="padding: 12px;">Index moved to Cloud-compatible path structure.</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px;"><code>Aggregate rule modified</code></td>
+            <td style="padding: 12px;">Aggregation configuration adjusted for Cloud compatibility.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>What to Check Into Git</h3>
+      <ul class="checklist">
+        <li>Updated <code>.content.xml</code> files in <code>_oak_index</code></li>
+        <li>Any new folders created by the converter</li>
+        <li>Updated <code>filter.xml</code> if paths changed</li>
+        <li>Do NOT check in the converter config file (it has local paths)</li>
+      </ul>
+
+      <h3>How to Re-Run Safely</h3>
+      <p>The converter is idempotent—you can run it multiple times:</p>
+      <pre><code># Re-run after making changes
+aio aem-cloud-migration index-converter --config ./index-converter.yaml
+
+# If you need a fresh start, reset your changes first
+git checkout -- ui.apps/src/main/content/jcr_root/_oak_index/</code></pre>
+
+      <h2>Troubleshooting</h2>
+
+      <h3>Error A: "index-converter:convert is not a aio command"</h3>
+      <pre><code>$ aio index-converter:convert --config ./config.yaml
+index-converter:convert is not a aio command.
+Did you mean aem-cloud-migration index-converter?</code></pre>
+      
+      <p><strong>Fix:</strong> Use the space-separated command format:</p>
+      <pre><code># Wrong (old/deprecated)
+aio index-converter:convert --config ./config.yaml
+
+# Correct
+aio aem-cloud-migration index-converter --config ./config.yaml</code></pre>
+
+      <h3>Error B: "Unable to read baseline.xml for AEM Version 6.4"</h3>
+      <pre><code>Error: Use AEM Version for Reference 6.4
+Unable to read baseline.xml for AEM Version 6.4</code></pre>
+      
+      <p><strong>Fix:</strong> Set the correct AEM version in your config:</p>
+      <pre><code># In your index-converter.yaml
+aemVersion: "6.5"    # NOT "6.4" unless you're actually on 6.4</code></pre>
+      <p>
+        The converter uses baseline definitions for each AEM version. If you specify the wrong version, 
+        it can't find the reference files.
+      </p>
+
+      <h3>Error C: "cat /home/develop/.config/@adobe/aio-cli/config.yaml: No such file"</h3>
+      <pre><code>Error: cat /home/develop/.config/@adobe/aio-cli/config.yaml: No such file or directory</code></pre>
+      
+      <p><strong>Fix:</strong> This is a HOME directory issue. The error is misleading—it's looking for 
+      the global aio config, not your converter config.</p>
+      <pre><code># Check your HOME is set correctly
+echo $HOME
+
+# The global aio config location varies:
+# macOS: ~/.config/@adobe/aio-cli/
+# Linux: ~/.config/@adobe/aio-cli/
+
+# This is NOT your index-converter.yaml
+# Your converter config is a separate file you create</code></pre>
+      <p>
+        Make sure you're passing the correct path to YOUR converter config file, not the aio global config.
+      </p>
+
+      <h3>Error D: "cd .../META-INF/vault/filter.xml: Not a directory"</h3>
+      <pre><code>Error: cd /Users/yourname/project/ui.apps/src/main/content/META-INF/vault/filter.xml: Not a directory</code></pre>
+      
+      <p><strong>Fix:</strong> The <code>filterXMLPath</code> must be a FILE path, not a directory:</p>
+      <pre><code># Wrong - pointing to directory
+filterXMLPath: "/path/to/META-INF/vault/"
+
+# Correct - pointing to the file
+filterXMLPath: "/path/to/META-INF/vault/filter.xml"</code></pre>
+      <p>
+        This error can also occur with older plugin versions. Try upgrading:
+      </p>
+      <pre><code>aio plugins:update
+aio plugins:install @adobe/aio-cli-plugin-aem-cloud-migration@latest</code></pre>
+
+      <h3>General Fix: Upgrade the Plugin</h3>
+      <p>Many issues are resolved by updating to the latest plugin version:</p>
+      <pre><code># Update all plugins
+aio plugins:update
+
+# Or reinstall the specific plugin
+aio plugins:uninstall @adobe/aio-cli-plugin-aem-cloud-migration
+aio plugins:install @adobe/aio-cli-plugin-aem-cloud-migration@latest
+
+# Verify version
+aio plugins</code></pre>
+
+      <h2>Next Steps</h2>
+
+      <h3>Validate Queries with Oak Tools</h3>
+      <p>
+        After conversion, verify your queries actually use the indexes. In AEM:
+      </p>
+      <ul>
+        <li>Go to <strong>Tools → Operations → Diagnosis → Query Performance</strong></li>
+        <li>Run your queries and check the "Index Used" column</li>
+        <li>Queries showing "traversal" need index optimization</li>
+      </ul>
+
+      <h3>Deploy via Cloud Manager</h3>
+      <ol>
+        <li>Commit your converted indexes to Git</li>
+        <li>Push to your Cloud Manager repository</li>
+        <li>Run a build pipeline—it should pass validation now</li>
+        <li>Deploy to dev environment first</li>
+      </ol>
+
+      <h3>Coordinate with Performance Testing</h3>
+      <ul>
+        <li>Run load tests after deploying new indexes</li>
+        <li>Monitor index reindexing time (can take hours for large repositories)</li>
+        <li>Watch for query performance regressions</li>
+      </ul>
+
+      <h3>Multi-Repo Architecture: Centralize Index Ownership</h3>
+      <p>
+        If you have multiple repositories feeding into an aggregator:
+      </p>
+      <ul>
+        <li>Keep all index definitions in ONE repository (usually the aggregator)</li>
+        <li>Don't let individual tenant repos define their own indexes</li>
+        <li>Use naming conventions to identify index ownership</li>
+        <li>Document which indexes support which queries</li>
+      </ul>
+
+      <div class="callout callout-tip">
+        <div class="callout-title">✅ Pro Tip</div>
+        <p>
+          Create a <code>README.md</code> in your <code>_oak_index</code> folder documenting each index: 
+          what queries it supports, who owns it, and when it was last modified. Future you will thank you.
+        </p>
+      </div>
+
+      <!-- Keywords Section -->
+      <div class="keywords-section">
+        <h4>Related Topics</h4>
+        <div class="keyword-tags">
+          <span>Oak index converter</span>
+          <span>AEM index migration</span>
+          <span>AEM Cloud indexes</span>
+          <span>Lucene index AEM</span>
+          <span>aio-cli AEM</span>
+          <span>Cloud Manager validation</span>
+          <span>AEM 6.5 migration</span>
+          <span>oak:index</span>
+          <span>AEM query performance</span>
+          <span>WegWorks</span>
+          <span>AEM consulting</span>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h3>Need Help with AEM Cloud Migration?</h3>
+        <p>Index conversion is just one piece of the puzzle. Our team has migrated enterprise AEM implementations to the cloud—let us help you avoid the pitfalls.</p>
+        <a class="btn btn-primary" href="/contact/">
+          Get Expert Help
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container-wide">
+    <p>&copy; 2026 <a href="/">WegWorks</a>. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const mobileToggle = document.querySelector(".mobile-toggle");
+const mobileMenu = document.getElementById("mobile-menu");
+if (mobileToggle && mobileMenu) {
+  mobileToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    mobileToggle.textContent = mobileMenu.classList.contains("active") ? "✕" : "☰";
+  });
+  mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("active");
+      mobileToggle.textContent = "☰";
+    });
+  });
+}
+</script>
+<script src="/js/common.min.js" defer></script>
+</body>
+</html>
+
