@@ -257,6 +257,79 @@ curl -s "https://get.sdkman.io" | bash
 sdk install java 11.0.21-zulu
 sdk use java 11.0.21-zulu</code></pre>
             
+            <h2>Bonus: Git Commit & Push Script for Windows</h2>
+            
+            <p>When working on AEM projects, you'll frequently need to commit and push code changes. This PowerShell script automates the entire process — setting your git identity, staging changes, committing, and pushing — all in one command.</p>
+            
+            <h3>Why Use This Script?</h3>
+            
+            <ul>
+                <li><strong>One Command:</strong> Replaces multiple git commands (<code>git add</code>, <code>git commit</code>, <code>git push</code>) with a single script</li>
+                <li><strong>Consistent Identity:</strong> Automatically sets your name and email for every commit</li>
+                <li><strong>Error Handling:</strong> Checks if you're in a git repository before running</li>
+                <li><strong>Time Saver:</strong> Perfect for rapid development cycles in AEM projects</li>
+            </ul>
+            
+            <h3>PowerShell Script (commit.ps1)</h3>
+            
+            <p>Save this as <code>commit.ps1</code> in your project folder:</p>
+            
+            <div style="position: relative;">
+                <button onclick="copyScript()" style="position: absolute; top: 12px; right: 12px; background: rgba(134,188,37,0.2); border: 1px solid var(--accent-primary); color: var(--accent-primary); padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 6px; z-index: 10;" id="copy-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    Copy
+                </button>
+<pre data-lang="powershell" id="ps-script"><code>Param(
+    [Parameter(Mandatory = $true)]
+    [string]$Message,
+
+    [string]$Name  = "Tharun Wegworks",
+    [string]$Email = "wegworks.hr@gmail.com"
+)
+
+# Ensure you are inside a Git repo
+if (-not (Test-Path ".git")) {
+    Write-Host "❌ Not a Git repository. CD into your repo folder first."
+    exit 1
+}
+
+# Set identity for this repo
+git config user.name  $Name
+git config user.email $Email
+
+Write-Host "✅ Using identity: $Name &lt;$Email&gt;"
+
+# Stage all changes
+git add -A
+Write-Host "📦 Staged all changes"
+
+# Commit with the provided message
+git commit -m $Message
+Write-Host "✔️ Committed: $Message"
+
+# Push to remote
+git push
+Write-Host "🚀 Pushed to remote successfully!"</code></pre>
+            </div>
+            
+            <h3>How to Use</h3>
+            
+            <ol>
+                <li><strong>Save the script:</strong> Copy the code above and save it as <code>commit.ps1</code></li>
+                <li><strong>Open PowerShell:</strong> Navigate to your AEM project directory</li>
+                <li><strong>Run the script:</strong> <code>.\commit.ps1 -Message "Your commit message here"</code></li>
+            </ol>
+            
+            <div class="warning-box">
+                <h4>⚠️ PowerShell Execution Policy</h4>
+                <p>If you get an execution policy error, run this command first:<br><code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code></p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>💡 Customize Your Identity</h4>
+                <p>The script uses default values for name and email. You can override them:<br><code>.\commit.ps1 -Message "Fix bug" -Name "Your Name" -Email "your@email.com"</code></p>
+            </div>
+            
             <div class="success-box">
                 <h4>Related Guides</h4>
                 <ul style="margin-bottom: 0;">
@@ -283,13 +356,16 @@ sdk use java 11.0.21-zulu</code></pre>
                 <span class="topic-tag">AEM 6.5</span>
                 <span class="topic-tag">AEM Cloud</span>
                 <span class="topic-tag">JAVA_HOME</span>
+                <span class="topic-tag">Git Script</span>
+                <span class="topic-tag">PowerShell</span>
                 <span class="topic-tag">WegWorks</span>
             </div>
         </section>
     </article>
     
     <footer class="footer"><p>&copy; 2026 WegWorks. Expert MarTech consulting services.</p><p><a href="/">Home</a> · <a href="/services/">Services</a> · <a href="/blog/">Blog</a> · <a href="/contact/">Contact</a></p></footer>
-<script>const mobileToggle=document.querySelector(".mobile-toggle");const mobileMenu=document.getElementById("mobile-menu");if(mobileToggle&&mobileMenu){mobileToggle.addEventListener("click",()=>{mobileMenu.classList.toggle("active");mobileToggle.textContent=mobileMenu.classList.contains("active")?"✕":"☰"});mobileMenu.querySelectorAll("a").forEach(link=>{link.addEventListener("click",()=>{mobileMenu.classList.remove("active");mobileToggle.textContent="☰"})})}</script>
+<script>const mobileToggle=document.querySelector(".mobile-toggle");const mobileMenu=document.getElementById("mobile-menu");if(mobileToggle&&mobileMenu){mobileToggle.addEventListener("click",()=>{mobileMenu.classList.toggle("active");mobileToggle.textContent=mobileMenu.classList.contains("active")?"✕":"☰"});mobileMenu.querySelectorAll("a").forEach(link=>{link.addEventListener("click",()=>{mobileMenu.classList.remove("active");mobileToggle.textContent="☰"})})}
+function copyScript(){const script=document.getElementById("ps-script").innerText;navigator.clipboard.writeText(script).then(()=>{const btn=document.getElementById("copy-btn");btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';btn.style.background="var(--accent-primary)";btn.style.color="#000";setTimeout(()=>{btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy';btn.style.background="rgba(134,188,37,0.2)";btn.style.color="var(--accent-primary)"},2000)})}</script>
 <script src="/js/common.min.js" defer></script>
 </body>
 </html>
