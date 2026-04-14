@@ -16,7 +16,7 @@
 </script>
 
 <title>Why jcr:createdBy Shows Distribution Service on AEM Cloud Publish | WegWorks</title>
-<meta name="description" content="Technical deep-dive for AEM architects and developers: why jcr:createdBy shows sling-distribution-importer on AEM Cloud Publish, the architectural reasons behind it, and how to build a reliable custom authorship solution."/>
+<meta name="description" content="Technical deep-dive for AEM architects and developers: why jcr:createdBy reflects a system user on AEM Cloud Publish — content is created by the distribution mechanism, not the original author — and how to build a reliable custom authorship solution."/>
 <meta name="keywords" content="AEM Cloud jcr:createdBy, sling content distribution, AEM Publish behavior, AEM metadata issue, AEM headless API, AEM architecture, AEMaaCS, sling-distribution-importer, AEM Cloud Service, jcr protected property, AEM authorship, WegWorks"/>
 <meta name="author" content="WegWorks"/>
 <meta name="robots" content="index, follow"/>
@@ -31,7 +31,7 @@
 <meta property="og:url" content="https://www.wegworks.com/blog/aem/aem-page-created-by-sling-distribution/"/>
 <meta property="og:site_name" content="WegWorks"/>
 <meta property="og:title" content="Why jcr:createdBy Shows Distribution Service on AEM Cloud Publish"/>
-<meta property="og:description" content="Architectural deep-dive into why AEM Cloud Publish replaces the real author in jcr:createdBy with sling-distribution-importer — and the right fix for headless APIs."/>
+<meta property="og:description" content="Architectural deep-dive into why jcr:createdBy reflects a system user on AEM Cloud Publish — on Publish, content is created by the distribution mechanism, so jcr:createdBy may reflect a system user such as the distribution service — and the right fix for headless APIs."/>
 <meta property="og:image" content="https://www.wegworks.com/images/blog/replication-aem-cloud.png"/>
 <meta property="article:published_time" content="2026-04-13"/>
 
@@ -39,7 +39,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:site" content="@Wegworks_"/>
 <meta name="twitter:title" content="Why jcr:createdBy Shows Distribution Service on AEM Cloud Publish"/>
-<meta name="twitter:description" content="Architectural deep-dive: why AEM Cloud Publish overwrites jcr:createdBy with sling-distribution-importer and the right fix for headless APIs."/>
+<meta name="twitter:description" content="On Publish, content is created by the distribution mechanism, so jcr:createdBy may reflect a system user — not the original author. Here's why and how to fix it for headless APIs."/>
 <meta name="twitter:image" content="https://www.wegworks.com/images/blog/replication-aem-cloud.png"/>
 
 <!-- Schema.org TechArticle -->
@@ -53,7 +53,7 @@
   },
   "url": "https://www.wegworks.com/blog/aem/aem-page-created-by-sling-distribution/",
   "headline": "Why jcr:createdBy Shows Distribution Service on AEM Cloud Publish",
-  "description": "Technical deep-dive for AEM architects explaining why jcr:createdBy shows sling-distribution-importer on AEM Cloud Publish, and how to build a custom authorship solution.",
+  "description": "Technical deep-dive for AEM architects explaining why jcr:createdBy reflects a system user on AEM Cloud Publish — content is created by the distribution mechanism, so jcr:createdBy may reflect a system user such as the distribution service — and how to build a custom authorship solution.",
   "image": {
     "@type": "ImageObject",
     "url": "https://www.wegworks.com/images/blog/replication-aem-cloud.png",
@@ -107,7 +107,7 @@
       "name": "Does AEM Cloud change jcr:createdBy after publishing a page?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, but not by modifying the existing value. AEM Cloud treats the incoming content as a brand-new node being created in the Publish JCR repository. The repository sets jcr:createdBy itself using the active session at import time, which is always the sling-distribution-importer service user. The Author value remains intact on Author — it simply never reaches Publish because protected JCR properties are excluded from distribution packages by design."
+        "text": "Yes, but not by modifying the existing value. On Publish, content is created by the distribution mechanism, so jcr:createdBy may reflect a system user such as the distribution service — this is set by the repository from the active session at import time, not carried over from Author. The Author value remains intact on Author; it simply never reaches Publish because protected JCR properties are excluded from distribution packages by design."
       }
     },
     {
@@ -163,7 +163,7 @@
       "name": "What happens if a page is deleted and recreated on Publish during a full content re-import?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "On re-creation, jcr:createdBy is reset to sling-distribution-importer again. However, the custom ww:createdBy property will survive because it travels in the distribution package from Author each time. This is another reason to prefer the custom property approach — it is resilient to full re-imports."
+        "text": "On re-creation, jcr:createdBy will again reflect the distribution mechanism's service user, since the node is being created fresh in the Publish repository. However, the custom ww:createdBy property will survive because it travels in the distribution package from Author each time. This is another reason to prefer the custom property approach — it is resilient to full re-imports."
       }
     }
   ]
@@ -466,13 +466,13 @@ img { max-width: 100%; height: auto; }
         <span>April 13, 2026</span>
         <span>18 min read</span>
       </div>
-      <h1>Why <code style="font-size:0.75em;background:rgba(255,255,255,0.08);padding:4px 12px;border-radius:6px;color:#e06c75;">jcr:createdBy</code> Shows Distribution Service on AEM Cloud Publish</h1>
+      <h1>Why <code style="font-size:0.75em;background:rgba(255,255,255,0.08);padding:4px 12px;border-radius:6px;color:#e06c75;">jcr:createdBy</code> Reflects a System User on AEM Cloud Publish</h1>
       <p class="article-intro">
         Your content authors create pages on AEM Author and the <code>jcr:createdBy</code> correctly 
         reflects their identity. But once a page is published, the same property on the Publish 
-        tier reads <strong>sling-distribution-importer</strong>. This post explains exactly why 
-        this happens, what it means for your headless APIs and audit workflows, and the 
-        right engineering pattern to fix it.
+        tier reflects a system user — the distribution service — instead of the original author. 
+        This post explains exactly why this happens, what it means for your headless APIs and 
+        audit workflows, and the right engineering pattern to fix it.
       </p>
     </div>
   </header>
@@ -513,9 +513,9 @@ img { max-width: 100%; height: auto; }
       </p>
 
       <p>
-        Then they test the same endpoint on Publish. The creator field reads 
-        <strong>sling-distribution-importer</strong>. Support tickets open. The team suspects 
-        a bug in their code. Debugging begins.
+        Then they test the same endpoint on Publish. The creator field reflects a system user — 
+        the distribution service — instead of the real author. Support tickets open. The team 
+        suspects a bug in their code. Debugging begins.
       </p>
 
       <p>There is no bug. This is how AEM Cloud Service works — by design.</p>
@@ -722,10 +722,11 @@ img { max-width: 100%; height: auto; }
 
       <h3>What Happens During Package Import</h3>
       <p>
-        When the distribution package arrives at a Publish pod, the 
-        <code>sling-distribution-importer</code> service user session calls 
+        When the distribution package arrives at a Publish pod, the distribution mechanism 
+        applies it under a dedicated service session. That session calls 
         <code>Node.addNode()</code> (or equivalent) for each node in the package. 
-        At that moment the JCR repository on Publish sets:
+        Because the node is being created for the first time in the Publish repository, 
+        the JCR sets <code>jcr:createdBy</code> from the active session at that moment:
       </p>
 
       <div class="jcr-tree">
@@ -755,7 +756,7 @@ jcr:created    = <span class="jcr-val-warn">"2026-04-13T10:30:05.000Z"</span>   
       <ul>
         <li>The original author's browser session has long since closed.</li>
         <li>There is no delegated user token or impersonation chain that spans Author → Pipeline → Publish.</li>
-        <li>The only session available on Publish during import is the <code>sling-distribution-importer</code> service session.</li>
+        <li>The only session available on Publish during import is the distribution mechanism's service session — there is no way to impersonate the original author across this boundary.</li>
       </ul>
 
       <div class="callout callout-warning">
@@ -778,9 +779,11 @@ jcr:created    = <span class="jcr-val-warn">"2026-04-13T10:30:05.000Z"</span>   
       <h3>JSON Exporters Returning Incorrect Creator</h3>
       <p>
         AEM's built-in Sling Model Exporter (and any custom JSON exporter backed by a 
-        <code>ValueMap</code> read on Publish) will return <code>sling-distribution-importer</code> 
-        if it reads <code>jcr:createdBy</code> directly. This corrupts any front-end that 
-        renders a byline, author card, or "written by" attribution.
+        <code>ValueMap</code> read on Publish) will return a system user identity 
+        if it reads <code>jcr:createdBy</code> directly from Publish. On Publish, content is 
+        created by the distribution mechanism, so <code>jcr:createdBy</code> may reflect a 
+        system user such as the distribution service — corrupting any front-end that renders 
+        a byline, author card, or "written by" attribution.
       </p>
 
       <h3>Audit and Compliance Challenges</h3>
@@ -835,8 +838,8 @@ jcr:created    = <span class="jcr-val-warn">"2026-04-13T10:30:05.000Z"</span>   
 /content/mysite/en/homepage
   └── jcr:content  [cq:PageContent]
         ├── jcr:title           = <span class="jcr-val">"Homepage"</span>
-        ├── jcr:createdBy       = <span class="jcr-val-warn">"sling-distribution-importer"</span>   <span class="jcr-comment">← overwritten on Publish</span>
-        ├── jcr:lastModifiedBy  = <span class="jcr-val-warn">"sling-distribution-importer"</span>   <span class="jcr-comment">← overwritten on Publish</span>
+        ├── jcr:createdBy       = <span class="jcr-val-warn">"sling-distribution-importer"</span>   <span class="jcr-comment">← set by distribution mechanism on Publish</span>
+        ├── jcr:lastModifiedBy  = <span class="jcr-val-warn">"sling-distribution-importer"</span>   <span class="jcr-comment">← set by distribution mechanism on Publish</span>
         ├── cq:lastReplicatedBy = <span class="jcr-val-ok">"jane.smith@acme.com"</span>            <span class="jcr-comment">← survives intact</span>
         ├── <span style="color:#86efac;font-weight:700;">ww:createdBy</span>        = <span class="jcr-val-ok">"jane.smith@acme.com"</span>            <span class="jcr-comment">← custom, survives intact ✓</span>
         └── <span style="color:#86efac;font-weight:700;">ww:lastPublishedBy</span>  = <span class="jcr-val-ok">"jane.smith@acme.com"</span>            <span class="jcr-comment">← custom, survives intact ✓</span>
@@ -891,7 +894,7 @@ println "Migration complete."</code></pre>
         <p>
           Always run the migration script on the <strong>Author</strong> instance and then 
           re-publish the affected pages. Running it on Publish directly would backfill 
-          <code>sling-distribution-importer</code> — exactly the wrong value.
+          a system user reflecting the distribution mechanism — exactly the wrong value.
         </p>
       </div>
 
@@ -1258,9 +1261,10 @@ public class PageMetaModel {
         <li>
           <span>
             <strong>Reading <code>jcr:createdBy</code> on Publish in production APIs.</strong> 
-            This is the root mistake. Any headless endpoint, Sling Model, or GraphQL resolver 
-            that reads <code>jcr:createdBy</code> directly from the Publish JCR will always 
-            return the importer service user.
+            This is the root mistake. On Publish, content is created by the distribution mechanism, 
+            so <code>jcr:createdBy</code> may reflect a system user such as the distribution service 
+            — not the original content author. Any headless endpoint, Sling Model, or GraphQL 
+            resolver that reads it directly from the Publish JCR will return the wrong identity.
           </span>
         </li>
         <li>
@@ -1434,8 +1438,9 @@ public class PageMetaModel {
           <span class="faq-icon">+</span>
         </div>
         <div class="faq-a">
-          On re-creation, <code>jcr:createdBy</code> is reset to <code>sling-distribution-importer</code> 
-          again. Your custom <code>ww:createdBy</code> property will survive because it travels 
+          On re-creation, <code>jcr:createdBy</code> will again reflect the distribution 
+          mechanism's service user, since the node is created fresh in the Publish repository. 
+          Your custom <code>ww:createdBy</code> property will survive because it travels 
           in the distribution package from Author each time. This is another argument in favour 
           of the custom property approach — it is resilient to full re-imports.
         </div>
