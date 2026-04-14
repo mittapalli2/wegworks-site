@@ -3,7 +3,7 @@
    Shared CSS for all pages - Header, Footer, Navigation, Typography, Variables
    ========================================================================== */
 
-/* CSS Variables */
+/* CSS Variables — Dark (default) */
 :root {
   --bg-primary: #000000;
   --bg-secondary: #0a0a0a;
@@ -17,6 +17,37 @@
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glow-primary: 0 0 40px rgba(134, 188, 37, 0.25);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --code-bg: #1e1e1e;
+  --code-border: #333;
+  --code-text: #d4d4d4;
+}
+
+/* CSS Variables — Light */
+[data-theme="light"] {
+  --bg-primary: #f5f5f0;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #ebebe6;
+  --text-primary: #0a0a0a;
+  --text-secondary: #3f3f46;
+  --text-muted: #71717a;
+  --accent-primary: #5c8a10;
+  --accent-light: #6a9a1e;
+  --accent-gradient: linear-gradient(135deg, #5c8a10 0%, #4a7209 100%);
+  --glass-bg: rgba(0, 0, 0, 0.03);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glow-primary: 0 0 40px rgba(92, 138, 16, 0.2);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --code-bg: #f0f0ec;
+  --code-border: #d4d4d0;
+  --code-text: #1a1a1a;
+}
+
+/* Smooth theme transition on all elements */
+*, *::before, *::after {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
 /* Reset & Base */
@@ -220,6 +251,69 @@ main {
   right: -80px;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.025), transparent 60%);
 }
+
+/* ==========================================================================
+   Theme Toggle Button
+   ========================================================================== */
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  cursor: pointer;
+  color: var(--text-primary);
+  flex-shrink: 0;
+  transition: border-color 0.3s, background 0.3s, transform 0.2s;
+  padding: 0;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent-primary);
+  background: rgba(134, 188, 37, 0.08);
+  transform: rotate(15deg);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--text-primary);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* Show sun icon in dark mode, moon icon in light mode */
+.theme-toggle .icon-sun  { display: none; }
+.theme-toggle .icon-moon { display: block; }
+
+[data-theme="light"] .theme-toggle .icon-sun  { display: block; }
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+/* Light mode header overrides */
+[data-theme="light"] .site-header.scrolled,
+[data-theme="light"] .site-header.header-solid {
+  background: rgba(245, 245, 240, 0.92);
+}
+
+[data-theme="light"] .nav-links a { color: var(--text-primary); }
+[data-theme="light"] .brand-text  { color: var(--text-primary); }
+
+[data-theme="light"] .dropdown-menu {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: var(--glass-border);
+}
+
+[data-theme="light"] .dropdown-menu a { color: var(--text-primary); }
+
+[data-theme="light"] .mobile-menu { background: var(--bg-primary); }
+[data-theme="light"] .mobile-menu a { color: var(--text-primary); }
 
 /* ==========================================================================
    Header & Navigation
