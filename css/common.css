@@ -297,24 +297,120 @@ main {
 [data-theme="light"] .theme-toggle .icon-sun  { display: block; }
 [data-theme="light"] .theme-toggle .icon-moon { display: none; }
 
-/* Light mode header overrides */
-[data-theme="light"] .site-header.scrolled,
-[data-theme="light"] .site-header.header-solid {
-  background: rgba(245, 245, 240, 0.92);
+/* ==========================================================================
+   Light Mode Overrides
+   ========================================================================== */
+
+/* Page background & base text */
+[data-theme="light"] body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
-[data-theme="light"] .nav-links a { color: var(--text-primary); }
-[data-theme="light"] .brand-text  { color: var(--text-primary); }
+/* Background grid — use dark lines instead of white */
+[data-theme="light"] .bg-grid {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+
+/* Hide decorative orbs/glows in light mode — they look wrong */
+[data-theme="light"] .floating-orb,
+[data-theme="light"] .edge-glow,
+[data-theme="light"] .corner-glow {
+  opacity: 0;
+}
+
+/* Header / Nav */
+[data-theme="light"] .site-header,
+[data-theme="light"] .site-header.scrolled,
+[data-theme="light"] .site-header.header-solid {
+  background: rgba(245, 245, 240, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+[data-theme="light"] .brand-text        { color: var(--text-primary); }
+[data-theme="light"] .nav-links a       { color: var(--text-primary); }
+[data-theme="light"] .nav-cta           { color: var(--accent-primary); border-color: var(--accent-primary); }
+[data-theme="light"] .mobile-toggle     { color: var(--text-primary); }
 
 [data-theme="light"] .dropdown-menu {
   background: rgba(255, 255, 255, 0.98);
   border-color: var(--glass-border);
 }
-
 [data-theme="light"] .dropdown-menu a { color: var(--text-primary); }
 
-[data-theme="light"] .mobile-menu { background: var(--bg-primary); }
-[data-theme="light"] .mobile-menu a { color: var(--text-primary); }
+[data-theme="light"] .mobile-menu     { background: var(--bg-primary); }
+[data-theme="light"] .mobile-menu a   { color: var(--text-primary); }
+
+/* Breadcrumbs */
+[data-theme="light"] .breadcrumb a,
+[data-theme="light"] .breadcrumb .separator,
+[data-theme="light"] .breadcrumb .current { color: var(--text-secondary); }
+
+/* All headings and body text */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6  { color: var(--text-primary); }
+
+[data-theme="light"] p   { color: var(--text-secondary); }
+
+/* Hero / page intro sections */
+[data-theme="light"] .hero-description,
+[data-theme="light"] .page-subtitle,
+[data-theme="light"] .section-subtitle { color: var(--text-secondary); }
+
+/* Glass cards */
+[data-theme="light"] .glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--glass-border);
+}
+
+/* Callout & CTA boxes */
+[data-theme="light"] .callout {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: var(--glass-border);
+}
+[data-theme="light"] .cta-box {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: var(--glass-border);
+}
+
+/* Back link */
+[data-theme="light"] .back-link {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+}
+
+/* Keyword tags */
+[data-theme="light"] .keyword-tags span {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: var(--glass-border);
+  color: var(--text-secondary);
+}
+
+/* Footer */
+[data-theme="light"] .footer,
+[data-theme="light"] .footer-simple {
+  background: var(--bg-secondary);
+  border-top-color: var(--glass-border);
+}
+[data-theme="light"] .footer-links a   { color: var(--text-secondary); }
+[data-theme="light"] .footer-bottom    { color: var(--text-muted); }
+[data-theme="light"] .footer-brand p   { color: var(--text-secondary); }
+
+/* Code blocks — keep dark in light mode for readability */
+[data-theme="light"] .code-block,
+[data-theme="light"] pre { background: #1e1e1e; border-color: #444; }
+[data-theme="light"] code { background: rgba(0,0,0,0.07); color: #c0392b; }
+
+/* Tables */
+[data-theme="light"] th  { background: var(--bg-tertiary); color: var(--text-primary); }
+[data-theme="light"] td  { color: var(--text-secondary); border-bottom-color: var(--glass-border); }
 
 /* ==========================================================================
    Header & Navigation
