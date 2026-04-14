@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9VH11ZH9Y4');
+</script>
+
+<title>Why jcr:createdBy Shows Distribution Service on AEM Cloud Publish | WegWorks</title>
+<meta name="description" content="Technical deep-dive for AEM architects and developers: why jcr:createdBy shows sling-distribution-importer on AEM Cloud Publish, the architectural reasons behind it, and how to build a reliable custom authorship solution."/>
+<meta name="keywords" content="AEM Cloud jcr:createdBy, sling content distribution, AEM Publish behavior, AEM metadata issue, AEM headless API, AEM architecture, AEMaaCS, sling-distribution-importer, AEM Cloud Service, jcr protected property, AEM authorship, WegWorks"/>
+<meta name="author" content="WegWorks"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.wegworks.com/blog/aem/aem-page-created-by-sling-distribution/"/>
+<link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.wegworks.com/blog/aem/aem-page-created-by-sling-distribution/"/>
+<meta property="og:site_name" content="WegWorks"/>
+<meta property="og:title" content="Why jcr:createdBy Shows Distribution Service on AEM Cloud Publish"/>
+<meta property="og:description" content="Architectural deep-dive into why AEM Cloud Publish replaces the real author in jcr:createdBy with sling-distribution-importer — and the right fix for headless APIs."/>
+<meta property="og:image" content="https://www.wegworks.com/images/blog/replication-aem-cloud.png"/>
+<meta property="article:published_time" content="2026-04-13"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@Wegworks_"/>
+<meta name="twitter:title" content="Why jcr:createdBy Shows Distribution Service on AEM Cloud Publish"/>
+<meta name="twitter:description" content="Architectural deep-dive: why AEM Cloud Publish overwrites jcr:createdBy with sling-distribution-importer and the right fix for headless APIs."/>
+<meta name="twitter:image" content="https://www.wegworks.com/images/blog/replication-aem-cloud.png"/>
+
+<!-- Schema.org TechArticle -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.wegworks.com/blog/aem/aem-page-created-by-sling-distribution/"
+  },
+  "url": "https://www.wegworks.com/blog/aem/aem-page-created-by-sling-distribution/",
+  "headline": "Why jcr:createdBy Shows Distribution Service on AEM Cloud Publish",
+  "description": "Technical deep-dive for AEM architects explaining why jcr:createdBy shows sling-distribution-importer on AEM Cloud Publish, and how to build a custom authorship solution.",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://www.wegworks.com/images/blog/replication-aem-cloud.png",
+    "width": 1558,
+    "height": 362
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "WegWorks",
+    "url": "https://www.wegworks.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "WegWorks",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.wegworks.com/images/blog/logowhite.png",
+      "width": 150,
+      "height": 40
+    }
+  },
+  "datePublished": "2026-04-13",
+  "dateModified": "2026-04-13",
+  "proficiencyLevel": "Expert",
+  "keywords": "AEM Cloud, jcr:createdBy, Sling Content Distribution, AEM Publish behavior, AEM metadata issue, AEM headless API, AEM architecture, sling-distribution-importer, JCR protected properties"
+}
+</script>
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wegworks.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.wegworks.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "AEM", "item": "https://www.wegworks.com/blog/aem/"},
+    {"@type": "ListItem", "position": 4, "name": "AEM jcr:createdBy Sling Distribution", "item": "https://www.wegworks.com/blog/aem/aem-page-created-by-sling-distribution/"}
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does AEM Cloud change jcr:createdBy after publishing a page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, but not by modifying the existing value. AEM Cloud treats the incoming content as a brand-new node being created in the Publish JCR repository. The repository sets jcr:createdBy itself using the active session at import time, which is always the sling-distribution-importer service user. The Author value remains intact on Author — it simply never reaches Publish because protected JCR properties are excluded from distribution packages by design."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is jcr:createdBy showing sling-distribution-importer a bug in AEM Cloud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It is expected behavior rooted in the JCR 2.0 specification. jcr:createdBy is a protected property set by the repository at node-creation time. On Publish, the distribution importer creates the node under its own service session, so the repository records that service user as the creator. This is not a defect in AEM's implementation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will Adobe fix this or provide a built-in solution?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Unlikely, because it would require violating the JCR specification. Adobe cannot make the repository override protected properties during package import without breaking the spec guarantee. The recommended pattern — storing authorship in a custom non-protected property — is the architecturally correct solution."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this behavior exist in AEM 6.5 / AMS as well?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The same behavior occurs in AEM 6.5 and Managed Services using classic replication. The replication transport user (e.g., replication-receiver) becomes jcr:createdBy on Publish instead of the original author. The service user name differs but the root cause and solution are identical."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why doesn't the original author identity transfer with the distribution package?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Protected JCR properties (jcr:createdBy, jcr:created, jcr:lastModifiedBy) are explicitly excluded from distribution package imports. Even if the serialized package contains these values, the destination repository ignores them and writes its own values based on the active session."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the recommended approach to track page authorship on Publish?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Store the original author in a custom, non-protected property (e.g., ww:createdBy) on the jcr:content node at page creation time on Author — using a ResourceChangeListener or workflow step. Because this is not a protected property, it travels intact through the distribution pipeline and is available on Publish."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use cq:lastReplicatedBy as a substitute?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "cq:lastReplicatedBy records who triggered the most recent publish action and survives distribution intact. It is a reliable built-in substitute for publisher identity and requires no custom code. However, it captures the publisher — not necessarily the original page creator. For proper creator attribution, a custom immutable property is more reliable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if a page is deleted and recreated on Publish during a full content re-import?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On re-creation, jcr:createdBy is reset to sling-distribution-importer again. However, the custom ww:createdBy property will survive because it travels in the distribution package from Author each time. This is another reason to prefer the custom property approach — it is resilient to full re-imports."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #86bc25;
+  --accent-light: #a4d44a;
+  --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --blue: #60a5fa;
+  --yellow: #fbbf24;
+  --red: #f87171;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100vw; overflow-x: hidden; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
+.container { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ── Header / Nav ── */
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10,10,15,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.brand img { height: 42px; width: auto; }
+.brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #fff; letter-spacing: .08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
+.brand-text span { font-size: .7rem; color: var(--accent-primary); letter-spacing: .15em; font-weight: 600; margin-top: 2px; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links > li { position: relative; }
+.nav-links a { color: #fff; text-decoration: none; font-weight: 600; transition: color .3s; }
+.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+.dropdown-arrow { font-size: .7rem; transition: transform .3s; }
+.nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18,18,26,.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all .3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0,0,0,.3); z-index: 100; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 20px; color: #fff; font-size: .9rem; }
+.dropdown-menu a:hover { background: rgba(255,255,255,.05); color: var(--accent-primary); }
+.nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; }
+.mobile-toggle { display: none; background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; padding: 8px; }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary); z-index: 999; padding: 100px 24px 24px; overflow-y: auto; }
+.mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.mobile-menu a { font-size: 1.2rem; color: #fff; text-decoration: none; font-weight: 600; }
+
+/* ── Article layout ── */
+.article-header { padding: 160px 0 40px; }
+.article-hero-image { margin: 0 auto 60px; max-width: 1200px; padding: 0 24px; }
+.article-hero-image img { width: 100%; height: 380px; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+.back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: .875rem; color: #fff; margin-bottom: 24px; text-decoration: none; }
+.article-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; font-size: .875rem; color: #fff; }
+.article-category { color: var(--accent-primary); font-weight: 600; text-decoration: none; }
+.article-header h1 { font-size: clamp(1.9rem, 5vw, 2.9rem); margin-bottom: 24px; }
+.article-intro { font-size: 1.2rem; color: #ddd; line-height: 1.75; }
+
+.article-content { padding: 60px 0 100px; }
+.article-content h2 { font-size: 1.7rem; margin: 56px 0 20px; padding-bottom: 12px; border-bottom: 1px solid var(--glass-border); }
+.article-content h3 { font-size: 1.3rem; margin: 36px 0 14px; color: var(--accent-light); }
+.article-content h4 { font-size: 1.05rem; margin: 24px 0 10px; color: #ccc; }
+.article-content p { margin-bottom: 20px; color: #ddd; line-height: 1.85; }
+.article-content ul, .article-content ol { margin: 16px 0 20px 24px; color: #ddd; }
+.article-content li { margin-bottom: 10px; line-height: 1.75; }
+.article-content strong { color: #fff; }
+.article-content a { color: var(--accent-primary); text-decoration: none; }
+.article-content a:hover { text-decoration: underline; }
+
+/* ── TOC ── */
+.toc { background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 16px; padding: 28px 32px; margin: 0 0 48px; }
+.toc h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; color: var(--accent-primary); margin-bottom: 16px; }
+.toc ol { margin: 0 0 0 20px; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: #ccc; text-decoration: none; font-size: .95rem; }
+.toc a:hover { color: var(--accent-primary); }
+
+/* ── Side-by-side comparison ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+.instance-card { background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 12px; padding: 24px; }
+.instance-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .14em; font-weight: 700; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--glass-border); }
+.instance-card.author .instance-label { color: var(--blue); }
+.instance-card.publish .instance-label { color: var(--yellow); }
+.prop-row { margin-bottom: 14px; }
+.prop-key { font-size: .78rem; color: var(--text-muted); font-family: 'SF Mono', Monaco, monospace; margin-bottom: 3px; }
+.prop-val { font-size: .88rem; font-family: 'SF Mono', Monaco, monospace; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+.prop-val.ok { color: #86efac; background: rgba(134,239,172,.08); }
+.prop-val.warn { color: var(--yellow); background: rgba(251,191,36,.08); }
+.prop-val.neutral { color: #c4b5fd; background: rgba(196,181,253,.08); }
+
+/* ── Architecture diagram ── */
+.arch-diagram { background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 16px; padding: 32px 24px; margin: 32px 0; }
+.arch-diagram-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .12em; color: var(--accent-primary); text-align: center; margin-bottom: 28px; font-weight: 700; }
+.arch-row { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; }
+.arch-node { background: var(--bg-tertiary); border: 1px solid var(--glass-border); border-radius: 10px; padding: 14px 20px; text-align: center; min-width: 120px; }
+.arch-node .node-icon { font-size: 1.6rem; margin-bottom: 6px; }
+.arch-node .node-label { font-size: .78rem; font-weight: 600; color: #fff; }
+.arch-node .node-sub { font-size: .68rem; color: var(--text-muted); margin-top: 3px; }
+.arch-node.highlight { border-color: var(--accent-primary); }
+.arch-node.highlight .node-label { color: var(--accent-primary); }
+.arch-node.warn-node { border-color: var(--yellow); }
+.arch-node.warn-node .node-label { color: var(--yellow); }
+.arch-arrow { color: var(--accent-primary); font-size: 1.2rem; padding: 0 10px; display: flex; align-items: center; }
+.arch-note { text-align: center; font-size: .8rem; color: var(--text-muted); margin-top: 18px; }
+.arch-note span { color: var(--yellow); font-weight: 600; }
+
+/* ── Callouts ── */
+.callout { padding: 20px 24px; border-radius: 12px; margin: 28px 0; border-left: 4px solid; }
+.callout-title { font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; font-size: .95rem; }
+.callout p, .callout ul { margin: 0; color: #ddd; }
+.callout ul { margin-top: 8px; padding-left: 20px; }
+.callout li { margin-bottom: 6px; }
+
+.callout-info { background: rgba(96,165,250,.07); border-color: var(--blue); }
+.callout-info .callout-title { color: var(--blue); }
+.callout-warning { background: rgba(251,191,36,.07); border-color: var(--yellow); }
+.callout-warning .callout-title { color: var(--yellow); }
+.callout-danger { background: rgba(248,113,113,.07); border-color: var(--red); }
+.callout-danger .callout-title { color: var(--red); }
+.callout-success { background: rgba(134,188,37,.07); border-color: var(--accent-primary); }
+.callout-success .callout-title { color: var(--accent-primary); }
+
+/* ── Tables ── */
+.data-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: .9rem; }
+.data-table th { background: var(--bg-tertiary); color: #fff; font-weight: 600; padding: 14px 18px; text-align: left; border-bottom: 2px solid var(--glass-border); }
+.data-table td { padding: 13px 18px; border-bottom: 1px solid var(--glass-border); color: #ddd; vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table .col-key { color: #fff; font-weight: 600; font-family: 'SF Mono', Monaco, monospace; font-size: .85rem; }
+.data-table .badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: .75rem; font-weight: 600; }
+.badge-yes { background: rgba(134,188,37,.15); color: var(--accent-primary); }
+.badge-no { background: rgba(248,113,113,.15); color: var(--red); }
+.badge-custom { background: rgba(96,165,250,.15); color: var(--blue); }
+table { display: block; overflow-x: auto; max-width: 100%; }
+
+/* ── Code ── */
+code { font-family: 'SF Mono', Monaco, Consolas, monospace; background: rgba(255,255,255,.08); padding: 2px 7px; border-radius: 4px; font-size: .84em; color: #e06c75; }
+pre { background: #0d1117; border: 1px solid #30363d; border-radius: 12px; overflow-x: auto; margin: 24px 0; box-shadow: 0 4px 20px rgba(0,0,0,.35); }
+.pre-header { background: #161b22; padding: 10px 18px; border-bottom: 1px solid #30363d; border-radius: 12px 12px 0 0; display: flex; align-items: center; justify-content: space-between; }
+.pre-lang { font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: #8b949e; font-weight: 600; }
+.pre-dots { display: flex; gap: 6px; }
+.pre-dots span { width: 10px; height: 10px; border-radius: 50%; }
+.dot-r { background: #ff5f56; }
+.dot-y { background: #ffbd2e; }
+.dot-g { background: #27ca40; }
+pre code { display: block; padding: 20px; background: none; font-size: .875rem; line-height: 1.75; color: #e6edf3; white-space: pre; overflow-x: auto; border-radius: 0; }
+.token-comment { color: #8b949e; font-style: italic; }
+.token-keyword { color: #ff7b72; }
+.token-string { color: #a5d6ff; }
+.token-annotation { color: #d2a8ff; }
+.token-type { color: #79c0ff; }
+.token-method { color: #d2a8ff; }
+
+/* ── JCR structure ── */
+.jcr-tree { background: #0d1117; border: 1px solid #30363d; border-radius: 12px; padding: 24px; margin: 24px 0; font-family: 'SF Mono', Monaco, monospace; font-size: .855rem; line-height: 1.9; color: #e6edf3; overflow-x: auto; }
+.jcr-node { color: #79c0ff; }
+.jcr-prop { color: #a5d6ff; }
+.jcr-val { color: #a5d6ff; }
+.jcr-val-warn { color: var(--yellow); }
+.jcr-val-ok { color: #86efac; }
+.jcr-comment { color: #8b949e; font-style: italic; }
+
+/* ── Pitfalls ── */
+.pitfall-list { list-style: none; margin: 16px 0; padding: 0; }
+.pitfall-list li { display: flex; gap: 14px; padding: 16px; background: rgba(248,113,113,.05); border: 1px solid rgba(248,113,113,.2); border-radius: 10px; margin-bottom: 12px; }
+.pitfall-list li::before { content: '✗'; color: var(--red); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.pitfall-list li span { color: #ddd; line-height: 1.65; }
+
+/* ── Dos / Donts ── */
+.dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+.dos-box, .donts-box { background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 12px; padding: 24px; }
+.dos-box { border-top: 3px solid var(--accent-primary); }
+.donts-box { border-top: 3px solid var(--red); }
+.dos-box h4 { color: var(--accent-primary); margin-bottom: 16px; }
+.donts-box h4 { color: var(--red); margin-bottom: 16px; }
+.check-list { list-style: none; padding: 0; margin: 0; }
+.check-list li { padding: 6px 0; border-bottom: 1px solid var(--glass-border); color: #ddd; font-size: .92rem; line-height: 1.6; display: flex; gap: 10px; }
+.check-list li:last-child { border-bottom: none; }
+.check-list.do li::before { content: '✓'; color: var(--accent-primary); font-weight: 700; flex-shrink: 0; }
+.check-list.dont li::before { content: '✗'; color: var(--red); font-weight: 700; flex-shrink: 0; }
+
+/* ── Takeaways ── */
+.takeaway-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 28px 0; }
+.takeaway-card { background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 12px; padding: 20px; }
+.takeaway-card .tk-num { font-size: 1.8rem; font-weight: 800; color: var(--accent-primary); font-family: 'Syne', sans-serif; line-height: 1; margin-bottom: 10px; }
+.takeaway-card p { font-size: .88rem; color: #ccc; margin: 0; line-height: 1.6; }
+
+/* ── FAQ ── */
+.faq-item { border: 1px solid var(--glass-border); border-radius: 12px; margin-bottom: 14px; overflow: hidden; }
+.faq-q { padding: 18px 22px; font-weight: 600; color: #fff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: .95rem; }
+.faq-q:hover { background: var(--glass-bg); }
+.faq-icon { color: var(--accent-primary); font-size: 1.2rem; }
+.faq-a { padding: 0 22px 18px; color: #ccc; font-size: .92rem; line-height: 1.75; display: none; }
+.faq-item.open .faq-a { display: block; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-icon { transition: transform .25s; }
+
+/* ── CTA / Keywords / Footer ── */
+.keywords-section { margin-top: 60px; padding-top: 36px; border-top: 1px solid var(--glass-border); }
+.keywords-section h4 { font-size: .8rem; color: #fff; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 14px; }
+.keyword-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.keyword-tags span { padding: 5px 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: .78rem; color: #ccc; }
+.cta-box { padding: 48px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; text-align: center; margin-top: 60px; }
+.cta-box h3 { font-size: 1.45rem; margin-bottom: 14px; }
+.cta-box p { color: #ccc; margin-bottom: 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-weight: 600; border-radius: 12px; text-decoration: none; }
+.btn-primary { background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); }
+.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
+.footer p { color: #888; }
+.footer a { color: var(--accent-primary); text-decoration: none; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
+  .article-header { padding: 120px 0 40px; }
+  .two-col, .dos-donts { grid-template-columns: 1fr; }
+  .arch-row { gap: 8px; }
+}
+@media (max-width: 768px) {
+  .article-hero-image img { height: 220px; }
+  .nav, .nav-links, .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
+  .toc { padding: 20px; }
+}
+img { max-width: 100%; height: auto; }
+</style>
+<link rel="stylesheet" href="/css/common.min.css">
+</head>
+
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="site-header">
+  <nav class="nav-wrapper">
+    <a class="brand" href="/"><img loading="eager" src="https://www.wegworks.com/images/logo-white-green-ww.svg" alt="WegWorks" width="150" height="40"/><div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div></a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="/services/">Services <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/services/adobe-analytics/">Adobe Analytics</a>
+          <a href="/services/segment-cdp/">Segment CDP</a>
+          <a href="/services/salesforce/">Salesforce</a>
+          <a href="/services/marketing-automation/">Marketing Automation</a>
+          <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
+          <a href="/small-business/" style="border-top:1px solid rgba(255,255,255,.1);margin-top:8px;padding-top:16px;">Small Business Solutions</a>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="/blog/">Blog <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown-menu">
+          <a href="/blog/adobe-analytics/">Adobe Analytics</a>
+          <a href="/blog/adobe-experience-platform/">Adobe Experience Platform</a>
+          <a href="/blog/adobe-target/">Adobe Target</a>
+          <a href="/blog/aem/">AEM</a>
+          <a href="/blog/google-analytics-4/">Google Analytics 4</a>
+          <a href="/blog/marketing-automation/">Marketing Automation</a>
+          <a href="/blog/salesforce/">Salesforce</a>
+          <a href="/blog/segment-cdp/">Segment CDP</a>
+        </div>
+      </li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="/contact/">Get Started</a>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Home</a>
+  <a href="/services/">Services</a>
+  <a href="/blog/">Blog</a>
+  <a href="/blog/adobe-analytics/">→ Adobe Analytics</a>
+  <a href="/blog/adobe-experience-platform/">→ Adobe Experience Platform</a>
+  <a href="/blog/adobe-target/">→ Adobe Target</a>
+  <a href="/blog/aem/">→ AEM</a>
+  <a href="/blog/google-analytics-4/">→ Google Analytics 4</a>
+  <a href="/blog/segment-cdp/">→ Segment CDP</a>
+  <a href="/about/">About</a>
+  <a href="/contact/">Contact</a>
+</div>
+
+<!-- ═══════════════ ARTICLE ═══════════════ -->
+<article>
+
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="/blog/aem/">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        AEM
+      </a>
+      <div class="article-meta">
+        <a class="article-category" href="/blog/aem/">AEM Cloud</a>
+        <span>April 13, 2026</span>
+        <span>18 min read</span>
+      </div>
+      <h1>Why <code style="font-size:0.75em;background:rgba(255,255,255,0.08);padding:4px 12px;border-radius:6px;color:#e06c75;">jcr:createdBy</code> Shows Distribution Service on AEM Cloud Publish</h1>
+      <p class="article-intro">
+        Your content authors create pages on AEM Author and the <code>jcr:createdBy</code> correctly 
+        reflects their identity. But once a page is published, the same property on the Publish 
+        tier reads <strong>sling-distribution-importer</strong>. This post explains exactly why 
+        this happens, what it means for your headless APIs and audit workflows, and the 
+        right engineering pattern to fix it.
+      </p>
+    </div>
+  </header>
+
+  <div class="article-hero-image">
+    <img loading="eager" src="https://www.wegworks.com/images/blog/replication-aem-cloud.png" alt="AEM Cloud Service Content Distribution Architecture" width="1558" height="362" onerror="this.style.display='none'"/>
+  </div>
+
+  <div class="article-content">
+    <div class="container">
+
+      <!-- TOC -->
+      <nav class="toc" aria-label="Table of contents">
+        <h4>In This Article</h4>
+        <ol>
+          <li><a href="#intro">The Problem</a></li>
+          <li><a href="#how-publishing-works">How Publishing Works in AEM Cloud</a></li>
+          <li><a href="#why-it-changes">Why <code>jcr:createdBy</code> Changes on Publish</a></li>
+          <li><a href="#headless-impact">Impact on Headless APIs and Reporting</a></li>
+          <li><a href="#solution">Recommended Solution: Custom Authorship Property</a></li>
+          <li><a href="#implementation">Implementation: ResourceChangeListener &amp; Workflow</a></li>
+          <li><a href="#sling-model">Sling Model &amp; JSON Exporter Update</a></li>
+          <li><a href="#pitfalls">Common Pitfalls</a></li>
+          <li><a href="#takeaways">Key Takeaways — Do's and Don'ts</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ol>
+      </nav>
+
+
+      <!-- ─── 1. INTRODUCTION ─── -->
+      <h2 id="intro">1. The Problem</h2>
+
+      <p>
+        Imagine a team building a headless API on top of AEM Cloud Service. They expose page 
+        metadata — title, tags, creation date, and creator — through a Sling Model backed by 
+        a JSON exporter. On the Author preview everything looks correct: <code>jcr:createdBy</code> 
+        shows <em>jane.smith@acme.com</em>.
+      </p>
+
+      <p>
+        Then they test the same endpoint on Publish. The creator field reads 
+        <strong>sling-distribution-importer</strong>. Support tickets open. The team suspects 
+        a bug in their code. Debugging begins.
+      </p>
+
+      <p>There is no bug. This is how AEM Cloud Service works — by design.</p>
+
+      <p>The following side-by-side illustrates the discrepancy:</p>
+
+      <div class="two-col">
+        <div class="instance-card author">
+          <div class="instance-label">✦ Author Instance — CRXDE</div>
+          <div class="prop-row">
+            <div class="prop-key">jcr:primaryType</div>
+            <div><span class="prop-val neutral">cq:PageContent</span></div>
+          </div>
+          <div class="prop-row">
+            <div class="prop-key">jcr:createdBy</div>
+            <div><span class="prop-val ok">jane.smith@acme.com</span></div>
+          </div>
+          <div class="prop-row">
+            <div class="prop-key">jcr:lastModifiedBy</div>
+            <div><span class="prop-val ok">jane.smith@acme.com</span></div>
+          </div>
+          <div class="prop-row">
+            <div class="prop-key">cq:lastReplicatedBy</div>
+            <div><span class="prop-val ok">jane.smith@acme.com</span></div>
+          </div>
+          <div class="prop-row">
+            <div class="prop-key">cq:lastReplicated</div>
+            <div><span class="prop-val neutral">2026-04-13T10:30Z</span></div>
+          </div>
+        </div>
+        <div class="instance-card publish">
+          <div class="instance-label">⚠ Publish Instance — CRXDE</div>
+          <div class="prop-row">
+            <div class="prop-key">jcr:primaryType</div>
+            <div><span class="prop-val neutral">cq:PageContent</span></div>
+          </div>
+          <div class="prop-row">
+            <div class="prop-key">jcr:createdBy</div>
+            <div><span class="prop-val warn">sling-distribution-importer</span></div>
+          </div>
+          <div class="prop-row">
+            <div class="prop-key">jcr:lastModifiedBy</div>
+            <div><span class="prop-val warn">sling-distribution-importer</span></div>
+          </div>
+          <div class="prop-row">
+            <div class="prop-key">cq:lastReplicatedBy</div>
+            <div><span class="prop-val ok">jane.smith@acme.com</span></div>
+          </div>
+          <div class="prop-row">
+            <div class="prop-key">cq:lastReplicated</div>
+            <div><span class="prop-val neutral">2026-04-13T10:30Z</span></div>
+          </div>
+        </div>
+      </div>
+
+      <p>
+        Notice that <code>cq:lastReplicatedBy</code> is intact — it correctly records who 
+        triggered the publish action. Only the JCR-managed properties (<code>jcr:createdBy</code> 
+        and <code>jcr:lastModifiedBy</code>) differ. Understanding why requires a quick look at 
+        the AEM Cloud publishing pipeline.
+      </p>
+
+
+      <!-- ─── 2. HOW PUBLISHING WORKS ─── -->
+      <h2 id="how-publishing-works">2. How Publishing Works in AEM Cloud</h2>
+
+      <h3>Legacy AEM 6.5 / AMS — Classic Replication</h3>
+      <p>
+        In AEM 6.5 and Managed Services, content is moved from Author to Publish through 
+        <strong>replication agents</strong>. An agent opens an HTTP connection directly to a 
+        specific Publish instance, serialises the content into a package, and POSTs it. The 
+        Publish instance unpacks the content using a configured replication-receiver service user. 
+        The same root cause applies here — that service user becomes <code>jcr:createdBy</code> 
+        on Publish — but the behaviour is less visible because teams rarely inspect CRXDE on Publish.
+      </p>
+
+      <h3>AEM as a Cloud Service — Sling Content Distribution</h3>
+      <p>
+        AEMaaCS replaces replication agents entirely with <strong>Sling Content Distribution 
+        (SCD)</strong>. The architecture is fundamentally different:
+      </p>
+
+      <div class="arch-diagram">
+        <div class="arch-diagram-title">AEM Cloud — Content Distribution Pipeline</div>
+        <div class="arch-row">
+          <div class="arch-node highlight">
+            <div class="node-icon">✍️</div>
+            <div class="node-label">Author</div>
+            <div class="node-sub">jcr:createdBy = real user</div>
+          </div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node">
+            <div class="node-icon">📦</div>
+            <div class="node-label">SCD Queue</div>
+            <div class="node-sub">Binary package</div>
+          </div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node">
+            <div class="node-icon">☁️</div>
+            <div class="node-label">Adobe Pipeline</div>
+            <div class="node-sub">Managed by Adobe</div>
+          </div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node warn-node">
+            <div class="node-icon">🌐</div>
+            <div class="node-label">Publish Pod(s)</div>
+            <div class="node-sub">Node created by importer</div>
+          </div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node">
+            <div class="node-icon">⚡</div>
+            <div class="node-label">CDN / Fastly</div>
+            <div class="node-sub">Auto-invalidated</div>
+          </div>
+        </div>
+        <div class="arch-note">
+          <span>★</span> At the Publish Pod, the binary package is applied by the 
+          <code>sling-distribution-importer</code> service session — not the original author's session.
+        </div>
+      </div>
+
+      <p>Key architectural properties of SCD that matter here:</p>
+
+      <ul>
+        <li><strong>Stateless pipeline:</strong> The distribution pipeline is managed entirely by Adobe outside the AEM runtime. There is no persistent HTTP connection between Author and Publish like in classic replication.</li>
+        <li><strong>Publish-pod auto-scaling:</strong> Publish pods can be added or removed dynamically. There is no per-instance agent to configure; all pods subscribe to the same distribution queue.</li>
+        <li><strong>Binary package import:</strong> Content is serialized into a distribution package (Apache Jackrabbit Vault format) on Author and deserialized on Publish by a dedicated service user. The active session on Publish at import time is <code>sling-distribution-importer</code>.</li>
+        <li><strong>Out-of-runtime execution:</strong> The serialization and pipeline handoff happens outside the normal AEM request cycle — there is no author user session in scope on the Publish side.</li>
+      </ul>
+
+      <div class="callout callout-info">
+        <div class="callout-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          Push vs Pull
+        </div>
+        <p>
+          In AEM 6.5, Author <em>pushes</em> to Publish via HTTP. In AEM Cloud, Publish 
+          <em>pulls</em> packages from a queue. This inversion is why author session context 
+          is fundamentally unavailable on the Publish side during import.
+        </p>
+      </div>
+
+
+      <!-- ─── 3. WHY jcr:createdBy CHANGES ─── -->
+      <h2 id="why-it-changes">3. Why <code>jcr:createdBy</code> Changes on Publish</h2>
+
+      <h3>JCR Protected Properties — The Specification</h3>
+      <p>
+        The JCR 2.0 specification (JSR-283) defines a category of <strong>protected properties</strong>. 
+        These properties are managed exclusively by the repository implementation and cannot be set, 
+        modified, or overridden by application code or imported content. The relevant protected 
+        properties in AEM are:
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>Property</th><th>Type</th><th>Set By</th><th>Writable by App?</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-key">jcr:created</td>
+            <td>Date</td>
+            <td>Repository at node creation</td>
+            <td><span class="badge badge-no">No</span></td>
+          </tr>
+          <tr>
+            <td class="col-key">jcr:createdBy</td>
+            <td>String</td>
+            <td>Repository at node creation (session user)</td>
+            <td><span class="badge badge-no">No</span></td>
+          </tr>
+          <tr>
+            <td class="col-key">jcr:lastModified</td>
+            <td>Date</td>
+            <td>Repository on every save</td>
+            <td><span class="badge badge-no">No</span></td>
+          </tr>
+          <tr>
+            <td class="col-key">jcr:lastModifiedBy</td>
+            <td>String</td>
+            <td>Repository on every save (session user)</td>
+            <td><span class="badge badge-no">No</span></td>
+          </tr>
+          <tr>
+            <td class="col-key">cq:lastReplicatedBy</td>
+            <td>String</td>
+            <td>AEM replication layer (before distribution)</td>
+            <td><span class="badge badge-yes">Yes</span></td>
+          </tr>
+          <tr>
+            <td class="col-key">cq:lastReplicated</td>
+            <td>Date</td>
+            <td>AEM replication layer</td>
+            <td><span class="badge badge-yes">Yes</span></td>
+          </tr>
+          <tr>
+            <td class="col-key">custom:createdBy</td>
+            <td>String</td>
+            <td>Your application code</td>
+            <td><span class="badge badge-custom">Custom</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>What Happens During Package Import</h3>
+      <p>
+        When the distribution package arrives at a Publish pod, the 
+        <code>sling-distribution-importer</code> service user session calls 
+        <code>Node.addNode()</code> (or equivalent) for each node in the package. 
+        At that moment the JCR repository on Publish sets:
+      </p>
+
+      <div class="jcr-tree">
+<span class="jcr-comment">// Set automatically by the repository — cannot be overridden</span>
+jcr:createdBy  = <span class="jcr-val-warn">"sling-distribution-importer"</span>   <span class="jcr-comment">// active session user</span>
+jcr:created    = <span class="jcr-val-warn">"2026-04-13T10:30:05.000Z"</span>         <span class="jcr-comment">// time of import on Publish</span>
+
+<span class="jcr-comment">// Even if the package contained these values, the repository ignores them.</span>
+<span class="jcr-comment">// Protected properties in the incoming package are silently discarded.</span>
+      </div>
+
+      <p>
+        The distribution package <em>does</em> contain the original <code>jcr:createdBy</code> 
+        value from Author. However, protected properties are explicitly excluded from the import 
+        contract. The Apache Jackrabbit Oak importer will not apply them — it generates new 
+        values from the active session. This is not a gap in AEM's implementation; it is 
+        correct JCR-specification behaviour.
+      </p>
+
+      <h3>Why the Original User Context is Unavailable</h3>
+      <p>
+        In classic AEM 6.5 replication, there was at least a concept of a "replication user" 
+        whose credentials were explicitly configured in the agent. In AEM Cloud, the distribution 
+        pipeline is operated by Adobe infrastructure. By the time the package reaches the 
+        Publish pod:
+      </p>
+      <ul>
+        <li>The original author's browser session has long since closed.</li>
+        <li>There is no delegated user token or impersonation chain that spans Author → Pipeline → Publish.</li>
+        <li>The only session available on Publish during import is the <code>sling-distribution-importer</code> service session.</li>
+      </ul>
+
+      <div class="callout callout-warning">
+        <div class="callout-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Not Documented Explicitly by Adobe
+        </div>
+        <p>
+          As of the time of writing, Adobe's public documentation does not call this out 
+          explicitly as a named behaviour. It is an emergent consequence of the JCR specification 
+          combined with the SCD architecture. Teams typically discover it by inspecting CRXDE 
+          on Publish or by debugging headless API responses.
+        </p>
+      </div>
+
+
+      <!-- ─── 4. HEADLESS / API IMPACT ─── -->
+      <h2 id="headless-impact">4. Impact on Headless APIs and Reporting</h2>
+
+      <h3>JSON Exporters Returning Incorrect Creator</h3>
+      <p>
+        AEM's built-in Sling Model Exporter (and any custom JSON exporter backed by a 
+        <code>ValueMap</code> read on Publish) will return <code>sling-distribution-importer</code> 
+        if it reads <code>jcr:createdBy</code> directly. This corrupts any front-end that 
+        renders a byline, author card, or "written by" attribution.
+      </p>
+
+      <h3>Audit and Compliance Challenges</h3>
+      <p>
+        Organisations subject to content governance requirements (financial services, healthcare, 
+        publishing) often need to trace which human created a piece of content for audit purposes. 
+        If audit tooling queries Publish directly and reads <code>jcr:createdBy</code>, audit 
+        trails will show only the system user — making it impossible to identify the responsible 
+        author without cross-referencing the Author tier.
+      </p>
+
+      <h3>Personalisation and Ownership Workflows</h3>
+      <p>
+        Teams using <code>jcr:createdBy</code> to route content to an author's queue, build 
+        personalised dashboards, or send notifications will find that Publish-side queries 
+        return no meaningful results — everything appears owned by the distribution service.
+      </p>
+
+      <h3>Cross-Tier Reporting</h3>
+      <p>
+        Analytics pipelines or CMS reports that aggregate data from Publish instances will 
+        produce misleading creator distributions — thousands of pages attributed to a single 
+        system user.
+      </p>
+
+
+      <!-- ─── 5. SOLUTION ─── -->
+      <h2 id="solution">5. Recommended Solution: Custom Authorship Property</h2>
+
+      <p>
+        The only reliable way to preserve original authorship across the distribution boundary is 
+        to store it in a <strong>custom, non-protected JCR property</strong> on the 
+        <code>jcr:content</code> node <em>on Author</em>, before the content is distributed. 
+        Because this property is not protected, the distribution package preserves it and the 
+        Publish repository applies it as-is.
+      </p>
+
+      <h3>Choosing the Right Property Name</h3>
+      <p>
+        Use a namespaced property to avoid collisions with AEM's built-in namespace. Common 
+        conventions:
+      </p>
+      <ul>
+        <li><code>custom:createdBy</code> — explicit custom namespace</li>
+        <li><code>app:originalAuthor</code> — application-specific namespace</li>
+        <li><code>ww:createdBy</code> — vendor-prefixed (used in this guide)</li>
+      </ul>
+
+      <h3>Target JCR Structure</h3>
+
+      <div class="jcr-tree">
+/content/mysite/en/homepage
+  └── jcr:content  [cq:PageContent]
+        ├── jcr:title           = <span class="jcr-val">"Homepage"</span>
+        ├── jcr:createdBy       = <span class="jcr-val-warn">"sling-distribution-importer"</span>   <span class="jcr-comment">← overwritten on Publish</span>
+        ├── jcr:lastModifiedBy  = <span class="jcr-val-warn">"sling-distribution-importer"</span>   <span class="jcr-comment">← overwritten on Publish</span>
+        ├── cq:lastReplicatedBy = <span class="jcr-val-ok">"jane.smith@acme.com"</span>            <span class="jcr-comment">← survives intact</span>
+        ├── <span style="color:#86efac;font-weight:700;">ww:createdBy</span>        = <span class="jcr-val-ok">"jane.smith@acme.com"</span>            <span class="jcr-comment">← custom, survives intact ✓</span>
+        └── <span style="color:#86efac;font-weight:700;">ww:lastPublishedBy</span>  = <span class="jcr-val-ok">"jane.smith@acme.com"</span>            <span class="jcr-comment">← custom, survives intact ✓</span>
+      </div>
+
+      <h3>Immutability — Set Once, Never Overwrite</h3>
+      <p>
+        <code>ww:createdBy</code> should be written <strong>once</strong> at page creation 
+        time and never changed again. It represents the original author. 
+        <code>ww:lastPublishedBy</code> can be updated on every publish action.
+      </p>
+
+      <h3>Migration Strategy for Existing Content</h3>
+      <p>
+        For existing pages that don't yet have <code>ww:createdBy</code>, run a one-time 
+        content migration script on Author that backfills from <code>jcr:createdBy</code> 
+        (which is accurate on Author):
+      </p>
+
+      <div class="pre-header"><div class="pre-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="pre-lang">Groovy — AEM Groovy Console</span></div>
+<pre><code>import com.day.cq.wcm.api.Page
+import com.day.cq.wcm.api.PageManager
+
+def pm = resourceResolver.adaptTo(PageManager)
+def root = pm.getPage('/content/mysite')
+
+root.listChildren(null, true).each { Page page ->
+    def content = page.contentResource
+    if (content == null) return
+
+    def props = content.adaptTo(ModifiableValueMap)
+    if (props == null) return
+
+    // Only backfill if not already set
+    if (!props.containsKey('ww:createdBy')) {
+        def original = props.get('jcr:createdBy', String)
+        if (original) {
+            props.put('ww:createdBy', original)
+            println "Backfilled: ${page.path} → ${original}"
+        }
+    }
+}
+
+resourceResolver.commit()
+println "Migration complete."</code></pre>
+
+      <div class="callout callout-warning">
+        <div class="callout-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Run on Author Only
+        </div>
+        <p>
+          Always run the migration script on the <strong>Author</strong> instance and then 
+          re-publish the affected pages. Running it on Publish directly would backfill 
+          <code>sling-distribution-importer</code> — exactly the wrong value.
+        </p>
+      </div>
+
+
+      <!-- ─── 6. IMPLEMENTATION ─── -->
+      <h2 id="implementation">6. Implementation Approaches</h2>
+
+      <h3>Option A — ResourceChangeListener (Preferred for AEM Cloud)</h3>
+      <p>
+        Listen for node-added events under <code>/content</code> on Author. When a 
+        <code>jcr:content</code> node is first created, capture the creating user and write 
+        the custom property immediately. This fires synchronously in the same request cycle as 
+        page creation, so the author's session is readily available.
+      </p>
+
+      <div class="pre-header"><div class="pre-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="pre-lang">Java — OSGi Component</span></div>
+<pre><code>package com.acme.core.listeners;
+
+import org.apache.sling.api.resource.*;
+import org.apache.sling.spi.resource.provider.ResolveContext;
+import org.osgi.service.component.annotations.*;
+import org.osgi.service.event.Event;
+import org.osgi.service.event.EventHandler;
+import org.apache.jackrabbit.api.security.user.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.jcr.Session;
+import java.util.*;
+
+import static org.apache.sling.api.resource.observation.ResourceChangeListener.*;
+
+@Component(
+    service = { EventHandler.class },
+    immediate = true,
+    property = {
+        "event.topics=org/apache/sling/api/resource/Resource/ADDED",
+        "event.filter=(path=/content/**/jcr:content)"
+    }
+)
+public class PageAuthorshipListener implements EventHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(PageAuthorshipListener.class);
+    private static final String CUSTOM_CREATED_BY = "ww:createdBy";
+
+    @Reference
+    private ResourceResolverFactory resolverFactory;
+
+    @Override
+    public void handleEvent(Event event) {
+        String path = (String) event.getProperty("path");
+        if (path == null || !path.endsWith("/jcr:content")) return;
+
+        Map<String, Object> authInfo = Collections.singletonMap(
+            ResourceResolverFactory.SUBSERVICE, "authorship-service"
+        );
+
+        try (ResourceResolver serviceResolver = resolverFactory.getServiceResourceResolver(authInfo)) {
+
+            Resource jcrContent = serviceResolver.getResource(path);
+            if (jcrContent == null) return;
+
+            ModifiableValueMap props = jcrContent.adaptTo(ModifiableValueMap.class);
+            if (props == null) return;
+
+            // Write only once — never overwrite the original author
+            if (!props.containsKey(CUSTOM_CREATED_BY)) {
+                // jcr:createdBy is accurate on Author at this point
+                String originalAuthor = props.get("jcr:createdBy", String.class);
+                if (originalAuthor != null && !originalAuthor.isBlank()) {
+                    props.put(CUSTOM_CREATED_BY, originalAuthor);
+                    serviceResolver.commit();
+                    log.debug("Set {} = {} on {}", CUSTOM_CREATED_BY, originalAuthor, path);
+                }
+            }
+
+        } catch (Exception e) {
+            log.error("Failed to set authorship property on {}", path, e);
+        }
+    }
+}</code></pre>
+
+      <h4>Service User Configuration</h4>
+      <p>
+        The listener uses a service user named <code>authorship-service</code>. Register it 
+        in your OSGi configuration:
+      </p>
+
+      <div class="pre-header"><div class="pre-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="pre-lang">OSGi Config — .cfg.json</span></div>
+<pre><code>{
+  "user.mapping": [
+    "com.acme.core:authorship-service=[authorship-service]"
+  ]
+}</code></pre>
+
+      <p>
+        Create the system user <code>authorship-service</code> in the AEM User Manager and 
+        grant it <code>rep:write</code> on <code>/content</code>. In AEM Cloud, add the 
+        principal to your repository-initializer repoinit script:
+      </p>
+
+      <div class="pre-header"><div class="pre-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="pre-lang">repoinit</span></div>
+<pre><code>create service user authorship-service
+
+set ACL on /content
+    allow jcr:read,rep:write for authorship-service
+end</code></pre>
+
+
+      <h3>Option B — Workflow Launcher on Page Creation</h3>
+      <p>
+        For teams that prefer workflow-based automation, configure a Workflow Launcher 
+        that triggers on <code>NODE_ADDED</code> under <code>/content</code> matching 
+        <code>jcr:content</code> nodes, and attach a workflow model with a single 
+        custom process step:
+      </p>
+
+      <div class="pre-header"><div class="pre-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="pre-lang">Java — Workflow Process Step</span></div>
+<pre><code>package com.acme.core.workflow;
+
+import com.adobe.granite.workflow.WorkflowException;
+import com.adobe.granite.workflow.WorkflowSession;
+import com.adobe.granite.workflow.exec.WorkItem;
+import com.adobe.granite.workflow.exec.WorkflowProcess;
+import com.adobe.granite.workflow.metadata.MetaDataMap;
+import org.apache.sling.api.resource.*;
+import org.osgi.service.component.annotations.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@Component(
+    service = WorkflowProcess.class,
+    property = { "process.label=Set Custom Authorship Property" }
+)
+public class SetAuthorshipWorkflowProcess implements WorkflowProcess {
+
+    private static final Logger log = LoggerFactory.getLogger(SetAuthorshipWorkflowProcess.class);
+
+    @Override
+    public void execute(WorkItem workItem, WorkflowSession workflowSession,
+                        MetaDataMap metaDataMap) throws WorkflowException {
+
+        String payloadPath = workItem.getWorkflowData().getPayload().toString();
+
+        try (ResourceResolver resolver = workflowSession.adaptTo(ResourceResolver.class)) {
+
+            // Workflow runs as the initiating user on Author — session is intact
+            String initiatorId = workItem.getWorkflow().getInitiator();
+
+            Resource jcrContent = resolver.getResource(payloadPath + "/jcr:content");
+            if (jcrContent == null) {
+                log.warn("jcr:content not found at {}", payloadPath);
+                return;
+            }
+
+            ModifiableValueMap props = jcrContent.adaptTo(ModifiableValueMap.class);
+            if (props == null) return;
+
+            // Set ww:createdBy only if not already present
+            if (!props.containsKey("ww:createdBy")) {
+                String originalAuthor = props.get("jcr:createdBy", initiatorId);
+                props.put("ww:createdBy", originalAuthor);
+            }
+
+            // Always update ww:lastPublishedBy when workflow fires on activation
+            props.put("ww:lastPublishedBy", initiatorId);
+
+            resolver.commit();
+            log.info("Authorship set: ww:createdBy={} on {}", 
+                      props.get("ww:createdBy", String.class), payloadPath);
+
+        } catch (Exception e) {
+            throw new WorkflowException("Could not set authorship property", e);
+        }
+    }
+}</code></pre>
+
+      <h3>Option C — ReplicationAction Event (Pre-Distribution Hook)</h3>
+      <p>
+        If you want to stamp <code>ww:lastPublishedBy</code> on every publish action 
+        without a full workflow, listen for the <code>ReplicationAction</code> OSGi event 
+        which fires on Author just before the package is dispatched:
+      </p>
+
+      <div class="pre-header"><div class="pre-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="pre-lang">Java — ReplicationAction Listener</span></div>
+<pre><code>package com.acme.core.listeners;
+
+import com.day.cq.replication.ReplicationAction;
+import com.day.cq.replication.ReplicationActionType;
+import org.apache.sling.api.resource.*;
+import org.osgi.service.component.annotations.*;
+import org.osgi.service.event.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.*;
+
+@Component(
+    service = EventHandler.class,
+    property = { "event.topics=" + ReplicationAction.EVENT_TOPIC }
+)
+public class PublishAuthorshipListener implements EventHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(PublishAuthorshipListener.class);
+
+    @Reference
+    private ResourceResolverFactory resolverFactory;
+
+    @Override
+    public void handleEvent(Event event) {
+        ReplicationAction action = ReplicationAction.fromEvent(event);
+        if (action == null || action.getType() != ReplicationActionType.ACTIVATE) return;
+
+        String path        = action.getPath();
+        String publishedBy = action.getUserId();
+
+        Map<String, Object> authInfo = Collections.singletonMap(
+            ResourceResolverFactory.SUBSERVICE, "authorship-service"
+        );
+
+        try (ResourceResolver resolver = resolverFactory.getServiceResourceResolver(authInfo)) {
+
+            Resource jcrContent = resolver.getResource(path + "/jcr:content");
+            if (jcrContent == null) return;
+
+            ModifiableValueMap props = jcrContent.adaptTo(ModifiableValueMap.class);
+            if (props == null) return;
+
+            // Stamp original author only on first publish
+            if (!props.containsKey("ww:createdBy")) {
+                String creator = props.get("jcr:createdBy", publishedBy);
+                props.put("ww:createdBy", creator);
+            }
+
+            // Update publisher identity on every activation
+            props.put("ww:lastPublishedBy", publishedBy);
+            resolver.commit();
+
+        } catch (Exception e) {
+            log.error("Failed to record publish authorship for {}", path, e);
+        }
+    }
+}</code></pre>
+
+      <div class="callout callout-success">
+        <div class="callout-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Which Option to Choose?
+        </div>
+        <ul>
+          <li><strong>Option A (ResourceChangeListener)</strong> — Best for capturing the true original creator at page-creation time. The author's identity is captured before any publish ever happens.</li>
+          <li><strong>Option B (Workflow)</strong> — Best when you already have a DAM/Page creation workflow. Easy to add as a step. Slightly delayed vs. the creation event.</li>
+          <li><strong>Option C (ReplicationAction)</strong> — Best for capturing publisher identity on every activation. Works alongside Option A for a complete picture.</li>
+        </ul>
+      </div>
+
+
+      <!-- ─── 7. SLING MODEL ─── -->
+      <h2 id="sling-model">7. Exposing Authorship in Sling Model and JSON Exporter</h2>
+
+      <p>
+        Update your Sling Model to read the custom property on Publish instead of relying 
+        on the JCR-managed one:
+      </p>
+
+      <div class="pre-header"><div class="pre-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="pre-lang">Java — Sling Model with JSON Exporter</span></div>
+<pre><code>package com.acme.core.models;
+
+import com.adobe.cq.export.json.ExporterConstants;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ValueMap;
+import org.apache.sling.models.annotations.*;
+import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+import org.apache.sling.models.annotations.injectorspecific.ChildResource;
+
+import javax.annotation.PostConstruct;
+
+@Model(
+    adaptables = Resource.class,
+    defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
+    resourceType = "acme/components/page",
+    exporterName = ExporterConstants.SLING_MODEL_EXPORTER_NAME,
+    extensions  = ExporterConstants.SLING_MODEL_EXTENSION
+)
+public class PageMetaModel {
+
+    @ChildResource(name = "jcr:content")
+    private Resource jcrContent;
+
+    private String author;
+    private String lastPublishedBy;
+    private String lastPublished;
+
+    @PostConstruct
+    protected void init() {
+        if (jcrContent == null) return;
+
+        ValueMap props = jcrContent.getValueMap();
+
+        // ✓ Read custom property — reliable on both Author and Publish
+        author = props.get("ww:createdBy", String.class);
+
+        // Fallback chain: custom → cq:lastReplicatedBy → "Unknown"
+        if (author == null || author.isBlank()) {
+            author = props.get("cq:lastReplicatedBy",
+                        props.get("jcr:createdBy", "Unknown"));
+        }
+
+        lastPublishedBy = props.get("ww:lastPublishedBy",
+                            props.get("cq:lastReplicatedBy", "Unknown"));
+
+        lastPublished = props.get("cq:lastReplicated",
+                          props.get("jcr:lastModified", ""));
+    }
+
+    /**
+     * JSON key: "author"
+     * Returns the original content creator, reliable on Publish.
+     */
+    @Nonnull
+    public String getAuthor() {
+        return author != null ? author : "Unknown";
+    }
+
+    /**
+     * JSON key: "lastPublishedBy"
+     */
+    @Nonnull
+    public String getLastPublishedBy() {
+        return lastPublishedBy != null ? lastPublishedBy : "Unknown";
+    }
+
+    /**
+     * JSON key: "lastPublished"
+     */
+    @Nonnull
+    public String getLastPublished() {
+        return lastPublished != null ? lastPublished : "";
+    }
+}
+</code></pre>
+
+      <h3>Expected JSON Output on Publish</h3>
+
+      <div class="pre-header"><div class="pre-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="pre-lang">JSON</span></div>
+<pre><code>{
+  "title": "Homepage",
+  "author": "jane.smith@acme.com",
+  "lastPublishedBy": "jane.smith@acme.com",
+  "lastPublished": "2026-04-13T10:30:00.000Z",
+  ":type": "acme/components/page"
+}</code></pre>
+
+      <p>
+        The <code>author</code> field now correctly reflects the original content creator 
+        on Publish — regardless of which service user performed the distribution import.
+      </p>
+
+
+      <!-- ─── 8. PITFALLS ─── -->
+      <h2 id="pitfalls">8. Common Pitfalls</h2>
+
+      <ul class="pitfall-list">
+        <li>
+          <span>
+            <strong>Reading <code>jcr:createdBy</code> on Publish in production APIs.</strong> 
+            This is the root mistake. Any headless endpoint, Sling Model, or GraphQL resolver 
+            that reads <code>jcr:createdBy</code> directly from the Publish JCR will always 
+            return the importer service user.
+          </span>
+        </li>
+        <li>
+          <span>
+            <strong>Running the backfill migration on Publish.</strong> The 
+            <code>jcr:createdBy</code> value on Publish is <em>already</em> 
+            <code>sling-distribution-importer</code>. Backfilling from it propagates the 
+            wrong value into your custom property.
+          </span>
+        </li>
+        <li>
+          <span>
+            <strong>Treating <code>cq:lastReplicatedBy</code> as the creator.</strong> This 
+            property records who last <em>published</em> — not who originally created the page. 
+            The same person may have published someone else's content.
+          </span>
+        </li>
+        <li>
+          <span>
+            <strong>Overwriting <code>ww:createdBy</code> on subsequent edits or publishes.</strong> 
+            The custom creator property must be immutable once set. Overwriting it on every save 
+            or publish defeats the purpose — it will end up reflecting the last editor, not the 
+            original author.
+          </span>
+        </li>
+        <li>
+          <span>
+            <strong>Assuming this is fixed by switching replication strategies.</strong> This 
+            behaviour is inherent to the JCR specification and applies to all content distribution 
+            mechanisms in AEM — classic replication, SCD, and the Content Transfer Tool. There 
+            is no configuration switch to make protected properties survive a cross-repository import.
+          </span>
+        </li>
+        <li>
+          <span>
+            <strong>Forgetting to include the custom property in Content Transfer Tool migrations.</strong> 
+            When migrating from AEM 6.5 to Cloud, verify that custom authorship properties are 
+            included in your inclusion sets. They are application properties and need explicit 
+            inclusion if you're using path-based filters.
+          </span>
+        </li>
+      </ul>
+
+
+      <!-- ─── 9. TAKEAWAYS ─── -->
+      <h2 id="takeaways">9. Key Takeaways — Do's and Don'ts</h2>
+
+      <div class="takeaway-grid">
+        <div class="takeaway-card">
+          <div class="tk-num">01</div>
+          <p><strong>Not a bug.</strong> <code>jcr:createdBy</code> changing on Publish is correct JCR behaviour. The distribution service user creates the node on Publish — the repository records it accurately.</p>
+        </div>
+        <div class="takeaway-card">
+          <div class="tk-num">02</div>
+          <p><strong>Protected properties cannot cross the distribution boundary.</strong> No AEM configuration or code can override <code>jcr:createdBy</code> on Publish. The specification prohibits it.</p>
+        </div>
+        <div class="takeaway-card">
+          <div class="tk-num">03</div>
+          <p><strong>Custom properties survive.</strong> Non-protected custom properties (e.g., <code>ww:createdBy</code>) travel unchanged through the distribution package to Publish.</p>
+        </div>
+        <div class="takeaway-card">
+          <div class="tk-num">04</div>
+          <p><strong>Set it on Author, read it anywhere.</strong> Capture the author identity at page-creation time on Author using a listener or workflow. It will be available on Publish after the first distribution.</p>
+        </div>
+      </div>
+
+      <div class="dos-donts">
+        <div class="dos-box">
+          <h4>Do</h4>
+          <ul class="check-list do">
+            <li><span>Use <code>ww:createdBy</code> (or equivalent) for authorship in APIs and UIs</span></li>
+            <li><span>Capture the author at page-creation time via <code>ResourceChangeListener</code> or workflow</span></li>
+            <li><span>Use <code>cq:lastReplicatedBy</code> for "last published by" attribution</span></li>
+            <li><span>Run backfill migrations on Author only, then re-publish</span></li>
+            <li><span>Treat <code>ww:createdBy</code> as immutable — write once, never overwrite</span></li>
+            <li><span>Document this behaviour for developers joining the project</span></li>
+          </ul>
+        </div>
+        <div class="donts-box">
+          <h4>Don't</h4>
+          <ul class="check-list dont">
+            <li><span>Read <code>jcr:createdBy</code> directly on Publish in any API or report</span></li>
+            <li><span>Assume this is a bug and raise an Adobe support case expecting a fix</span></li>
+            <li><span>Run backfill scripts on Publish (wrong values will be captured)</span></li>
+            <li><span>Confuse "publisher" (<code>cq:lastReplicatedBy</code>) with "creator"</span></li>
+            <li><span>Overwrite <code>ww:createdBy</code> on subsequent edits or publishes</span></li>
+            <li><span>Rely on <code>jcr:lastModifiedBy</code> on Publish for audit trails</span></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- ─── 10. FAQ ─── -->
+      <h2 id="faq">10. Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          Does AEM Cloud change jcr:createdBy after publishing a page?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          Yes — but not in the way you might expect. AEM Cloud does not <em>modify</em> the 
+          existing <code>jcr:createdBy</code> value. What actually happens is that the Publish 
+          instance treats the incoming content as a brand-new node being created for the first 
+          time in its own JCR repository. The repository then sets <code>jcr:createdBy</code> 
+          itself, using the active session at the time of import — which is always the 
+          <code>sling-distribution-importer</code> service user. So the value is not "changed"; 
+          it is "set fresh" on Publish, independently of whatever value existed on Author.
+          This distinction matters: the Author value is not overwritten — it remains intact on 
+          Author. The Publish instance simply never receives the Author value because protected 
+          JCR properties are excluded from distribution packages by design.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          Is this a bug in AEM Cloud Service?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          No. It is the correct and expected behaviour based on the JCR 2.0 specification. 
+          <code>jcr:createdBy</code> is a protected property set by the repository at node-creation 
+          time. On Publish, the node is created by the distribution importer service user, so the 
+          repository records that user. This is not a defect in AEM's implementation.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          Will Adobe fix this or provide a built-in solution?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          Unlikely, because it would require violating the JCR specification. Adobe cannot make 
+          the repository override protected properties during package import without breaking the 
+          spec guarantee. The recommended pattern (custom non-protected property) is the 
+          architecturally correct solution.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          Does this only affect AEM Cloud? What about AEM 6.5?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          The same behaviour exists in AEM 6.5 and Managed Services. The service user name 
+          differs — in classic replication it is the replication transport user (e.g., 
+          <code>replication-receiver</code>) rather than <code>sling-distribution-importer</code>. 
+          The root cause and solution are identical.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          Can I use cq:lastReplicatedBy instead of a custom property?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <code>cq:lastReplicatedBy</code> is a good built-in substitute for <em>publisher</em> 
+          identity and requires no custom code. However, it records who last triggered the publish 
+          action — not necessarily who originally created the page. If those are always the same 
+          person in your workflow, it may be sufficient. For proper creator attribution, a custom 
+          immutable property is more reliable.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          What happens if a page is deleted and recreated on Publish (e.g., full content re-import)?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          On re-creation, <code>jcr:createdBy</code> is reset to <code>sling-distribution-importer</code> 
+          again. Your custom <code>ww:createdBy</code> property will survive because it travels 
+          in the distribution package from Author each time. This is another argument in favour 
+          of the custom property approach — it is resilient to full re-imports.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          Can I use AEM's Content Fragment author field as an alternative?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          Content Fragments have their own metadata model. For page-level authorship on 
+          <code>cq:Page</code> nodes, the custom property approach on <code>jcr:content</code> 
+          is the correct pattern. Content Fragments store author metadata differently and are 
+          not directly comparable.
+        </div>
+      </div>
+
+
+      <!-- Keywords -->
+      <div class="keywords-section">
+        <h4>Related Topics</h4>
+        <div class="keyword-tags">
+          <span>AEM Cloud jcr:createdBy</span>
+          <span>sling-distribution-importer</span>
+          <span>Sling Content Distribution</span>
+          <span>AEM Publish behavior</span>
+          <span>AEM metadata issue</span>
+          <span>AEM headless API</span>
+          <span>AEM architecture</span>
+          <span>JCR protected properties</span>
+          <span>cq:lastReplicatedBy</span>
+          <span>AEM service user</span>
+          <span>AEM Workflow</span>
+          <span>ResourceChangeListener</span>
+          <span>Adobe Experience Manager</span>
+          <span>AEMaaCS</span>
+          <span>WegWorks</span>
+          <span>Weg Works</span>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h3>Building on AEM Cloud and Running Into Architecture Issues?</h3>
+        <p>WegWorks specialises in AEM Cloud Service implementations, headless API design, and content distribution architecture. If your team is wrestling with metadata, audit workflows, or distribution behaviour, we can help.</p>
+        <a class="btn btn-primary" href="/contact/">
+          Talk to an AEM Architect
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container-wide">
+    <p>&copy; 2026 <a href="/">WegWorks</a>. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* Mobile menu */
+const mobileToggle = document.querySelector(".mobile-toggle");
+const mobileMenu   = document.getElementById("mobile-menu");
+if (mobileToggle && mobileMenu) {
+  mobileToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    mobileToggle.textContent = mobileMenu.classList.contains("active") ? "✕" : "☰";
+  });
+  mobileMenu.querySelectorAll("a").forEach(l => l.addEventListener("click", () => {
+    mobileMenu.classList.remove("active");
+    mobileToggle.textContent = "☰";
+  }));
+}
+
+/* FAQ accordion */
+document.querySelectorAll(".faq-q").forEach(q => {
+  q.addEventListener("click", () => {
+    const item = q.closest(".faq-item");
+    const wasOpen = item.classList.contains("open");
+    document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("open"));
+    if (!wasOpen) item.classList.add("open");
+  });
+});
+</script>
+<script src="/js/common.min.js" defer></script>
+</body>
+</html>
