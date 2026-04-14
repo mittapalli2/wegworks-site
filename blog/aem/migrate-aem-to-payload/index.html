@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Anti-flash theme init: must run before paint -->
-    <script>(function(){var t=localStorage.getItem('ww-theme');if(t==='light'){document.documentElement.setAttribute('data-theme','light');}else if(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){document.documentElement.setAttribute('data-theme','light');}})();</script>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
     <script>
@@ -167,16 +165,6 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
 }
-.theme-toggle{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--glass-border,rgba(255,255,255,0.1));background:var(--glass-bg,rgba(255,255,255,0.03));cursor:pointer;color:var(--text-primary,#fff);flex-shrink:0;padding:0;transition:border-color .3s,background .3s,transform .2s}
-.theme-toggle:hover{border-color:var(--accent-primary,#86bc25);background:rgba(134,188,37,0.1);transform:rotate(15deg)}
-.theme-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;display:block}
-.theme-toggle .icon-sun{display:none}.theme-toggle .icon-moon{display:block}
-[data-theme="light"] .theme-toggle .icon-sun{display:block}[data-theme="light"] .theme-toggle .icon-moon{display:none}
-[data-theme="light"]{--bg-primary:#f5f5f0;--bg-secondary:#ffffff;--bg-tertiary:#ebebe6;--text-primary:#0a0a0a;--text-secondary:#3f3f46;--accent-primary:#5c8a10;--glass-bg:rgba(0,0,0,0.03);--glass-border:rgba(0,0,0,0.1)}
-[data-theme="light"] body{background:var(--bg-primary);color:var(--text-primary)}
-[data-theme="light"] .site-header,[data-theme="light"] header{background:rgba(245,245,240,0.92)!important}
-[data-theme="light"] .desktop-nav a{color:var(--text-primary)}
-*,*::before,*::after{transition:background-color .25s ease,border-color .25s ease,color .25s ease}
 
 .mobile-menu {
     display: none;
@@ -503,10 +491,6 @@ pre code {
                 <a href="/blog/">Blog</a>
                 <a href="/contact/">Contact</a>
             </nav>
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
-              <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
-              <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            </button>
             <button class="mobile-toggle">☰</button>
         </div>
         <nav class="mobile-menu" id="mobile-menu">
@@ -1125,8 +1109,6 @@ if (mobileToggle && mobileMenu) {
     });
   });
 }
-/* ── Theme toggle ── */
-(function(){var btn=document.getElementById('theme-toggle');if(!btn)return;var cur=document.documentElement.hasAttribute('data-theme')?'light':'dark';btn.addEventListener('click',function(){cur=(cur==='dark')?'light':'dark';if(cur==='light'){document.documentElement.setAttribute('data-theme','light');}else{document.documentElement.removeAttribute('data-theme');}localStorage.setItem('ww-theme',cur);});})();
 </script>
 <script src="/js/common.min.js" defer></script>
 </body>

@@ -223,56 +223,6 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height:
 .mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
 .mobile-menu a { font-size: 1.2rem; color: #fff; text-decoration: none; font-weight: 600; }
 
-/* ── Theme toggle ── */
-.theme-toggle { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass-bg); cursor: pointer; color: var(--text-primary); flex-shrink: 0; padding: 0; transition: border-color .3s, background .3s, transform .2s; }
-.theme-toggle:hover { border-color: var(--accent-primary); background: rgba(134,188,37,0.1); transform: rotate(15deg); }
-.theme-toggle svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; display: block; }
-.theme-toggle .icon-sun { display: none; }
-.theme-toggle .icon-moon { display: block; }
-[data-theme="light"] .theme-toggle .icon-sun { display: block; }
-[data-theme="light"] .theme-toggle .icon-moon { display: none; }
-
-/* ── Light mode variable overrides ── */
-[data-theme="light"] { --bg-primary: #f5f5f0; --bg-secondary: #ffffff; --bg-tertiary: #ebebe6; --text-primary: #0a0a0a; --text-secondary: #3f3f46; --text-muted: #71717a; --accent-primary: #5c8a10; --accent-light: #6a9a1e; --glass-bg: rgba(0,0,0,0.03); --glass-border: rgba(0,0,0,0.1); --blue: #2563eb; --yellow: #d97706; --red: #dc2626; }
-[data-theme="light"] body { background: var(--bg-primary); color: var(--text-primary); }
-[data-theme="light"] .site-header { background: rgba(245,245,240,0.92) !important; border-bottom: 1px solid var(--glass-border); }
-[data-theme="light"] .nav-links a, [data-theme="light"] .brand-text { color: var(--text-primary); }
-[data-theme="light"] .dropdown-menu { background: rgba(255,255,255,0.98); border-color: var(--glass-border); }
-[data-theme="light"] .dropdown-menu a { color: var(--text-primary); }
-[data-theme="light"] .mobile-menu { background: var(--bg-primary); }
-[data-theme="light"] .mobile-menu a { color: var(--text-primary); }
-[data-theme="light"] .article-intro { color: #1a1a1a; }
-[data-theme="light"] .article-content p, [data-theme="light"] .article-content li { color: #1a1a1a; }
-[data-theme="light"] .article-content h2, [data-theme="light"] .article-content h3, [data-theme="light"] .article-content h4 { color: var(--text-primary); }
-[data-theme="light"] .toc { background: #eeeee8; border-color: var(--glass-border); }
-[data-theme="light"] .toc a { color: #1a1a1a; }
-[data-theme="light"] .instance-card, [data-theme="light"] .arch-diagram, [data-theme="light"] .diagram-box { background: #eeeee8; border-color: var(--glass-border); }
-[data-theme="light"] .arch-node { background: #e4e4de; border-color: var(--glass-border); }
-[data-theme="light"] .arch-node .node-label { color: var(--text-primary); }
-[data-theme="light"] .data-table th { background: #e4e4de; color: var(--text-primary); }
-[data-theme="light"] .data-table td { color: #1a1a1a; border-color: var(--glass-border); }
-[data-theme="light"] .dos-box, [data-theme="light"] .donts-box, [data-theme="light"] .takeaway-card { background: #eeeee8; border-color: var(--glass-border); }
-[data-theme="light"] .check-list li, [data-theme="light"] .takeaway-card p { color: #1a1a1a; }
-[data-theme="light"] .faq-item { border-color: var(--glass-border); }
-[data-theme="light"] .faq-q { color: var(--text-primary); }
-[data-theme="light"] .faq-q:hover { background: rgba(0,0,0,0.03); }
-[data-theme="light"] .faq-a { color: #3a3a3a; }
-[data-theme="light"] .jcr-tree { background: #eeeee8; border-color: var(--glass-border); color: #1a1a1a; }
-[data-theme="light"] .jcr-comment { color: #666; }
-[data-theme="light"] pre { background: #eeeee8; border-color: var(--glass-border); }
-[data-theme="light"] pre code { color: #1a1a1a; }
-[data-theme="light"] .pre-header { background: #e4e4de; border-color: var(--glass-border); }
-[data-theme="light"] code { background: rgba(0,0,0,0.07); color: #c0392b; }
-[data-theme="light"] .callout p, [data-theme="light"] .callout ul { color: #1a1a1a; }
-[data-theme="light"] .pitfall-list li { background: rgba(220,38,38,0.05); border-color: rgba(220,38,38,0.15); }
-[data-theme="light"] .pitfall-list li span { color: #1a1a1a; }
-[data-theme="light"] .keyword-tags span { color: #1a1a1a; background: rgba(0,0,0,0.05); border-color: var(--glass-border); }
-[data-theme="light"] .cta-box { background: rgba(0,0,0,0.03); border-color: var(--glass-border); }
-[data-theme="light"] .cta-box p { color: #3a3a3a; }
-[data-theme="light"] .footer p { color: #555; }
-*, *::before, *::after { transition: background-color .25s ease, border-color .25s ease, color .25s ease; }
-@media (max-width: 900px) { .theme-toggle { display: flex; } }
-
 /* ── Article layout ── */
 .article-header { padding: 160px 0 40px; }
 .article-hero-image { margin: 0 auto 60px; max-width: 1200px; padding: 0 24px; }
@@ -488,10 +438,6 @@ img { max-width: 100%; height: auto; }
       <li><a href="/about/">About</a></li>
       <li><a href="/contact/">Contact</a></li>
     </ul>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
-      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
-      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-    </button>
     <a class="nav-cta" href="/contact/">Get Started</a>
     <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
   </nav>
@@ -1562,7 +1508,7 @@ public class PageMetaModel {
 </footer>
 
 <script>
-/* ── Mobile menu ── */
+/* Mobile menu */
 const mobileToggle = document.querySelector(".mobile-toggle");
 const mobileMenu   = document.getElementById("mobile-menu");
 if (mobileToggle && mobileMenu) {
@@ -1576,31 +1522,7 @@ if (mobileToggle && mobileMenu) {
   }));
 }
 
-/* ── Theme toggle ── */
-(function () {
-  const KEY = 'ww-theme';
-  const btn = document.getElementById('theme-toggle');
-  if (!btn) return;
-
-  function apply(theme) {
-    if (theme === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-  }
-
-  /* Determine starting theme (already applied by the anti-flash script in <head>) */
-  let current = document.documentElement.hasAttribute('data-theme') ? 'light' : 'dark';
-
-  btn.addEventListener('click', () => {
-    current = (current === 'dark') ? 'light' : 'dark';
-    apply(current);
-    localStorage.setItem(KEY, current);
-  });
-})();
-
-/* ── FAQ accordion ── */
+/* FAQ accordion */
 document.querySelectorAll(".faq-q").forEach(q => {
   q.addEventListener("click", () => {
     const item = q.closest(".faq-item");
