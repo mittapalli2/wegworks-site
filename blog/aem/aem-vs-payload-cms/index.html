@@ -6,6 +6,8 @@
 
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Anti-flash theme init: must run before paint -->
+<script>(function(){var t=localStorage.getItem('ww-theme');if(t==='light'){document.documentElement.setAttribute('data-theme','light');}else if(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){document.documentElement.setAttribute('data-theme','light');}})();</script>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VH11ZH9Y4"></script>
 <script>
@@ -199,6 +201,22 @@ footer a { color: #ffffff; margin: 0 10px; }
 .mobile-menu a { font-size: 1.2rem; color: var(--text-primary, #fff); text-decoration: none; font-weight: 600; }
 .mobile-menu a:hover { color: var(--accent-primary, #ffffff); }
 @media (max-width: 768px) { .article-hero-image img { height: 250px; } .nav, .nav-links, .nav-cta { display: none; } .mobile-toggle { display: block; } }
+
+/* ── Theme toggle button ── */
+.theme-toggle{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(134,188,37,0.5);background:rgba(134,188,37,0.08);cursor:pointer;color:var(--text-primary);flex-shrink:0;padding:0;margin:0 8px;transition:border-color .3s,background .3s,transform .2s}
+.theme-toggle:hover{border-color:var(--accent-primary);background:rgba(134,188,37,0.1);transform:rotate(15deg)}
+.theme-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;display:block}
+.theme-toggle .icon-sun{display:none}.theme-toggle .icon-moon{display:block}
+[data-theme="light"] .theme-toggle .icon-sun{display:block}[data-theme="light"] .theme-toggle .icon-moon{display:none}
+[data-theme="light"]{--bg-primary:#f5f5f0;--bg-secondary:#ffffff;--bg-tertiary:#ebebe6;--text-primary:#0a0a0a;--text-secondary:#3f3f46;--text-muted:#71717a;--accent-primary:#5c8a10;--accent-light:#6a9a1e;--glass-bg:rgba(0,0,0,0.03);--glass-border:rgba(0,0,0,0.1);--glow-primary:0 0 40px rgba(92,138,16,0.2)}
+[data-theme="light"] body{background:var(--bg-primary);color:var(--text-primary)}
+[data-theme="light"] .site-header{background:rgba(245,245,240,0.92)!important;border-bottom:1px solid var(--glass-border)}
+[data-theme="light"] .nav-links a,[data-theme="light"] .brand-text{color:var(--text-primary)}
+[data-theme="light"] .dropdown-menu{background:rgba(255,255,255,0.98);border-color:var(--glass-border)}
+[data-theme="light"] .dropdown-menu a{color:var(--text-primary)}
+[data-theme="light"] .mobile-menu{background:var(--bg-primary)}
+[data-theme="light"] .mobile-menu a{color:var(--text-primary)}
+*,*::before,*::after{transition:background-color .25s ease,border-color .25s ease,color .25s ease}
 </style>
 <link rel="stylesheet" href="/css/common.min.css">
 </head>
@@ -233,6 +251,11 @@ footer a { color: #ffffff; margin: 0 10px; }
       <li><a href="/about/">About</a></li>
       <li><a href="/contact/">Contact</a></li>
     </ul>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+
     <a class="nav-cta" href="/contact/">Get Started</a>
     <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
   </nav>
@@ -493,6 +516,19 @@ if (mobileToggle && mobileMenu) {
     });
   });
 }
+
+/* ── Theme toggle ── */
+(function(){
+  var btn=document.getElementById('theme-toggle');
+  if(!btn)return;
+  var cur=document.documentElement.hasAttribute('data-theme')?'light':'dark';
+  btn.addEventListener('click',function(){
+    cur=(cur==='dark')?'light':'dark';
+    if(cur==='light'){document.documentElement.setAttribute('data-theme','light');}
+    else{document.documentElement.removeAttribute('data-theme');}
+    localStorage.setItem('ww-theme',cur);
+  });
+})();
 </script>
 <script src="/js/common.min.js" defer></script>
 </body>
