@@ -135,11 +135,11 @@
     var STORAGE_KEY = 'ww-theme';
 
     // Determine the initial theme:
-    // 1. User's saved preference  2. Default light
+    // 1. User's saved preference  2. Default dark
     function getInitialTheme() {
       var saved = localStorage.getItem(STORAGE_KEY);
       if (saved === 'light' || saved === 'dark') return saved;
-      return 'light';
+      return 'dark';
     }
 
     function applyTheme(theme) {
@@ -149,7 +149,7 @@
         document.documentElement.removeAttribute('data-theme');
       }
 
-      var logoLight = 'https://www.wegworks.com/images/logo-ww.svg';
+      var logoLight = 'https://www.wegworks.com/images/fav/weg_works_logo.jpeg';
       var logoDark = 'https://www.wegworks.com/images/logo-white-green-ww.svg';
       document.querySelectorAll('.brand img').forEach(function(img) {
         img.src = theme === 'dark' ? logoDark : logoLight;
@@ -207,16 +207,6 @@
       applyTheme(currentTheme);
       localStorage.setItem(STORAGE_KEY, currentTheme);
     });
-
-    // Sync if the OS theme changes while the page is open (only when no saved preference)
-    if (window.matchMedia) {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-        if (!localStorage.getItem(STORAGE_KEY)) {
-          currentTheme = e.matches ? 'dark' : 'light';
-          applyTheme(currentTheme);
-        }
-      });
-    }
   }
 
   // ==========================================================================
