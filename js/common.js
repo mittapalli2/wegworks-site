@@ -135,11 +135,11 @@
     var STORAGE_KEY = 'ww-theme';
 
     // Determine the initial theme:
-    // 1. User's saved preference  2. Default dark
+    // 1. User's saved preference  2. Default light
     function getInitialTheme() {
       var saved = localStorage.getItem(STORAGE_KEY);
       if (saved === 'light' || saved === 'dark') return saved;
-      return 'dark';
+      return 'light';
     }
 
     function applyTheme(theme) {
@@ -153,6 +153,11 @@
       var logoDark = 'https://www.wegworks.com/images/logo-white-green-ww.svg';
       document.querySelectorAll('.brand img').forEach(function(img) {
         img.src = theme === 'dark' ? logoDark : logoLight;
+      });
+
+      document.querySelectorAll('.logo-img[data-src-dark]').forEach(function(img) {
+        img.src = theme === 'dark' ? img.getAttribute('data-src-dark') : img.getAttribute('data-src-light');
+        img.style.filter = '';
       });
     }
 
