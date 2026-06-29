@@ -572,7 +572,7 @@ h1, h2, h3, h4 {
   font-style: italic;
 }
 
-.rf-testimonial footer {
+.rf-testimonial-foot {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -599,7 +599,7 @@ h1, h2, h3, h4 {
   color: var(--text-primary);
 }
 
-.rf-testimonial footer span {
+.rf-testimonial-foot span {
   font-size: 0.8rem;
   color: var(--text-muted);
 }
