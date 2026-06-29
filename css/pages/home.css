@@ -8,25 +8,31 @@
   overflow: hidden;
   overflow-x: hidden;
   z-index: 1;
-  background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 55%, #f4f4f5 100%);
+  background-color: #f4f4f5;
+  background-image: url('https://www.wegworks.com/images/green-fern-branch.avif');
+  background-position: 65% center;
+  background-size: cover;
+  background-repeat: no-repeat;
   max-width: 100vw;
 }
 
 [data-theme="dark"] .hero {
-  background: url('https://www.wegworks.com/images/banner%20image.webp') 60% center/cover no-repeat;
+  background-color: transparent;
+  background-image: url('https://www.wegworks.com/images/banner%20image.webp');
+  background-position: 60% center;
 }
 
 .hero::before {
-  display: none;
-}
-
-[data-theme="dark"] .hero::before {
   display: block;
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.85) 45%, rgba(10, 10, 15, 0.4) 70%, rgba(10, 10, 15, 0.2) 100%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.88) 42%, rgba(255, 255, 255, 0.45) 68%, rgba(255, 255, 255, 0.12) 100%);
   z-index: 0;
+}
+
+[data-theme="dark"] .hero::before {
+  background: linear-gradient(90deg, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.85) 45%, rgba(10, 10, 15, 0.4) 70%, rgba(10, 10, 15, 0.2) 100%);
 }
 
 .hero-orb {
@@ -590,15 +596,6 @@
 [data-theme="dark"] .client-logo:hover {
   box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.05);
   background: rgba(255, 255, 255, 0.08);
-}
-
-/* White-only logo assets (TCS, Sogeti, etc.) — dark on light pills, white on dark */
-.client-logo .logo-img[data-logo-variant="white"] {
-  filter: brightness(0);
-}
-
-[data-theme="dark"] .client-logo .logo-img[data-logo-variant="white"] {
-  filter: none;
 }
 
 /* CSS Logo Styles */
