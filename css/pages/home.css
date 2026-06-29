@@ -592,6 +592,15 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+/* White-only logo assets (TCS, Sogeti, etc.) — dark on light pills, white on dark */
+.client-logo .logo-img[data-logo-variant="white"] {
+  filter: brightness(0);
+}
+
+[data-theme="dark"] .client-logo .logo-img[data-logo-variant="white"] {
+  filter: none;
+}
+
 /* CSS Logo Styles */
 .logo-text {
   font-weight: 700;
