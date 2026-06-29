@@ -1,18 +1,4 @@
-:root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #12121a;
-      --bg-tertiary: #1a1a24;
-      --text-primary: #ffffff;
-      --text-secondary: #a1a1aa;
-      --text-muted: #71717a;
-      --accent-primary: #86bc25;
-      --accent-secondary: #a4d65e;
-      --accent-gradient: linear-gradient(135deg, #86bc25 0%, #a4d65e 100%);
-      --glass-bg: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(255, 255, 255, 0.08);
-    }
-
-    * {
+* {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -50,7 +36,7 @@
       left: 0;
       right: 0;
       z-index: 100;
-      background: rgba(10, 10, 15, 0.8);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--glass-border);
     }
@@ -84,7 +70,7 @@
       font-family: 'Rajdhani', sans-serif;
       font-weight: 700;
       font-size: 1.6rem;
-      color: #ffffff;
+      color: var(--text-primary);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       display: flex;
@@ -107,7 +93,7 @@
     }
 
     .nav-links a {
-      color: #ffffff;
+      color: var(--text-primary);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
@@ -153,8 +139,8 @@
     }
 
     .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-    .dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
-    .dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); color: var(--accent-primary); }
+    .dropdown-menu a { display: block; padding: 10px 20px; color: var(--text-primary); font-size: 0.9rem; }
+    .dropdown-menu a:hover { background: var(--glass-bg); color: var(--accent-primary); }
     .dropdown-menu a::after { display: none; }
 
     .nav-cta {
@@ -248,7 +234,7 @@
 
     .error-message {
       font-size: 1.1rem;
-      color: #ffffff;
+      color: var(--text-primary);
       line-height: 1.7;
       margin-bottom: 40px;
     }
@@ -309,7 +295,7 @@
       font-size: 0.875rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: #ffffff;
+      color: var(--text-primary);
       margin-bottom: 20px;
     }
 
@@ -321,7 +307,7 @@
     }
 
     .links-grid a {
-      color: #ffffff;
+      color: var(--text-primary);
       text-decoration: none;
       font-weight: 600;
       transition: color 0.3s;
@@ -335,7 +321,7 @@
     footer {
       padding: 24px 0;
       text-align: center;
-      color: #ffffff;
+      color: var(--text-primary);
       font-size: 0.875rem;
       position: relative;
       z-index: 10;

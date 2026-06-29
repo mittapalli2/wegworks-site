@@ -3,8 +3,30 @@
    Shared CSS for all pages - Header, Footer, Navigation, Typography, Variables
    ========================================================================== */
 
-/* CSS Variables — Dark (default) */
+/* CSS Variables — Light (default, Attio-inspired) */
 :root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-tertiary: #f4f4f5;
+  --text-primary: #0a0a0a;
+  --text-secondary: #52525b;
+  --text-muted: #71717a;
+  --accent-primary: #5c8a10;
+  --accent-light: #6a9a1e;
+  --accent-gradient: linear-gradient(135deg, #5c8a10 0%, #4a7209 100%);
+  --glass-bg: rgba(0, 0, 0, 0.02);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glow-primary: 0 0 40px rgba(92, 138, 16, 0.12);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --code-bg: #f4f4f5;
+  --code-border: #e4e4e7;
+  --code-text: #18181b;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+}
+
+/* CSS Variables — Dark */
+[data-theme="dark"] {
   --bg-primary: #000000;
   --bg-secondary: #0a0a0a;
   --bg-tertiary: #141414;
@@ -22,27 +44,7 @@
   --code-bg: #1e1e1e;
   --code-border: #333;
   --code-text: #d4d4d4;
-}
-
-/* CSS Variables — Light */
-[data-theme="light"] {
-  --bg-primary: #f5f5f0;
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #ebebe6;
-  --text-primary: #0a0a0a;
-  --text-secondary: #3f3f46;
-  --text-muted: #71717a;
-  --accent-primary: #5c8a10;
-  --accent-light: #6a9a1e;
-  --accent-gradient: linear-gradient(135deg, #5c8a10 0%, #4a7209 100%);
-  --glass-bg: rgba(0, 0, 0, 0.03);
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --glow-primary: 0 0 40px rgba(92, 138, 16, 0.2);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
-  --code-bg: #f0f0ec;
-  --code-border: #d4d4d0;
-  --code-text: #1a1a1a;
+  --border-subtle: rgba(255, 255, 255, 0.08);
 }
 
 /* Smooth theme transition on all elements */
@@ -60,6 +62,11 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 body {
@@ -131,12 +138,31 @@ main {
   right: 0;
   bottom: 0;
   background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   background-size: 80px 80px;
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
+}
+
+[data-theme="dark"] .bg-grid {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+}
+
+.floating-orb,
+.edge-glow,
+.corner-glow {
+  opacity: 0;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .floating-orb,
+[data-theme="dark"] .edge-glow,
+[data-theme="dark"] .corner-glow {
+  opacity: 1;
 }
 
 .floating-orb {
@@ -289,31 +315,12 @@ main {
   flex-shrink: 0;
 }
 
-/* Show sun icon in dark mode, moon icon in light mode */
+/* Show moon in light mode (switch to dark), sun in dark mode */
 .theme-toggle .icon-sun  { display: none; }
 .theme-toggle .icon-moon { display: block; }
 
-[data-theme="light"] .theme-toggle .icon-sun  { display: block; }
-[data-theme="light"] .theme-toggle .icon-moon { display: none; }
-
-/* Light mode header overrides */
-[data-theme="light"] .site-header.scrolled,
-[data-theme="light"] .site-header.header-solid {
-  background: rgba(245, 245, 240, 0.92);
-}
-
-[data-theme="light"] .nav-links a { color: var(--text-primary); }
-[data-theme="light"] .brand-text  { color: var(--text-primary); }
-
-[data-theme="light"] .dropdown-menu {
-  background: rgba(255, 255, 255, 0.98);
-  border-color: var(--glass-border);
-}
-
-[data-theme="light"] .dropdown-menu a { color: var(--text-primary); }
-
-[data-theme="light"] .mobile-menu { background: var(--bg-primary); }
-[data-theme="light"] .mobile-menu a { color: var(--text-primary); }
+[data-theme="dark"] .theme-toggle .icon-sun  { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
 /* ==========================================================================
    Header & Navigation
@@ -327,19 +334,36 @@ main {
   z-index: 1000;
   padding: 20px 0;
   transition: all 0.4s ease;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+[data-theme="dark"] .site-header {
+  background: transparent;
+  border-bottom: none;
 }
 
 .site-header.scrolled {
-  background: rgba(10, 10, 15, 0.9);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+[data-theme="dark"] .site-header.scrolled {
+  background: rgba(10, 10, 15, 0.9);
   border-bottom: 1px solid var(--glass-border);
 }
 
 /* Alternative header style with always-on background */
 .site-header.header-solid {
-  background: rgba(10, 10, 15, 0.8);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--glass-border);
+}
+
+[data-theme="dark"] .site-header.header-solid {
+  background: rgba(10, 10, 15, 0.8);
 }
 
 .nav-wrapper {
@@ -369,7 +393,7 @@ main {
   font-family: 'Rajdhani', sans-serif;
   font-weight: 700;
   font-size: 1.6rem;
-  color: #ffffff;
+  color: var(--text-primary);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   display: flex;
@@ -399,7 +423,7 @@ main {
 }
 
 .nav-links a {
-  color: #ffffff;
+  color: var(--text-primary);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
@@ -419,7 +443,7 @@ main {
 }
 
 .nav-links a:hover {
-  color: var(--text-primary);
+  color: var(--accent-primary);
 }
 
 .nav-links a:hover::after {
@@ -453,7 +477,7 @@ main {
   left: -16px;
   min-width: 220px;
   padding: 12px 0;
-  background: rgba(18, 18, 26, 0.95);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
   border-radius: 12px;
@@ -462,8 +486,13 @@ main {
   transform: translateY(10px);
   transition: all 0.3s;
   margin-top: 16px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-md);
   z-index: 100;
+}
+
+[data-theme="dark"] .dropdown-menu {
+  background: rgba(18, 18, 26, 0.95);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .nav-dropdown:hover .dropdown-menu {
@@ -475,7 +504,7 @@ main {
 .dropdown-menu a {
   display: block;
   padding: 10px 20px;
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: 0.9rem;
 }
 
@@ -484,8 +513,12 @@ main {
 }
 
 .dropdown-menu a:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass-bg);
   color: var(--accent-primary);
+}
+
+[data-theme="dark"] .dropdown-menu a:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* Nav CTA Button */
@@ -984,7 +1017,7 @@ img {
 
 /* Utility classes */
 .nav-divider {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-subtle);
   margin-top: 8px;
   padding-top: 16px;
 }

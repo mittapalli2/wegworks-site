@@ -411,8 +411,11 @@
     ]
   }
   </script>
-<link rel="stylesheet" href="https://www.wegworks.com/css/pages/home.min.css">
+<script>
+(function(){var t=localStorage.getItem('ww-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
 <link rel="stylesheet" href="https://www.wegworks.com/css/common.min.css">
+<link rel="stylesheet" href="https://www.wegworks.com/css/pages/home.min.css">
 </head>
 
 <body>
@@ -434,7 +437,7 @@
   <div class="container">
     <nav class="nav-wrapper">
       <a class="brand" href="#home">
-        <img alt="WegWorks logo" loading="lazy" src="https://www.wegworks.com/images/logo-white-green-ww.svg" width="150" height="40"/>
+        <img alt="WegWorks logo" loading="lazy" src="https://www.wegworks.com/images/logo-ww.svg" width="150" height="40"/>
         <div class="brand-text">WegWorks<span>Simplifying Tomorrow</span></div>
       </a>
       <ul class="nav-links">

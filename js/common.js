@@ -135,22 +135,25 @@
     var STORAGE_KEY = 'ww-theme';
 
     // Determine the initial theme:
-    // 1. User's saved preference  2. OS preference  3. Default dark
+    // 1. User's saved preference  2. Default light
     function getInitialTheme() {
       var saved = localStorage.getItem(STORAGE_KEY);
       if (saved === 'light' || saved === 'dark') return saved;
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-        return 'light';
-      }
-      return 'dark';
+      return 'light';
     }
 
     function applyTheme(theme) {
-      if (theme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
       } else {
         document.documentElement.removeAttribute('data-theme');
       }
+
+      var logoLight = 'https://www.wegworks.com/images/logo-ww.svg';
+      var logoDark = 'https://www.wegworks.com/images/logo-white-green-ww.svg';
+      document.querySelectorAll('.brand img').forEach(function(img) {
+        img.src = theme === 'dark' ? logoDark : logoLight;
+      });
     }
 
     function buildToggleButton() {
@@ -199,16 +202,17 @@
     injectToggle(btn);
 
     btn.addEventListener('click', function() {
-      currentTheme = document.documentElement.hasAttribute('data-theme') ? 'dark' : 'light';
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      currentTheme = isDark ? 'light' : 'dark';
       applyTheme(currentTheme);
       localStorage.setItem(STORAGE_KEY, currentTheme);
     });
 
-    // Sync if the OS theme changes while the page is open
+    // Sync if the OS theme changes while the page is open (only when no saved preference)
     if (window.matchMedia) {
-      window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function(e) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
         if (!localStorage.getItem(STORAGE_KEY)) {
-          currentTheme = e.matches ? 'light' : 'dark';
+          currentTheme = e.matches ? 'dark' : 'light';
           applyTheme(currentTheme);
         }
       });
