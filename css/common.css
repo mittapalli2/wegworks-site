@@ -3,7 +3,7 @@
    Shared CSS for all pages - Header, Footer, Navigation, Typography, Variables
    ========================================================================== */
 
-/* CSS Variables — Light (default, Attio-inspired) */
+/* CSS Variables — Light */
 :root {
   --bg-primary: #ffffff;
   --bg-secondary: #fafafa;
