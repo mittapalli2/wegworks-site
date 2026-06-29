@@ -513,7 +513,7 @@ main {
 }
 
 .dropdown-menu a:hover {
-  background: var(--glass-bg);
+  background: var(--bg-tertiary);
   color: var(--accent-primary);
 }
 

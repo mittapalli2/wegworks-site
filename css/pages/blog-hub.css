@@ -65,13 +65,6 @@ h1, h2, h3, h4, h5, h6 {
 .nav-links a:hover { color: var(--text-primary); }
 
 /* Dropdown */
-.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
-.nav-dropdown > a::after { content: ''; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid currentColor; transition: transform 0.3s; }
-.nav-dropdown:hover > a::after { transform: rotate(180deg); }
-.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
-.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-.dropdown-menu a { display: block; padding: 10px 20px; color: var(--text-primary); font-size: 0.9rem; }
-.dropdown-menu a:hover { color: var(--accent-primary); background: var(--glass-bg); }
 
 .nav-cta {
   padding: 12px 28px;
@@ -98,6 +91,37 @@ h1, h2, h3, h4, h5, h6 {
 .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 24px; line-height: 1.15; }
 .gradient-text { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .hero-description { font-size: 1.25rem; color: var(--text-primary); max-width: 600px; margin: 0 0 40px; line-height: 1.7; }
+
+.hub-intro {
+  max-width: 900px;
+  padding: 24px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+}
+
+.hub-intro--narrow {
+  max-width: 800px;
+}
+
+.hub-intro p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.hub-intro p + p {
+  margin-top: 16px;
+}
+
+[data-theme="dark"] .hub-intro {
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+}
+
+[data-theme="dark"] .hub-intro p {
+  color: rgba(255, 255, 255, 0.85);
+}
 
 .section { padding: 80px 0; }
 .section-title { font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 16px; }
