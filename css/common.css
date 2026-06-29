@@ -982,3 +982,30 @@ img {
   }
 }
 
+/* Utility classes */
+.nav-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 8px;
+  padding-top: 16px;
+}
+
+.text-accent {
+  color: var(--accent-primary);
+}
+
+.required-mark {
+  color: #ef4444;
+}
+
+.logo-sm {
+  height: 32px;
+  width: auto;
+}
+
+.section-alt-bg {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+

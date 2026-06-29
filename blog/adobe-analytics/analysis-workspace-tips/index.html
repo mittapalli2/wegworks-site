@@ -4,6 +4,8 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
+<link rel="icon" type="image/jpeg" href="https://www.wegworks.com/images/fav/weg_works_logo.jpeg">
+<link rel="apple-touch-icon" href="https://www.wegworks.com/images/fav/weg_works_logo.jpeg">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://script.google.com https://cloudflareinsights.com;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <!-- Google Analytics -->
@@ -20,7 +22,6 @@
 <meta name="author" content="WegWorks"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://www.wegworks.com/blog/adobe-analytics/analysis-workspace-tips/"/>
-<link href="https://www.wegworks.com/images/blog/logowhite.png" rel="icon" type="image/png"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
@@ -31,13 +32,13 @@
 <meta property="og:site_name" content="WegWorks"/>
 <meta property="og:title" content="10 Analysis Workspace Tips Every Analyst Should Know"/>
 <meta property="og:description" content="Master Adobe Analysis Workspace with these 10 essential tips for better reporting."/>
-<meta property="og:image" content="/images/blog/aa-dashboard.png"/>
+<meta property="og:image" content="https://www.wegworks.com/images/blog/aa-dashboard.png"/>
 <meta property="article:published_time" content="2025-12-17"/>
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:site" content="@Wegworks_"/>
-<meta name="twitter:image" content="/images/blog/aa-dashboard.png"/>
+<meta name="twitter:image" content="https://www.wegworks.com/images/blog/aa-dashboard.png"/>
 
 <!-- Schema.org Article -->
 <script type="application/ld+json">
@@ -46,9 +47,9 @@
   "@type": "Article",
   "headline": "10 Analysis Workspace Tips Every Analyst Should Know",
   "description": "Master Adobe Analysis Workspace with these 10 essential tips. Learn about calculated metrics, segments, visualizations, and productivity shortcuts.",
-  "image": "/images/blog/aa-dashboard.png",
+  "image": "https://www.wegworks.com/images/blog/aa-dashboard.png",
   "author": {"@type": "Organization", "name": "WegWorks", "url": "https://www.wegworks.com"},
-  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "/images/blog/logowhite.png"}},
+  "publisher": {"@type": "Organization", "name": "WegWorks", "logo": {"@type": "ImageObject", "url": "https://www.wegworks.com/images/blog/logowhite.png"}},
   "datePublished": "2025-12-17",
   "dateModified": "2025-12-17"
 }
@@ -68,104 +69,8 @@
 }
 </script>
 
-<style>
-:root {
-  --bg-primary: #000000;
-  --bg-secondary: #0a0a0a;
-  --bg-tertiary: #141414;
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-  --accent-primary: #86bc25;
-  --accent-light: #a4d44a;
-  --accent-gradient: linear-gradient(135deg, #86bc25 0%, #6a9a1e 100%);
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glow-primary: 0 0 40px rgba(134, 188, 37, 0.25);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { max-width: 100vw; overflow-x: hidden; } body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
-h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.3; }
-.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
-.container-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
-.nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.brand { display: flex; align-items: center; gap: 6px; text-decoration: none; }
-.brand img { height: 42px; width: auto; }
-.brand-text { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #ffffff; letter-spacing: 0.08em; text-transform: uppercase; display: flex; flex-direction: column; line-height: 1; }
-.brand-text span { font-size: 0.7rem; color: var(--accent-primary); letter-spacing: 0.15em; font-weight: 600; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; margin-top: 2px; }
-.nav-links { display: flex; gap: 40px; list-style: none; }
-.nav-links > li { position: relative; }
-.nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
-.nav-links a:hover { color: var(--text-primary); }
-.nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
-.dropdown-arrow { font-size: 0.7rem; transition: transform 0.3s; }
-.nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
-.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 12px 0; background: rgba(18, 18, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 12px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; margin-top: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); z-index: 100; }
-.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-.dropdown-menu a { display: block; padding: 10px 20px; color: #ffffff; font-size: 0.9rem; }
-.dropdown-menu a:hover { background: rgba(255, 255, 255, 0.05); color: var(--accent-primary); }
-.nav-cta { padding: 12px 28px; background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); font-weight: 600; border-radius: 100px; text-decoration: none; transition: all 0.3s; }
-.nav-cta:hover { border-color: var(--accent-light); color: var(--accent-light); box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2); }
-
-.article-header { padding: 160px 0 40px; }
-.article-hero-image { margin: 0 auto 60px; max-width: 1200px; padding: 0 24px; }
-.article-hero-image img { width: 100%; height: 400px; object-fit: cover; object-position: center; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
-.back-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.875rem; color: #ffffff; margin-bottom: 24px; text-decoration: none; transition: all 0.3s; }
-.back-link:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
-.article-meta { display: flex; gap: 16px; margin-bottom: 16px; font-size: 0.875rem; color: #ffffff; }
-.article-category { color: var(--accent-primary); font-weight: 600; text-decoration: none; }
-.article-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
-.article-intro { font-size: 1.25rem; color: #ffffff; line-height: 1.7; }
-
-.article-content { padding: 60px 0 100px; }
-.article-content h2 { font-size: 1.75rem; margin: 48px 0 20px; color: var(--text-primary); }
-.article-content h3 { font-size: 1.375rem; margin: 36px 0 16px; color: var(--text-primary); }
-.article-content p { margin-bottom: 20px; color: #ffffff; line-height: 1.8; }
-.article-content ul, .article-content ol { margin: 20px 0 20px 24px; color: #ffffff; }
-.article-content li { margin-bottom: 12px; line-height: 1.7; }
-.article-content strong { color: var(--text-primary); }
-.article-content a { color: var(--accent-primary); text-decoration: none; }
-.article-content a:hover { text-decoration: underline; }
-
-.tip-card { padding: 24px 28px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; margin: 28px 0; border-left: 3px solid var(--accent-primary); }
-.tip-card h4 { color: var(--accent-primary); margin-bottom: 12px; font-size: 1.1rem; }
-.tip-card p { margin: 0; }
-
-.kbd { display: inline-block; padding: 4px 8px; background: var(--bg-tertiary); border: 1px solid var(--glass-border); border-radius: 6px; font-family: monospace; font-size: 0.875rem; color: var(--text-primary); }
-
-.cta-box { padding: 48px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; text-align: center; margin-top: 60px; }
-.cta-box h3 { font-size: 1.5rem; margin-bottom: 16px; }
-.cta-box p { color: #ffffff; margin-bottom: 24px; }
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-weight: 600; border-radius: 12px; text-decoration: none; transition: all 0.3s; }
-.btn-primary { background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); }
-.btn-primary:hover { transform: translateY(-2px); border-color: var(--accent-light); color: var(--accent-light); box-shadow: 0 10px 30px rgba(134, 188, 37, 0.2); }
-
-.keywords-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--glass-border); }
-.keywords-section h4 { font-size: 0.875rem; color: #ffffff; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
-.keyword-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.keyword-tags span { padding: 6px 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; font-size: 0.8rem; color: #ffffff; }
-
-.footer { padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center; }
-.footer p { color: #ffffff; }
-.footer a { color: var(--accent-primary); text-decoration: none; }
-
-@media (max-width: 900px) {
-  .nav-links, .nav-cta { display: none; }
-  .article-header { padding: 120px 0 40px; }
-  .cta-box { padding: 32px 24px; }
-}
-/* Code Block Styles - IDE Theme */ .code-block { background: #1e1e1e; border-radius: 12px; margin: 24px 0; overflow: hidden; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); } .code-block::before { content: ""; display: block; background: linear-gradient(90deg, #333 0%, #2d2d2d 100%); padding: 10px 16px; border-bottom: 1px solid #333; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='14'%3E%3Ccircle cx='6' cy='7' r='5' fill='%23ff5f56'/%3E%3Ccircle cx='26' cy='7' r='5' fill='%23ffbd2e'/%3E%3Ccircle cx='46' cy='7' r='5' fill='%2327ca40'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: 12px center; } .code-block code { display: block; padding: 20px; overflow-x: auto; font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.875rem; line-height: 1.7; color: #d4d4d4; white-space: pre; } pre { background: #1e1e1e; border-radius: 12px; padding: 20px; overflow-x: auto; margin: 24px 0; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); } pre code { font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.875rem; line-height: 1.7; color: #d4d4d4; background: none; padding: 0; } code { font-family: "SF Mono", Monaco, Consolas, monospace; background: rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.875em; color: #e06c75; } table { display: block; overflow-x: auto; max-width: 100%; } img { max-width: 100%; height: auto; } .mobile-toggle { display: none; background: none; border: none; color: var(--text-primary, #fff); font-size: 28px; cursor: pointer; padding: 8px; }
-.mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg-primary, #0a0a0f); z-index: 999; padding: 100px 24px 24px; overflow-y: auto; }
-.mobile-menu.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-.mobile-menu a { font-size: 1.2rem; color: var(--text-primary, #fff); text-decoration: none; font-weight: 600; }
-.mobile-menu a:hover { color: var(--accent-primary, #ffffff); }
-@media (max-width: 900px) { .mobile-toggle { display: block; } }
-@media (max-width: 768px) { .article-hero-image img { height: 250px; } }
-</style>
-<link rel="stylesheet" href="/css/common.min.css">
+<link rel="stylesheet" href="https://www.wegworks.com/css/pages/blog-marketing.min.css">
+<link rel="stylesheet" href="https://www.wegworks.com/css/common.min.css">
 </head>
 
 <body>
@@ -181,7 +86,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
           <a href="/services/salesforce/">Salesforce</a>
           <a href="/services/marketing-automation/">Marketing Automation</a>
           <a href="/services/adobe-experience-cloud/">Adobe Experience Cloud</a>
-          <a href="/small-business/" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 8px; padding-top: 16px;">Small Business Solutions</a>
+          <a href="/small-business/" class="nav-divider">Small Business Solutions</a>
         </div>
       </li>
       <li class="nav-dropdown">
@@ -412,23 +317,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; font-weight: 700; line
   </div>
 </footer>
 
-<script>
-const mobileToggle = document.querySelector(".mobile-toggle");
-const mobileMenu = document.getElementById("mobile-menu");
-if (mobileToggle && mobileMenu) {
-  mobileToggle.addEventListener("click", () => {
-    mobileMenu.classList.toggle("active");
-    mobileToggle.textContent = mobileMenu.classList.contains("active") ? "✕" : "☰";
-  });
-  mobileMenu.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-      mobileMenu.classList.remove("active");
-      mobileToggle.textContent = "☰";
-    });
-  });
-}
-</script>
-<script src="/js/common.min.js" defer></script>
+<script src="https://www.wegworks.com/js/common.min.js" defer></script>
 </body>
 </html>
 
